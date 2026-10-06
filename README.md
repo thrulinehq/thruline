@@ -130,11 +130,11 @@ install_thruline() (
     Darwin-x86_64) target=x86_64-apple-darwin ;;
     Linux-aarch64|Linux-arm64) target=aarch64-unknown-linux-musl ;;
     Linux-x86_64) target=x86_64-unknown-linux-musl ;;
-    *) printf 'No v0.1.0 archive for this platform.\n' >&2; exit 1 ;;
+    *) printf 'No ThruLine archive for this platform.\n' >&2; exit 1 ;;
   esac
 
   archive="thruline-cli-$target.tar.gz"
-  base="https://github.com/thrulinehq/thruline/releases/download/v0.1.0"
+  base="https://github.com/thrulinehq/thruline/releases/latest/download"
   work=$(mktemp -d)
   trap 'rm -rf "$work"' 0
   cd "$work"
@@ -194,10 +194,10 @@ exactly what they added.
 
 ## Free and Pro
 
-Recording, reading and re-checking your sessions are free. **Approving a
-version** is Pro: $15 a month or $150 a year. Every install gets a 14-day
-trial, which starts the first time you try to approve a version. Details are at
-[thrulinehq.com](https://thrulinehq.com).
+Everything is free except one act. Opening your projects, recording, reading,
+checking, re-checking, verifying and exporting your own records need no licence.
+**Approving a version** needs Pro: $15 a month or $150 a year. Details are at
+[thrulinehq.com/pricing](https://thrulinehq.com/pricing).
 
 ## Known in v0.1.0
 
