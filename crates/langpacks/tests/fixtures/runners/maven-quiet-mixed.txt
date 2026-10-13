@@ -1,0 +1,36 @@
+[ERROR] Tests run: 3, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.027 s <<< FAILURE! -- in demo.OrderServiceTest
+[ERROR] demo.OrderServiceTest.looksUpAMissingCustomer -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "String.trim()" because "customer" is null
+	at demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] demo.OrderServiceTest.appliesDiscountToLargeOrders -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+	at demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] Failures: 
+[ERROR]   OrderServiceTest.appliesDiscountToLargeOrders:18 discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+[ERROR] Errors: 
+[ERROR]   OrderServiceTest.looksUpAMissingCustomer:25 NullPointer Cannot invoke "String.trim()" because "customer" is null
+[ERROR] Tests run: 6, Failures: 1, Errors: 1, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project mvn-mixed: There are test failures.
+[ERROR] 
+[ERROR] See /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/mvn-mixed/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

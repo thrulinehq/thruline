@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="463523c4-bc56-4bcf-a929-6658d9597e4f" name="@Dev-MacBook-Pro 2026-09-05 03:11:30" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-05T03:11:30.8040660+05:30" queuing="2026-09-05T03:11:30.8040660+05:30" start="2026-09-05T03:11:26.8110120+05:30" finish="2026-09-05T03:11:30.8655570+05:30" />
+  <TestSettings name="default" id="8e8e20c4-0e3f-47bf-8dfc-dbd3caa7c497">
+    <Deployment runDeploymentRoot="_Dev-MacBook-Pro_2026-09-05_03_11_30" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="9bbd11e1-b332-4f64-991d-718b672d424d" testId="856bd0aa-9c55-7613-ffc6-6610eba66fd6" testName="Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase" computerName="Dev-MacBook-Pro" duration="00:00:00.0020557" startTime="2026-09-05T03:11:30.2514210+05:30" endTime="2026-09-05T03:11:30.2514210+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9bbd11e1-b332-4f64-991d-718b672d424d" />
+    <UnitTestResult executionId="b3e7b82c-7227-4875-8b49-a3ecae3c45e2" testId="b856988d-3c57-2462-84c8-0dfb2c655761" testName="Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel" computerName="Dev-MacBook-Pro" duration="00:00:00.0024226" startTime="2026-09-05T03:11:30.2494270+05:30" endTime="2026-09-05T03:11:30.2494270+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b3e7b82c-7227-4875-8b49-a3ecae3c45e2">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.True() Failure
+Expected: True
+Actual:   False</Message>
+          <StackTrace>   at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs:line 29
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1f47226f-1f0e-4028-aa31-ffba9aff08e6" testId="2decc5ae-6004-a1a2-7796-2b46b09e0f12" testName="Shipping.Tests.ShippingRateTests.InternationalSurcharge" computerName="Dev-MacBook-Pro" duration="00:00:00.0010000" startTime="2026-09-05T03:11:30.2626120+05:30" endTime="2026-09-05T03:11:30.2626120+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f47226f-1f0e-4028-aa31-ffba9aff08e6">
+      <Output>
+        <ErrorInfo>
+          <Message>pending the international rate table</Message>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5df0d5b9-5d83-4621-8c6a-c97778e3ea2a" testId="fd0c54bc-a68e-e19f-c71f-8a03e771a8e1" testName="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 31, expected: True)" computerName="Dev-MacBook-Pro" duration="00:00:00.0001718" startTime="2026-09-05T03:11:30.2217480+05:30" endTime="2026-09-05T03:11:30.2217480+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5df0d5b9-5d83-4621-8c6a-c97778e3ea2a" />
+    <UnitTestResult executionId="dc371501-7609-4810-beef-f677e5e4944d" testId="2943c076-9d0e-cd41-6457-b773b6b836fa" testName="Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo" computerName="Dev-MacBook-Pro" duration="00:00:00.0081810" startTime="2026-09-05T03:11:30.2612010+05:30" endTime="2026-09-05T03:11:30.2612010+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dc371501-7609-4810-beef-f677e5e4944d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Equal() Failure: Values differ
+Expected: 30.00
+Actual:   29.50</Message>
+          <StackTrace>   at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs:line 18
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="372f8ecf-b44e-4df7-ad99-e2155fc6fba4" testId="ca979da0-ae02-8360-87b2-537e52b4d683" testName="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 30, expected: False)" computerName="Dev-MacBook-Pro" duration="00:00:00.0186668" startTime="2026-09-05T03:11:30.2165430+05:30" endTime="2026-09-05T03:11:30.2166800+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="372f8ecf-b44e-4df7-ad99-e2155fc6fba4" />
+    <UnitTestResult executionId="16045efe-ff36-4a6b-be29-372df9d511a3" testId="12f44333-44db-be2e-ba41-fe055827cb0c" testName="Shipping.Tests.ShippingRateTests.ZeroWeightStillCostsBase" computerName="Dev-MacBook-Pro" duration="00:00:00.0000320" startTime="2026-09-05T03:11:30.2521660+05:30" endTime="2026-09-05T03:11:30.2521660+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="16045efe-ff36-4a6b-be29-372df9d511a3" />
+    <UnitTestResult executionId="7ca3cc86-a46a-4143-94fb-c7a322e6b35a" testId="b4926a0a-c21d-f5b7-4d5e-5f96089cd1b9" testName="Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos" computerName="Dev-MacBook-Pro" duration="00:00:00.0001827" startTime="2026-09-05T03:11:30.2517980+05:30" endTime="2026-09-05T03:11:30.2517980+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7ca3cc86-a46a-4143-94fb-c7a322e6b35a" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.InternationalSurcharge" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="2decc5ae-6004-a1a2-7796-2b46b09e0f12">
+      <Execution id="1f47226f-1f0e-4028-aa31-ffba9aff08e6" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="InternationalSurcharge" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.ZeroWeightStillCostsBase" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="12f44333-44db-be2e-ba41-fe055827cb0c">
+      <Execution id="16045efe-ff36-4a6b-be29-372df9d511a3" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="ZeroWeightStillCostsBase" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 30, expected: False)" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="ca979da0-ae02-8360-87b2-537e52b4d683">
+      <Execution id="372f8ecf-b44e-4df7-ad99-e2155fc6fba4" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="OversizeThreshold" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="2943c076-9d0e-cd41-6457-b773b6b836fa">
+      <Execution id="dc371501-7609-4810-beef-f677e5e4944d" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="LargeParcelUsesPerKilo" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 31, expected: True)" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="fd0c54bc-a68e-e19f-c71f-8a03e771a8e1">
+      <Execution id="5df0d5b9-5d83-4621-8c6a-c97778e3ea2a" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="OversizeThreshold" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="856bd0aa-9c55-7613-ffc6-6610eba66fd6">
+      <Execution id="9bbd11e1-b332-4f64-991d-718b672d424d" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="SmallParcelUsesFlatBase" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="b856988d-3c57-2462-84c8-0dfb2c655761">
+      <Execution id="b3e7b82c-7227-4875-8b49-a3ecae3c45e2" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="OversizeRejectsHeavyParcel" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/debug/net9.0/shipping.tests.dll" id="b4926a0a-c21d-f5b7-4d5e-5f96089cd1b9">
+      <Execution id="7ca3cc86-a46a-4143-94fb-c7a322e6b35a" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="BoundaryAtFiveKilos" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="856bd0aa-9c55-7613-ffc6-6610eba66fd6" executionId="9bbd11e1-b332-4f64-991d-718b672d424d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b856988d-3c57-2462-84c8-0dfb2c655761" executionId="b3e7b82c-7227-4875-8b49-a3ecae3c45e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2decc5ae-6004-a1a2-7796-2b46b09e0f12" executionId="1f47226f-1f0e-4028-aa31-ffba9aff08e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd0c54bc-a68e-e19f-c71f-8a03e771a8e1" executionId="5df0d5b9-5d83-4621-8c6a-c97778e3ea2a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2943c076-9d0e-cd41-6457-b773b6b836fa" executionId="dc371501-7609-4810-beef-f677e5e4944d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ca979da0-ae02-8360-87b2-537e52b4d683" executionId="372f8ecf-b44e-4df7-ad99-e2155fc6fba4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12f44333-44db-be2e-ba41-fe055827cb0c" executionId="16045efe-ff36-4a6b-be29-372df9d511a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4926a0a-c21d-f5b7-4d5e-5f96089cd1b9" executionId="7ca3cc86-a46a-4143-94fb-c7a322e6b35a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="8" executed="7" passed="5" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.19)
+[xUnit.net 00:00:00.49]   Discovering: Shipping.Tests
+[xUnit.net 00:00:00.67]   Discovered:  Shipping.Tests
+[xUnit.net 00:00:00.68]   Starting:    Shipping.Tests
+[xUnit.net 00:00:00.82]       Assert.True() Failure
+[xUnit.net 00:00:00.82]       Expected: True
+[xUnit.net 00:00:00.82]       Actual:   False
+[xUnit.net 00:00:00.82]       Stack Trace:
+[xUnit.net 00:00:00.82]         /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs(29,0): at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel()
+[xUnit.net 00:00:00.82]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.82]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.83]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.83]       Expected: 30.00
+[xUnit.net 00:00:00.83]       Actual:   29.50
+[xUnit.net 00:00:00.83]       Stack Trace:
+[xUnit.net 00:00:00.83]         /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs(18,0): at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo()
+[xUnit.net 00:00:00.83]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.83]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.83]       pending the international rate table
+[xUnit.net 00:00:00.86]   Finished:    Shipping.Tests
+Test 'Shipping.Tests.ShippingRateTests.InternationalSurcharge' was skipped in the test run.
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="Dev-MacBook-Pro" outcome="Error" timestamp="2026-09-05T03:11:30.2547420+05:30">
+        <Text>[xUnit.net 00:00:00.82]     Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Dev-MacBook-Pro" outcome="Error" timestamp="2026-09-05T03:11:30.2615800+05:30">
+        <Text>[xUnit.net 00:00:00.83]     Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [FAIL]</Text>
+      </RunInfo>
+      <RunInfo computerName="Dev-MacBook-Pro" outcome="Warning" timestamp="2026-09-05T03:11:30.2633740+05:30">
+        <Text>[xUnit.net 00:00:00.83]     Shipping.Tests.ShippingRateTests.InternationalSurcharge [SKIP]</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

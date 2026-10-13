@@ -1,0 +1,37 @@
+task = "C24-DECISIONS"
+order = 150
+built_on_commit = "7e8204fc"
+pinned_schema_digest = "schema_sha256_f10f4b2a3b2aa28118df59fb88a6c972e62b23849170530ec9c5a528037f6344"
+migration_test = "crates/core/tests/decision_storage_schema.rs"
+note = """
+Six append-only tables for project-scoped standing decisions, their immutable
+revisions, person acceptances and retirements, exact-version computations, and
+scoped waivers. Every existing row and table is left intact. The full-schema
+upgrade is paid only by `thruline upgrade`.
+"""
+
+tables = [
+  "decisions",
+  "decision_revisions",
+  "decision_acceptances",
+  "decision_retirements",
+  "decision_verdicts",
+  "decision_waivers",
+]
+
+indexes = [
+  "idx_decisions_project",
+  "idx_decision_acceptances_decision",
+  "idx_decision_retirements_decision",
+  "idx_decision_verdicts_lookup",
+  "idx_decision_waivers_decision",
+]
+
+triggers = [
+  "decisions_no_replace", "decisions_no_update", "decisions_no_delete",
+  "decision_revisions_no_replace", "decision_revisions_no_update", "decision_revisions_no_delete",
+  "decision_acceptances_no_replace", "decision_acceptances_no_update", "decision_acceptances_no_delete",
+  "decision_retirements_no_replace", "decision_retirements_no_update", "decision_retirements_no_delete",
+  "decision_verdicts_no_replace", "decision_verdicts_no_update", "decision_verdicts_no_delete",
+  "decision_waivers_no_replace", "decision_waivers_no_update", "decision_waivers_no_delete",
+]

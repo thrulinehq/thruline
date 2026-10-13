@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__26-a-fabricated-claim-is-still-caught/store/ledger.db
+projects 1
+sessions 1
+lines    8 read · 0 already ingested
+events   8 new
+           assistant_text       1
+           tool_result          3
+           tool_use             3
+           user_msg             1
+unknown  none
+malformed none
+head     eval cf17b39f5364ed32cea2f6fa1a32194afa0cfed17e05b33645706a69e5ab8a34
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

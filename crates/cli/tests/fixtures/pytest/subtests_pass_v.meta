@@ -1,0 +1,3 @@
+cwd: subpass
+args: pytest -v
+exit: 0

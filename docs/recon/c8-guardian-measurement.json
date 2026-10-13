@@ -1,0 +1,73 @@
+{
+  "probe": "C8 — Guardian phase 1: the false-alarm measurement",
+  "date": "2026-08-14",
+  "rule": "the measurement is the item; nothing surfaces by default until a class graduates",
+  "coverage": {
+    "sessions_with_hook_rows": 28,
+    "sessions_in_ledger": 76179,
+    "fraction": "0.037%",
+    "note": "the Guardian reads C1 hook rows, which exist only for sessions since the sensor was installed on 2026-08-12. Every count below is bounded by this reach, and the bound is the first thing the surface prints."
+  },
+  "classes": {
+    "crash_candidate": {
+      "readiness": "implementable",
+      "candidates": 2,
+      "rule": "SessionStart with no SessionEnd, quiet longer than 60 minutes",
+      "window_minutes": 60,
+      "window_status": "assumption-grade, stated on every candidate — a compile can legitimately be quiet"
+    },
+    "compaction_pressure": {
+      "readiness": "implementable",
+      "candidates": 0,
+      "rule": ">= 2 PreCompact deliveries in one session",
+      "note": "measured zero: exactly one PreCompact has ever been delivered on this machine, so no session shows pressure. The detector exists and has nothing to say, which is different from having nothing to look at."
+    },
+    "detached_tool": {
+      "readiness": "not_separable",
+      "candidates": 0,
+      "why": "27 PreToolUse deliveries have no matching PostToolUse — but A166 measured that a DENIED tool produces exactly this shape. The class cannot be told apart from an ordinary permission denial, so it emits nothing rather than accusing a denial of being a failure."
+    },
+    "api_limit": {
+      "readiness": "no_signal_observed",
+      "candidates": 0,
+      "why": "StopFailure: 0 rows. Registered in the hook set and accepted by settings validation, never delivered (A166). The blueprint's research names it; this machine has never seen it."
+    },
+    "waiting_on_you": {
+      "readiness": "no_signal_observed",
+      "candidates": 0,
+      "why": "Notification: 0 rows, including on a headless tool denial (A166)."
+    }
+  },
+  "adjudication": {
+    "method": "each candidate checked against an INDEPENDENT signal that uses no hook rows: RB1's T1 vendor-terminal-marker rule over the session's own transcript tail. A tail ending in the vendor's `last-prompt` meta marker means the session closed cleanly and the missing SessionEnd would be a hook gap — a false alarm. A tail ending mid-work means the session really did stop without closing.",
+    "adjudicated": 2,
+    "true_positive": 2,
+    "false_alarm": 0,
+    "specimens": [
+      {
+        "session": "5e5a0011-0000-4000-8000-000000000011",
+        "hook_deliveries": 1611,
+        "quiet_minutes": 1896,
+        "transcript_tail": "assistant message, no terminal marker",
+        "verdict": "true positive"
+      },
+      {
+        "session": "5e5a0012-0000-4000-8000-000000000012",
+        "hook_deliveries": 83,
+        "quiet_minutes": 1144,
+        "transcript_tail": "assistant message, no terminal marker",
+        "verdict": "true positive"
+      }
+    ],
+    "authority": "coder-side, as at A151. OPERATOR adjudication of these same specimens is the graduation input; a coder agreeing with his own detector is not evidence."
+  },
+  "false_alarm_rate": {
+    "observed": "0 of 2",
+    "target": "< 2%",
+    "target_met": false,
+    "why_not": "not because the rate is high — because the denominator cannot support the claim. With 0 false in 2, the 95% upper confidence bound on the false-alarm rate is approximately 78%, which is about 39x the 2% target. NORTHSTAR-v2 reliability rule 4 states the principle this measurement is obeying: '0 false in 12 means little.' 0 false in 2 means less. The honest report of this run is that the target is NOT MEASURABLE at this denominator, and any figure quoted as if it were would be the exact overclaim this product exists to refuse.",
+    "graduation_bar": 300,
+    "short_by": 298
+  },
+  "verdict": "Guardian phase 1 ships SHADOW-ONLY. Two of the five phase-1 classes have no signal on this machine at all, a third cannot be separated from an innocent denial, and the two that are buildable sit on a 0.037% reach with a denominator 298 adjudications short of the graduation bar. Nothing surfaces by default, and the surface prints its own reach before it prints a single candidate."
+}

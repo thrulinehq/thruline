@@ -1,0 +1,155 @@
+# Measured constants
+
+# Every constant in `src/measured.rs` is generated from this file, and
+# `tests/measured_constants.rs` fails if the two disagree. Nothing here was
+# chosen; each row records the corpus it came from and the command that
+# reproduces it.
+#
+# The format follows `docs/perf-basis.toml`, which this repository already uses
+# for the same reason: a number without a stamped basis is a number nobody can
+# tell has gone stale. `thruline perf` prints "stale basis — re-measure" instead
+# of a figure whose basis has moved; the equivalent here is that the gate test
+# fails.
+#
+# Reproduce all of it with:
+#   cargo run -p thruline-langpacks --release --bin measure
+
+[basis]
+measured_on = "2026-09-05"
+# RE-MEASURED the same day, after `tamper::as_test_fn` began blanking comments
+# structurally. That fix changes `body_tokens`, which is the input to `jaccard`,
+# so the rename basis moved even though the chosen value did not. The four
+# ambiguity rates are byte-identical across both runs (comment blanking does not
+# touch `classify`), and the pooled cost at the argmin IMPROVED from 2.0586 to
+# 1.9079 — the fix sharpened the separation the threshold is chosen against.
+# Recording the new basis rather than leaving the old one behind an unchanged
+# number is the `docs/perf-basis.toml` rule.
+host = "macOS 25.1.0 arm64"
+schema = "thruline-langpacks/measure/1"
+corpus_root = "/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/corpus"
+ambiguity_budget_pct = 0.1
+assertion_floor = 5000
+command = "cargo run -p thruline-langpacks --release --bin measure"
+
+
+[language.java]
+candidate_files    = 2556
+measured_files     = 1672
+parse_errors       = 0
+parity_mismatches  = 0
+assertions         = 72696
+ambiguous          = 66
+ambiguity_pct      = 0.0908
+meets_floor        = true
+meets_budget       = true
+repos = [
+    { repo = "commons-lang", commit = "d83eabf4ac76fd401d2bf5771e3a6b8a26358857" },
+    { repo = "guava", commit = "5fb424c43ae38bad86b18841954337af791b6685" },
+    { repo = "junit5", commit = "35c56a8e02f6f2ae6c0ea3616097b1cfefe17d2a" },
+    { repo = "okhttp", commit = "5aab55d5ee3527e32dd60428d2c5ce856ec004d0" },
+]
+
+[language.csharp]
+candidate_files    = 3413
+measured_files     = 1538
+parse_errors       = 0
+parity_mismatches  = 0
+assertions         = 67923
+ambiguous          = 48
+ambiguity_pct      = 0.0707
+meets_floor        = true
+meets_budget       = true
+repos = [
+    { repo = "AutoMapper", commit = "9b500d50afe327a66d9a0002208aee79b99651d5" },
+    { repo = "Newtonsoft.Json", commit = "09bb545d72969ad7fb4ea07db0d5c34f4fc07877" },
+    { repo = "efcore", commit = "c5ca4bb94f71d47210c570121b4726bba2d6f26e" },
+    { repo = "serilog", commit = "49b5339ce85385dc52d4d8e8f2b8308becf23506" },
+    { repo = "xunit", commit = "6bbefaed1d0a995bc9970800384f9e8a1b9d2331" },
+]
+
+[language.ruby]
+candidate_files    = 1458
+measured_files     = 1438
+parse_errors       = 0
+parity_mismatches  = 0
+assertions         = 58839
+ambiguous          = 75
+ambiguity_pct      = 0.1275
+meets_floor        = true
+meets_budget       = false
+# CAP: every Ruby finding is held at `warn` at emission — never `fail`.
+#
+# Operator ruling 2026-09-06 01:10 IST, verbatim: "ship Ruby, but every Ruby finding is
+# capped at warn severity — never fail — until ambiguity is under 0.1%, with the
+# cap and the measurement recorded beside it. No per-language budget. A detector
+# over budget may inform; it may not accuse."
+#
+# The budget above ([basis].ambiguity_budget_pct) stays the ONLY budget; this is
+# not a per-language one in disguise. What the miss changes is not the number
+# Ruby is held to, but what a pack that misses it may do.
+#
+# Enforced by `Ruby::severity_cap()` and proved by construction in
+# `tests/severity_cap.rs::a_ruby_finding_cannot_reach_fail`, which drives every
+# detector rather than checking a list of expected severities.
+# `the_cap_and_the_measurement_agree` fails if this line and the cap ever
+# disagree in either direction.
+#
+# HALF OF THE RULING IS NOT ENFORCEABLE HERE: verify's `tests_pass::escalate`
+# raises `skip_marker_added` from warn to fail downstream of anything this crate
+# emits. That half is docs/tracks/G/INTERFACE-REQUESTS.md R8.
+severity_cap       = "warn"
+# OVER BUDGET, recorded rather than hidden. The brief this crate was built to
+# asks for ambiguity under 0.1%; Ruby measures 0.1275% over 58,839 assertions.
+# The residue is not a classifier error — every one of the 75 is a case where
+# stripping produces the RIGHT shape and the raw text would have produced a
+# wrong one, e.g. `assert_converted_to('\===', "<p>===</p>")`. Ruby test code
+# simply carries more operators and matcher words inside literals than the
+# other three. Lowering the budget to fit would make the number meaningless,
+# so the number stands and the miss is named.
+# `tests/measured_constants.rs::ruby_is_over_budget_and_it_is_recorded` fails
+# if this ever silently becomes true without the entry being removed.
+repos = [
+    { repo = "faker", commit = "cca4184947e09fdd02afb8b89d25a9c8ebc7274e" },
+    { repo = "jekyll", commit = "74d751339d3e534aa51d5d7b0640e9bd743509e4" },
+    { repo = "puma", commit = "c63ee1079f39a40a156c65149e37a86404fc0d50" },
+    { repo = "rails", commit = "1ec64ce82451c52d7407fa665ea5f95291430c23" },
+    { repo = "rspec-core", commit = "aec5f49485d97908183dbe790a7fefb8baaa8091" },
+    { repo = "sinatra", commit = "cb22afd7902b566b6eaba6c4ea89739494a65d12" },
+]
+
+[language.go]
+candidate_files    = 2279
+measured_files     = 2037
+parse_errors       = 0
+parity_mismatches  = 0
+assertions         = 47700
+ambiguous          = 27
+ambiguity_pct      = 0.0566
+meets_floor        = true
+meets_budget       = true
+repos = [
+    { repo = "cobra", commit = "adbc8813901bba65827259daa8e22ff94ec1f30e" },
+    { repo = "gin", commit = "dcaa4296d111981ffb31ac3eba90bb63e1eb5ab9" },
+    { repo = "go", commit = "ba7fdba26bb5f9698a0ccd719c49d5ba2d1327a2" },
+    { repo = "prometheus", commit = "575ab169c7c1ad882823cb9692daa1fe9eb043e5" },
+    { repo = "testify", commit = "435c07b5cb95c88b82cf35f49da0dde33d24ad46" },
+]
+
+
+[rename_similarity]
+# The Jaccard threshold above which two test bodies are "the same test renamed".
+# `verify` chose 0.5 against a Python/Rust/JS table. Measured here it is 0.4.
+value = 0.4
+basis = "pooled argmin of (mined-rename false accusation + rename+3-edits false accusation + coexisting-pair accidental pairing), the four languages weighted equally"
+per_language = { java = 0.4, csharp = 0.55, ruby = 0.45, go = 0.4 }
+# Pooled cost by candidate threshold; the chosen value is the argmin.
+pooled_cost = [
+    { t = 0.3, cost = 2.2442 },
+    { t = 0.4, cost = 1.9079 },
+    { t = 0.45, cost = 2.1582 },
+    { t = 0.5, cost = 2.1134 },
+    { t = 0.55, cost = 2.0882 },
+    { t = 0.6, cost = 2.2387 },
+    { t = 0.7, cost = 2.7028 },
+    { t = 0.8, cost = 3.5017 },
+]

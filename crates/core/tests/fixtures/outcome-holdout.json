@@ -1,0 +1,345 @@
+{
+ "note": "SEALED HOLDOUT \u2014 \u00a75e. Generated from format grammars mined out of market + thruline (A37) BEFORE any parser work in M3.10.2. Content is synthetic per A22: the grammar is real, every number, name and path is invented. Never executed during parser development; opened once at M3.10.4.",
+ "partition": "holdout",
+ "manifest": {
+  "_rule": "\u00a75h: counts are asserted against contents at seal time by tests/sealed_manifests.rs. A description disagreeing with this block is a seal failure.",
+  "added": "M3.12.0, retroactively \u2014 this partition predates \u00a75h",
+  "total_cases": 34,
+  "real_cases": 24,
+  "trap_cases": 10,
+  "real_by_family": {
+   "build": 7,
+   "test": 17
+  }
+ },
+ "sources": [
+  "-Users-dev-Developer-market",
+  "-Users-dev-thruline"
+ ],
+ "expectation_schema": {
+  "family": "test | build | none",
+  "passed": "integer or null \u2014 null means the format reports an outcome but no count",
+  "failed": "integer or null",
+  "ok": "true | false | null",
+  "must_abstain": "true when the ONLY correct answer is Unknown; a parse here is a misclassification and fails the gate"
+ },
+ "gate": "\u226570% of non-trap cases correctly classified; ZERO misclassifications across all cases (a trap that parses, or any wrong count, is a failure). Abstention on a non-trap case costs coverage, never correctness.",
+ "cases": [
+  {
+   "id": "h01",
+   "family": "test",
+   "passed": 42,
+   "failed": 0,
+   "ok": true,
+   "grammar": "swift-testing run summary (market)",
+   "text": "\u2714 Test run with 42 tests in 6 suites passed after 3.104 seconds."
+  },
+  {
+   "id": "h02",
+   "family": "test",
+   "passed": null,
+   "failed": 2,
+   "ok": false,
+   "grammar": "swift-testing run summary, failing",
+   "text": "\u2718 Test run with 42 tests in 6 suites failed after 3.104 seconds with 2 issues."
+  },
+  {
+   "id": "h03",
+   "family": "test",
+   "passed": 118,
+   "failed": 0,
+   "ok": true,
+   "grammar": "swift-testing, mutation: casing + spacing",
+   "text": "\u2714  TEST RUN WITH 118 TESTS IN 9 SUITES PASSED AFTER 12.7 SECONDS."
+  },
+  {
+   "id": "h04",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": true,
+   "grammar": "XCTest suite line \u2014 outcome known, counts NOT known",
+   "text": "Test Suite 'All tests' passed at 2026-03-04 11:02:07.451."
+  },
+  {
+   "id": "h05",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": false,
+   "grammar": "XCTest suite line, failing",
+   "text": "Test Suite 'All tests' failed at 2026-03-04 11:02:07.451."
+  },
+  {
+   "id": "h06",
+   "family": "test",
+   "passed": 6,
+   "failed": 0,
+   "ok": true,
+   "grammar": "prose ratio beside an explicit pass word (market)",
+   "text": "**Presentation suite** `swift test --filter WidgetLayoutTests` \u2192 **6/6 pass**."
+  },
+  {
+   "id": "h07",
+   "family": "test",
+   "passed": 7,
+   "failed": 0,
+   "ok": true,
+   "grammar": "ratio + uppercase PASS, mutation: delimiter",
+   "text": "`--self-test`: **7/7 PASS**, and all three cache suites ran green."
+  },
+  {
+   "id": "h08",
+   "family": "test",
+   "passed": 9,
+   "failed": 1,
+   "ok": false,
+   "grammar": "cargo, failing (thruline)",
+   "text": "test result: FAILED. 9 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+  },
+  {
+   "id": "h09",
+   "family": "test",
+   "passed": 23,
+   "failed": 0,
+   "ok": true,
+   "grammar": "cargo, passing, mutation: extra whitespace",
+   "text": "test result:   ok.  23 passed;  0 failed;  0 ignored;  0 measured;  0 filtered out; finished in 1.42s"
+  },
+  {
+   "id": "h10",
+   "family": "test",
+   "passed": 37,
+   "failed": 0,
+   "ok": true,
+   "grammar": "bare count + participle (thruline)",
+   "text": "37 tests passing"
+  },
+  {
+   "id": "h11",
+   "family": "test",
+   "passed": 5,
+   "failed": 0,
+   "ok": true,
+   "grammar": "node TAP summary (market), mutation: field order",
+   "text": "# fail 0\n# pass 5\n# tests 5\n# skipped 0\n# todo 0"
+  },
+  {
+   "id": "h12",
+   "family": "test",
+   "passed": 14,
+   "failed": 3,
+   "ok": false,
+   "grammar": "node TAP summary, failing",
+   "text": "1..17\n# tests 17\n# suites 0\n# pass 14\n# fail 3\n# cancelled 0\n# skipped 0"
+  },
+  {
+   "id": "h13",
+   "family": "test",
+   "passed": 1,
+   "failed": 0,
+   "ok": true,
+   "grammar": "prefix harness, single assertion (market)",
+   "text": "PASS: resident memory is within the idle target."
+  },
+  {
+   "id": "h14",
+   "family": "test",
+   "passed": 0,
+   "failed": 1,
+   "ok": false,
+   "grammar": "prefix harness, failing",
+   "text": "FAIL: resident memory exceeds the hard limit."
+  },
+  {
+   "id": "h15",
+   "family": "test",
+   "passed": 3,
+   "failed": 1,
+   "ok": false,
+   "grammar": "prefix harness, several lines mixed",
+   "text": "PASS: cold start under budget\nPASS: warm start under budget\nFAIL: eviction leaves an orphan page\nPASS: replay is idempotent"
+  },
+  {
+   "id": "h16",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": true,
+   "grammar": "exit code zero (both projects)",
+   "text": "Exit code 0"
+  },
+  {
+   "id": "h17",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": false,
+   "grammar": "exit code nonzero",
+   "text": "Exit code 3"
+  },
+  {
+   "id": "h18",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": true,
+   "grammar": "xcodebuild success banner",
+   "text": "** BUILD SUCCEEDED **"
+  },
+  {
+   "id": "h19",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": false,
+   "grammar": "bundler build failure, mutation: ANSI escapes retained",
+   "text": "\u001b[31m\u2718 [ERROR] Build failed with 4 errors:\u001b[0m"
+  },
+  {
+   "id": "h20",
+   "family": "test",
+   "passed": 30,
+   "failed": 0,
+   "ok": true,
+   "grammar": "custom harness final line",
+   "text": "=== final: 30 pass, 0 fail ==="
+  },
+  {
+   "id": "h21",
+   "family": "test",
+   "passed": 21,
+   "failed": 4,
+   "ok": false,
+   "grammar": "custom harness, mutation: delimiter + casing",
+   "text": "--- POST-FIX: 21 PASS, 4 FAIL ---"
+  },
+  {
+   "id": "h22",
+   "family": "test",
+   "passed": 36,
+   "failed": 0,
+   "ok": true,
+   "grammar": "swift test filter summary with slash count",
+   "text": "**Store suite** `swift test --filter LedgerChainTests` \u2192 **36/36 pass** (ran it myself)."
+  },
+  {
+   "id": "h23",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "ok": false,
+   "grammar": "compiler error line",
+   "text": "error: cannot find 'QuotaSluice' in scope"
+  },
+  {
+   "id": "h24",
+   "family": "test",
+   "passed": 8,
+   "failed": 0,
+   "ok": true,
+   "grammar": "checkmark harness, counted lines",
+   "text": "\u2713 lobby: join emits snapshot\n\u2713 lobby: duplicate ids rejected\n\u2713 round: vote closes phase\n\u2713 round: tally is stable\n\u2713 score: additive across rounds\n\u2713 score: no negative totals\n\u2713 exit: host handoff\n\u2713 exit: socket drains"
+  },
+  {
+   "id": "t01",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a date, not a ratio (A37)",
+   "text": "POST https://api.example.invalid/v1/rooms - Ok @ 3/4/2026, 11:02:07 PM"
+  },
+  {
+   "id": "t02",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a progress counter, not a ratio (A37)",
+   "text": "[2/7] wait: Waited 1.2s."
+  },
+  {
+   "id": "t03",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 prose about tests, no run",
+   "text": "## 3. Goldens: all pass, untouched"
+  },
+  {
+   "id": "t04",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a flag whose name contains a count word",
+   "text": "the soak process exits before the first pass, and `--leaks-passes 0` took that path"
+  },
+  {
+   "id": "t05",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 source code that mentions failure counting",
+   "text": "120:bad()  { printf 'FAIL: %s\\n' \"$1\" >&2; fail_count=$((fail_count + 1)); }"
+  },
+  {
+   "id": "t06",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a plan describing what a test WILL assert",
+   "text": "105:#        Each scenario asserts the exit code AND the specific message text of the"
+  },
+  {
+   "id": "t07",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 two conflicting summaries in one payload; \u00a75e says abstain",
+   "text": "test result: ok. 12 passed; 0 failed; 0 ignored\ntest result: FAILED. 3 passed; 9 failed; 0 ignored"
+  },
+  {
+   "id": "t08",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a git subject line mentioning a suite",
+   "text": "41fe1ca Merge P-STAB \u2014 the suite is a gate again: watchdog, RSS isolation"
+  },
+  {
+   "id": "t09",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a checklist item, not a result",
+   "text": "199\t- [ ] Git history shows one commit per phase with passing build + review notes"
+  },
+  {
+   "id": "t10",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "ok": null,
+   "must_abstain": true,
+   "grammar": "TRAP \u2014 a swift property named isPass",
+   "text": "161\t    public var isPass: Bool { if case .pass = self { return true }; return false }"
+  }
+ ]
+}

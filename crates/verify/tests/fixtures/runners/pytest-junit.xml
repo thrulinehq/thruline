@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="1" tests="3" time="0.010" timestamp="2026-09-02T16:39:59.921503+05:30" hostname="Dev-MacBook-Pro.local"><testcase classname="test_mixed" name="test_ok" time="0.000" /><testcase classname="test_mixed" name="test_skipped" time="0.000"><skipped type="pytest.skip" message="demo">/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/py/test_mixed.py:3: demo</skipped></testcase><testcase classname="test_mixed" name="test_fails" time="0.000"><failure message="AssertionError: rate mismatch&#10;assert 1 == 2">&gt;   def test_fails(): assert 1 == 2, "rate mismatch"
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: rate mismatch
+E   assert 1 == 2
+
+test_mixed.py:5: AssertionError</failure></testcase></testsuite></testsuites>

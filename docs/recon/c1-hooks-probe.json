@@ -1,0 +1,57 @@
+{
+  "probe": "C1.1 — Claude Code hooks, print-then-pin",
+  "date": "2026-08-12",
+  "claude_code_version": "2.1.227",
+  "method": "project-scoped hook install in a throwaway workspace (docs/recon/c1_hooks_probe.sh); ten events registered, every one running the same verbatim appender; two headless haiku sessions fired; payloads recorded raw before any interpretation",
+  "registered_events": 10,
+  "observed": {
+    "SessionStart": {
+      "deliveries": 2,
+      "keys": ["cwd", "hook_event_name", "session_id", "source", "transcript_path"],
+      "note": "source=startup; transcript_path names the live JSONL from the first moment"
+    },
+    "UserPromptSubmit": {
+      "deliveries": 2,
+      "keys": ["cwd", "hook_event_name", "permission_mode", "prompt", "prompt_id", "session_id", "transcript_path"],
+      "note": "carries the prompt verbatim"
+    },
+    "PreToolUse": {
+      "deliveries": 2,
+      "keys": ["cwd", "hook_event_name", "permission_mode", "prompt_id", "session_id", "tool_input", "tool_name", "tool_use_id", "transcript_path"],
+      "note": "fires for a tool that is subsequently denied, too"
+    },
+    "PostToolUse": {
+      "deliveries": 1,
+      "keys": ["cwd", "duration_ms", "hook_event_name", "permission_mode", "prompt_id", "session_id", "tool_input", "tool_name", "tool_response", "tool_use_id", "transcript_path"],
+      "note": "did NOT fire for the denied call — the pre/post asymmetry is the denial signature"
+    },
+    "Stop": {
+      "deliveries": 2,
+      "keys": ["background_tasks", "cwd", "hook_event_name", "last_assistant_message", "permission_mode", "prompt_id", "session_crons", "session_id", "stop_hook_active", "transcript_path"],
+      "note": "carries last_assistant_message, background_tasks, and session_crons — rich fields the sensor gets for free"
+    },
+    "SessionEnd": {
+      "deliveries": 2,
+      "keys": ["cwd", "hook_event_name", "prompt_id", "reason", "session_id", "transcript_path"],
+      "note": "reason=other on both headless completions; the reason vocabulary needs mapping in C1.2"
+    }
+  },
+  "unobserved": {
+    "Notification": "registered; did not fire even when a headless tool call was denied — the idle_prompt/permission paths need an interactive probe",
+    "PreCompact": "registered; a two-turn session compacts nothing — untriggered, not proven absent",
+    "SubagentStop": "registered; no subagent was spawned — untriggered, not proven absent",
+    "StopFailure": "registered WITHOUT complaint from settings validation; never fired; existence on 2.1.227 unconfirmed — the blueprint's 31-event research claim is not treated as measurement"
+  },
+  "injection_experiment": {
+    "surface": "SessionStart hook stdout: hookSpecificOutput.additionalContext",
+    "delivered": true,
+    "evidence": "the probe token appears in BOTH session transcripts, recorded as a hook_success attachment carrying the additionalContext JSON — the rescue capsule has a proven delivery path into the session record",
+    "attended": "measured 2026-08-13 by docs/recon/c40-injection-probe.json — observed once: asked directly for the token, the model replied with exactly it, so injected bytes do reach the model's working context. At A166 this read `unconfirmed` because run 1's model executed the requested tool yet never quoted the token. The upgrade is one specimen under the easiest possible test and does NOT license any claim that a model honors capsule constraints unprompted; see that artifact's caveat_do_not_overclaim."
+  },
+  "findings_in_passing": {
+    "denied_tool_shape": "PreToolUse fires, PostToolUse does not, Notification does not (headless deny)",
+    "fabrication_specimen": "run 2's final message asserted 'The .git directory doesn't exist here' after its only git status call was denied — an unverifiable claim of exactly the class the verdict engine scores; kept as a live specimen",
+    "uninstall": "rm -rf of the workspace removes every installed hook; nothing global was touched"
+  },
+  "sensor_code_written": 0
+}

@@ -1,0 +1,24 @@
+[package]
+publish = false
+name = "thruline-reexec"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Sandboxed re-execution: sandbox trait, docker backend, cloud backend."
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+tempfile = { workspace = true }
+thiserror = { workspace = true }
+thruline-core = { workspace = true }
+
+[features]
+# §7's cloud sandbox. §18 leaves the provider undecided, so the feature builds
+# the interface and its implementation refuses by name — see src/cloud.rs.
+reexec-cloud = []

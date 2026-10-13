@@ -1,0 +1,98 @@
+{
+  "claims_vs_proof": [
+    {
+      "findings": [],
+      "kind": "lint_ok",
+      "reasons": [
+        "ran on the final tree",
+        "`cargo clippy --all-targets` exited 0"
+      ],
+      "text": "Clippy is clean.",
+      "verdict": "supported"
+    }
+  ],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "cccccccc-0002-4000-8000-000000000000",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "session_start",
+      "seq": 4,
+      "text": "session started"
+    },
+    {
+      "kind": "user_prompt",
+      "seq": 8,
+      "text": "Please drop the unused `HashMap` import from `src/lib.rs` and keep cli…"
+    },
+    {
+      "input": "{\"file_path\":\"/Users/dev/demo/src/lib.rs\",\"new_string\":\"use std::fmt;\\n\",\"old_string\":\"use std::collections::HashMap;\\nuse std::fmt;\\n\",\"replace_all\":false}",
+      "kind": "tool_call",
+      "seq": 12,
+      "text": "Edit {\"file_path\":\"/Users/dev/demo/src/lib.rs\",\"new_str…",
+      "tool": "Edit"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 16,
+      "text": "Edit ok",
+      "tool": "Edit"
+    },
+    {
+      "kind": "fs_change",
+      "seq": 17,
+      "text": "modify /Users/dev/demo/src/lib.rs"
+    },
+    {
+      "kind": "snapshot",
+      "seq": 18,
+      "text": "tree c4eeb65ef913 (taken at fold)"
+    },
+    {
+      "input": "{\"command\":\"cargo clippy --all-targets\",\"description\":\"Run clippy on every target\"}",
+      "kind": "tool_call",
+      "seq": 20,
+      "text": "Bash {\"command\":\"cargo clippy --all-targets\",\"descripti…",
+      "tool": "Bash"
+    },
+    {
+      "kind": "exec",
+      "seq": 24,
+      "text": "cargo clippy --all-targets → exit 0"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 28,
+      "text": "Bash ok",
+      "tool": "Bash"
+    },
+    {
+      "kind": "snapshot",
+      "seq": 29,
+      "text": "tree c4eeb65ef913 (taken at fold)"
+    },
+    {
+      "kind": "stop",
+      "seq": 32,
+      "text": "stopped: The unused import is gone from the library root. Clippy is c…"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "agent_finished",
+    "last_events": [
+      "cargo clippy --all-targets → exit 0",
+      "Bash ok",
+      "tree c4eeb65ef913 (taken at fold)"
+    ],
+    "summary": "the agent finished its turn"
+  }
+}

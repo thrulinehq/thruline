@@ -1,0 +1,18 @@
+{
+  "bridge": null,
+  "checks_failed": [],
+  "checks_written": 1,
+  "events_skipped": 0,
+  "events_written": 11,
+  "exec_events": 1,
+  "lines_read": 8,
+  "ok": true,
+  "quarantine_write_error": null,
+  "quarantined": [],
+  "schema_version": 1,
+  "sessions": 1,
+  "sessions_in_multiple_spools": [],
+  "shape": "thruline.fold",
+  "snapshots_failed": [],
+  "snapshots_taken": 2
+}

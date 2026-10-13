@@ -1,0 +1,1715 @@
+{
+  "schema": "thruline.integrations.v1",
+  "version": "1",
+  "inspected_target": {
+    "repository": "thrulinehq/thruline",
+    "branch": "codex/l0-execution",
+    "commit": "1f95aa02fff5331e8e832ce0591256e56b62bc41",
+    "selection_basis": "Live dirty checkout inspected; existing backend and UI work preserved.",
+    "native_build_validated": true
+  },
+  "product_state_authority": "existing ThruLine evidence, policy and receipt code",
+  "coverage_claim": "Candidate mappings are not implemented check coverage. Tool observations do not establish whole-product correctness.",
+  "budget_policy": {
+    "workers_per_store": 1,
+    "background_execution": false,
+    "execution": "explicit accepted foreground plan",
+    "limits": "wall time, per-process CPU, sampled group RSS, output; macOS network denied"
+  },
+  "projects": [
+    {
+      "id": "in-toto",
+      "feature": "evidence",
+      "feature_name": "Evidence and freshness",
+      "repository": "in-toto/in-toto",
+      "commit": "e352b43ad7cb8915d84c36d791aa61346152a0a3",
+      "role": "design_reference",
+      "declared_main_license": "Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "design_reference",
+      "existing_native_use": "in-toto/DSSE protocol in crates/attest",
+      "candidate_check_ids": [
+        "EVD-02",
+        "EVD-06",
+        "EVD-12"
+      ],
+      "contribution": "Extend the existing in-toto/DSSE receipt contract; compare material/product binding and authorized signer handling.",
+      "source_entry_points": [
+        "in_toto/runlib.py",
+        "in_toto/verifylib.py",
+        "in_toto/models/link.py"
+      ],
+      "limits": "Existing protocol implementation in crates/attest; do not add a Python engine dependency.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "86ad0c996e42dccfa4236810e5a4fc7d797b82a7",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "b5c26c8a2ad6dd7cac6646e470a32ee42d23c36124caac4e66c989b6545b2a44"
+        }
+      ],
+      "submodules": 0,
+      "format": null,
+      "qualification": "unqualified",
+      "readiness": "Design reference · no additional runtime"
+    },
+    {
+      "id": "salsa",
+      "feature": "evidence",
+      "feature_name": "Evidence and freshness",
+      "repository": "salsa-rs/salsa",
+      "commit": "e021c01d4939408c89c9325ad2426660117a8b32",
+      "role": "design_reference",
+      "declared_main_license": "Apache-2.0 OR MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "design_reference",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "EVD-07",
+        "ALG-06",
+        "PER-10"
+      ],
+      "contribution": "Study dependency tracking for derived views and conservative invalidation; external runs require explicit frozen inputs.",
+      "source_entry_points": [
+        "src/lib.rs",
+        "examples/lazy-input/main.rs",
+        "examples/calc/main.rs"
+      ],
+      "limits": "Design reference first. No replacement of the rebuild authority; caches need measured limits.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "a433b0650cc383131004fa13d1b21ba3893bca41",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "submodules": 0,
+      "format": null,
+      "qualification": "unqualified",
+      "readiness": "Design reference · no additional runtime"
+    },
+    {
+      "id": "ast-grep",
+      "feature": "architecture",
+      "feature_name": "Architecture and code hygiene",
+      "repository": "ast-grep/ast-grep",
+      "commit": "fc2b1530db74de49131b725221de98036a552a9f",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "captured_fixture_validated",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "ARC-01",
+        "FUN-08",
+        "MNT-04"
+      ],
+      "contribution": "Add versioned repository structural rules with exact source ranges and rule digests.",
+      "source_entry_points": [
+        "crates/cli/src/scan.rs",
+        "crates/config/src/lib.rs",
+        "crates/cli/src/print/json_print.rs"
+      ],
+      "limits": "Static matches support the named syntactic rule only. No automatic rewriting.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "27161e7b1c4cf7754bbb254c5135f2a1d79915f5",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "81471889c77b2161a3e4dcdb1b2e6ca382e485766132d92d5fe1d7497e7dd2d9"
+        }
+      ],
+      "submodules": 0,
+      "format": "ast-grep-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured execution validated on labeled fixtures · advisory"
+    },
+    {
+      "id": "dependency-cruiser",
+      "feature": "architecture",
+      "feature_name": "Architecture and code hygiene",
+      "repository": "sverweij/dependency-cruiser",
+      "commit": "ee229c36bb25201610e06e07333df8cf2c0d7880",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "captured_fixture_validated",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "ARC-01",
+        "ARC-02",
+        "ARC-04",
+        "ARC-05"
+      ],
+      "contribution": "Check accepted JS/TS module boundaries and cycles; attach the actual dependency path.",
+      "source_entry_points": [
+        "src/validate/index.mjs",
+        "src/main/index.mjs",
+        "src/report/json.mjs"
+      ],
+      "limits": "Configuration and entry-point completeness are inputs. Runtime-generated dependencies may remain unknown.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "ba1c35c320481e98840d6cb0d13f49afffcff982",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "046799de79c54f5366624ef97e3d5518afbefcd784a23aa74ef58d8f8bfcb2be"
+        }
+      ],
+      "submodules": 0,
+      "format": "dependency-cruiser-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured execution validated on labeled fixtures · advisory",
+      "component_license_files": [],
+      "component_license_scope": "MIT core; resolver/parser dependencies and examples retain notices.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R06",
+        "commit": "ee229c36bb25201610e06e07333df8cf2c0d7880",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "knip",
+      "feature": "architecture",
+      "feature_name": "Architecture and code hygiene",
+      "repository": "webpro-nl/knip",
+      "commit": "c2d652c82802239139b1c0b48a071b729fa92251",
+      "role": "external_adapter",
+      "declared_main_license": "ISC",
+      "source_status": "source_acquired",
+      "native_integration_status": "captured_fixture_validated",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "MNT-01",
+        "MNT-08"
+      ],
+      "contribution": "Report unused JS/TS files, exports and dependencies for review with entry-point assumptions.",
+      "source_entry_points": [
+        "packages/knip/src/index.ts",
+        "packages/knip/src/util/cli-arguments.ts",
+        "packages/knip/src/reporters/json.ts"
+      ],
+      "limits": "Framework plugins and dynamic imports affect precision. No --fix or automatic deletion.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "3105470e5016bc36d613af48c9484ccac1fa9799",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        }
+      ],
+      "submodules": 0,
+      "format": "knip-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured execution validated on labeled fixtures · advisory",
+      "component_license_files": [
+        {
+          "path": "packages/create-config/LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        },
+        {
+          "path": "packages/knip/LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        },
+        {
+          "path": "packages/language-server/LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        },
+        {
+          "path": "packages/mcp-server/LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        },
+        {
+          "path": "packages/vscode-knip/LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        }
+      ],
+      "component_license_scope": "ISC core; third-party dependencies have their own licenses.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R05",
+        "commit": "c2d652c82802239139b1c0b48a071b729fa92251",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "cargo-mutants",
+      "feature": "test-integrity",
+      "feature_name": "Test integrity and algorithm safety",
+      "repository": "sourcefrog/cargo-mutants",
+      "commit": "fe82f1832778a591ab74248010fb40e699defafe",
+      "role": "test_harness",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "captured_fixture_validated",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "TST-02",
+        "TST-03",
+        "TST-09"
+      ],
+      "contribution": "Target mutations at changed, important Rust functions and keep each surviving mutation as evidence.",
+      "source_entry_points": [
+        "src/lab.rs",
+        "src/outcome.rs",
+        "src/mutant.rs"
+      ],
+      "limits": "A survivor is a test-adequacy signal; equivalent mutations require review. Use an isolated worktree.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "8ad83441f3fce915a9c378d23f3851bf8fcd3e32",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "479cbeb2506157776cf80abe31df18065d0fe50b5816ff77bfd75d5deb04ab5c"
+        }
+      ],
+      "submodules": 0,
+      "format": "cargo-mutants-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured execution validated on labeled fixtures · advisory",
+      "component_license_files": [],
+      "component_license_scope": "MIT; upstream August2026 README says semi-active spare-time maintenance and slower response.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R18",
+        "commit": "fe82f1832778a591ab74248010fb40e699defafe",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "proptest",
+      "feature": "test-integrity",
+      "feature_name": "Test integrity and algorithm safety",
+      "repository": "proptest-rs/proptest",
+      "commit": "a6f033cf83adfd55557b86e6065e6f4df054ec70",
+      "role": "existing_dependency",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "development_harness",
+      "existing_native_use": "proptest is an existing workspace and verifier test dependency",
+      "candidate_check_ids": [
+        "TST-05",
+        "ALG-03",
+        "ALG-04",
+        "DAT-04"
+      ],
+      "contribution": "Extend the existing dependency with invariant and metamorphic tests for deduplication, binding and replay.",
+      "source_entry_points": [
+        "proptest/src/test_runner/runner.rs",
+        "proptest/src/strategy/traits.rs"
+      ],
+      "limits": "Already declared in ThruLine's workspace and verify dev-dependencies. Preserve failing seeds.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "8641ac961da588c0cbc5e7cbed53c48fc7c8bf59",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "e32fbd428b915bc6bf2ed6a59c2ca56b25c0cdd7e05ec941127259e62485e3da"
+        }
+      ],
+      "submodules": 0,
+      "format": "cargo-test-text-v1",
+      "qualification": "unqualified",
+      "readiness": "Development harness exercised · bounded measurement"
+    },
+    {
+      "id": "cargo-fuzz",
+      "feature": "test-integrity",
+      "feature_name": "Test integrity and algorithm safety",
+      "repository": "rust-fuzz/cargo-fuzz",
+      "commit": "bf2fc668dafda5295aa6fd01825ee67b885f0f2b",
+      "role": "test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "development_harness",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "FUN-04",
+        "SEC-04",
+        "REL-08"
+      ],
+      "contribution": "Fuzz ingestion and adapter decoders with persistent minimized regression inputs.",
+      "source_entry_points": [
+        "src/main.rs",
+        "src/project.rs"
+      ],
+      "limits": "Needs nightly/toolchain setup. Run bounded jobs outside the production process.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "3c300e696252e31d916caaaa00d64c4b5aaffe52",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720"
+        }
+      ],
+      "submodules": 0,
+      "format": "libfuzzer-text-v1",
+      "qualification": "unqualified",
+      "readiness": "Development harness exercised · bounded measurement"
+    },
+    {
+      "id": "kani",
+      "feature": "test-integrity",
+      "feature_name": "Test integrity and algorithm safety",
+      "repository": "model-checking/kani",
+      "commit": "b07abe8a72f8eb1ef1ea3521ca6b00a973d341bc",
+      "role": "test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "ALG-03",
+        "ALG-07",
+        "DAT-01"
+      ],
+      "contribution": "Write small proof harnesses for index/arithmetic/state invariants and retain assumptions and solver bounds.",
+      "source_entry_points": [
+        "kani-driver/src/main.rs",
+        "kani-driver/src/call_cbmc.rs"
+      ],
+      "limits": "Proof is scoped to the model and bounds; unresolved unwind obligations are not passes.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "f680110e42c74771f1696e7a60481e65343754e0",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "submodules": 3,
+      "format": "kani-text-v1",
+      "qualification": "unqualified",
+      "readiness": "Production function model exercised · development only · bounded scope"
+    },
+    {
+      "id": "loom",
+      "feature": "test-integrity",
+      "feature_name": "Test integrity and algorithm safety",
+      "repository": "tokio-rs/loom",
+      "commit": "948c8cc78b178ede6eeff3afc7d97f2f4ea08559",
+      "role": "test_harness",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "REL-01",
+        "REL-02",
+        "REL-07"
+      ],
+      "contribution": "Exercise modeled queue, cancellation and shutdown interleavings in focused Rust tests.",
+      "source_entry_points": [
+        "src/model.rs",
+        "src/rt/mod.rs"
+      ],
+      "limits": "Requires Loom primitives and has documented memory-model gaps. It does not prove arbitrary deployed concurrency.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "c9f0924cf1b6fbf4520fadcf46b67dfa01a7c6b0",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "8ce0830173fdac609dfb4ea603fdc002c2f4af0dc9b1a005653f5da9cf534b18"
+        }
+      ],
+      "submodules": 0,
+      "format": "cargo-test-text-v1",
+      "qualification": "unqualified",
+      "readiness": "Production function model exercised · development only · bounded scope"
+    },
+    {
+      "id": "criterion",
+      "feature": "performance",
+      "feature_name": "Performance and memory",
+      "repository": "criterion-rs/criterion.rs",
+      "commit": "a663c1fc211bcc2aa7fff77d9d87964e52489ede",
+      "role": "test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "development_harness",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "PER-01",
+        "ALG-01",
+        "ALG-02",
+        "ALG-08"
+      ],
+      "contribution": "Benchmark ingestion, evidence lookup and projection reads across workload sizes and comparable environments.",
+      "source_entry_points": [
+        "src/lib.rs",
+        "src/analysis/mod.rs"
+      ],
+      "limits": "Benchmarks need baseline fingerprints, sample distributions and workload scope. No universal Big-O verdict.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "6b205816cb693005cb5f3b8172d59e9db1466c47",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "4594f18866be94a3ce309ed8f94d92699f5b87739b76e1216addca75f5253fa7"
+        }
+      ],
+      "submodules": 0,
+      "format": "criterion-estimates-v1",
+      "qualification": "unqualified",
+      "readiness": "Development harness exercised · bounded measurement"
+    },
+    {
+      "id": "dhat",
+      "feature": "performance",
+      "feature_name": "Performance and memory",
+      "repository": "nnethercote/dhat-rs",
+      "commit": "30e041bbf5bc1d160366494a9489d0ca340db3a8",
+      "role": "experimental_test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "development_harness",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "PER-02",
+        "PER-03",
+        "PER-04"
+      ],
+      "contribution": "Add isolated heap-allocation budget tests and retention experiments.",
+      "source_entry_points": [
+        "src/lib.rs"
+      ],
+      "limits": "Experimental upstream. Heap measurements do not cover total process RSS or all native allocations.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "d637f6e11104f037ac46ce30760413467266fd71",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "submodules": 0,
+      "format": "dhat-json-v2",
+      "qualification": "unqualified",
+      "readiness": "Development harness exercised · bounded measurement"
+    },
+    {
+      "id": "cargo-deny",
+      "feature": "security",
+      "feature_name": "Security and dependencies",
+      "repository": "EmbarkStudios/cargo-deny",
+      "commit": "79d7f54dc1bfd8cc8105fac917d3dcc7675eb026",
+      "role": "external_adapter",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "captured_fixture_validated",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "SEC-07",
+        "SEC-08",
+        "MNT-08"
+      ],
+      "contribution": "Check resolved Rust dependencies, allowed sources, advisory snapshots and accepted license policy.",
+      "source_entry_points": [
+        "src/cargo-deny/main.rs",
+        "src/advisories.rs",
+        "src/sources.rs",
+        "src/licenses.rs"
+      ],
+      "limits": "Use --offline --locked and a dated local advisory snapshot. Missing data must stay unknown.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "92d6f7e641520db892b77293fa9fe8f82a00ae66",
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "090a294a492ab2f41388252312a65cf2f0e423330b721a68c6665ac64766753b"
+        }
+      ],
+      "submodules": 2,
+      "format": "cargo-deny-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured execution validated on labeled fixtures · advisory"
+    },
+    {
+      "id": "osv-scanner",
+      "feature": "security",
+      "feature_name": "Security and dependencies",
+      "repository": "google/osv-scanner",
+      "commit": "6126a8e7111d6394d75c8ca1e13aa1bb3a07149a",
+      "role": "external_adapter",
+      "declared_main_license": "Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "SEC-07",
+        "SEC-08"
+      ],
+      "contribution": "Add multi-ecosystem vulnerability observations bound to lockfiles and a dated database snapshot.",
+      "source_entry_points": [
+        "cmd/osv-scanner/main.go",
+        "README.md"
+      ],
+      "limits": "Default operation uses network services; select offline-supported capabilities explicitly.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "5f114a635ce62f9d68b7c01ac3b02248f35e46d6",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ],
+      "submodules": 0,
+      "format": "osv-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured offline crates.io advisory scan exercised · dated database · advisory",
+      "component_license_files": [
+        {
+          "path": "internal/output/html/license_summary_template.gohtml",
+          "sha256": "2d29c9235a0e154db9bfd3ab72e6fd7557cfb5408b532e9aee1ac0122f5205d0"
+        },
+        {
+          "path": "internal/thirdparty/ar/COPYING",
+          "sha256": "b309f2b3a2001daddd5983aeb28f363faa9dfea6f3f7c58409d6d46ede9a1cd4"
+        }
+      ],
+      "component_license_scope": "Apache-2.0 scanner; advisory dataset, bundled third-party utilities and deps.dev/registries recorded separately.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R07",
+        "commit": "6126a8e7111d6394d75c8ca1e13aa1bb3a07149a",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "betterleaks",
+      "feature": "security",
+      "feature_name": "Security and dependencies",
+      "repository": "betterleaks/betterleaks",
+      "commit": "95237cf8eb4d8e9f67409595b245e674832992cf",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "captured_fixture_validated",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "SEC-06",
+        "SEC-12"
+      ],
+      "contribution": "Scan candidate exports and workspace files with local rules, preserving redacted locations.",
+      "source_entry_points": [
+        "cmd/root.go",
+        "cmd/git.go",
+        "README.md"
+      ],
+      "limits": "Disable credential validation and remote sources for local mode. Do not retain live secrets in receipts.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "c8229444423b8193d68493ad84053e5c52d37b2d",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "caea114592a8f8e5e05a116d63a99e0ccd79a3ff74f4ddf270bcf4c929eb021e"
+        }
+      ],
+      "submodules": 0,
+      "format": "betterleaks-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured execution validated on labeled fixtures · advisory"
+    },
+    {
+      "id": "semgrep",
+      "feature": "security",
+      "feature_name": "Security and dependencies",
+      "repository": "semgrep/semgrep",
+      "commit": "ad20f09ece0b652f4e532803ce3bcf0e1586c618",
+      "role": "external_adapter",
+      "declared_main_license": "LGPL-2.1; file/rule terms must be checked",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "SEC-03",
+        "SEC-04",
+        "SEC-10",
+        "MNT-06"
+      ],
+      "contribution": "Add local static-analysis reports from pinned Community Edition and explicitly licensed rule packs.",
+      "source_entry_points": [
+        "src/engine/Match_search_mode.ml",
+        "src/osemgrep/cli_scan/Scan_CLI.ml",
+        "README.md"
+      ],
+      "limits": "LGPL engine; separate rule and submodule terms. Community analysis limits must appear on receipts.",
+      "default_enabled": false,
+      "cost_class": "light_static",
+      "tree": "888183b53ed1f703aad50d196aba07900465e164",
+      "root_license_files": [
+        {
+          "path": "COPYRIGHT",
+          "sha256": "0f90eaca8e598c6c67a6cda7beb4470518fb2dababc996b3898344d380769aca"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        }
+      ],
+      "submodules": 36,
+      "format": "semgrep-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured isolated execution exercised · authored cases · advisory",
+      "component_license_files": [
+        {
+          "path": "cli/LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        },
+        {
+          "path": "cli/src/semdep/external/packaging/LICENSE",
+          "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+        },
+        {
+          "path": "cli/src/semdep/external/packaging/LICENSE.APACHE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "cli/src/semdep/external/packaging/LICENSE.BSD",
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        },
+        {
+          "path": "cli/src/semdep/external/parsy/LICENSE",
+          "sha256": "3cd274c6ec7873e4f03693145819ec1fb82768d1386b7c59b4ff194c79853e06"
+        },
+        {
+          "path": "cli/src/semgrep/semgrep_interfaces/LICENSE",
+          "sha256": "7411dc31e3b709d4d82e1d10f0ed966a232cd0034779eef16a6cf81ca575f35a"
+        },
+        {
+          "path": "cli/src/semgrep/semgrep_interfaces/NOTICE",
+          "sha256": "4342a1347a3866578dc93291c383c039a14b76739bb7c925afe0fbd1a4dce751"
+        },
+        {
+          "path": "languages/cpp/menhir/copyright.txt",
+          "sha256": "63f88859403ff0866f5884278c78395e04bc4a3f88a5456d1f1677ce6506e9ff"
+        },
+        {
+          "path": "languages/cpp/menhir/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "languages/javascript/menhir/copyright.txt",
+          "sha256": "f32253f3828ddf8d6d721d5be0b4b418cbf987e3d96bf55d8f1b052f11760e7b"
+        },
+        {
+          "path": "languages/javascript/menhir/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "languages/ocaml/menhir/license_parser_ml_mly.txt",
+          "sha256": "36ed72077a7854285b3073c5c104afd36fa5d0077ab77baa85be56ff72c8660c"
+        },
+        {
+          "path": "languages/python/menhir/copyright.txt",
+          "sha256": "e0a7b1be52e0c1c744c12700be527618562836fd82a68c37477be4b0c993b1a7"
+        },
+        {
+          "path": "languages/python/menhir/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "libs/commons/copyright.txt",
+          "sha256": "c3bb88f328501741817b3732bc355e49e2eaa844311d032d47e03feb591750f6"
+        },
+        {
+          "path": "libs/commons/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "libs/lib_parsing/copyright.txt",
+          "sha256": "23d2ddb8ac1ef98a9d773c202a2a7a70abf56f629c6eb832f824659da68c3c75"
+        },
+        {
+          "path": "libs/lib_parsing/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "libs/python-str-repr/LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        }
+      ],
+      "component_license_scope": "LGPL-2.1 engine. Rule catalogs are independently licensed; no grant inferred for Semgrep-maintained restricted rules. Grammar submodule licenses separate.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R03",
+        "commit": "ad20f09ece0b652f4e532803ce3bcf0e1586c618",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "playwright",
+      "feature": "product-behavior",
+      "feature_name": "Product behavior",
+      "repository": "microsoft/playwright",
+      "commit": "6232bd76fcf9e54c2e0b57e79879b75e30c89b46",
+      "role": "test_harness",
+      "declared_main_license": "Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "FUN-03",
+        "UX-01",
+        "UX-02",
+        "UX-06",
+        "UX-07",
+        "UX-08"
+      ],
+      "contribution": "Test real receipt navigation, recovery/handoff flows and save/reload behavior with traces.",
+      "source_entry_points": [
+        "packages/playwright/src/reporters/json.ts",
+        "packages/playwright/src/runner/tasks.ts"
+      ],
+      "limits": "Assertions must check accepted outcomes. Browser binaries, state and credentials need isolated execution.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "62d9e216d0e7ae2f628f7df6f6476115cfa5d39b",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb"
+        },
+        {
+          "path": "NOTICE",
+          "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d"
+        }
+      ],
+      "submodules": 0,
+      "format": "playwright-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured isolated execution exercised · authored cases · advisory"
+    },
+    {
+      "id": "schemathesis",
+      "feature": "product-behavior",
+      "feature_name": "Product behavior",
+      "repository": "schemathesis/schemathesis",
+      "commit": "66b5c3ed71f429151aba46c68da856e6ec43f447",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "FUN-02",
+        "FUN-04",
+        "TST-07",
+        "DAT-04"
+      ],
+      "contribution": "Exercise accepted API schemas and stateful operation sequences on isolated targets.",
+      "source_entry_points": [
+        "src/schemathesis/engine/__init__.py",
+        "src/schemathesis/specs/openapi/schemas.py",
+        "README.md"
+      ],
+      "limits": "API tests may create/delete data. Targets and schema revisions must be explicit; no production defaults.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "e92780aaa6733271db510ab767c341454bea1774",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "d957b827cbf98cc4005ab4fbaf59dfddb23c55f964deb65541e7e2176ce9c708"
+        }
+      ],
+      "submodules": 0,
+      "format": "schemathesis-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Captured isolated execution exercised · authored cases · advisory",
+      "import_formats": [
+        "sarif-2.1.0"
+      ],
+      "component_license_files": [],
+      "component_license_scope": "MIT; hypothesis/schema/parser dependencies separate.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R17",
+        "commit": "66b5c3ed71f429151aba46c68da856e6ec43f447",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "swe-bench",
+      "feature": "evaluation",
+      "feature_name": "Verifier and AI evaluation",
+      "repository": "SWE-bench/SWE-bench",
+      "commit": "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+      "role": "evaluation_harness",
+      "declared_main_license": "MIT; task/data terms separate",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "TST-04",
+        "AGT-08",
+        "AIP-05",
+        "AIP-06"
+      ],
+      "contribution": "Build independent held-out failure cases from real repository issues and patches.",
+      "source_entry_points": [
+        "swebench/harness/run_evaluation.py",
+        "swebench/harness/grading.py"
+      ],
+      "limits": "Heavy evaluation worker. Cache identity must include patch/input digests; benchmark scores do not establish field precision.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "3c53c27bd4ae6a14ddf58be94156965dcd00f6f3",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "2bd2e08df7147f67a69b42c10efae09bd4bf119df397371036187d5dd1b02f57"
+        }
+      ],
+      "submodules": 0,
+      "format": "swe-bench-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Report reader and upstream cache audit · task execution not provisioned"
+    },
+    {
+      "id": "inspect-ai",
+      "feature": "evaluation",
+      "feature_name": "Verifier and AI evaluation",
+      "repository": "UKGovernmentBEIS/inspect_ai",
+      "commit": "ec3bf0995fb6435f452f158f85ca423803aa0f98",
+      "role": "evaluation design reference and optional reader",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "AGT-08",
+        "AIP-04",
+        "AIP-05",
+        "AIP-06"
+      ],
+      "contribution": "Compare ThruLine verdicts to independently adjudicated labels; report class-wise precision and abstention.",
+      "source_entry_points": [
+        "src/inspect_ai/scorer/_scorer.py",
+        "src/inspect_ai/log/_log.py"
+      ],
+      "limits": "Development harness only. Model graders cannot mint authoritative product verdicts.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "b4283fdbd598bbcce713324704f02fa27f3bebc4",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "c593c2afc81388521eaeb03f0d1a4b01bc3e5147ed9cb16c1f129e5be353b6af"
+        }
+      ],
+      "submodules": 1,
+      "format": "inspect-json-v2",
+      "qualification": "unqualified",
+      "readiness": "Native evaluation accounting exercised · design reference and optional report import"
+    },
+    {
+      "id": "promptfoo",
+      "feature": "evaluation",
+      "feature_name": "Verifier and AI evaluation",
+      "repository": "promptfoo/promptfoo",
+      "commit": "7cf65f33e5ac09d1edc93753430d83d35f7128cb",
+      "role": "evaluation_harness",
+      "declared_main_license": "MIT",
+      "source_status": "source_acquired",
+      "native_integration_status": "report_reader_only",
+      "existing_native_use": "not_established_by_this_review",
+      "candidate_check_ids": [
+        "AGT-01",
+        "AIP-01",
+        "AIP-03",
+        "AIP-06"
+      ],
+      "contribution": "Evaluate optional language annotation and explanatory output with adversarial and regression cases.",
+      "source_entry_points": [
+        "src/evaluator.ts",
+        "src/assertions/index.ts"
+      ],
+      "limits": "Provider, grader, telemetry and hosted red-team services require explicit configuration. Model scores remain advisory.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "tree": "b130de0b2f00982a96f1981552667c5fd144ed57",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "bf813686553f451e1b833fbd827488aee49b60b189626915bf3108d10b754e44"
+        }
+      ],
+      "submodules": 0,
+      "format": "promptfoo-json-v3",
+      "qualification": "unqualified",
+      "readiness": "Optional model-evaluation reader · no provider or model evaluation enabled"
+    },
+    {
+      "id": "ruff",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "astral-sh/ruff",
+      "commit": "b5dba861cc38e3f7fb4524c9ceba3e01a474ea13",
+      "tree": "2b61306d708a211b3725c8d920e7590be6da41ad",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "MIT (includes third-party notices)",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Check Python unused imports and variables; preserve exact diagnostic spans and upstream safe/unsafe fix applicability.",
+      "source_entry_points": [
+        "crates/ruff_db/src/diagnostic/render/json.rs",
+        "crates/ruff_linter/src/rules/pyflakes"
+      ],
+      "limits": "Pinned 0.16.7; F401/F841 only. Isolated rules ignore project configuration and disable noqa. Excluded Python files, symlinks, parser errors and zero-work scans remain incomplete. Fixes require separate preview and behavior checks.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+        }
+      ],
+      "submodules": 0,
+      "format": "ruff-json-v1",
+      "qualification": "unqualified",
+      "readiness": "Guided check; native applicability retained; assignment qualification pending",
+      "component_license_files": [
+        {
+          "path": "crates/ruff_annotate_snippets/LICENSE-APACHE",
+          "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08"
+        },
+        {
+          "path": "crates/ruff_annotate_snippets/LICENSE-MIT",
+          "sha256": "6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6"
+        },
+        {
+          "path": "crates/ty_vendored/vendor/typeshed/LICENSE",
+          "sha256": "295f8538c94ae5c3043301cf7cff1c852dab6a786a8ddee471e061b40d5ecabe"
+        }
+      ],
+      "component_license_scope": "MIT core; parser and vendored ancillary notice files retained.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R08",
+        "commit": "b5dba861cc38e3f7fb4524c9ceba3e01a474ea13",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "opengrep",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "opengrep/opengrep",
+      "commit": "acf67b45c97c4b63626536605c77064ef536806d",
+      "tree": "4aa07663bd4dfbaee745788c3029881fb9224a8f",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "LGPL-2.1; inspect engine components and independently supplied rules",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Local rule findings with intrafile cross-function taint traces; native spans and trace paths retained.",
+      "source_entry_points": [
+        "README.md",
+        "src/engine/",
+        "tests/rules/cross_function_tainting/"
+      ],
+      "limits": "Intrafile mode only. Interfile alpha is separate and unqualified; no reproduced security failure inferred from static flow.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "COPYRIGHT",
+          "sha256": "0f90eaca8e598c6c67a6cda7beb4470518fb2dababc996b3898344d380769aca"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        }
+      ],
+      "submodules": 0,
+      "format": "opengrep-json-v1",
+      "qualification": "Implemented; product qualification pending.",
+      "readiness": "Pinned native recipe; qualification pending.",
+      "import_formats": [
+        "opengrep-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "cli/LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        },
+        {
+          "path": "cli/src/semdep/external/packaging/LICENSE",
+          "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+        },
+        {
+          "path": "cli/src/semdep/external/packaging/LICENSE.APACHE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "cli/src/semdep/external/packaging/LICENSE.BSD",
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        },
+        {
+          "path": "cli/src/semdep/external/parsy/LICENSE",
+          "sha256": "3cd274c6ec7873e4f03693145819ec1fb82768d1386b7c59b4ff194c79853e06"
+        },
+        {
+          "path": "languages/cpp/menhir/copyright.txt",
+          "sha256": "63f88859403ff0866f5884278c78395e04bc4a3f88a5456d1f1677ce6506e9ff"
+        },
+        {
+          "path": "languages/cpp/menhir/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "languages/java/menhir/copyright.txt",
+          "sha256": "5917fde4582cc101d1f05675d5a9cd62820d56b5a879637e93d8da55fcb85d4b"
+        },
+        {
+          "path": "languages/java/menhir/license.txt",
+          "sha256": "4b02a810ae066f8ec84803f7960dc21991df4fb273240ec809756f475ef09a12"
+        },
+        {
+          "path": "languages/javascript/menhir/copyright.txt",
+          "sha256": "f32253f3828ddf8d6d721d5be0b4b418cbf987e3d96bf55d8f1b052f11760e7b"
+        },
+        {
+          "path": "languages/javascript/menhir/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "languages/ocaml/menhir/license_parser_ml_mly.txt",
+          "sha256": "36ed72077a7854285b3073c5c104afd36fa5d0077ab77baa85be56ff72c8660c"
+        },
+        {
+          "path": "languages/python/menhir/copyright.txt",
+          "sha256": "e0a7b1be52e0c1c744c12700be527618562836fd82a68c37477be4b0c993b1a7"
+        },
+        {
+          "path": "languages/python/menhir/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "libs/commons/copyright.txt",
+          "sha256": "c3bb88f328501741817b3732bc355e49e2eaa844311d032d47e03feb591750f6"
+        },
+        {
+          "path": "libs/commons/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "libs/lib_parsing/copyright.txt",
+          "sha256": "23d2ddb8ac1ef98a9d773c202a2a7a70abf56f629c6eb832f824659da68c3c75"
+        },
+        {
+          "path": "libs/lib_parsing/license.txt",
+          "sha256": "360a184cf3ae270fe7c328addc89768925a445ca255852a82a20d57a26749862"
+        },
+        {
+          "path": "libs/python-str-repr/LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        }
+      ],
+      "component_license_scope": "LGPL-2.1 engine; inherited and external rules/grammar terms remain separate.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R04",
+        "commit": "acf67b45c97c4b63626536605c77064ef536806d",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "infer",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "facebook/infer",
+      "commit": "410a6d9394b9c9794bf9469ee0e1aa8d3ae91031",
+      "tree": "06a18503641ce718080a9b96a19e26afafc8bd25",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "MIT core; Java analysis may require GPL components; compiler/dependency terms separate",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Infer supported Java defect traces",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Java17 selected javac capture; other build systems and languages remain unqualified.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        }
+      ],
+      "submodules": 0,
+      "format": "infer-json-v1",
+      "qualification": "Implemented; qualification pending.",
+      "readiness": "Pinned Java capture; qualification pending.",
+      "import_formats": [
+        "infer-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "dependencies/camlzip/LICENSE",
+          "sha256": "aaf45d7ab67085c75704b2c09f614b9a0d7f3c4c4b31ee3f7838b0effb307dfc"
+        },
+        {
+          "path": "dependencies/charon/LICENSE.md",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "path": "dependencies/ocamldot/LICENSE",
+          "sha256": "5afa3a36fda80f6e4e52790f689b4238a59555930d612de30823c4ec70a3549e"
+        },
+        {
+          "path": "dependencies/ppx_show/COPYING",
+          "sha256": "f19335d1ba61ec0915992465e4c8ebe325b15492d5b7246318eb65a75b2a580a"
+        },
+        {
+          "path": "dependencies/pyml/LICENSE",
+          "sha256": "13a5ff85eea314d830fca2531bd978839016412a8965ad389e1f570b1df77f95"
+        },
+        {
+          "path": "facebook-clang-plugins/LLVM-LICENSE",
+          "sha256": "b2b835993691f8c57a3e696cf76245f8381a20cffb521bc18b15c320d11a05c1"
+        },
+        {
+          "path": "infer/src/sledge/nonstdlib/iter/LICENSE",
+          "sha256": "11073e7a64e8956b4a83b8e93c4ff1005b8593e2944e911e260b8d83f710312d"
+        },
+        {
+          "path": "infer/src/sledge/nonstdlib/ocaml/LICENSE",
+          "sha256": "65f47d3bf5a921011ac7fa30f23d54f9dffbe7683921eeb116d5ce8dc26ff0c1"
+        },
+        {
+          "path": "infer/src/treesitter/vendor/tree-sitter-c/LICENSE",
+          "sha256": "2e0110e07abef7c2548b26ec9d6969775617ca539a0dc8dbeeb14d6452c711d1"
+        },
+        {
+          "path": "infer/src/treesitter/vendor/tree-sitter/LICENSE",
+          "sha256": "c5cfb43042b6b72045f4ba997834d0a7786d2793d91680868b5815b39f14fc78"
+        }
+      ],
+      "component_license_scope": "MIT core; README warns Java support may require GPL components; bundled compiler/dependency licenses distinct.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R10",
+        "commit": "410a6d9394b9c9794bf9469ee0e1aa8d3ae91031",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "aider",
+      "feature": "local-repair-advisors",
+      "feature_name": "Local review and repair proposals",
+      "repository": "Aider-AI/aider",
+      "commit": "a4be6ccd87ebaa59b361f3f028d116ce1761b626",
+      "tree": "41700aeb97cbfbc50c2799496d2a687e0f3645f5",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Aider isolated local repair proposals",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Selected repository context; native edits and independent checks remain separate.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ],
+      "submodules": 0,
+      "format": "aider-json-v1",
+      "qualification": "Implemented; qualification pending.",
+      "readiness": "Local agent capture; advisory only",
+      "import_formats": [
+        "aider-json-v1"
+      ],
+      "component_license_files": [],
+      "component_license_scope": "Apache-2.0; optional model weights/providers and media dependencies independent.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R12",
+        "commit": "a4be6ccd87ebaa59b361f3f028d116ce1761b626",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "openhands-sdk",
+      "feature": "local-repair-advisors",
+      "feature_name": "Local review and repair proposals",
+      "repository": "OpenHands/software-agent-sdk",
+      "commit": "50080b58d35b4824fda25fca2345d80bcd08aeff",
+      "tree": "270937462b841b45551dc7b56671f1727bbee3c0",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "MIT; ancillary components and endpoints remain separately licensed",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "OpenHands SDK actions, persistence and resume",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "SDK component only; persisted completion is not verified behavior.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "14a9b631c658eee682c6c2973525fbdf808c3457176bc47513052c559cc5ce86"
+        }
+      ],
+      "submodules": 0,
+      "format": "openhands-sdk-json-v1",
+      "qualification": "Implemented; qualification pending.",
+      "readiness": "Local agent capture; advisory only",
+      "import_formats": [
+        "openhands-sdk-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "clients/typescript/LICENSE",
+          "sha256": "5f81be7d1eee918d9b626e5b9b2f8fccd52d74d8f91c5e0402aaf3fe86e92399"
+        }
+      ],
+      "component_license_scope": "MIT SDK/tools/server/workspace modules; endpoint/model/cloud terms separate.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R13",
+        "commit": "50080b58d35b4824fda25fca2345d80bcd08aeff",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "pr-agent",
+      "feature": "local-repair-advisors",
+      "feature_name": "Local review and repair proposals",
+      "repository": "The-PR-Agent/pr-agent",
+      "commit": "f3b385ea2927247ddcff2fe252472380b9c8f5fc",
+      "tree": "e8013eb8fd49115d8a160199ad9ece8c82971388",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "MIT; ancillary components and endpoints remain separately licensed",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "PR-Agent committed diff review",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Local committed merge-base diff excludes unchanged files and dirty working-tree changes. Pinned tag package metadata says0.43.0.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "ea19f3b6bfd70ce0bf8d60fc5b15cdb789fcf86a63c0d6542977f888519f5788"
+        }
+      ],
+      "submodules": 0,
+      "format": "pr-agent-json-v1",
+      "qualification": "Implemented; qualification pending.",
+      "readiness": "Local agent capture; advisory only",
+      "import_formats": [
+        "pr-agent-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "docker/mosaico/LICENSE",
+          "sha256": "ea19f3b6bfd70ce0bf8d60fc5b15cdb789fcf86a63c0d6542977f888519f5788"
+        }
+      ],
+      "component_license_scope": "MIT at pinned LICENSE (historical conflicting handovers superseded only for this exact source).",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R14",
+        "commit": "f3b385ea2927247ddcff2fe252472380b9c8f5fc",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "mini-swe-agent",
+      "feature": "local-repair-advisors",
+      "feature_name": "Local review and repair proposals",
+      "repository": "SWE-agent/mini-swe-agent",
+      "commit": "a83fcae82d2a08f0ee0c688f9d137b3566c097f8",
+      "tree": "665df42f5761252b83d9a30e1b82f76f1f17f828",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "MIT; ancillary components and endpoints remain separately licensed",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "mini-swe-agent bounded repair attempts",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Submitted, finished or limit-reached states never establish acceptance.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "0f796e58f91d1c07bb2c1b1d0f8bf3a83017c3a5dec1bdc6fae733b2cd2e875b"
+        }
+      ],
+      "submodules": 0,
+      "format": "mini-swe-agent-json-v1",
+      "qualification": "Implemented; qualification pending.",
+      "readiness": "Local agent capture; advisory only",
+      "import_formats": [
+        "mini-swe-agent-json-v1"
+      ],
+      "component_license_files": [],
+      "component_license_scope": "MIT; model provider/environment distribution licenses separate.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R15",
+        "commit": "a83fcae82d2a08f0ee0c688f9d137b3566c097f8",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "clippy",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "rust-lang/rust-clippy",
+      "commit": "906dffbf10af19f8d6adf5485a73b14d24220456",
+      "tree": "065593b8a744d3d56993a7f2dda46bfd908cf843",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Compiler-backed Rust lint with explicit feature/target scope",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "The executable component comes from Rust1.97.1 official sources, separately pinned from R09 nightly HEAD. Only needless_return is selected.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "COPYRIGHT",
+          "sha256": "d2c41ea7c48c1bbb9b2dd72bc6464ff9b2032987e33fe28bee6a46e355ed9ea7"
+        },
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "d8b56cd45661bfc7ccf4ce5722388cab275f9dabb9e471c922cc80e36bbf9caa"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "8d07f0c9c9966be0aaec4196d7863b56ade114e9714dbc31ebba576c0446d2fc"
+        }
+      ],
+      "submodules": 0,
+      "format": "clippy-json-v1",
+      "qualification": "Native execution observed; final product qualification pending.",
+      "readiness": "Native adapter; qualification pending.",
+      "import_formats": [
+        "clippy-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "rustc_tools_util/LICENSE-APACHE",
+          "sha256": "d8b56cd45661bfc7ccf4ce5722388cab275f9dabb9e471c922cc80e36bbf9caa"
+        },
+        {
+          "path": "rustc_tools_util/LICENSE-MIT",
+          "sha256": "8d07f0c9c9966be0aaec4196d7863b56ade114e9714dbc31ebba576c0446d2fc"
+        }
+      ],
+      "component_license_scope": "MIT OR Apache-2.0; rustc and distribution notices separate.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R09",
+        "commit": "906dffbf10af19f8d6adf5485a73b14d24220456",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "joern",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "joernio/joern",
+      "commit": "7c1163d96705d354d7c1957531487a63af34dda6",
+      "tree": "c99fc6b66264f41eb49a2ce3f5518a8c42bfd917",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "Apache-2.0; component terms separate",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "C property graph and cross-function dataflow query",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Selected C source and an owned query; unresolved methods and omitted inputs remain incomplete. Other frontends/query catalogs remain unqualified.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "2e50a6169977b8c7bb3c3fb39e13b4502c0a5f00c79716647bee12731f50c4ce"
+        }
+      ],
+      "submodules": 0,
+      "format": "joern-json-v1",
+      "qualification": "Native execution observed; final product qualification pending.",
+      "readiness": "Native adapter; qualification pending.",
+      "import_formats": [
+        "joern-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "joern-cli/frontends/c2cpg/eclipse-cdt/LICENSE",
+          "sha256": "0becf16567beb77fa252b7664631dd177c8f9a1889e48995b45379c7130e5303"
+        }
+      ],
+      "component_license_scope": "Apache-2.0 core/querydb; frontend dependencies retain separate terms.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R11",
+        "commit": "7c1163d96705d354d7c1957531487a63af34dda6",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "openrewrite",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "openrewrite/rewrite",
+      "commit": "f490be178dfac05c231158d85974951d93cdf9aa",
+      "tree": "10b2fbcca931b532f31353068fb06dd83f345c90",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "Apache-2.0 core; seven language modules use Moderne Source Available License; component terms separate",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Named Java semantic migration across selected modules",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Apache Java ChangeMethodName recipe8.90.4 with matching source artifacts; acquired8.92.1 is distinct. Broader classpaths and restricted modules remain gaps.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ],
+      "submodules": 0,
+      "format": "openrewrite-json-v1",
+      "qualification": "Native execution observed; final product qualification pending.",
+      "readiness": "Native adapter; qualification pending.",
+      "import_formats": [
+        "openrewrite-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "rewrite-android/LICENSE.md",
+          "sha256": "1d8fc6fc111af1a988203c03956c92bf0b3f62822018e3e0321e8129d777d14a"
+        },
+        {
+          "path": "rewrite-csharp/LICENSE.md",
+          "sha256": "1d8fc6fc111af1a988203c03956c92bf0b3f62822018e3e0321e8129d777d14a"
+        },
+        {
+          "path": "rewrite-go/LICENSE.md",
+          "sha256": "1d8fc6fc111af1a988203c03956c92bf0b3f62822018e3e0321e8129d777d14a"
+        },
+        {
+          "path": "rewrite-javascript/LICENSE.md",
+          "sha256": "1d8fc6fc111af1a988203c03956c92bf0b3f62822018e3e0321e8129d777d14a"
+        },
+        {
+          "path": "rewrite-python/LICENSE.md",
+          "sha256": "1d8fc6fc111af1a988203c03956c92bf0b3f62822018e3e0321e8129d777d14a"
+        },
+        {
+          "path": "rewrite-ruby/LICENSE.md",
+          "sha256": "cd3be70247c1b00f6e9b0b4992e1a739c29b3da385d262b46ce2ed485b67a723"
+        },
+        {
+          "path": "rewrite-scala/LICENSE.md",
+          "sha256": "cd3be70247c1b00f6e9b0b4992e1a739c29b3da385d262b46ce2ed485b67a723"
+        }
+      ],
+      "component_license_scope": "Apache-2.0 root/core/selected Java paths. rewrite-android/csharp/go/javascript/python/ruby/scala have Moderne Source Available License; never infer Apache for those modules.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R16",
+        "commit": "f490be178dfac05c231158d85974951d93cdf9aa",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "sonarqube",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "SonarSource/sonarqube",
+      "commit": "55af4e8b2e82479da5933328048a0734e520b171",
+      "tree": "96960ce113b140282e167827444a088087c28481",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "LGPL-3.0; included analyzers have separate component terms",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Local Community analysis, paginated issues, lifecycle and quality gate",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Completed asynchronous job and exact revision required. Scanner runs in a disposable internal-network service. Commercial features and mutable external servers are outside this recipe.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+        },
+        {
+          "path": "NOTICE.txt",
+          "sha256": "a4e3f4e0b95cacc0c1725f13d2e23d34b96c7d40513a76f0a991616e156c5ce1"
+        }
+      ],
+      "submodules": 0,
+      "format": "sonarqube-json-v1",
+      "qualification": "Native service exercised; final product qualification pending.",
+      "readiness": "Local server adapter; qualification pending.",
+      "import_formats": [
+        "sonarqube-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": "server/sonar-webserver-core/COPYING",
+          "sha256": "a853c2ffec17057872340eee242ae4d96cbf2b520ae27d903e1b2fef1a5f9d1c"
+        },
+        {
+          "path": "sonar-application/src/main/assembly/COPYING",
+          "sha256": "b4a8053f957cb2e4f6f7079daa7e8ad442f442f880a34360fea57dc99628a7fa"
+        },
+        {
+          "path": "sonar-application/src/main/assembly/bin/winsw-license/LICENSE.txt",
+          "sha256": "bcbe80b1c38541952a6c351ad3837077f8b8ef01ad4c64351235197e2891ed3a"
+        },
+        {
+          "path": "sonar-application/src/main/assembly/sonarsource-svnkit-license.txt",
+          "sha256": "f682e6764e0eeba8069bd5d75319a21ffd5206641e8c88b096f5f4e5e9d374fa"
+        }
+      ],
+      "component_license_scope": "LGPL-3.0 core; bundled analyzers, web application and dependencies retain separate notices; commercial edition additions are not Community coverage.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R02",
+        "commit": "55af4e8b2e82479da5933328048a0734e520b171",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    },
+    {
+      "id": "megalinter",
+      "feature": "static",
+      "feature_name": "Source and dependency analysis",
+      "repository": "oxsecurity/megalinter",
+      "commit": "9949bad031045f366be2467e00e8371a7328a2e2",
+      "tree": "706a41638608f2e553acc412db920633e5098864",
+      "role": "production_adapter_advisory",
+      "declared_main_license": "AGPL-3.0 root license; pyproject MIT declaration conflicts; underlying analyzer and rule terms separate",
+      "source_status": "source_acquired",
+      "native_integration_status": "implemented_not_qualified",
+      "candidate_check_ids": [],
+      "contribution": "Two native analyzers, full per-tool reports and optional local Advisor",
+      "source_entry_points": [
+        "README.md"
+      ],
+      "limits": "Ruff and yamllint only in this recipe. MegaLinter is the wrapper, not another independent scanner. Native YAML has no SARIF. Advisor remains optional advisory text.",
+      "default_enabled": false,
+      "cost_class": "targeted_or_checkpoint",
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+        }
+      ],
+      "submodules": 0,
+      "format": "megalinter-json-v1",
+      "qualification": "Native detector/fix/advisor exercised; final product qualification pending.",
+      "readiness": "Native orchestration; qualification pending.",
+      "import_formats": [
+        "megalinter-json-v1"
+      ],
+      "component_license_files": [
+        {
+          "path": ".claude/skills/datadog-dashboards/LICENSE",
+          "sha256": "5982fe8b2f8d2feeb6fe6e6d9e004e7956113f4e5bb41151989d856ab0955e9b"
+        },
+        {
+          "path": ".claude/skills/grafana-dashboarding/LICENSE",
+          "sha256": "efb4d91baa7cd9559d3452f79deb2b3d9dc819c83d7058a1f90ac70484a1a23e"
+        },
+        {
+          "path": ".claude/skills/grafana-promql/LICENSE",
+          "sha256": "efb4d91baa7cd9559d3452f79deb2b3d9dc819c83d7058a1f90ac70484a1a23e"
+        },
+        {
+          "path": ".claude/skills/kibana-dashboards/LICENSE",
+          "sha256": "7981f1aef260799b5379f8a41a60b99b07e4599426df5f7abfda76b77202ae01"
+        }
+      ],
+      "component_license_scope": "AGPL-3.0 wrapper per root LICENSE; pyproject.toml incorrectly/conflictingly declares MIT. Each underlying linter/rule and image layer needs separate terms. No closed hosted-service rights inferred.",
+      "license_provenance": {
+        "path": "spec/integrations/license-provenance.json",
+        "repository_id": "R01",
+        "commit": "9949bad031045f366be2467e00e8371a7328a2e2",
+        "scope": "Root/component/fixture/policy documents and runtime declarations have separate recorded scopes; no whole-distribution clearance."
+      }
+    }
+  ]
+}

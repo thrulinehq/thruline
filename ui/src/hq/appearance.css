@@ -1,0 +1,35 @@
+/* The look a person chose in Settings (C30 R-PREFS), on the app root only: the
+ * design gallery never mounts the app, so it never sees this file and draws the
+ * canvas exactly (docs/hq-next/reference). The attributes are set by
+ * appearance.jsx from data/appearance.js. */
+
+/* Colour vision (DESIGN-SPEC §1.11, "Proven is teal"): every place the app draws
+ * Proven reads these two tokens (data/palette.js); the fallback written beside
+ * each use is the standard green, so this one rule is the only swap. Shapes
+ * stay identical. */
+#root[data-colour-vision="proven_teal"] {
+  --tl-proven: #2DD4BF;
+  --tl-proven-rgb: 45, 212, 191;
+}
+
+/* Motion (§1.9): "Always reduce" cuts every animation and transition the app
+ * has, so the finished state appears at once; "Follow this Mac" does the same
+ * when this Mac asks for less motion. */
+#root[data-motion="reduce"],
+#root[data-motion="reduce"] *,
+#root[data-motion="reduce"] *::before,
+#root[data-motion="reduce"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #root[data-motion="system"],
+  #root[data-motion="system"] *,
+  #root[data-motion="system"] *::before,
+  #root[data-motion="system"] *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

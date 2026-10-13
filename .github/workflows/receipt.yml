@@ -1,0 +1,194 @@
+# ThruLine's own receipt gate — BUILD-SPEC §9's Action, wired to something that
+# runs it.
+#
+# WHY THIS FILE EXISTS
+# --------------------
+# `packaging/action/action.yml` was written, reviewed and committed while **no
+# workflow referenced it**. Its step bodies had therefore never executed once,
+# and running them found four defects a reader could not:
+#
+#   1. the policy step called `thruline policy check`, which is not a verb —
+#      the §9 gate could not pass for anyone who enabled it;
+#   2. `set -uo pipefail` does not turn OFF the `-e` that `shell: bash` supplies,
+#      so a FAILING policy aborted the step before it wrote the reason it failed;
+#   3. `"${key_arg[@]}"` on an empty array is an unbound variable under bash 3.2
+#      — the shell every macos runner has — so the Action died in its default
+#      configuration on macOS and worked on ubuntu, which is why nothing noticed;
+#   4. nothing rendered the badge at all: the three states existed in the library
+#      and no caller asked for them.
+#
+# So: the `states` job below runs the Action's own step bodies over receipts it
+# really signs, and watches every state it can produce — verified, partial, not
+# verified, no badge at all — on BOTH shells. The matrix is not thoroughness for
+# its own sake; defect 3 is invisible on ubuntu.
+#
+# AND A FIFTH DEFECT, FOUND BECAUSE THIS WORKFLOW HAS NEVER RUN
+# ------------------------------------------------------------
+# `packaging/action/selftest.py` was RED at `10dae44`. Its scenario 1 expected
+# `conclusion: success` over a receipt whose only verdict was `unverifiable`;
+# `b273136` had made `verify` refuse to call that verified, and updated
+# `crates/cli/tests/m2_action.rs` to match, and left this harness behind.
+# Nothing noticed, because the only thing that ran the harness was this file,
+# and this file has never executed. `cargo test -p thruline-cli --test
+# m2_action` now runs it too, so a developer machine catches it.
+#
+# THE THREE AXES (operator ruling, 2026-09-04)
+# --------------------------------------------
+# The check run's conclusion combines the receipt's integrity, the claim
+# verdicts inside it, and `.thruline/policy.yml` — downward only. It may never
+# conclude `success` while a claim is `unsupported`; without a policy that is
+# `neutral` with the verdict table rendered, and `failure` comes only from
+# policy. The `states` job observes all of it, including a badge in each of its
+# three colours plus its absence.
+#
+# WHAT ONLY GITHUB CAN PROVE
+# --------------------------
+# The `self` job is the only place the real `POST /repos/{owner}/{repo}/check-runs`
+# and `gh pr comment` calls happen. `packaging/action/selftest.py` stubs `gh` and
+# asserts the payload; it cannot assert that GitHub accepts it.
+#
+# **UNVERIFIED-AGAINST-GITHUB, precisely:**
+#   - `gh api repos/{owner}/{repo}/check-runs --method POST --input check-run.json`
+#     — the payload's shape follows the documented Checks API schema (`name`,
+#     `head_sha`, `status`, `conclusion`, `output.{title,summary,text}`), and the
+#     `conclusion` values posted are exactly GitHub's three; that the API accepts
+#     the document is untested.
+#   - `gh pr comment <n> --body-file receipt-table.md`.
+#   - this workflow file itself, both jobs, on any runner.
+#   - GitHub's rendering of the badge SVG and of the markdown tables.
+# Everything else in the Action — every step body, every conclusion, every badge
+# state — is executed locally by the harness and by `cargo test`.
+
+name: Receipt
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: receipt-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Every state the Action can produce, observed on both runner shells.
+  states:
+    name: action states (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        # macos-latest is here for bash 3.2. Dropping it re-opens defect 3.
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+
+      # `--no-default-features` drops the `ort` feature, whose build script
+      # downloads ONNX Runtime. Nothing on the receipt path uses the NLI model,
+      # and a gate that needs a CDN is a gate that goes red for a stranger's
+      # outage.
+      - name: Build the binary the Action runs
+        run: cargo build --locked -p thruline-cli --no-default-features
+
+      - name: Tools the harness needs
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet --disable-pip-version-check pyyaml pytest
+          # pytest is not optional decoration: without a real runner the
+          # cheating-session scenario cannot run, and selftest.py reports that
+          # as a FAILURE rather than a skip — the §9 gate would otherwise be
+          # asserted about and never watched catching anything.
+          python3 -c "import yaml" && pytest --version
+
+      - name: Run the Action over every state it can produce
+        run: python3 packaging/action/selftest.py --thruline target/debug/thruline
+
+      # The unit and CLI halves of the same ruling: the six points, each with a
+      # test, each mutation-witnessed. Cheap next to the build above, and it
+      # keeps the two halves from drifting apart the way the harness did.
+      - name: The check-run conclusion tests
+        run: |
+          cargo test --locked --no-default-features \
+            -p thruline-attest --test ruling_check_run --test false_accusation
+          cargo test --locked --no-default-features \
+            -p thruline-cli --test m2_action
+
+  # The Action itself, on this repository, through GitHub's own runner.
+  #
+  # Skipped for pull requests from forks, where `GITHUB_TOKEN` is read-only and
+  # the check-run POST cannot succeed. That is a permission fact, not a receipt
+  # fact, and failing there would teach people to ignore a red gate.
+  self:
+    name: thruline/receipt (this repository)
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    steps:
+      # fetch-depth: 0 — the Action's own README says so, and the Action fails
+      # loudly without it, because a shallow clone has none of the objects a
+      # receipt names.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build and install thruline on PATH
+        run: |
+          set -euo pipefail
+          cargo build --locked -p thruline-cli --no-default-features
+          echo "${GITHUB_WORKSPACE}/target/debug" >> "$GITHUB_PATH"
+
+      # A real captured session in this repository, not a fixture: the two hook
+      # payloads a harness delivers, folded into the ledger, then a receipt
+      # built from those ledger rows alone (M2.1).
+      - name: Capture a session and build its receipt
+        env:
+          THRULINE_HOME: ${{ runner.temp }}/thruline-home
+        run: |
+          set -euo pipefail
+          mkdir -p "$THRULINE_HOME" .thruline/receipts
+          SID="c1c1c1c1-0000-4000-8000-000000000001"
+          printf '{"hook_event_name":"SessionStart","session_id":"%s","transcript_path":"/t","cwd":"%s","source":"startup"}' \
+            "$SID" "$GITHUB_WORKSPACE" | thruline hook claude-code
+          printf '{"hook_event_name":"Stop","session_id":"%s","transcript_path":"/t","cwd":"%s","last_assistant_message":"%s","stop_hook_active":false}' \
+            "$SID" "$GITHUB_WORKSPACE" "CI built this workspace." | thruline hook claude-code
+          thruline fold
+          thruline receipt --out .thruline/receipts/ci.json
+          echo "THRULINE_HOME=$THRULINE_HOME" >> "$GITHUB_ENV"
+
+      - name: ThruLine receipt
+        id: receipt
+        uses: ./packaging/action
+        with:
+          receipt: .thruline/receipts/ci.json
+          key: ${{ runner.temp }}/thruline-home/signing.pub
+          # This repository has no committed `.thruline/policy.yml`, and an
+          # action must not invent one — `policy:` stays empty until the
+          # repository writes the file. See README.md: the shipped example
+          # requires `tests_pass` only under `src/**` and `lib/**`, so a flat
+          # repository that copies it gets a gate that never fires.
+
+      - name: What the Action concluded
+        run: |
+          set -euo pipefail
+          echo "conclusion: ${{ steps.receipt.outputs.conclusion }}"
+          echo "status:     ${{ steps.receipt.outputs.status }}"
+          echo "badge:      ${{ steps.receipt.outputs.badge }}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: thruline-badge
+          path: ${{ steps.receipt.outputs.badge }}
+          if-no-files-found: error

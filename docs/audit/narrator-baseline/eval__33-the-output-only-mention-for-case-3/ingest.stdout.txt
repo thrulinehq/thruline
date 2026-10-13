@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__33-the-output-only-mention-for-case-3/store/ledger.db
+projects 1
+sessions 1
+lines    6 read · 0 already ingested
+events   6 new
+           assistant_text       1
+           tool_result          2
+           tool_use             2
+           user_msg             1
+unknown  none
+malformed none
+head     eval a63f46be19469a472335b48cd291c5d4f98b381f2ffe915339a3fa02332b7a89
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

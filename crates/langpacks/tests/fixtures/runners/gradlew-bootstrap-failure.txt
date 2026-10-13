@@ -1,0 +1,38 @@
+Fetching distribution.
+Downloading https://services.gradle.org/distributions/gradle-9.7.1-bin.zip
+..............10%..............20%...............30%..............40%...............50%..............60%...............70%..............80%..............90%...............100%
+Could not unzip /Users/dev/.gradle/wrapper/dists/gradle-9.7.1-bin/1w1c7tv4s851m17nbqdsro2tv/gradle-9.7.1-bin.zip to /Users/dev/.gradle/wrapper/dists/gradle-9.7.1-bin/1w1c7tv4s851m17nbqdsro2tv.
+Reason: No space left on device
+Exception in thread "main" java.io.IOException: No space left on device
+	at java.base/sun.nio.ch.FileDispatcherImpl.write0(Native Method)
+	at java.base/sun.nio.ch.FileDispatcherImpl.write(FileDispatcherImpl.java:62)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:132)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:97)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:67)
+	at java.base/sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:288)
+	at java.base/java.nio.channels.Channels.writeFullyImpl(Channels.java:74)
+	at java.base/java.nio.channels.Channels.writeFully(Channels.java:96)
+	at java.base/java.nio.channels.Channels$1.write(Channels.java:171)
+	at java.base/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:81)
+	at java.base/java.io.BufferedOutputStream.write(BufferedOutputStream.java:127)
+	at org.gradle.wrapper.Install.unzip(SourceFile:1)
+	at org.gradle.wrapper.Install.unzipLocal(SourceFile)
+	at org.gradle.wrapper.Install.lambda$createDist$0(SourceFile:13)
+	at org.gradle.wrapper.Install.createDist(SourceFile:24)
+	at org.gradle.wrapper.GradleWrapperMain.lambda$prepareWrapper$0(SourceFile:2)
+	at org.gradle.wrapper.GradleWrapperMain.main(SourceFile:2)
+	Suppressed: java.io.IOException: No space left on device
+		at java.base/sun.nio.ch.FileDispatcherImpl.write0(Native Method)
+		at java.base/sun.nio.ch.FileDispatcherImpl.write(FileDispatcherImpl.java:62)
+		at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:132)
+		at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:97)
+		at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:67)
+		at java.base/sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:288)
+		at java.base/java.nio.channels.Channels.writeFullyImpl(Channels.java:74)
+		at java.base/java.nio.channels.Channels.writeFully(Channels.java:96)
+		at java.base/java.nio.channels.Channels$1.write(Channels.java:171)
+		at java.base/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:81)
+		at java.base/java.io.BufferedOutputStream.flush(BufferedOutputStream.java:142)
+		at java.base/java.io.FilterOutputStream.close(FilterOutputStream.java:182)
+		at org.gradle.wrapper.Install.unzip(SourceFile:2)
+		... 5 more

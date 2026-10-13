@@ -1,0 +1,25 @@
+..**F.
+
+Pending: (Failures listed here are expected and do not affect your suite's status)
+
+  1) Calc supports arbitrary precision
+     # Temporarily skipped with xit
+     # ./spec/calc_spec.rb:14
+
+  2) Calc supports complex numbers
+     # Calc has no Complex support yet
+     # ./spec/calc_spec.rb:18
+
+Failures:
+
+  1) Calc rounds bankers-style FIXED
+     Expected pending 'rounding mode is not implemented' to fail. No error was raised.
+     # ./spec/calc_spec.rb:23
+
+Finished in 0.01514 seconds (files took 0.53383 seconds to load)
+6 examples, 1 failure, 2 pending
+
+Failed examples:
+
+rspec ./spec/calc_spec.rb:23 # Calc rounds bankers-style
+

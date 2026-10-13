@@ -1,0 +1,31 @@
+{
+  "chain_failure_sample": [],
+  "chain_failures": 0,
+  "chains_verified": 0,
+  "dry_run": false,
+  "events_skipped": 0,
+  "events_written": 0,
+  "exec_db": "<WORK>/sessions/eval__37-a-proposal-in-the-newest-session-p/store/exec.db",
+  "legacy_kinds": {
+    "assistant_text": 1,
+    "user_msg": 1
+  },
+  "meta_rows_aggregated": 0,
+  "rejected": 2,
+  "rejected_sample": [
+    [
+      "<ULID-1>",
+      "\"2026-01-37T00:01:00.000Z\" is not an RFC 3339 UTC timestamp (`YYYY-MM-DDTHH:MM:SS[.fff]Z`)"
+    ],
+    [
+      "<ULID-2>",
+      "\"2026-01-37T00:02:00.000Z\" is not an RFC 3339 UTC timestamp (`YYYY-MM-DDTHH:MM:SS[.fff]Z`)"
+    ]
+  ],
+  "rows_read": 2,
+  "schema_version": 1,
+  "sessions_seen": 0,
+  "sessions_with_dead_source": 0,
+  "shape": "thruline.import-legacy",
+  "source": "<WORK>/sessions/eval__37-a-proposal-in-the-newest-session-p/store/ledger.db"
+}

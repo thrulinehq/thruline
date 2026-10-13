@@ -1,0 +1,1 @@
+{"version_id":"v2","tree_hash":"tree-v2","complete":true,"runs":[{"run_id":"r1","seq":1,"version_id":"v2","tree_hash":"tree-v2","command":"cargo test","exit_code":0,"tally":{"passed":3,"failed":0,"ignored":0,"suites":1},"errors":0,"complete":true}]}

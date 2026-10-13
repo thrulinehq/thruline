@@ -1,0 +1,40 @@
+task = "T-2-1"
+order = 10
+built_on_commit = "5cab107da5df12154cbccc49cb34f7e44f38dc65"
+pinned_schema_digest = "schema_sha256_744652141e5feb3e3a754582ab7f08899941251774aa4d032c7a0b5d96773be3"
+migration_test = "crates/core/tests/change_migration.rs"
+note = "The Change layer itself: a Change, the revisions of its scope, who accepted one, what implements it, and which sessions belong to it."
+
+tables = [
+  "changes",
+  "change_scope_revisions",
+  "change_scope_acceptances",
+  "change_implementations",
+  "change_session_associations",
+]
+
+indexes = [
+  "idx_changes_project",
+  "idx_change_session_associations_change",
+  "idx_change_session_associations_session",
+]
+
+triggers = [
+  "changes_no_replace",
+  "changes_no_update",
+  "changes_no_delete",
+  "changes_request_event_in_project",
+  "change_scope_revisions_no_replace",
+  "change_scope_revisions_no_update",
+  "change_scope_revisions_no_delete",
+  "change_scope_acceptances_no_replace",
+  "change_scope_acceptances_no_update",
+  "change_scope_acceptances_no_delete",
+  "change_implementations_no_replace",
+  "change_implementations_no_update",
+  "change_implementations_no_delete",
+  "change_session_associations_no_replace",
+  "change_session_associations_no_update",
+  "change_session_associations_no_delete",
+  "change_session_associations_same_project",
+]

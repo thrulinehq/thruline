@@ -1,0 +1,43 @@
+task = "T-4-1"
+order = 120
+built_on_commit = "da9afbf7"
+pinned_schema_digest = "schema_sha256_de2b05e56a94443dfecc594e763bf6fa2249e8bf030a0062fc83a90673dd7d4a"
+migration_test = "crates/core/tests/change_review_migration.rs"
+note = """
+What one reviewer looked at, and what it found: the review row bound to one
+version and one accepted-criteria version, and its raw report, parsed record
+and typed findings in three append-only child tables sealed by the parent's
+`record_sha256`. A review is not a verdict and not an approval.
+
+Built on the same schema as T-5-3 and P6-5B (the review lane's base `da9afbf7`
+pins the same digest 090-t-5-3.toml pins). The lane landed after T-5-3,
+R-2026-09-24-22 and P6-5B, in the A2 merge of `p4/review-repair`, so its
+order is after all three. The lane predates this registry, and its
+hand-written `ADDED_BY_LATER_TASKS` entries were replaced by this file at the
+merge (R-2026-09-24-21).
+
+Four tables, one index, eight append-only triggers, no ALTER of anything
+already there. Cost (A193): nothing of its own; the bill is the existing
+full-schema path's, and `thruline upgrade` is still the only thing that may
+pay it.
+"""
+
+tables = [
+  "change_reviews",
+  "change_review_raw_artifacts",
+  "change_review_parsed_artifacts",
+  "change_review_findings",
+]
+
+indexes = ["idx_change_reviews_change"]
+
+triggers = [
+  "change_reviews_no_update",
+  "change_reviews_no_delete",
+  "change_review_raw_artifacts_no_update",
+  "change_review_raw_artifacts_no_delete",
+  "change_review_parsed_artifacts_no_update",
+  "change_review_parsed_artifacts_no_delete",
+  "change_review_findings_no_update",
+  "change_review_findings_no_delete",
+]

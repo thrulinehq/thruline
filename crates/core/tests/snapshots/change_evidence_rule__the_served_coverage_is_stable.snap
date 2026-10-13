@@ -1,0 +1,176 @@
+---
+source: crates/core/tests/change_evidence_rule.rs
+expression: view
+---
+{
+  "schema_version": 1,
+  "change_id": "c1",
+  "scope_version": 1,
+  "criteria": [
+    {
+      "index": 1,
+      "text": "The importer keeps a malformed line when it cannot parse it.",
+      "class": "unclassified",
+      "state": "ran_nothing",
+      "state_slug": "coverage_ran_checked_nothing",
+      "absent_tool": null,
+      "items": [
+        {
+          "link_id": "cce_5ce01c556cad817b98baf09ea3aa1f90e96fd0c7c5d20141042e6ee2c4e08a27",
+          "kind": "check_run",
+          "evidence_id": "eb_named",
+          "session_id": "s1",
+          "basis": "named",
+          "basis_slug": "basis_named",
+          "detail": "importer",
+          "actor": null,
+          "asserted_at": "2026-02-01T12:00:00Z",
+          "reason": null,
+          "name": "bash:/tmp/synthetic:cargo run --bin importer",
+          "observed": "couldnt",
+          "bears": false,
+          "note_slug": "item_checked_nothing",
+          "applies": null,
+          "applies_slug": null,
+          "fresh": null,
+          "fresh_slug": null,
+          "assessable": false,
+          "execution": "not_run",
+          "execution_slug": "execution_not_run",
+          "failure_line": null,
+          "evidence_class": null,
+          "evidence_class_slug": null
+        }
+      ],
+      "removed": []
+    },
+    {
+      "index": 2,
+      "text": "The test suite passes on the packages that changed.",
+      "class": "test",
+      "state": "ran_nothing",
+      "state_slug": "coverage_ran_checked_nothing",
+      "absent_tool": null,
+      "items": [
+        {
+          "link_id": "cce_946825ea2956895031038ac3ba1d2100a98ec7d1461d90edb42dda585e727ad1",
+          "kind": "check_run",
+          "evidence_id": "eb_test",
+          "session_id": "s1",
+          "basis": "declared",
+          "basis_slug": "basis_declared",
+          "detail": "cargo-test",
+          "actor": null,
+          "asserted_at": "2026-02-01T12:00:00Z",
+          "reason": null,
+          "name": "bash:/tmp/synthetic:cargo test",
+          "observed": "couldnt",
+          "bears": false,
+          "note_slug": "item_checked_nothing",
+          "applies": null,
+          "applies_slug": null,
+          "fresh": null,
+          "fresh_slug": null,
+          "assessable": false,
+          "execution": "not_run",
+          "execution_slug": "execution_not_run",
+          "failure_line": null,
+          "evidence_class": null,
+          "evidence_class_slug": null
+        }
+      ],
+      "removed": []
+    },
+    {
+      "index": 3,
+      "text": "The build stays clean under clippy after the change.",
+      "class": "build",
+      "state": "evidence",
+      "state_slug": "coverage_evidence",
+      "absent_tool": null,
+      "items": [
+        {
+          "link_id": "cce_1c0d3d27cbcdd6fc3ccdee6e09499399305802357568c24387c6551535300e22",
+          "kind": "check_run",
+          "evidence_id": "eb_lint",
+          "session_id": "s1",
+          "basis": "declared",
+          "basis_slug": "basis_declared",
+          "detail": "clippy",
+          "actor": null,
+          "asserted_at": "2026-02-01T12:00:00Z",
+          "reason": null,
+          "name": "bash:/tmp/synthetic:cargo clippy",
+          "observed": "proven",
+          "bears": true,
+          "note_slug": null,
+          "applies": null,
+          "applies_slug": null,
+          "fresh": null,
+          "fresh_slug": null,
+          "assessable": false,
+          "execution": "not_run",
+          "execution_slug": "execution_not_run",
+          "failure_line": null,
+          "evidence_class": null,
+          "evidence_class_slug": null
+        }
+      ],
+      "removed": []
+    },
+    {
+      "index": 4,
+      "text": "HQ reopens where you left it after a restart.",
+      "class": "unclassified",
+      "state": "none",
+      "state_slug": "coverage_no_test_ran",
+      "absent_tool": null,
+      "items": [],
+      "removed": []
+    }
+  ],
+  "candidates": [
+    {
+      "kind": "check_run",
+      "evidence_id": "eb_lint",
+      "session_id": "s1",
+      "name": "bash:/tmp/synthetic:cargo clippy",
+      "observed": "proven",
+      "bears": true,
+      "execution": "not_run",
+      "execution_slug": "execution_not_run"
+    },
+    {
+      "kind": "check_run",
+      "evidence_id": "eb_test",
+      "session_id": "s1",
+      "name": "bash:/tmp/synthetic:cargo test",
+      "observed": "couldnt",
+      "bears": false,
+      "execution": "not_run",
+      "execution_slug": "execution_not_run"
+    },
+    {
+      "kind": "check_run",
+      "evidence_id": "eb_named",
+      "session_id": "s1",
+      "name": "bash:/tmp/synthetic:cargo run --bin importer",
+      "observed": "couldnt",
+      "bears": false,
+      "execution": "not_run",
+      "execution_slug": "execution_not_run"
+    }
+  ],
+  "executions": [],
+  "link_rows": 3,
+  "nothing_to_link_slug": null,
+  "nothing_bound_slug": "inputs_nothing_bound",
+  "execution_sessions": [],
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

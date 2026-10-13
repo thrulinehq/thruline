@@ -1,0 +1,36 @@
+[package]
+publish = false
+name = "thruline-verify"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Deterministic verifiers, test-tampering detectors, runner output parsers."
+
+[lints]
+workspace = true
+
+[dependencies]
+sha2 = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tree-sitter = "0.25"
+tree-sitter-go = "0.23"
+tree-sitter-javascript = "0.23"
+tree-sitter-python = "0.23"
+tree-sitter-rust = "0.24"
+tree-sitter-typescript = "0.23"
+
+[dev-dependencies]
+proptest = { workspace = true }
+serde_json = { workspace = true }
+
+# Development-only measurement; neither library enters the production CLI.
+criterion = { version = "=0.8.2", default-features = false }
+dhat = "=0.3.3"
+
+[[bench]]
+name = "integration_decoding"
+harness = false

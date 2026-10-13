@@ -1,0 +1,3 @@
+cwd: mixed
+args: pytest --color=yes
+exit: 1

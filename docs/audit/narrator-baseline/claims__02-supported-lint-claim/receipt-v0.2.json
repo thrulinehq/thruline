@@ -1,0 +1,105 @@
+{
+  "payload": "<normalised: base64 of the payload, which carries a run-dependent value; see payload_decoded>",
+  "payloadType": "application/vnd.in-toto+json",
+  "payload_decoded": {
+    "_type": "https://in-toto.io/Statement/v1",
+    "predicate": {
+      "capture": {
+        "capture_degraded": false,
+        "git_env_digest": "sha256:2abecd1babd44fae28bb9f0b46b35ece284a795003a4223f9085ae7e116e0fbe",
+        "redactions_applied": 0,
+        "sources": [
+          "claude-code-hook",
+          "exec-recorder",
+          "git"
+        ]
+      },
+      "checks": [
+        {
+          "argv_hash": "sha256:96cc757bf0d3ff9ebcc92ccd8313b091531318a4fcb95f3ec529d5ef0864db52",
+          "category": "lint",
+          "cwd_hash": "sha256:a86ba3dad1d203fa99421f1f1239eb817424b55dfd75c226b4711c6982a08676",
+          "env_hash": "sha256:fb1135bf5c58feed09a64a4e26275e520b12e39cafbf159ca87ca19b89e2584b",
+          "exit_code": 0,
+          "id": "chk_5FQQ963SC081C2DPGAWHNSDRCB",
+          "input_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+          "parsed": {
+            "bypass": null,
+            "exit_only": true
+          },
+          "reexecuted": false,
+          "runner": "cargo clippy"
+        }
+      ],
+      "claim_origins": [
+        {
+          "claim_id": "clm_6YE4Q17W0J6N6ZGTTSHWYTNXE4",
+          "extractor": "rules"
+        }
+      ],
+      "claims": [
+        {
+          "asserted_by": {
+            "harness": "claude-code"
+          },
+          "id": "clm_6YE4Q17W0J6N6ZGTTSHWYTNXE4",
+          "kind": "lint_ok",
+          "text": "lint_ok claim clm_6YE4Q17W0J6N6ZGTTSHWYTNXE4 (original text omitted)"
+        }
+      ],
+      "evidence_trust": "local",
+      "ground": "all_claims_proven",
+      "kind": "session_claims",
+      "promises": {
+        "fulfilled": [],
+        "open": []
+      },
+      "session": {
+        "ended": "2026-01-02T00:08:00Z",
+        "event_chain_head": "sha256:47cd3153ffa00d11deebd10885bc924e1e0507ce7d358b919b9990e431829677",
+        "event_count": 11,
+        "harness": "claude-code",
+        "id": "cccccccc-0002-4000-8000-000000000000",
+        "started": "2026-01-02T00:01:00Z"
+      },
+      "verdicts": [
+        {
+          "claim_id": "clm_6YE4Q17W0J6N6ZGTTSHWYTNXE4",
+          "evidence": [
+            "chk_5FQQ963SC081C2DPGAWHNSDRCB"
+          ],
+          "reasons": [
+            "ran on the final tree",
+            "`cargo clippy --all-targets` exited 0",
+            "§6.1 rule 1 applied: the check ran on tree c4eeb65ef9132009ad33aeb19abd8785cad50d8c, which is this receipt's subject. Rule 2 (\"no relevant change since\") was not used and cannot be, because a receipt only keeps `supported` where the trees are equal."
+          ],
+          "verdict": "supported",
+          "verifier": "lint_ok@1"
+        }
+      ],
+      "verifier": {
+        "mode": "local",
+        "policy_hash": "sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad",
+        "thruline_version": "0.1.0"
+      },
+      "version": 2
+    },
+    "predicateType": "https://thrulinehq.com/attestation/execution-check/v0.2",
+    "subject": [
+      {
+        "digest": {
+          "gitCommit": "84ec0e1398b104136666b20fec11b422b3415a9c",
+          "gitTree": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c"
+        },
+        "name": "git+<WORK>/repo"
+      }
+    ]
+  },
+  "payload_normalised_sha256": "af2ba2288bdedae0d122e71273ea0b75fe9c3fd67c8e329446eb08c9f499fb4b",
+  "signatures": [
+    {
+      "keyid": "sha256:139e3940e64b5491722088d9a0d741628fc826e09475d341a780acde3c4b8070",
+      "sig": "<normalised: Ed25519 signature over a payload that carries a run-dependent value; verify-receipt reported it passing in-run>"
+    }
+  ]
+}

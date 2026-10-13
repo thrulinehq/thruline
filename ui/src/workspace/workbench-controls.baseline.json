@@ -1,0 +1,764 @@
+{
+  "src": "dc47818:ui/src (git archive dc47818 ui/src spec/integrations)",
+  "altitude": "workbench",
+  "total": 93,
+  "rows": [
+    {
+      "tag": "button",
+      "name": "projectno project open▾"
+    },
+    {
+      "tag": "button",
+      "name": "session synthetic-session-0001 — Fog — open the session switcher"
+    },
+    {
+      "tag": "button",
+      "name": "Connections · local records available, agents not connected"
+    },
+    {
+      "tag": "button",
+      "name": "Refresh reading"
+    },
+    {
+      "tag": "button",
+      "name": "Settings"
+    },
+    {
+      "tag": "button",
+      "name": "◌ Reading observation status"
+    },
+    {
+      "tag": "button",
+      "name": "REV▾"
+    },
+    {
+      "tag": "button",
+      "name": "Inbox"
+    },
+    {
+      "tag": "button",
+      "name": "Sessions"
+    },
+    {
+      "tag": "button",
+      "name": "Trace"
+    },
+    {
+      "tag": "button",
+      "name": "Claims"
+    },
+    {
+      "tag": "button",
+      "name": "Asks & promises"
+    },
+    {
+      "tag": "button",
+      "name": "EVID▾"
+    },
+    {
+      "tag": "button",
+      "name": "Agreed checks"
+    },
+    {
+      "tag": "button",
+      "name": "Receipts"
+    },
+    {
+      "tag": "button",
+      "name": "Evidence bindings"
+    },
+    {
+      "tag": "button",
+      "name": "Audit Ledger"
+    },
+    {
+      "tag": "button",
+      "name": "Explorer"
+    },
+    {
+      "tag": "button",
+      "name": "TOOLS▾"
+    },
+    {
+      "tag": "button",
+      "name": "Compare sessions"
+    },
+    {
+      "tag": "button",
+      "name": "Capture & setup"
+    },
+    {
+      "tag": "button",
+      "name": "Policy"
+    },
+    {
+      "tag": "button",
+      "name": "Handoff"
+    },
+    {
+      "tag": "button",
+      "name": "Operator diagnostics"
+    },
+    {
+      "tag": "button",
+      "name": "Hide left dock"
+    },
+    {
+      "tag": "input",
+      "name": "Filter objects"
+    },
+    {
+      "tag": "button",
+      "name": "▾Claims1 claim"
+    },
+    {
+      "tag": "button",
+      "name": "“All tests pass.”"
+    },
+    {
+      "tag": "button",
+      "name": "▸Agent actions1 command"
+    },
+    {
+      "tag": "button",
+      "name": "▾Ending1 ending"
+    },
+    {
+      "tag": "button",
+      "name": "no stop recordedseq 3"
+    },
+    {
+      "tag": "button",
+      "name": "◈Not provennone in this record"
+    },
+    {
+      "tag": "button",
+      "name": "◈Loose threadsnone in this record"
+    },
+    {
+      "tag": "button",
+      "name": "◈Not bound to final tree1 object"
+    },
+    {
+      "tag": "button",
+      "name": "◈Destructive commandsnone in this record"
+    },
+    {
+      "tag": "button",
+      "name": "Focus · what's not proven"
+    },
+    {
+      "tag": "button",
+      "name": "Everything"
+    },
+    {
+      "tag": "button",
+      "name": "Graph"
+    },
+    {
+      "tag": "button",
+      "name": "Timeline"
+    },
+    {
+      "tag": "button",
+      "name": "Table"
+    },
+    {
+      "tag": "input",
+      "name": "Find in trace"
+    },
+    {
+      "tag": "button",
+      "name": "◂ Finding"
+    },
+    {
+      "tag": "button",
+      "name": "Finding ▸"
+    },
+    {
+      "tag": "button",
+      "name": "Show findings only"
+    },
+    {
+      "tag": "button",
+      "name": "Focus selection"
+    },
+    {
+      "tag": "button",
+      "name": "Show linked evidence"
+    },
+    {
+      "tag": "button",
+      "name": "Fit"
+    },
+    {
+      "tag": "button",
+      "name": "Zoom out"
+    },
+    {
+      "tag": "button",
+      "name": "Zoom in"
+    },
+    {
+      "tag": "button",
+      "name": "Expand"
+    },
+    {
+      "tag": "button",
+      "name": "Collapse"
+    },
+    {
+      "tag": "button",
+      "name": "Widen"
+    },
+    {
+      "tag": "button",
+      "name": "Step back"
+    },
+    {
+      "tag": "button",
+      "name": "▶ Replay record"
+    },
+    {
+      "tag": "button",
+      "name": "Step forward"
+    },
+    {
+      "tag": "button",
+      "name": "Jump to stop"
+    },
+    {
+      "tag": "button",
+      "name": "Show test changes"
+    },
+    {
+      "tag": "button",
+      "name": "Compare sessions"
+    },
+    {
+      "tag": "button",
+      "name": "Line the claim up against the check"
+    },
+    {
+      "tag": "button",
+      "name": "Filters · Group by · Columns ▾"
+    },
+    {
+      "tag": "button",
+      "name": "Panels ▾"
+    },
+    {
+      "tag": "button",
+      "name": "Focus canvas"
+    },
+    {
+      "tag": "button",
+      "name": "Reset layout"
+    },
+    {
+      "tag": "button",
+      "name": "→ Horizontal"
+    },
+    {
+      "tag": "button",
+      "name": "↓ Vertical"
+    },
+    {
+      "tag": "button",
+      "name": "Previous trace section"
+    },
+    {
+      "tag": "button",
+      "name": "Next trace section"
+    },
+    {
+      "tag": "select",
+      "name": "Jump to trace section"
+    },
+    {
+      "tag": "button",
+      "name": "Explain this →"
+    },
+    {
+      "tag": "button",
+      "name": "Expand 1 event that holds up in place"
+    },
+    {
+      "tag": "button",
+      "name": "Expand 2 other steps in place"
+    },
+    {
+      "tag": "button",
+      "name": "Findings1 finding"
+    },
+    {
+      "tag": "button",
+      "name": "Events3 events"
+    },
+    {
+      "tag": "button",
+      "name": "Checksnone"
+    },
+    {
+      "tag": "button",
+      "name": "Promisesnone open"
+    },
+    {
+      "tag": "button",
+      "name": "Outputnone"
+    },
+    {
+      "tag": "button",
+      "name": "Receipt checksnone in this reading"
+    },
+    {
+      "tag": "button",
+      "name": "Show proof"
+    },
+    {
+      "tag": "button",
+      "name": "Hide analysis panel"
+    },
+    {
+      "tag": "button",
+      "name": "Verdict"
+    },
+    {
+      "tag": "button",
+      "name": "Trace"
+    },
+    {
+      "tag": "button",
+      "name": "Set up project checks"
+    },
+    {
+      "tag": "button",
+      "name": "Refresh evidence"
+    },
+    {
+      "tag": "button",
+      "name": "Open source in graph"
+    },
+    {
+      "tag": "summary",
+      "name": "Source reference"
+    },
+    {
+      "tag": "summary",
+      "name": "Reading details and limits"
+    },
+    {
+      "tag": "summary",
+      "name": "Available check types and setup"
+    },
+    {
+      "tag": "button",
+      "name": "Local setup and full catalog"
+    },
+    {
+      "tag": "button",
+      "name": "Tool checks and setup"
+    },
+    {
+      "tag": "summary",
+      "name": "Reading identity and result scope"
+    },
+    {
+      "tag": "button",
+      "name": "Verdict"
+    },
+    {
+      "tag": "button",
+      "name": "Trace"
+    },
+    {
+      "tag": "button",
+      "name": "Skip to verdict"
+    }
+  ],
+  "everything": {
+    "total": 95,
+    "rows": [
+      {
+        "tag": "button",
+        "name": "projectno project open▾"
+      },
+      {
+        "tag": "button",
+        "name": "session synthetic-session-0001 — Fog — open the session switcher"
+      },
+      {
+        "tag": "button",
+        "name": "Connections · local records available, agents not connected"
+      },
+      {
+        "tag": "button",
+        "name": "Refresh reading"
+      },
+      {
+        "tag": "button",
+        "name": "Settings"
+      },
+      {
+        "tag": "button",
+        "name": "◌ Reading observation status"
+      },
+      {
+        "tag": "button",
+        "name": "REV▾"
+      },
+      {
+        "tag": "button",
+        "name": "Inbox"
+      },
+      {
+        "tag": "button",
+        "name": "Sessions"
+      },
+      {
+        "tag": "button",
+        "name": "Trace"
+      },
+      {
+        "tag": "button",
+        "name": "Claims"
+      },
+      {
+        "tag": "button",
+        "name": "Asks & promises"
+      },
+      {
+        "tag": "button",
+        "name": "EVID▾"
+      },
+      {
+        "tag": "button",
+        "name": "Agreed checks"
+      },
+      {
+        "tag": "button",
+        "name": "Receipts"
+      },
+      {
+        "tag": "button",
+        "name": "Evidence bindings"
+      },
+      {
+        "tag": "button",
+        "name": "Audit Ledger"
+      },
+      {
+        "tag": "button",
+        "name": "Explorer"
+      },
+      {
+        "tag": "button",
+        "name": "TOOLS▾"
+      },
+      {
+        "tag": "button",
+        "name": "Compare sessions"
+      },
+      {
+        "tag": "button",
+        "name": "Capture & setup"
+      },
+      {
+        "tag": "button",
+        "name": "Policy"
+      },
+      {
+        "tag": "button",
+        "name": "Handoff"
+      },
+      {
+        "tag": "button",
+        "name": "Operator diagnostics"
+      },
+      {
+        "tag": "button",
+        "name": "Hide left dock"
+      },
+      {
+        "tag": "input",
+        "name": "Filter objects"
+      },
+      {
+        "tag": "button",
+        "name": "▾Claims1 claim"
+      },
+      {
+        "tag": "button",
+        "name": "“All tests pass.”"
+      },
+      {
+        "tag": "button",
+        "name": "▸Agent actions1 command"
+      },
+      {
+        "tag": "button",
+        "name": "▾Ending1 ending"
+      },
+      {
+        "tag": "button",
+        "name": "no stop recordedseq 3"
+      },
+      {
+        "tag": "button",
+        "name": "◈Not provennone in this record"
+      },
+      {
+        "tag": "button",
+        "name": "◈Loose threadsnone in this record"
+      },
+      {
+        "tag": "button",
+        "name": "◈Not bound to final tree1 object"
+      },
+      {
+        "tag": "button",
+        "name": "◈Destructive commandsnone in this record"
+      },
+      {
+        "tag": "button",
+        "name": "Focus · what's not proven"
+      },
+      {
+        "tag": "button",
+        "name": "Everything"
+      },
+      {
+        "tag": "button",
+        "name": "Graph"
+      },
+      {
+        "tag": "button",
+        "name": "Timeline"
+      },
+      {
+        "tag": "button",
+        "name": "Table"
+      },
+      {
+        "tag": "input",
+        "name": "Find in trace"
+      },
+      {
+        "tag": "button",
+        "name": "◂ Finding"
+      },
+      {
+        "tag": "button",
+        "name": "Finding ▸"
+      },
+      {
+        "tag": "button",
+        "name": "Show findings only"
+      },
+      {
+        "tag": "button",
+        "name": "Focus selection"
+      },
+      {
+        "tag": "button",
+        "name": "Show linked evidence"
+      },
+      {
+        "tag": "button",
+        "name": "Fit"
+      },
+      {
+        "tag": "button",
+        "name": "Zoom out"
+      },
+      {
+        "tag": "button",
+        "name": "Zoom in"
+      },
+      {
+        "tag": "button",
+        "name": "Expand"
+      },
+      {
+        "tag": "button",
+        "name": "Collapse"
+      },
+      {
+        "tag": "button",
+        "name": "Widen"
+      },
+      {
+        "tag": "button",
+        "name": "Step back"
+      },
+      {
+        "tag": "button",
+        "name": "▶ Replay record"
+      },
+      {
+        "tag": "button",
+        "name": "Step forward"
+      },
+      {
+        "tag": "button",
+        "name": "Jump to stop"
+      },
+      {
+        "tag": "button",
+        "name": "Show test changes"
+      },
+      {
+        "tag": "button",
+        "name": "Compare sessions"
+      },
+      {
+        "tag": "button",
+        "name": "Line the claim up against the check"
+      },
+      {
+        "tag": "button",
+        "name": "Panels ▾"
+      },
+      {
+        "tag": "button",
+        "name": "Focus canvas"
+      },
+      {
+        "tag": "button",
+        "name": "Reset layout"
+      },
+      {
+        "tag": "input",
+        "name": "Add filter"
+      },
+      {
+        "tag": "button",
+        "name": "+ Facet ▾"
+      },
+      {
+        "tag": "button",
+        "name": "Group by · phase ▾"
+      },
+      {
+        "tag": "button",
+        "name": "Columns ▾"
+      },
+      {
+        "tag": "button",
+        "name": "Save view"
+      },
+      {
+        "tag": "button",
+        "name": "→ Horizontal"
+      },
+      {
+        "tag": "button",
+        "name": "↓ Vertical"
+      },
+      {
+        "tag": "button",
+        "name": "Previous trace section"
+      },
+      {
+        "tag": "button",
+        "name": "Next trace section"
+      },
+      {
+        "tag": "select",
+        "name": "Jump to trace section"
+      },
+      {
+        "tag": "button",
+        "name": "Explain this →"
+      },
+      {
+        "tag": "button",
+        "name": "Findings1 finding"
+      },
+      {
+        "tag": "button",
+        "name": "Events3 events"
+      },
+      {
+        "tag": "button",
+        "name": "Checksnone"
+      },
+      {
+        "tag": "button",
+        "name": "Promisesnone open"
+      },
+      {
+        "tag": "button",
+        "name": "Outputnone"
+      },
+      {
+        "tag": "button",
+        "name": "Receipt checksnone in this reading"
+      },
+      {
+        "tag": "button",
+        "name": "Show proof"
+      },
+      {
+        "tag": "button",
+        "name": "Hide analysis panel"
+      },
+      {
+        "tag": "button",
+        "name": "Verdict"
+      },
+      {
+        "tag": "button",
+        "name": "Trace"
+      },
+      {
+        "tag": "button",
+        "name": "Set up project checks"
+      },
+      {
+        "tag": "button",
+        "name": "Refresh evidence"
+      },
+      {
+        "tag": "button",
+        "name": "Open source in graph"
+      },
+      {
+        "tag": "summary",
+        "name": "Source reference"
+      },
+      {
+        "tag": "summary",
+        "name": "Reading details and limits"
+      },
+      {
+        "tag": "summary",
+        "name": "Available check types and setup"
+      },
+      {
+        "tag": "button",
+        "name": "Local setup and full catalog"
+      },
+      {
+        "tag": "button",
+        "name": "Tool checks and setup"
+      },
+      {
+        "tag": "summary",
+        "name": "Reading identity and result scope"
+      },
+      {
+        "tag": "button",
+        "name": "Verdict"
+      },
+      {
+        "tag": "button",
+        "name": "Trace"
+      },
+      {
+        "tag": "button",
+        "name": "Skip to verdict"
+      }
+    ]
+  }
+}

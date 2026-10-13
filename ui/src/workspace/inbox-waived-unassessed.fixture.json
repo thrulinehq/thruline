@@ -1,0 +1,1039 @@
+{
+ "about": "PATH-UI-2-R2 (BROKEN 1). The four documents the local server served for ONE Change, read twice: once by the head server (head) and once by the base server (base), for the round-1 adversary's FI-22 construction: two accepted lines, line 1 set aside by a named person under the release policy, line 2's passing run linked by a person, the code committed after the run. Trimmed to the fields the model reads, and scrubbed of this machine's paths; every value is otherwise as served. The two sets differ only in ids and times (the crates were identical at both commits).",
+ "head": {
+  "applicability": {
+   "items": []
+  },
+  "change": {
+   "change": {
+    "accepted_scope": {
+     "acceptance": {
+      "accepted_at": "2026-01-03T09:05:00Z",
+      "actor": "sam",
+      "rationale": "who may set something aside"
+     },
+     "allowed_scope": [
+      "src/**"
+     ],
+     "check_profile": [
+      "cargo-test",
+      "clippy",
+      "policy:exceptions-allowed-by:the release policy"
+     ],
+     "constraints": [],
+     "content_sha256": "x",
+     "criteria": [
+      "When the cart is empty, the total shows zero.",
+      "When the cart has two items, the total shows their sum."
+     ],
+     "exclusions": [],
+     "proposed_at": "2026-01-03T09:00:00Z",
+     "version": 2
+    },
+    "associations": [
+     {
+      "actor": "sam",
+      "asserted_at": "2026-09-29T19:42:04Z",
+      "basis": "user",
+      "id": "csa_01M3QB0GTC3FCVTQ53Y800VX5Z",
+      "provenance": "confirmed",
+      "reason": "this is the cart work",
+      "session_id": "cccccccc-0000-4000-8000-000000000065"
+     },
+     {
+      "actor": "walker",
+      "asserted_at": "2026-09-29T19:42:19Z",
+      "basis": "user",
+      "id": "csa_01M3QB0ZS2DXT8DNAZX8V1D9HC",
+      "provenance": "confirmed",
+      "reason": "ran this check for this Change",
+      "session_id": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+     }
+    ],
+    "code_moved": {
+     "changed_paths": [
+      "src/lib.rs"
+     ],
+     "commits": 1,
+     "now": "0b82e39611bafde9b4e859a1f12cafca299b1431",
+     "recorded": "511b469c2779928a69be6767e51aa3a88d1a4b1f",
+     "uncommitted_compared": false
+    },
+    "decision": "none_yet",
+    "decisions": {
+     "history": [],
+     "scope_version": 2,
+     "standing": null,
+     "target_revision": "01M3QB0ZXV5WAFW8BSBEGZG0KS"
+    },
+    "examination": "none_yet",
+    "id": "chg_01M3QB0GF1WEA5P76ZBEDK0VHN",
+    "implementation": {
+     "base_revision": "511b469c2779928a69be6767e51aa3a88d1a4b1f",
+     "bound_at": "2026-09-29T19:42:19Z",
+     "repository_identity": "wsid1:369be0983427e10add73c58edc404271a2be25be375809dddaf923f6471a7fb6",
+     "snapshot_id": "01M3QB0ZXV5WAFW8BSBEGZG0KS",
+     "version": 0,
+     "workspace_identity": "/work/shop"
+    },
+    "implementation_history": [],
+    "masking": {
+     "detector": "v2",
+     "masked": 0,
+     "patterns": [],
+     "state": "ran",
+     "statement": "detector v2 \u00b7 nothing matched a known secret shape \u00b7 best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+    },
+    "opened_at": "2026-09-29T19:42:03Z",
+    "project_id": "-work-shop",
+    "request": {
+     "prompt_event_id": null,
+     "purpose": "Add a cart total function. When the cart is empty, the total shows zero. When the cart has two items, the total shows their sum.",
+     "requester": "sam",
+     "source": "person",
+     "title": "Cart total"
+    },
+    "reviews": [],
+    "schema_version": 5,
+    "scope_history": [
+     {
+      "acceptance": {
+       "accepted_at": "2026-09-29T19:42:04Z",
+       "actor": "sam",
+       "rationale": "this is what I want checked"
+      },
+      "allowed_scope": [
+       "src/**"
+      ],
+      "check_profile": [
+       "cargo-test",
+       "clippy"
+      ],
+      "constraints": [],
+      "content_sha256": "26a62caed54ac59420efdb9d3291713d8d7ec2b123052242dabe5e667936ea2a",
+      "criteria": [
+       "When the cart is empty, the total shows zero.",
+       "When the cart has two items, the total shows their sum."
+      ],
+      "exclusions": [],
+      "proposed_at": "2026-09-29T19:42:04Z",
+      "version": 1
+     }
+    ]
+   }
+  },
+  "coverage": {
+   "coverage": {
+    "candidates": [
+     {
+      "bears": true,
+      "evidence_id": "bd715234e5d12a453d5870f2393e5158ee826c70515e9e1b9c07f87fd7cc234d",
+      "execution": "completed",
+      "execution_slug": "execution_completed",
+      "kind": "check_run",
+      "name": "bash:/work/shop:cargo test",
+      "observed": "proven",
+      "session_id": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+     },
+     {
+      "bears": false,
+      "evidence_id": "2ee18770901b3159c7452844c7d40ab03a25f8c80c8e47f11deca8466751f5d5",
+      "execution": "not_run",
+      "execution_slug": "execution_not_run",
+      "kind": "observation",
+      "name": "COMMAND_FINISHED",
+      "observed": "couldnt",
+      "session_id": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+     },
+     {
+      "bears": false,
+      "evidence_id": "c458b4dcc9c7810a5d36d1437a90cbe8daad4617aec455aa3049a4abdc456918",
+      "execution": "not_run",
+      "execution_slug": "execution_not_run",
+      "kind": "observation",
+      "name": "EVIDENCE_BOUND",
+      "observed": "couldnt",
+      "session_id": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+     },
+     {
+      "bears": false,
+      "evidence_id": "c7c3d67e9580813bd2ad04cff521dae388915f12dab356d27de19ffcd1143a3c",
+      "execution": "not_run",
+      "execution_slug": "execution_not_run",
+      "kind": "observation",
+      "name": "COMMAND_STARTED",
+      "observed": "couldnt",
+      "session_id": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+     }
+    ],
+    "change_id": "chg_01M3QB0GF1WEA5P76ZBEDK0VHN",
+    "criteria": [
+     {
+      "absent_tool": null,
+      "class": "unclassified",
+      "index": 1,
+      "items": [],
+      "removed": [],
+      "state": "none",
+      "state_slug": "coverage_no_test_ran",
+      "text": "When the cart is empty, the total shows zero."
+     },
+     {
+      "absent_tool": null,
+      "class": "unclassified",
+      "index": 2,
+      "items": [
+       {
+        "actor": "walker",
+        "applies": true,
+        "applies_slug": "inputs_applies",
+        "asserted_at": "2026-09-29T20:14:49Z",
+        "assessable": true,
+        "basis": "manual",
+        "basis_slug": "basis_manual",
+        "bears": true,
+        "detail": null,
+        "evidence_class": null,
+        "evidence_class_slug": null,
+        "evidence_id": "bd715234e5d12a453d5870f2393e5158ee826c70515e9e1b9c07f87fd7cc234d",
+        "execution": "completed",
+        "execution_slug": "execution_completed",
+        "failure_line": null,
+        "fresh": null,
+        "fresh_slug": null,
+        "kind": "check_run",
+        "link_id": "cce_a52707c5cdc1881590fd08396f21a7f23001a048d80d8bbc8224168706041a68",
+        "name": "bash:/work/shop:cargo test",
+        "note_slug": null,
+        "observed": "proven",
+        "reason": "",
+        "session_id": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+       }
+      ],
+      "removed": [],
+      "state": "evidence",
+      "state_slug": "coverage_evidence",
+      "text": "When the cart has two items, the total shows their sum."
+     }
+    ],
+    "execution_sessions": [
+     "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+    ],
+    "executions": [
+     {
+      "actor": null,
+      "binding_id": "bd715234e5d12a453d5870f2393e5158ee826c70515e9e1b9c07f87fd7cc234d",
+      "change_id": "chg_01M3QB0GF1WEA5P76ZBEDK0VHN",
+      "cleanup_verified": null,
+      "examined_inputs_id": "exi_cc97bfcfa2f930224fe0dfd3254871b50390adb950efbe328a038c7453dc8bdf",
+      "id": "rx_01M3QB102J7C24VA5ZMBMM29ME",
+      "name": "bash:/work/shop:cargo test",
+      "pid": 91777,
+      "process_group": 91777,
+      "reason": null,
+      "reason_slug": null,
+      "recorded_at": "2026-09-29T19:42:19Z",
+      "run_key": "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G",
+      "settles": true,
+      "started_at": "2026-09-29T19:42:18Z",
+      "state": "completed",
+      "state_slug": "execution_completed",
+      "survivors": null
+     }
+    ],
+    "link_rows": 1,
+    "masking": {
+     "detector": "v2",
+     "masked": 0,
+     "patterns": [],
+     "state": "ran",
+     "statement": "detector v2 \u00b7 nothing matched a known secret shape \u00b7 best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+    },
+    "nothing_bound_slug": null,
+    "nothing_to_link_slug": null,
+    "schema_version": 1,
+    "scope_version": 2
+   },
+   "readiness": {
+    "change_id": "chg_01M3QB0GF1WEA5P76ZBEDK0VHN",
+    "headline_slug": "readiness_needs_evidence_one",
+    "missing": [
+     "criterion:2"
+    ],
+    "not_applicable": [],
+    "obligations": [
+     {
+      "criterion_index": null,
+      "evidence_name": null,
+      "id": "candidate_identity",
+      "kind": "candidate_identity",
+      "linked_by": null,
+      "outcome": "satisfied",
+      "outcome_slug": "satisfied",
+      "text": "",
+      "unsatisfied": null,
+      "unsatisfied_slug": null,
+      "waivable": false,
+      "waiver": null
+     },
+     {
+      "criterion_index": 1,
+      "evidence_name": null,
+      "id": "criterion:1",
+      "kind": "criterion",
+      "linked_by": null,
+      "outcome": "waived",
+      "outcome_slug": "waived",
+      "text": "When the cart is empty, the total shows zero.",
+      "unsatisfied": "nothing_looked",
+      "unsatisfied_slug": "readiness_nothing_looked",
+      "waivable": true,
+      "waiver": {
+       "actor": "walker",
+       "at": "2026-09-29T19:42:10Z",
+       "authority": "the release policy",
+       "id": "cx_01M3QB0PW8GBR4X5BCJT877KEX",
+       "kind": "waived",
+       "obligation_id": "criterion:1",
+       "rationale": "the payment sandbox is down all week"
+      }
+     },
+     {
+      "criterion_index": 2,
+      "evidence_name": null,
+      "id": "criterion:2",
+      "kind": "criterion",
+      "linked_by": null,
+      "outcome": "needs_evidence",
+      "outcome_slug": "needs_evidence",
+      "text": "When the cart has two items, the total shows their sum.",
+      "unsatisfied": "never_assessed",
+      "unsatisfied_slug": "readiness_never_assessed",
+      "waivable": true,
+      "waiver": null
+     }
+    ],
+    "ready": false,
+    "rests_on": [],
+    "schema_version": 2,
+    "scope_version": 2,
+    "target_version": "01M3QB0ZXV5WAFW8BSBEGZG0KS",
+    "waived": [
+     "criterion:1"
+    ],
+    "with_exceptions": false
+   },
+   "review_findings": null
+  },
+  "proposals": {
+   "proposals": {
+    "accepted": {
+     "acceptance": {
+      "accepted_at": "2026-01-03T09:05:00Z",
+      "actor": "sam",
+      "rationale": "who may set something aside"
+     },
+     "allowed_scope": [
+      "src/**"
+     ],
+     "check_profile": [
+      "cargo-test",
+      "clippy",
+      "policy:exceptions-allowed-by:the release policy"
+     ],
+     "criteria": [
+      {
+       "attribution": "as_proposed",
+       "attribution_slug": "criterion_as_proposed",
+       "not_observable_slug": null,
+       "text": "When the cart is empty, the total shows zero."
+      },
+      {
+       "attribution": "as_proposed",
+       "attribution_slug": "criterion_as_proposed",
+       "not_observable_slug": null,
+       "text": "When the cart has two items, the total shows their sum."
+      }
+     ],
+     "not_an_approval_slug": "accept_is_not_approval",
+     "scope_attribution": "as_proposed",
+     "scope_attribution_slug": "criterion_as_proposed",
+     "version": 2
+    },
+    "change_id": "chg_01M3QB0GF1WEA5P76ZBEDK0VHN",
+    "confirmed_sessions": [
+     "cccccccc-0000-4000-8000-000000000065",
+     "hq-check-01M3QB0YPHWB75NTGJN5P1HP9G"
+    ],
+    "criteria": [
+     {
+      "number": 1,
+      "reasoning_slug": "proposal_reasoning",
+      "shape": {
+       "condition": "When the cart is empty",
+       "outcome": "shows zero",
+       "subject": "the total"
+      },
+      "source": {
+       "ask_id": "req_d3b2883aa61da9690688e40d",
+       "event_id": null,
+       "length": 44,
+       "offset": 27,
+       "origin": "change_purpose",
+       "session_id": null
+      },
+      "subject_key": "total",
+      "text": "When the cart is empty, the total shows zero."
+     },
+     {
+      "number": 2,
+      "reasoning_slug": "proposal_reasoning",
+      "shape": {
+       "condition": "When the cart has two items",
+       "outcome": "shows their sum",
+       "subject": "the total"
+      },
+      "source": {
+       "ask_id": "req_d3b2883aa61da9690688e40d",
+       "event_id": null,
+       "length": 54,
+       "offset": 73,
+       "origin": "change_purpose",
+       "session_id": null
+      },
+      "subject_key": "total",
+      "text": "When the cart has two items, the total shows their sum."
+     }
+    ],
+    "diff": {
+     "accepted_version": 2,
+     "added": [
+      2
+     ],
+     "nothing_changed_slug": "reproposal_changes_nothing",
+     "removed": [],
+     "restated": [
+      {
+       "accepted": "When the cart has two items, the total shows their sum.",
+       "proposed": "When the cart is empty, the total shows zero.",
+       "proposed_number": 1,
+       "sentence_slug": "reproposal_restated"
+      }
+     ],
+     "weakened": []
+    },
+    "empty_slug": null,
+    "masking": {
+     "detector": "v2",
+     "masked": 0,
+     "patterns": [],
+     "state": "ran",
+     "statement": "detector v2 \u00b7 nothing matched a known secret shape \u00b7 best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+    },
+    "not_accepted_slug": null,
+    "notes": [
+     {
+      "reason_slug": "note_no_outcome",
+      "refusal": "no_outcome",
+      "source": {
+       "ask_id": "req_d3b2883aa61da9690688e40d",
+       "event_id": null,
+       "length": 25,
+       "offset": 0,
+       "origin": "change_purpose",
+       "session_id": null
+      },
+      "text": "Add a cart total function"
+     }
+    ],
+    "profile": {
+     "change_type_slugs": [
+      "type_backend_behaviour"
+     ],
+     "change_types": [
+      "backend_behaviour"
+     ],
+     "checks": [
+      {
+       "availability": {
+        "recipe": ".thruline/cargo-test.json",
+        "state": "recipe_missing"
+       },
+       "availability_name": ".thruline/cargo-test.json",
+       "availability_slug": "check_needs_a_recipe",
+       "category": "tests",
+       "for_types": [
+        "backend_behaviour"
+       ],
+       "id": "cargo-test",
+       "mandatory": true,
+       "need_slug": "check_mandatory",
+       "tool": "cargo"
+      },
+      {
+       "availability": {
+        "recipe": ".thruline/clippy.json",
+        "state": "recipe_missing"
+       },
+       "availability_name": ".thruline/clippy.json",
+       "availability_slug": "check_needs_a_recipe",
+       "category": "lint",
+       "for_types": [
+        "backend_behaviour"
+       ],
+       "id": "clippy",
+       "mandatory": false,
+       "need_slug": "check_advisory",
+       "tool": "cargo-clippy"
+      }
+     ],
+     "not_evidence_slug": "profile_is_not_evidence",
+     "paths_read": [
+      "src/**",
+      "src/lib.rs"
+     ],
+     "unknown_slug": null
+    },
+    "request": {
+     "prompt_event_id": null,
+     "purpose": "Add a cart total function. When the cart is empty, the total shows zero. When the cart has two items, the total shows their sum.",
+     "requester": "sam",
+     "title": "Cart total"
+    },
+    "schema_version": 1,
+    "scope": {
+     "bound": 25,
+     "empty_slug": null,
+     "from_files": 1,
+     "not_shown": 0,
+     "over_bound_slug": null,
+     "paths": [
+      "src/**"
+     ],
+     "reason_slug": "scope_from_the_work"
+    },
+    "versions_allowed": 20,
+    "versions_slug": "scope_versions_bounded",
+    "versions_used": 2
+   }
+  }
+ },
+ "base": {
+  "applicability": {
+   "items": []
+  },
+  "change": {
+   "change": {
+    "accepted_scope": {
+     "acceptance": {
+      "accepted_at": "2026-01-03T09:05:00Z",
+      "actor": "sam",
+      "rationale": "who may set something aside"
+     },
+     "allowed_scope": [
+      "src/**"
+     ],
+     "check_profile": [
+      "cargo-test",
+      "clippy",
+      "policy:exceptions-allowed-by:the release policy"
+     ],
+     "constraints": [],
+     "content_sha256": "x",
+     "criteria": [
+      "When the cart is empty, the total shows zero.",
+      "When the cart has two items, the total shows their sum."
+     ],
+     "exclusions": [],
+     "proposed_at": "2026-01-03T09:00:00Z",
+     "version": 2
+    },
+    "associations": [
+     {
+      "actor": "sam",
+      "asserted_at": "2026-09-29T19:44:28Z",
+      "basis": "user",
+      "id": "csa_01M3QB4XDNHK1QG1QCABYEZRVK",
+      "provenance": "confirmed",
+      "reason": "this is the cart work",
+      "session_id": "cccccccc-0000-4000-8000-000000000065"
+     },
+     {
+      "actor": "walker",
+      "asserted_at": "2026-09-29T19:44:38Z",
+      "basis": "user",
+      "id": "csa_01M3QB57M142FSGEF1SJD8CDD0",
+      "provenance": "confirmed",
+      "reason": "ran this check for this Change",
+      "session_id": "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+     }
+    ],
+    "code_moved": {
+     "changed_paths": [
+      "src/lib.rs"
+     ],
+     "commits": 1,
+     "now": "c68007352b4fb48b08ac8a540f1ffbc3fb430624",
+     "recorded": "9ac533a7d5b50ed3d423d3e12964403de63a9bcb",
+     "uncommitted_compared": false
+    },
+    "decision": "none_yet",
+    "decisions": {
+     "history": [],
+     "scope_version": 2,
+     "standing": null,
+     "target_revision": "01M3QB57X4126X9VBEJW7DSSFB"
+    },
+    "examination": "none_yet",
+    "id": "chg_01M3QB4X34P0NJY2ZK2CMRD2RK",
+    "implementation": {
+     "base_revision": "9ac533a7d5b50ed3d423d3e12964403de63a9bcb",
+     "bound_at": "2026-09-29T19:44:38Z",
+     "repository_identity": "wsid1:9fb43d4368dcb23c2738a62750d5a5a181c279135726d4d6ffca7270cd6a4772",
+     "snapshot_id": "01M3QB57X4126X9VBEJW7DSSFB",
+     "version": 0,
+     "workspace_identity": "/work/shop"
+    },
+    "implementation_history": [],
+    "masking": {
+     "detector": "v2",
+     "masked": 0,
+     "patterns": [],
+     "state": "ran",
+     "statement": "detector v2 \u00b7 nothing matched a known secret shape \u00b7 best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+    },
+    "opened_at": "2026-09-29T19:44:27Z",
+    "project_id": "-work-shop",
+    "request": {
+     "prompt_event_id": null,
+     "purpose": "Add a cart total function. When the cart is empty, the total shows zero. When the cart has two items, the total shows their sum.",
+     "requester": "sam",
+     "source": "person",
+     "title": "Cart total"
+    },
+    "reviews": [],
+    "schema_version": 5,
+    "scope_history": [
+     {
+      "acceptance": {
+       "accepted_at": "2026-09-29T19:44:28Z",
+       "actor": "sam",
+       "rationale": "this is what I want checked"
+      },
+      "allowed_scope": [
+       "src/**"
+      ],
+      "check_profile": [
+       "cargo-test",
+       "clippy"
+      ],
+      "constraints": [],
+      "content_sha256": "26a62caed54ac59420efdb9d3291713d8d7ec2b123052242dabe5e667936ea2a",
+      "criteria": [
+       "When the cart is empty, the total shows zero.",
+       "When the cart has two items, the total shows their sum."
+      ],
+      "exclusions": [],
+      "proposed_at": "2026-09-29T19:44:28Z",
+      "version": 1
+     }
+    ]
+   }
+  },
+  "coverage": {
+   "coverage": {
+    "candidates": [
+     {
+      "bears": true,
+      "evidence_id": "18335d200ad9186a59a08a091c985aa435581aacd6c8ddc8561463f3700bcaa0",
+      "execution": "completed",
+      "execution_slug": "execution_completed",
+      "kind": "check_run",
+      "name": "bash:/work/shop:cargo test",
+      "observed": "proven",
+      "session_id": "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+     },
+     {
+      "bears": false,
+      "evidence_id": "a3809a816d3ec8350167f1c6c6f4192d507503158cd452b4460b893c02f2a16d",
+      "execution": "not_run",
+      "execution_slug": "execution_not_run",
+      "kind": "observation",
+      "name": "EVIDENCE_BOUND",
+      "observed": "couldnt",
+      "session_id": "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+     },
+     {
+      "bears": false,
+      "evidence_id": "ca412383b599e553091afec2892d45a7c2796facef5fc3bd9a9bb96d2bad90c4",
+      "execution": "not_run",
+      "execution_slug": "execution_not_run",
+      "kind": "observation",
+      "name": "COMMAND_STARTED",
+      "observed": "couldnt",
+      "session_id": "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+     },
+     {
+      "bears": false,
+      "evidence_id": "ecef41127c9c0c809aed8ed9552aa0ab096ec8263b2b6d5851362df468b3f0ba",
+      "execution": "not_run",
+      "execution_slug": "execution_not_run",
+      "kind": "observation",
+      "name": "COMMAND_FINISHED",
+      "observed": "couldnt",
+      "session_id": "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+     }
+    ],
+    "change_id": "chg_01M3QB4X34P0NJY2ZK2CMRD2RK",
+    "criteria": [
+     {
+      "absent_tool": null,
+      "class": "unclassified",
+      "index": 1,
+      "items": [],
+      "removed": [],
+      "state": "none",
+      "state_slug": "coverage_no_test_ran",
+      "text": "When the cart is empty, the total shows zero."
+     },
+     {
+      "absent_tool": null,
+      "class": "unclassified",
+      "index": 2,
+      "items": [
+       {
+        "actor": "walker",
+        "applies": true,
+        "applies_slug": "inputs_applies",
+        "asserted_at": "2026-09-29T20:20:32Z",
+        "assessable": true,
+        "basis": "manual",
+        "basis_slug": "basis_manual",
+        "bears": true,
+        "detail": null,
+        "evidence_class": null,
+        "evidence_class_slug": null,
+        "evidence_id": "18335d200ad9186a59a08a091c985aa435581aacd6c8ddc8561463f3700bcaa0",
+        "execution": "completed",
+        "execution_slug": "execution_completed",
+        "failure_line": null,
+        "fresh": null,
+        "fresh_slug": null,
+        "kind": "check_run",
+        "link_id": "cce_10fc5970fc3ded4d2b41ff7cbecf44470667e2505e97f39e295c6cdf31775f42",
+        "name": "bash:/work/shop:cargo test",
+        "note_slug": null,
+        "observed": "proven",
+        "reason": "",
+        "session_id": "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+       }
+      ],
+      "removed": [],
+      "state": "evidence",
+      "state_slug": "coverage_evidence",
+      "text": "When the cart has two items, the total shows their sum."
+     }
+    ],
+    "execution_sessions": [
+     "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+    ],
+    "executions": [
+     {
+      "actor": null,
+      "binding_id": "18335d200ad9186a59a08a091c985aa435581aacd6c8ddc8561463f3700bcaa0",
+      "change_id": "chg_01M3QB4X34P0NJY2ZK2CMRD2RK",
+      "cleanup_verified": null,
+      "examined_inputs_id": "exi_5e3ed272aa9172800889bb6e1abc76235d9f85288e1d1a0ed2b84cdb631117bf",
+      "id": "rx_01M3QB58685JPX2790ASXES1HH",
+      "name": "bash:/work/shop:cargo test",
+      "pid": 70154,
+      "process_group": 70154,
+      "reason": null,
+      "reason_slug": null,
+      "recorded_at": "2026-09-29T19:44:39Z",
+      "run_key": "hq-check-01M3QB55TMD1CAW6G8244GCSAX",
+      "settles": true,
+      "started_at": "2026-09-29T19:44:37Z",
+      "state": "completed",
+      "state_slug": "execution_completed",
+      "survivors": null
+     }
+    ],
+    "link_rows": 1,
+    "masking": {
+     "detector": "v2",
+     "masked": 0,
+     "patterns": [],
+     "state": "ran",
+     "statement": "detector v2 \u00b7 nothing matched a known secret shape \u00b7 best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+    },
+    "nothing_bound_slug": null,
+    "nothing_to_link_slug": null,
+    "schema_version": 1,
+    "scope_version": 2
+   },
+   "readiness": {
+    "change_id": "chg_01M3QB4X34P0NJY2ZK2CMRD2RK",
+    "headline_slug": "readiness_needs_evidence_one",
+    "missing": [
+     "criterion:2"
+    ],
+    "not_applicable": [],
+    "obligations": [
+     {
+      "criterion_index": null,
+      "evidence_name": null,
+      "id": "candidate_identity",
+      "kind": "candidate_identity",
+      "linked_by": null,
+      "outcome": "satisfied",
+      "outcome_slug": "satisfied",
+      "text": "",
+      "unsatisfied": null,
+      "unsatisfied_slug": null,
+      "waivable": false,
+      "waiver": null
+     },
+     {
+      "criterion_index": 1,
+      "evidence_name": null,
+      "id": "criterion:1",
+      "kind": "criterion",
+      "linked_by": null,
+      "outcome": "waived",
+      "outcome_slug": "waived",
+      "text": "When the cart is empty, the total shows zero.",
+      "unsatisfied": "nothing_looked",
+      "unsatisfied_slug": "readiness_nothing_looked",
+      "waivable": true,
+      "waiver": {
+       "actor": "walker",
+       "at": "2026-09-29T19:44:28Z",
+       "authority": "the release policy",
+       "id": "cx_01M3QB4Y72ART6K8CA0FAM9426",
+       "kind": "waived",
+       "obligation_id": "criterion:1",
+       "rationale": "the payment sandbox is down all week"
+      }
+     },
+     {
+      "criterion_index": 2,
+      "evidence_name": null,
+      "id": "criterion:2",
+      "kind": "criterion",
+      "linked_by": null,
+      "outcome": "needs_evidence",
+      "outcome_slug": "needs_evidence",
+      "text": "When the cart has two items, the total shows their sum.",
+      "unsatisfied": "never_assessed",
+      "unsatisfied_slug": "readiness_never_assessed",
+      "waivable": true,
+      "waiver": null
+     }
+    ],
+    "ready": false,
+    "rests_on": [],
+    "schema_version": 2,
+    "scope_version": 2,
+    "target_version": "01M3QB57X4126X9VBEJW7DSSFB",
+    "waived": [
+     "criterion:1"
+    ],
+    "with_exceptions": false
+   },
+   "review_findings": null
+  },
+  "proposals": {
+   "proposals": {
+    "accepted": {
+     "acceptance": {
+      "accepted_at": "2026-01-03T09:05:00Z",
+      "actor": "sam",
+      "rationale": "who may set something aside"
+     },
+     "allowed_scope": [
+      "src/**"
+     ],
+     "check_profile": [
+      "cargo-test",
+      "clippy",
+      "policy:exceptions-allowed-by:the release policy"
+     ],
+     "criteria": [
+      {
+       "attribution": "as_proposed",
+       "attribution_slug": "criterion_as_proposed",
+       "not_observable_slug": null,
+       "text": "When the cart is empty, the total shows zero."
+      },
+      {
+       "attribution": "as_proposed",
+       "attribution_slug": "criterion_as_proposed",
+       "not_observable_slug": null,
+       "text": "When the cart has two items, the total shows their sum."
+      }
+     ],
+     "not_an_approval_slug": "accept_is_not_approval",
+     "scope_attribution": "as_proposed",
+     "scope_attribution_slug": "criterion_as_proposed",
+     "version": 2
+    },
+    "change_id": "chg_01M3QB4X34P0NJY2ZK2CMRD2RK",
+    "confirmed_sessions": [
+     "cccccccc-0000-4000-8000-000000000065",
+     "hq-check-01M3QB55TMD1CAW6G8244GCSAX"
+    ],
+    "criteria": [
+     {
+      "number": 1,
+      "reasoning_slug": "proposal_reasoning",
+      "shape": {
+       "condition": "When the cart is empty",
+       "outcome": "shows zero",
+       "subject": "the total"
+      },
+      "source": {
+       "ask_id": "req_0d5aed9977b5e6b3a88ccbf3",
+       "event_id": null,
+       "length": 44,
+       "offset": 27,
+       "origin": "change_purpose",
+       "session_id": null
+      },
+      "subject_key": "total",
+      "text": "When the cart is empty, the total shows zero."
+     },
+     {
+      "number": 2,
+      "reasoning_slug": "proposal_reasoning",
+      "shape": {
+       "condition": "When the cart has two items",
+       "outcome": "shows their sum",
+       "subject": "the total"
+      },
+      "source": {
+       "ask_id": "req_0d5aed9977b5e6b3a88ccbf3",
+       "event_id": null,
+       "length": 54,
+       "offset": 73,
+       "origin": "change_purpose",
+       "session_id": null
+      },
+      "subject_key": "total",
+      "text": "When the cart has two items, the total shows their sum."
+     }
+    ],
+    "diff": {
+     "accepted_version": 2,
+     "added": [
+      2
+     ],
+     "nothing_changed_slug": "reproposal_changes_nothing",
+     "removed": [],
+     "restated": [
+      {
+       "accepted": "When the cart has two items, the total shows their sum.",
+       "proposed": "When the cart is empty, the total shows zero.",
+       "proposed_number": 1,
+       "sentence_slug": "reproposal_restated"
+      }
+     ],
+     "weakened": []
+    },
+    "empty_slug": null,
+    "masking": {
+     "detector": "v2",
+     "masked": 0,
+     "patterns": [],
+     "state": "ran",
+     "statement": "detector v2 \u00b7 nothing matched a known secret shape \u00b7 best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+    },
+    "not_accepted_slug": null,
+    "notes": [
+     {
+      "reason_slug": "note_no_outcome",
+      "refusal": "no_outcome",
+      "source": {
+       "ask_id": "req_0d5aed9977b5e6b3a88ccbf3",
+       "event_id": null,
+       "length": 25,
+       "offset": 0,
+       "origin": "change_purpose",
+       "session_id": null
+      },
+      "text": "Add a cart total function"
+     }
+    ],
+    "profile": {
+     "change_type_slugs": [
+      "type_backend_behaviour"
+     ],
+     "change_types": [
+      "backend_behaviour"
+     ],
+     "checks": [
+      {
+       "availability": {
+        "recipe": ".thruline/cargo-test.json",
+        "state": "recipe_missing"
+       },
+       "availability_name": ".thruline/cargo-test.json",
+       "availability_slug": "check_needs_a_recipe",
+       "category": "tests",
+       "for_types": [
+        "backend_behaviour"
+       ],
+       "id": "cargo-test",
+       "mandatory": true,
+       "need_slug": "check_mandatory",
+       "tool": "cargo"
+      },
+      {
+       "availability": {
+        "recipe": ".thruline/clippy.json",
+        "state": "recipe_missing"
+       },
+       "availability_name": ".thruline/clippy.json",
+       "availability_slug": "check_needs_a_recipe",
+       "category": "lint",
+       "for_types": [
+        "backend_behaviour"
+       ],
+       "id": "clippy",
+       "mandatory": false,
+       "need_slug": "check_advisory",
+       "tool": "cargo-clippy"
+      }
+     ],
+     "not_evidence_slug": "profile_is_not_evidence",
+     "paths_read": [
+      "src/**",
+      "src/lib.rs"
+     ],
+     "unknown_slug": null
+    },
+    "request": {
+     "prompt_event_id": null,
+     "purpose": "Add a cart total function. When the cart is empty, the total shows zero. When the cart has two items, the total shows their sum.",
+     "requester": "sam",
+     "title": "Cart total"
+    },
+    "schema_version": 1,
+    "scope": {
+     "bound": 25,
+     "empty_slug": null,
+     "from_files": 1,
+     "not_shown": 0,
+     "over_bound_slug": null,
+     "paths": [
+      "src/**"
+     ],
+     "reason_slug": "scope_from_the_work"
+    },
+    "versions_allowed": 20,
+    "versions_slug": "scope_versions_bounded",
+    "versions_used": 2
+   }
+  }
+ }
+}

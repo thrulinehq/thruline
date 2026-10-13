@@ -1,0 +1,10 @@
+{
+  "checks": 0,
+  "claims": [],
+  "final_tree_hash": null,
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "13-true-claim-whose-only-evidence-the",
+  "shape": "thruline.claims"
+}

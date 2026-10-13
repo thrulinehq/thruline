@@ -1,0 +1,3 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/broken/ShippingTests.cs(10,39): error CS1002: ; expected [/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/broken/Shipping.Tests.csproj]

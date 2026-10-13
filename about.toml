@@ -1,0 +1,35 @@
+# cargo-about configuration for THIRD_PARTY_NOTICES.md.
+#
+# The set described is what ships in the `thruline` binary: crates/cli built as
+# the release is built (`--no-default-features`, no `ort`/ONNX Runtime — see
+# dist-workspace.toml) for the four release targets below. First-party crates
+# (`publish = false`) are excluded by `private`; build- and dev-dependencies do
+# not ship and are excluded.
+#
+# Preference order matters: for a dual-licensed crate ("MIT OR Apache-2.0")
+# cargo-about records the first accepted licence that satisfies the expression,
+# so permissive licences that are only ever the alternative half of an OR
+# (MPL-2.0, BSL-1.0, Unlicense, 0BSD) are deliberately not accepted. If one of
+# them becomes the ONLY licence of a crate, generation fails and a person
+# decides — it is not accepted silently. The list is exactly the licences present
+# in the shipped set today; any new licence fails generation until a person adds it.
+accepted = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-3-Clause",
+    "Unicode-3.0",
+    "Zlib",
+]
+
+targets = [
+    "aarch64-apple-darwin",
+    "x86_64-apple-darwin",
+    "x86_64-unknown-linux-musl",
+    "aarch64-unknown-linux-musl",
+]
+
+ignore-build-dependencies = true
+ignore-dev-dependencies = true
+
+# First-party workspace crates (`publish = false`) are not third-party.
+private = { ignore = true }

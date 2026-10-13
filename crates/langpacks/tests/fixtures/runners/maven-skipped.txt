@@ -1,0 +1,39 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< demo:mvn-skipped >--------------------------
+[INFO] Building mvn-skipped 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ mvn-skipped ---
+[INFO] skip non existing resourceDirectory /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/mvn-skipped/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ mvn-skipped ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ mvn-skipped ---
+[INFO] skip non existing resourceDirectory /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/mvn-skipped/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ mvn-skipped ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug target 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ mvn-skipped ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running demo.ShippingTest
+[WARNING] Tests run: 3, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.060 s -- in demo.ShippingTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 3, Failures: 0, Errors: 0, Skipped: 2
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.531 s
+[INFO] Finished at: 2026-09-05T03:07:25+05:30
+[INFO] ------------------------------------------------------------------------

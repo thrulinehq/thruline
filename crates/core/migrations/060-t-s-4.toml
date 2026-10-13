@@ -1,0 +1,16 @@
+task = "T-S-4"
+order = 60
+built_on_commit = "0d2de68c"
+pinned_schema_digest = "schema_sha256_f10171c9b6bd1008373fa29ecb323f4b94837e05d6f2124af7ab36c4e0398947"
+migration_test = "crates/core/tests/change_decision_migration.rs"
+note = "The approvals and withdrawals a Change carries. One approval names one version, one actor, one time and one accepted-criteria version, as columns, so it cannot inherit onto a later version."
+
+tables = ["change_decisions"]
+
+indexes = ["idx_change_decisions_change"]
+
+triggers = [
+  "change_decisions_no_replace",
+  "change_decisions_no_update",
+  "change_decisions_no_delete",
+]

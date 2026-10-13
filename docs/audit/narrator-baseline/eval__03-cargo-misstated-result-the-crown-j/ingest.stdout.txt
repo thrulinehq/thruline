@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__03-cargo-misstated-result-the-crown-j/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 7a8138be35d04dbfeb6866033fe688fec639a0e4ac791d656b2b31747e6c42b2
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

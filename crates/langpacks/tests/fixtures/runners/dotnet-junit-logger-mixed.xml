@@ -1,0 +1,50 @@
+<testsuites>
+  <testsuite name="Shipping.JUnit.dll" tests="8" skipped="1" failures="2" errors="0" time="0.0078436" timestamp="2026-09-05T05:59:05" hostname="Dev-MacBook-Pro" id="0" package="Shipping.JUnit.dll">
+    <properties />
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="LargeParcelUsesPerKilo" time="0.0048071">
+      <failure type="failure" message="Assert.Equal() Failure: Values differ&#xA;Expected: 30.00&#xA;Actual:   29.50">at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/junitlogger/ShippingTests.cs:line 18
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</failure>
+    </testcase>
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="SmallParcelUsesFlatBase" time="0.0004349" />
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="ZeroWeightStillCostsBase" time="0.0000555" />
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="OversizeRejectsHeavyParcel" time="0.0002964">
+      <failure type="failure" message="Assert.True() Failure&#xA;Expected: True&#xA;Actual:   False">at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/junitlogger/ShippingTests.cs:line 29
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</failure>
+    </testcase>
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="BoundaryAtFiveKilos" time="0.0000360" />
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="OversizeThreshold(kg: 30, expected: False)" time="0.0010896" />
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="OversizeThreshold(kg: 31, expected: True)" time="0.0001241" />
+    <testcase classname="Shipping.Tests.ShippingRateTests" name="InternationalSurcharge" time="0.0010000">
+      <skipped />
+    </testcase>
+    <system-out>
+Test Framework Informational Messages:
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.19)
+[xUnit.net 00:00:00.03]   Discovering: Shipping.JUnit
+[xUnit.net 00:00:00.05]   Discovered:  Shipping.JUnit
+[xUnit.net 00:00:00.05]   Starting:    Shipping.JUnit
+[xUnit.net 00:00:00.07]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.07]       Expected: 30.00
+[xUnit.net 00:00:00.07]       Actual:   29.50
+[xUnit.net 00:00:00.07]       Stack Trace:
+[xUnit.net 00:00:00.07]         /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/junitlogger/ShippingTests.cs(18,0): at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo()
+[xUnit.net 00:00:00.07]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.07]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.07]       Assert.True() Failure
+[xUnit.net 00:00:00.07]       Expected: True
+[xUnit.net 00:00:00.07]       Actual:   False
+[xUnit.net 00:00:00.07]       Stack Trace:
+[xUnit.net 00:00:00.07]         /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/junitlogger/ShippingTests.cs(29,0): at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel()
+[xUnit.net 00:00:00.07]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.07]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.07]       pending the international rate table
+[xUnit.net 00:00:00.08]   Finished:    Shipping.JUnit
+</system-out>
+    <system-err>Error - [xUnit.net 00:00:00.07]     Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [FAIL]
+Error - [xUnit.net 00:00:00.07]     Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel [FAIL]
+Warning - [xUnit.net 00:00:00.07]     Shipping.Tests.ShippingRateTests.InternationalSurcharge [SKIP]
+</system-err>
+  </testsuite>
+</testsuites>

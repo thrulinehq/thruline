@@ -1,0 +1,3 @@
+cwd: empty
+args: pytest -q
+exit: 5

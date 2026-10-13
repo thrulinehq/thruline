@@ -1,0 +1,80 @@
+[workspace]
+resolver = "2"
+# NOTE: `members` must stay on ONE line. `crates/core/tests/a209_masking_corpus.rs`
+# derives the redaction call-site census from this key by splitting a single line
+# on `[` and `]`; a multi-line array would silently shrink the walk to nothing,
+# which is the exact class of failure that test exists to prevent (A209-C2 B4).
+members = ["crates/core", "crates/cli", "crates/capture", "crates/claims", "crates/verify", "crates/reexec", "crates/attest", "crates/ledger", "crates/explain", "crates/tui", "crates/bench", "crates/policy", "crates/app-core", "crates/sync", "crates/langpacks", "crates/sigstore", "crates/licence", "crates/licence-issue"]
+# The HTTP shell around `crates/licence-issue` is not part of this workspace, so
+# no HTTP or TLS dependency enters an engine build. `crates/licence-issue/tests/no_network.rs`
+# reads this line; the path may be absent from a checkout, which cargo accepts.
+exclude = ["tools/licence-issuer"]
+
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.97"
+license = "FSL-1.1-MIT"
+publish = false
+authors = ["RAAS Labs, LLC <noreply@thrulinehq.com>"]
+# **The one definition of where this is published.**
+#
+# cargo-dist refuses to generate CI without it, and every install path — the
+# curl installer, the npx shim, the Homebrew formula, the Action's own
+# installer — builds a release URL from the same `owner/name`. Those were
+# `thruline/thruline`, which is not a repository that exists; this is the
+# remote this work is actually on.
+#
+# The source and the release downloads now share one home, `thrulinehq/thruline`
+# (the source is public under FSL-1.1-MIT). If this moves,
+# `crates/cli/tests/m6_release_paths.rs` names every file that has to move with
+# it and fails until they all agree — the alternative is an installer that 404s
+# on a release that published fine.
+repository = "https://github.com/thrulinehq/thruline"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+# Shared versions for the BUILD-SPEC crates. The two pre-existing crates
+# (`core`, `cli`) keep their own pinned versions untouched — Rule 3.
+[workspace.dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.11.0"
+thiserror = "2.0.19"
+tracing = "0.1.44"
+ulid = "3.0.0"
+rusqlite = { version = "0.40.1", features = ["bundled"] }
+thruline-core = { version = "0.2.0", path = "crates/core", default-features = false }
+thruline-capture = { version = "0.2.0", path = "crates/capture" }
+thruline-ledger = { version = "0.2.0", path = "crates/ledger" }
+thruline-verify = { version = "0.2.0", path = "crates/verify" }
+tempfile = "3.27.0"
+proptest = "1.11.0"
+
+# cargo-dist's release profile. `dist generate` expects it and the build fails
+# without it; `inherits = "release"` keeps the shipped binary the same one
+# `cargo build --release` produces, so the profile adds a name and nothing else.
+#
+# `debug = false` and `strip = "symbols"` are stated rather than inherited: a
+# release artifact carrying debug symbols is several times larger, and the
+# thing people download over `curl | sh` should not be.
+[profile.dist]
+inherits = "release"
+debug = false
+strip = "symbols"
+
+# The one cost Track B named for taking `crates/sigstore` as a workspace member
+# (DECISIONS #130, B's plan §0a). **Profiles in a non-root manifest are
+# ignored**, and this crate's cosign-key tests run scrypt at three cost levels —
+# unoptimised, that is roughly 96 seconds on the workspace suite.
+#
+# B's own `crates/sigstore/Cargo.toml` carries the same two stanzas and they
+# travel byte-identical, which costs one cargo warning. That is deliberate: a
+# stripped manifest is not B's file, and the pin digest exists to assert the
+# vendored bytes ARE B's bytes.
+[profile.dev.package.scrypt]
+opt-level = 3
+
+[profile.test.package.scrypt]
+opt-level = 3

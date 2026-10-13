@@ -1,0 +1,1 @@
+module.exports={testDir:'/input',testMatch:'workflow.spec.cjs',outputDir:'/tmp/browser-results',workers:1,retries:0,timeout:10000,reporter:[['json']],use:{headless:true,baseURL:'http://127.0.0.1:8123',trace:'off'}};

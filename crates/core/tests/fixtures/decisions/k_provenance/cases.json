@@ -1,0 +1,10 @@
+{
+  "rule_file": ".thruline/decisions.yml",
+  "ordinary_file": "src/main.rs",
+  "spec_file": "docs/next/SPEC.md",
+  "ordinary_doc": "docs/next/NOTES.md",
+  "safe_command": ["git", "status"],
+  "bypass_command": ["git", "commit", "--no-verify"],
+  "safe_shape_family": "capture-masker-and-known-prefix-v1",
+  "credential_shape_family": "github_token"
+}

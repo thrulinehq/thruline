@@ -1,0 +1,9 @@
+{
+  "name": "thruline-local-integration-tools",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "dependency-cruiser": "18.2.0",
+    "knip": "6.35.0"
+  }
+}

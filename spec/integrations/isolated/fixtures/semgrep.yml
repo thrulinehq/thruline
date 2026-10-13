@@ -1,0 +1,6 @@
+rules:
+- id: no-dynamic-python-eval
+  languages: [python]
+  message: This executes a string as Python code. Use a parser or an explicit operation.
+  severity: ERROR
+  pattern: eval(...)

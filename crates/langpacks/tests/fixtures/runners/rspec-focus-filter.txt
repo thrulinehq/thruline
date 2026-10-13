@@ -1,0 +1,6 @@
+Run options: include {focus: true}
+.
+
+Finished in 0.00309 seconds (files took 0.11558 seconds to load)
+1 example, 0 failures
+

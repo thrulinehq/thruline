@@ -1,0 +1,12 @@
+---
+source: crates/core/tests/parse_fixtures.rs
+expression: stats.events_by_kind
+---
+{
+    "assistant_text": 1,
+    "assistant_thinking": 2,
+    "meta": 4,
+    "tool_result": 4,
+    "tool_use": 2,
+    "user_msg": 1,
+}

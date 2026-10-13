@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__21-a-measurement-report-is-a-finding/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval af64e7b09c4a6aac31a0c94eb2f45a3e6e918396d6864f6b6abebe4b5a135064
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

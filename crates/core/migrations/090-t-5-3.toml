@@ -1,0 +1,41 @@
+task = "T-5-3"
+order = 90
+built_on_commit = "8fe2761a"
+pinned_schema_digest = "schema_sha256_de2b05e56a94443dfecc594e763bf6fa2249e8bf030a0062fc83a90673dd7d4a"
+migration_test = "crates/core/tests/change_exception_migration.rs"
+note = """
+Setting one obligation aside, and what one approval was given under. The first
+table holds the exception; `change_decision_exceptions` holds what an approval
+was given under, copied rather than joined, so an approval cannot acquire an
+exception written after it (B10.9).
+
+The first table shipped as `change_dispositions` and is named here as it now
+is: R-2026-09-24-22 renamed it to `change_obligation_waivers` hours later, with
+its own migration and its own file, 100-r-2026-09-24-22.toml. This file names
+the objects as THIS TREE creates them, which is what the guard can check; the
+old name is recorded in the rename file, which is the only place it survives
+outside the migration itself.
+
+The `indexes` list below also corrects this file's first version, which said
+"No index on either" while the DDL created one on each. Derived from the
+schema, not from the sentence.
+"""
+
+tables = [
+  "change_obligation_waivers",
+  "change_decision_exceptions",
+]
+
+indexes = [
+  "idx_change_obligation_waivers_change",
+  "idx_change_decision_exceptions_decision",
+]
+
+triggers = [
+  "change_obligation_waivers_no_replace",
+  "change_obligation_waivers_no_update",
+  "change_obligation_waivers_no_delete",
+  "change_decision_exceptions_no_replace",
+  "change_decision_exceptions_no_update",
+  "change_decision_exceptions_no_delete",
+]

@@ -1,0 +1,35 @@
+[package]
+publish = false
+name = "thruline-licence"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Offline licence verification and the one entitlement table (T-DIST-4)."
+
+[lints]
+workspace = true
+
+# **No HTTP, TLS or socket crate, deliberately.** A licence check that phones
+# home breaks the product's central claim that nothing leaves the machine, so
+# the compiler is the first control: `tests/no_network.rs` holds both the
+# manifest and the sources to that, and the CLI's process-level test runs the
+# real binary under an OS network denial.
+[dependencies]
+# Ed25519 verification over the exact stored payload bytes. Already in
+# Cargo.lock at 2.2.0 (crates/core, crates/attest); no new crate enters.
+ed25519-dalek = { version = "2.2.0" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+# The key id and the machine fingerprint are SHA-256, like every hash here.
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+# `licence_id` is a ULID; parsing it is the check that it is one.
+ulid = { workspace = true }
+
+[dev-dependencies]
+# Tests generate every key pair at run time, in memory; nothing is committed.
+ed25519-dalek = { version = "2.2.0", features = ["rand_core"] }
+rand_core = { version = "0.6.4", features = ["getrandom"] }
+tempfile = { workspace = true }

@@ -1,0 +1,19 @@
+uuuF                                                                     [100%]
+=================================== FAILURES ===================================
+___________________________ test_with_subtests (i=1) ___________________________
+
+subtests = <_pytest.subtests.Subtests object at 0x1085d06e0>
+
+    def test_with_subtests(subtests):
+        for i in range(3):
+            with subtests.test(i=i):
+>               assert i != 1
+E               assert 1 != 1
+
+test_sub.py:4: AssertionError
+______________________________ test_with_subtests ______________________________
+contains 1 failed subtest
+=========================== short test summary info ============================
+SUBFAILED(i=1) test_sub.py::test_with_subtests - assert 1 != 1
+FAILED test_sub.py::test_with_subtests - contains 1 failed subtest
+2 failed, 2 subtests passed in 0.01s

@@ -1,0 +1,107 @@
+{
+  "claims_vs_proof": [
+    {
+      "findings": [],
+      "kind": "build_ok",
+      "reasons": [
+        "ran on the final tree",
+        "`cargo build` exited 0"
+      ],
+      "text": "As you asked in 1, the parser fix is in and the build succeeds.",
+      "verdict": "supported"
+    },
+    {
+      "findings": [],
+      "kind": "tests_pass",
+      "reasons": [
+        "no test check was captured in this session; the claim may be true and there is no evidence either way"
+      ],
+      "text": "As you asked in 2, all tests pass.",
+      "verdict": "unverifiable"
+    }
+  ],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "cccccccc-0001-4000-8000-000000000000",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "session_start",
+      "seq": 4,
+      "text": "session started"
+    },
+    {
+      "kind": "user_prompt",
+      "seq": 8,
+      "text": "Three things for the demo crate, please:"
+    },
+    {
+      "input": "{\"file_path\":\"/Users/dev/demo/src/parser.rs\",\"new_string\":\"        let token = self.next_token()?;\",\"old_string\":\"        let token = self.next_token();\",\"replace_all\":false}",
+      "kind": "tool_call",
+      "seq": 12,
+      "text": "Edit {\"file_path\":\"/Users/dev/demo/src/parser.rs\",\"new_…",
+      "tool": "Edit"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 16,
+      "text": "Edit ok",
+      "tool": "Edit"
+    },
+    {
+      "kind": "fs_change",
+      "seq": 17,
+      "text": "modify /Users/dev/demo/src/parser.rs"
+    },
+    {
+      "kind": "snapshot",
+      "seq": 18,
+      "text": "tree c4eeb65ef913 (taken at fold)"
+    },
+    {
+      "input": "{\"command\":\"cargo build\",\"description\":\"Build the crate\"}",
+      "kind": "tool_call",
+      "seq": 20,
+      "text": "Bash {\"command\":\"cargo build\",\"description\":\"Build the …",
+      "tool": "Bash"
+    },
+    {
+      "kind": "exec",
+      "seq": 24,
+      "text": "cargo build → exit 0"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 28,
+      "text": "Bash ok",
+      "tool": "Bash"
+    },
+    {
+      "kind": "snapshot",
+      "seq": 29,
+      "text": "tree c4eeb65ef913 (taken at fold)"
+    },
+    {
+      "kind": "stop",
+      "seq": 32,
+      "text": "stopped: As you asked in 1, the parser fix is in and the build succee…"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "agent_finished",
+    "last_events": [
+      "cargo build → exit 0",
+      "Bash ok",
+      "tree c4eeb65ef913 (taken at fold)"
+    ],
+    "summary": "the agent finished its turn"
+  }
+}

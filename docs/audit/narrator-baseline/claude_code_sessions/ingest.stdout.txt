@@ -1,0 +1,21 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/claude_code_sessions/store/ledger.db
+projects 1
+sessions 1
+lines    12 read · 0 already ingested
+events   14 new
+           assistant_text       1
+           assistant_thinking   2
+           meta                 4
+           tool_result          4
+           tool_use             2
+           user_msg             1
+unknown  4 type(s) mapped to meta
+           file-history-snapshot      1
+           last-prompt                1
+           queue-operation            1
+           system                     1
+malformed none
+head     fixtures f4393b2d9ecdf0644fd15e82ffba02b28affdfd7303d2de27754a92324fb2dc8
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

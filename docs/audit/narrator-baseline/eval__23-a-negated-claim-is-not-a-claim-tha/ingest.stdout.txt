@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__23-a-negated-claim-is-not-a-claim-tha/store/ledger.db
+projects 1
+sessions 1
+lines    5 read · 0 already ingested
+events   5 new
+           assistant_text       2
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 91175a817c25f3c72b78a4f6b9dcf683e13879706b109761bc4ca570fde73a4c
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

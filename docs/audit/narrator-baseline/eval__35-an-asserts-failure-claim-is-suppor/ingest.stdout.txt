@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__35-an-asserts-failure-claim-is-suppor/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 2c33ce97e8b5e81144df5d3a3af142d67a9e110fbd959a872be9e66d38a01793
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

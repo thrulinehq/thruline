@@ -1,0 +1,26 @@
+Run options: --seed 20260905
+
+# Running:
+
+.SE.S.FF
+
+Finished in 0.003086s, 2592.3526 runs/s, 1620.2204 assertions/s.
+
+  1) Error:
+TestCalcMixed#test_propagates_the_underlying_type_error:
+NoMethodError: undefined method '/' for an instance of String
+    lib/calc.rb:11:in 'Calc.div'
+    test2/test_calc_mixed.rb:28:in 'TestCalcMixed#test_propagates_the_underlying_type_error'
+
+  2) Failure:
+TestCalcMixed#test_rounds_toward_zero_not_away [test2/test_calc_mixed.rb:21]:
+Expected: 4
+  Actual: 3
+
+  3) Failure:
+TestCalcMixed#test_returns_a_rational_for_inexact_division [test2/test_calc_mixed.rb:32]:
+Expected 3 to be a kind of Rational, not Integer.
+
+8 runs, 5 assertions, 2 failures, 1 errors, 2 skips
+
+You have skipped tests. Run with --verbose for details.

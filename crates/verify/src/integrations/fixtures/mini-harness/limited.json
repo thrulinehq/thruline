@@ -1,0 +1,39 @@
+{
+  "fixture_role": "Parser control composed from the retained actual native mini-harness artifact; not a product qualification result.",
+  "agent_termination": "LimitsExceeded",
+  "mini_harness": {
+    "options": {
+      "schema": "thruline.mini-harness-options.v1",
+      "mode": "owned-swebench-task",
+      "environment": "local-in-linux",
+      "instance_id": "thruline-owned-workspace",
+      "command_timeout": 25
+    },
+    "native": {
+      "schema": "thruline.mini-owned-harness.v1",
+      "native_runner": "minisweagent.run.benchmarks.swebench.process_instance",
+      "native_agent": "minisweagent.run.benchmarks.utils.common.ProgressTrackingAgent",
+      "environment_type": "minisweagent.environments.local.LocalEnvironment",
+      "instance_ids": [
+        "thruline-owned-workspace"
+      ],
+      "workers": 1,
+      "dataset_kind": "owned_compatibility_format",
+      "official_benchmark": false,
+      "official_score": null,
+      "native_predictions_file": "preds.json",
+      "native_trajectory_file": "thruline-owned-workspace/thruline-owned-workspace.traj.json",
+      "native_exit_status": "LimitsExceeded",
+      "scope": "One owned task per disposable product namespace; upstream predictions are model submissions, not independent test results. No official SWE-bench/ProgramBench task or score is claimed."
+    },
+    "source_artifact": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/mini-swe-environment-batch-proposal-v1/native-limit01/native/container-native/mini-harness.json",
+    "source_sha256": "6f2422152b6ba03c9f42e45b93a1baf5a491d4c424f5fa140c6323ed744faae5",
+    "capture_error": null
+  },
+  "native_artifacts": [
+    {
+      "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/mini-swe-environment-batch-proposal-v1/native-limit01/native/container-native/mini-harness.json",
+      "sha256": "6f2422152b6ba03c9f42e45b93a1baf5a491d4c424f5fa140c6323ed744faae5"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+cwd: mixed
+args: pytest -rA
+exit: 1

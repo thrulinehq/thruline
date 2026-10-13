@@ -1,0 +1,211 @@
+{
+  "attested_run_tables": {
+    "capture_attempts": 0,
+    "capture_compatibility_profiles": 0,
+    "capture_continuity_receipts": 0,
+    "capture_event_links": 0,
+    "capture_install_plans": 0,
+    "capture_lifecycle_records": 0,
+    "capture_project_authorizations": 0,
+    "capture_refresh_receipts": 0,
+    "capture_self_tests": 0,
+    "source_assurance_attestations": 0
+  },
+  "capsule_code_written": 0,
+  "corpus": {
+    "events": 2012204,
+    "projects": 91,
+    "sessions": 76179
+  },
+  "corpus_claim_states": {
+    "dropped": 29,
+    "pending": 33162,
+    "recorded": 38568,
+    "supported": 752,
+    "unknown": 14561,
+    "unsupported": 60
+  },
+  "date": "2026-08-13",
+  "namespace": "stored ledger rows + the \u00a79 export documents named on argv; no transcript is opened, no file on disk is stat-ed",
+  "probe": "C3.0 \u2014 capsule section sources, measured before any capsule code",
+  "scope_finding": {
+    "astrology_project_rows": 11,
+    "headline": "a capsule scoped to one project row can silently under-represent a real project",
+    "measured": "one project's work fragments across 11 project rows (nine of them `--claude-worktrees-*`), and workspace identity abstains on every one (basis 'unresolvable') because the working roots are gone from disk \u2014 so repo scoping cannot reunite them either",
+    "rule": "the capsule states its own scope as a fact (this project row, N sessions) and, when repo identity does not resolve, SAYS SO. Sibling roots are never guessed from path prefixes \u2014 that is the per-repo demangle guess the A156 pin already forbids."
+  },
+  "sections": {
+    "caution_no_proof": {
+      "astrology": 60,
+      "availability": "shadow-blocked",
+      "beta": 0,
+      "note": "TWO independent findings: (1) \u00a75s holds 'unsupported' in FULL SHADOW until per-class graduation and the \u00a79 export already excludes it, so surfacing it in a capsule would break the shadow gate; (2) it is a measured zero on beta anyway. The 60 corpus rows sit in one project root. Operator ruling required \u2014 see the write-up.",
+      "source": "nodes at 'unsupported' (rendered 'no proof found'), coverage-scoped"
+    },
+    "do_not_repeat": {
+      "astrology": {
+        "attested": 0,
+        "bash_calls": 1221,
+        "observed_shapes": {
+          "deploy": 21,
+          "git commit": 24,
+          "git push": 24,
+          "migrate": 0,
+          "npm publish": 0,
+          "rm -rf": 21
+        }
+      },
+      "availability": "partial",
+      "beta": {
+        "attested": 0,
+        "bash_calls": 3042,
+        "observed_shapes": {
+          "deploy": 166,
+          "git commit": 82,
+          "git push": 1,
+          "migrate": 45,
+          "npm publish": 0,
+          "rm -rf": 19
+        }
+      },
+      "note": "ATTESTED RUNS ARE A MEASURED ZERO on this machine \u2014 every capture table is empty, so the proof-grade half of this section has no rows at all. Only the observed half exists, and a command matching a shape is a CANDIDATE: every entry must carry replay_class 'unknown' citing the C5 operation/replay ledger by name. No safety class may be invented here.",
+      "source": "attested runs (capture_* / source_assurance_attestations) + side-effect-shaped Bash tool_use events"
+    },
+    "freshness": {
+      "astrology": "chain position per project",
+      "availability": "provable",
+      "beta": "chain position per project",
+      "note": "a capsule cites the snapshot it was built beside by digest; applicability is derived at read, never stored twice (A87)",
+      "source": "project_heads chain position + the cited workspace snapshot's taken_at/doc_sha256 + ProofApplicability derived at read"
+    },
+    "in_flight": {
+      "astrology": {
+        "clusters": 292,
+        "tails": 3
+      },
+      "availability": "provable",
+      "beta": {
+        "clusters": 938,
+        "tails": 8
+      },
+      "note": "candidate vocabulary only: 'N edits after the last commit \u2014 unresolved', never 'dead end'",
+      "source": "RB7 Layer-2 UncommittedTail + EditCluster (candidates.tails / candidates.clusters)"
+    },
+    "next_safe_action": {
+      "astrology": {
+        "pending": 135
+      },
+      "availability": "provable-as-inference",
+      "beta": {
+        "pending": 480
+      },
+      "note": "an inference, never a receipt: labeled Inferred and carrying a basis string in the session_status.rs house style ('the last claim the record backs, and the first it does not')",
+      "source": "derived: last supported claim + first unresolved (pending) claim, in recorded order"
+    },
+    "objective": {
+      "astrology": 24,
+      "availability": "provable",
+      "beta": 26,
+      "note": "one verbatim ask per session; a session with none renders an honest empty, never an invented objective",
+      "source": "RB7 Layer-2 OpeningAsk (candidates.opening_asks), rendered under exactly the label 'opening ask' \u2014 'purpose' is a Layer-3 word and stays banned"
+    },
+    "rejected_paths": {
+      "astrology": 0,
+      "availability": "absent",
+      "beta": 0,
+      "note": "the packet already prints this honestly: 'no failed-approach object exists; abandoned is set with supersession and explicitly does not mean the work failed'. The capsule OMITS this section in v1 with that measured-zero note rather than faking it from `dropped`.",
+      "source": "NONE \u2014 no failed-approach object exists in the model"
+    },
+    "uncertainties": {
+      "astrology": 169,
+      "availability": "provable",
+      "beta": 224,
+      "note": "'unknown' is NOT a shadow class \u2014 it renders today and is the honest home for unreadable outcomes; C2's gaps string is copied verbatim, never paraphrased",
+      "source": "nodes at 'unknown' (rendered 'insufficient evidence') + the C2 snapshot's own named v1 gaps"
+    },
+    "verified_with_receipts": {
+      "astrology": {
+        "supported": 39,
+        "verified": 0
+      },
+      "availability": "partial",
+      "beta": {
+        "supported": 347,
+        "verified": 0
+      },
+      "note": "VERIFIED IS A MEASURED ZERO CORPUS-WIDE (0 rows): every claim this machine can offer is 'supported' at best, so the section may not be titled 'verified' without laundering a verdict \u2014 the packet's RULING 4 already caps nodes at supported and the capsule inherits it",
+      "source": "nodes at evidence supported/verified, with their anchor receipts"
+    }
+  },
+  "specimens": {
+    "astrology": {
+      "bash_calls": 1221,
+      "claim_states": {
+        "dropped": 28,
+        "pending": 135,
+        "recorded": 1512,
+        "supported": 39,
+        "unknown": 169,
+        "unsupported": 60
+      },
+      "events": 17708,
+      "layer2": {
+        "artifacts": 126,
+        "boundaries": 24,
+        "clusters": 292,
+        "opening_asks": 24,
+        "tails": 3
+      },
+      "project_id": "-Users-dev-Desktop-shop-project",
+      "receipts": 1943,
+      "repo_identity": {
+        "basis": "unresolvable",
+        "repo_id": "",
+        "resolves": false
+      },
+      "sessions": 24,
+      "side_effect_shaped": {
+        "deploy": 21,
+        "git commit": 24,
+        "git push": 24,
+        "migrate": 0,
+        "npm publish": 0,
+        "rm -rf": 21
+      }
+    },
+    "beta": {
+      "bash_calls": 3042,
+      "claim_states": {
+        "dropped": 1,
+        "pending": 480,
+        "recorded": 4075,
+        "supported": 347,
+        "unknown": 224
+      },
+      "events": 33880,
+      "layer2": {
+        "artifacts": 403,
+        "boundaries": 82,
+        "clusters": 938,
+        "opening_asks": 26,
+        "tails": 8
+      },
+      "project_id": "-Users-dev-Developer-notes-private-beta",
+      "receipts": 5127,
+      "repo_identity": {
+        "basis": "git",
+        "repo_id": "2fa0e06a9360f3fc76cad206809e15b2b232654ccea7101274359b5e448d2839",
+        "resolves": true
+      },
+      "sessions": 26,
+      "side_effect_shaped": {
+        "deploy": 166,
+        "git commit": 82,
+        "git push": 1,
+        "migrate": 45,
+        "npm publish": 0,
+        "rm -rf": 19
+      }
+    }
+  }
+}

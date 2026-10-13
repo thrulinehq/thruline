@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__36-an-asserts-failure-claim-can-never/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval e625d8da455cfbf1bd3e34a59de34299f7c66d545cf6b9a6173cb98019df51b3
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

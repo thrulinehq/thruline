@@ -1,0 +1,37 @@
+# thruline musl artefacts — CONSUMED from Track C, COPIED into this lane.
+#
+# WHY THE COPY EXISTS (DECISIONS #62). These were read live from
+# /Users/dev/thruline-gate/target/musl, inside another track's
+# gitignored build directory. Track C reaped that directory and stopped one
+# path short of deleting them; `cargo clean` — the obvious reading of "reap
+# your build directory" — would have taken them mid-pilot. An artefact one
+# track consumes must not live where another track's housekeeping reaches.
+#
+# I ARGUED THE OTHER WAY AND I WAS WRONG. I told Track C to leave them in
+# place because "a copy would be a second artefact with no provenance". The
+# answer is to carry the provenance WITH the copy, which is this file — not
+# to avoid copying and hope nobody sweeps.
+#
+# The binaries live in fixtures/bench/musl/, which .gitignore:10 excludes
+# (43 MB); this manifest is committed beside them, exactly as
+# fixtures/bench/download.sh pins the Terminal-Bench tarball by sha256.
+# scripts/pilot-run.sh verifies every staged binary against these digests
+# and REFUSES on a mismatch: an unpinned artefact in a lane is the same
+# liability one directory along.
+#
+# producer: Track C, worktree ~/thruline-gate, branch codex/m6-gate-packaging
+# commit  : 74c9f3b87e616ebb8aac082a5881871006d81e84
+# built by: ./packaging/build-musl.sh, rust:1.97.1-alpine, --locked,
+#           --no-default-features (ORT has no musl build)
+#
+# Verified independently in this lane, by property and not by phrasing:
+#   readelf -l -> 0 INTERP segments; readelf -d -> 0 NEEDED entries
+#   aarch64 runs `--version` in ghcr.io/laude-institute/t-bench/python-3-13:20250620
+#   NOTE: `file` says "statically linked" for aarch64 and "static-pie
+#   linked" for x86_64. Both are static. A check on that string refuses the
+#   amd64 artefact, and `ldd` on the static-pie prints a loader path that is
+#   not a dependency — which fails in the UNSAFE direction.
+#
+# arch	sha256	bytes	build_id
+aarch64	f175469ffb76ab07eab8be6fdb95b690338e35a894b13a3ae361c1d056101091	21200336	650b8a801419ec300f0f17b85cf051c6dbe52c43
+x86_64	bac8dafb0d16b43903b057a1c6a82d6d2fca5163901d9ae1374dc40b340c1836	22599744	1aaf352ff5c8839842eb802233cbf006d768356e

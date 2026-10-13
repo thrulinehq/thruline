@@ -1,0 +1,41 @@
+{
+  "schema": "thruline.actual-native-fixtures.v1",
+  "source": "Exact actual native wrapper stdout JSON, except that the developer home directory in recorded paths is rewritten to /Users/dev for the public snapshot (the sha256 values are those of the original captures); paths refer to preserved qualification runs, not test runtime reads.",
+  "captures": [
+    {
+      "case": "defective",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/defective/wrapper.stdout",
+      "sha256": "fa016edd03f9fd75ec7d0c6fddb541213c8730f5be5cd86c5f49540bc620bd56"
+    },
+    {
+      "case": "fixed",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/fixed/wrapper.stdout",
+      "sha256": "ad6c6d519a8b4eb7314e24920d26d3f4b43969ced3cd755e91975802a444d4ae"
+    },
+    {
+      "case": "constant-pointer",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/constant-pointer/wrapper.stdout",
+      "sha256": "dc5a17781771b5bd884f8e731992711123dd9500a607382e35f501b7f3b21535"
+    },
+    {
+      "case": "upstream-pair",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/upstream-pair/wrapper.stdout",
+      "sha256": "b0140aa83ab99bd72d777ce4ca926fc7df079695b759a20204e28d88effbaab0"
+    },
+    {
+      "case": "syntax-error",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/syntax-error/wrapper.stdout",
+      "sha256": "8abb2e81c80eac1b6f18ffb7210d78937257e277f21e39c6afcfaf1f189d9e37"
+    },
+    {
+      "case": "unknown-query",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/unknown-query/wrapper.stdout",
+      "sha256": "4871be977ffd8c8dc188a2c1f7600f431084f087d3764e6ac01955575564a74d"
+    },
+    {
+      "case": "missing-querydb",
+      "native_capture": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/joern-querydb-proposal-v1/wrapper-native01/missing-querydb/wrapper.stdout",
+      "sha256": "019feb8d52b52712c6f523e12f2c39c209253056db344a7a6996542d09d1d53d"
+    }
+  ]
+}

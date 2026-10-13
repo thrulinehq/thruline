@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__29-an-aggregate-count-against-one-par/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 98c4e09f279eeeb625091a40daae6800d285eb5d64a0f33e07eafbf9ce29c84b
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

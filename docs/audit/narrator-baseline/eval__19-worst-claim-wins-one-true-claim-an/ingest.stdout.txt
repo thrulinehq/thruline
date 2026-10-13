@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__19-worst-claim-wins-one-true-claim-an/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 8a48d5b906b458accff23ee97f1908561263c8882c816bbbd631c1888fcce46f
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

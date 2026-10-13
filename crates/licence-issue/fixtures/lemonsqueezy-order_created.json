@@ -1,0 +1,73 @@
+{
+  "_provenance": "SYNTHESISED FROM DOCUMENTATION, NOT RECORDED - unverified against a live account. Shape from https://docs.lemonsqueezy.com/help/webhooks and https://docs.lemonsqueezy.com/api/orders/the-order-object; every id, name and amount is invented. Signed at test time with a secret generated at test time.",
+  "meta": {
+    "event_name": "order_created",
+    "test_mode": false,
+    "webhook_id": "cccccccc-0000-4000-8000-00000000a001",
+    "custom_data": {}
+  },
+  "data": {
+    "type": "orders",
+    "id": "100001",
+    "attributes": {
+      "store_id": 10001,
+      "customer_id": 20001,
+      "identifier": "cccccccc-0000-4000-8000-00000000a002",
+      "order_number": 1001,
+      "user_name": "Example Buyer",
+      "user_email": "buyer@example.invalid",
+      "currency": "USD",
+      "currency_rate": "1.0000",
+      "subtotal": 9900,
+      "setup_fee": 0,
+      "discount_total": 0,
+      "tax": 0,
+      "total": 9900,
+      "subtotal_usd": 9900,
+      "setup_fee_usd": 0,
+      "discount_total_usd": 0,
+      "tax_usd": 0,
+      "total_usd": 9900,
+      "tax_name": null,
+      "tax_rate": "0.00",
+      "tax_inclusive": false,
+      "status": "paid",
+      "status_formatted": "Paid",
+      "refunded": false,
+      "refunded_at": null,
+      "subtotal_formatted": "$99.00",
+      "setup_fee_formatted": "$0.00",
+      "discount_total_formatted": "$0.00",
+      "tax_formatted": "$0.00",
+      "total_formatted": "$99.00",
+      "first_order_item": {
+        "id": 30001,
+        "order_id": 100001,
+        "product_id": 40001,
+        "variant_id": 50001,
+        "price_id": 60001,
+        "product_name": "ThruLine",
+        "variant_name": "Pro, one year",
+        "price": 9900,
+        "quantity": 1,
+        "created_at": "2026-09-24T10:00:00.000000Z",
+        "updated_at": "2026-09-24T10:00:00.000000Z",
+        "test_mode": false
+      },
+      "created_at": "2026-09-24T10:00:00.000000Z",
+      "updated_at": "2026-09-24T10:00:00.000000Z",
+      "test_mode": false
+    },
+    "relationships": {
+      "store": {
+        "links": {
+          "related": "https://api.lemonsqueezy.com/v1/orders/100001/store",
+          "self": "https://api.lemonsqueezy.com/v1/orders/100001/relationships/store"
+        }
+      }
+    },
+    "links": {
+      "self": "https://api.lemonsqueezy.com/v1/orders/100001"
+    }
+  }
+}

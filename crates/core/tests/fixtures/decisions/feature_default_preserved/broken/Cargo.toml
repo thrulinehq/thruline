@@ -1,0 +1,3 @@
+[dependencies]
+default-features = true
+legacy_feature = true

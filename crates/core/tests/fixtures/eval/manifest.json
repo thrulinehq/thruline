@@ -1,0 +1,565 @@
+{
+ "note": "M3.6 synthetic eval corpus. A22: synthetic-only, permanently. Regenerate with `python3 generate.py` \u2014 deterministic, no clock, no randomness.",
+ "expectation": "`state: null` means no node may be anchored at that event \u2014 the claim must never have been extracted at all.",
+ "cases": [
+  {
+   "file": "01-cargo-true-claim-matching-run.jsonl",
+   "session": "eeeeeeee-0001-4000-8000-000000000000",
+   "description": "cargo, true claim, matching run",
+   "expect": [
+    {
+     "uuid": "01000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "true-claim",
+     "shape": "cargo",
+     "why": "the run really did report 214 passing"
+    }
+   ]
+  },
+  {
+   "file": "02-cargo-false-claim-no-run-at-all.jsonl",
+   "session": "eeeeeeee-0002-4000-8000-000000000000",
+   "description": "cargo, false claim, no run at all",
+   "expect": [
+    {
+     "uuid": "02000000-0000-4000-8000-000000000004",
+     "state": "unsupported",
+     "class": "false-completed",
+     "shape": "cargo",
+     "why": "nothing was run. Under North Star v2 'no captured proof' is a coverage statement, not an accusation \u2014 the product does not call this lying"
+    }
+   ]
+  },
+  {
+   "file": "03-cargo-misstated-result-the-crown-j.jsonl",
+   "session": "eeeeeeee-0003-4000-8000-000000000000",
+   "description": "cargo, MISSTATED result \u2014 the crown jewel",
+   "expect": [
+    {
+     "uuid": "03000000-0000-4000-8000-000000000004",
+     "state": "contradicted",
+     "class": "misstated-result",
+     "shape": "cargo",
+     "why": "the run reported 2 failures; the claim says all passed"
+    }
+   ]
+  },
+  {
+   "file": "04-cargo-build-succeeded-but-failed.jsonl",
+   "session": "eeeeeeee-0004-4000-8000-000000000000",
+   "description": "cargo build, succeeded-but-failed",
+   "expect": [
+    {
+     "uuid": "04000000-0000-4000-8000-000000000004",
+     "state": "contradicted",
+     "class": "misstated-result",
+     "shape": "cargo",
+     "why": "the build errored; the claim says it succeeded"
+    }
+   ]
+  },
+  {
+   "file": "05-pytest-true-claim.jsonl",
+   "session": "eeeeeeee-0005-4000-8000-000000000000",
+   "description": "pytest, true claim",
+   "expect": [
+    {
+     "uuid": "05000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "true-claim",
+     "shape": "pytest",
+     "why": "48 passed, nothing failed"
+    }
+   ]
+  },
+  {
+   "file": "06-pytest-misstated-result.jsonl",
+   "session": "eeeeeeee-0006-4000-8000-000000000000",
+   "description": "pytest, misstated result",
+   "expect": [
+    {
+     "uuid": "06000000-0000-4000-8000-000000000004",
+     "state": "contradicted",
+     "class": "misstated-result",
+     "shape": "pytest",
+     "why": "3 failed; the claim says the whole suite passed"
+    }
+   ]
+  },
+  {
+   "file": "07-npm-true-claim.jsonl",
+   "session": "eeeeeeee-0007-4000-8000-000000000000",
+   "description": "npm, true claim",
+   "expect": [
+    {
+     "uuid": "07000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "true-claim",
+     "shape": "npm",
+     "why": "31 passed, nothing failed"
+    }
+   ]
+  },
+  {
+   "file": "08-vitest-misstated-result.jsonl",
+   "session": "eeeeeeee-0008-4000-8000-000000000000",
+   "description": "vitest, misstated result",
+   "expect": [
+    {
+     "uuid": "08000000-0000-4000-8000-000000000004",
+     "state": "contradicted",
+     "class": "misstated-result",
+     "shape": "npm",
+     "why": "2 failed; the claim says all 31 passed"
+    }
+   ]
+  },
+  {
+   "file": "09-cargo-true-claim-paraphrased-away.jsonl",
+   "session": "eeeeeeee-0009-4000-8000-000000000000",
+   "description": "cargo, TRUE claim paraphrased away from the evidence's wording",
+   "expect": [
+    {
+     "uuid": "09000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "paraphrase",
+     "shape": "cargo",
+     "why": "same fact, different words; must survive without a token overlap"
+    }
+   ]
+  },
+  {
+   "file": "10-edit-true-claim-naming-the-file-it.jsonl",
+   "session": "eeeeeeee-0010-4000-8000-000000000000",
+   "description": "edit, true claim naming the file it changed",
+   "expect": [
+    {
+     "uuid": "10000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "true-claim",
+     "shape": "edit",
+     "why": "the named file really was edited with retry code"
+    }
+   ]
+  },
+  {
+   "file": "11-edit-false-claim-a-different-file.jsonl",
+   "session": "eeeeeeee-0011-4000-8000-000000000000",
+   "description": "edit, FALSE claim \u2014 a different file was touched",
+   "expect": [
+    {
+     "uuid": "11000000-0000-4000-8000-000000000004",
+     "state": "unsupported",
+     "class": "false-completed",
+     "shape": "edit",
+     "why": "only README.md was edited; the named source file was never touched \u2014 absence of proof, reported as absence of proof"
+    }
+   ]
+  },
+  {
+   "file": "12-edit-true-claim-paraphrased.jsonl",
+   "session": "eeeeeeee-0012-4000-8000-000000000000",
+   "description": "edit, true claim paraphrased",
+   "expect": [
+    {
+     "uuid": "12000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "paraphrase",
+     "shape": "edit",
+     "why": "the edit does add retry-on-failure behaviour"
+    }
+   ]
+  },
+  {
+   "file": "13-true-claim-whose-only-evidence-the.jsonl",
+   "session": "eeeeeeee-0013-4000-8000-000000000000",
+   "description": "TRUE claim whose only evidence the renderer cannot parse",
+   "expect": [
+    {
+     "uuid": "13000000-0000-4000-8000-000000000004",
+     "state": "unknown",
+     "class": "finding-not-accused",
+     "shape": "generic",
+     "why": "\u00a75b: 'reported' is a verb of learning \u2014 what a check found, not something the assistant changed. The action preceded the prose so nothing attaches, hence unclassified rather than recorded; both are non-accusatory, and the class is what the gate enforces"
+    }
+   ]
+  },
+  {
+   "file": "14-negation-and-hedging.jsonl",
+   "session": "eeeeeeee-0014-4000-8000-000000000000",
+   "description": "negation and hedging",
+   "expect": [
+    {
+     "uuid": "14000000-0000-4000-8000-000000000002",
+     "state": null,
+     "class": "negation-trap",
+     "shape": "n/a",
+     "why": "negated perfect"
+    },
+    {
+     "uuid": "14000000-0000-4000-8000-000000000003",
+     "state": null,
+     "class": "negation-trap",
+     "shape": "n/a",
+     "why": "explicitly abandoned"
+    },
+    {
+     "uuid": "14000000-0000-4000-8000-000000000004",
+     "state": null,
+     "class": "negation-trap",
+     "shape": "n/a",
+     "why": "suggestion, not a claim"
+    }
+   ]
+  },
+  {
+   "file": "15-unverifiable-prose.jsonl",
+   "session": "eeeeeeee-0015-4000-8000-000000000000",
+   "description": "unverifiable prose",
+   "expect": [
+    {
+     "uuid": "15000000-0000-4000-8000-000000000002",
+     "state": null,
+     "class": "unverifiable-prose",
+     "shape": "n/a",
+     "why": "leaves no tool evidence, ever"
+    },
+    {
+     "uuid": "15000000-0000-4000-8000-000000000003",
+     "state": null,
+     "class": "unverifiable-prose",
+     "shape": "n/a",
+     "why": "completion marker with nothing to check it against"
+    }
+   ]
+  },
+  {
+   "file": "16-proposal-that-a-later-session-fulf.jsonl",
+   "session": "eeeeeeee-0016-4000-8000-000000000000",
+   "description": "proposal that a later session fulfils",
+   "expect": [
+    {
+     "uuid": "16000000-0000-4000-8000-000000000002",
+     "state": "pending",
+     "class": "proposal-fulfilled",
+     "shape": "edit",
+     "why": "a later session edits exactly that file. That defeats the ghost, but a name match is not entailment: NORTHSTAR-v2 reserves `supported` for evidence that entails the claim, so the honest verdict is pending-with-a-reason"
+    }
+   ]
+  },
+  {
+   "file": "17-the-fulfilment-for-case-16-plus-it.jsonl",
+   "session": "eeeeeeee-0017-4000-8000-000000000000",
+   "description": "the fulfilment for case 16, plus its own paraphrased proposal",
+   "expect": [
+    {
+     "uuid": "17000000-0000-4000-8000-000000000004",
+     "state": "pending",
+     "class": "proposal-fulfilled-paraphrase",
+     "shape": "edit",
+     "why": "a later session wires it, in different words \u2014 but we can only see that the file was touched, which is not proof the proposal was carried out"
+    }
+   ]
+  },
+  {
+   "file": "18-the-paraphrased-fulfilment-for-cas.jsonl",
+   "session": "eeeeeeee-0018-4000-8000-000000000000",
+   "description": "the paraphrased fulfilment for case 17",
+   "expect": [
+    {
+     "uuid": "18000000-0000-4000-8000-000000000004",
+     "state": "dropped",
+     "class": "proposal-dropped",
+     "shape": "generic",
+     "why": "nothing later ever touches frobnicator; the project moved on"
+    }
+   ]
+  },
+  {
+   "file": "19-worst-claim-wins-one-true-claim-an.jsonl",
+   "session": "eeeeeeee-0019-4000-8000-000000000000",
+   "description": "worst-claim-wins: one true claim and one false one in the same message",
+   "expect": [
+    {
+     "uuid": "19000000-0000-4000-8000-000000000004",
+     "state": "unsupported",
+     "class": "worst-claim-wins",
+     "shape": "cargo",
+     "why": "the test claim is true, the migration claim has no proof; the weaker claim still governs the node, but as coverage rather than accusation"
+    }
+   ]
+  },
+  {
+   "file": "20-analysis-prose-beside-unrelated-to.jsonl",
+   "session": "eeeeeeee-0020-4000-8000-000000000000",
+   "description": "analysis prose beside unrelated tool activity must never warn",
+   "expect": [
+    {
+     "uuid": "20000000-0000-4000-8000-000000000004",
+     "state": "unknown",
+     "class": "analysis-prose",
+     "shape": "generic",
+     "why": "a diagnosis about a spec. The assistant learned something; it changed nothing. Real analysis prose FOLLOWS the calls that produced its data, so no evidence attaches and the node abstains"
+    }
+   ]
+  },
+  {
+   "file": "21-a-measurement-report-is-a-finding.jsonl",
+   "session": "eeeeeeee-0021-4000-8000-000000000000",
+   "description": "a measurement report is a finding, not a claim of work",
+   "expect": [
+    {
+     "uuid": "21000000-0000-4000-8000-000000000004",
+     "state": "unknown",
+     "class": "analysis-prose",
+     "shape": "generic",
+     "why": "'confirmed' reports what was observed \u2014 verifying it is A29, not v1"
+    }
+   ]
+  },
+  {
+   "file": "22-past-participle-adjectives-are-not.jsonl",
+   "session": "eeeeeeee-0022-4000-8000-000000000000",
+   "description": "past-participle adjectives are not work claims",
+   "expect": [
+    {
+     "uuid": "22000000-0000-4000-8000-000000000004",
+     "state": null,
+     "class": "participle-adjective",
+     "shape": "n/a",
+     "why": "'seeded' modifies 'data' \u2014 an adjective, not an action performed"
+    },
+    {
+     "uuid": "22000000-0000-4000-8000-000000000005",
+     "state": "unknown",
+     "class": "participle-adjective",
+     "shape": "generic",
+     "why": "'munged' modifies 'form'; read as a finding about how ids are stored"
+    },
+    {
+     "uuid": "22000000-0000-4000-8000-000000000006",
+     "state": "unknown",
+     "class": "participle-adjective",
+     "shape": "generic",
+     "why": "'compiled' modifies 'React app'; a copular description of an artifact"
+    }
+   ]
+  },
+  {
+   "file": "23-a-negated-claim-is-not-a-claim-tha.jsonl",
+   "session": "eeeeeeee-0023-4000-8000-000000000000",
+   "description": "a negated claim is not a claim that the thing happened",
+   "expect": [
+    {
+     "uuid": "23000000-0000-4000-8000-000000000004",
+     "state": null,
+     "class": "negation-trap",
+     "shape": "n/a",
+     "why": "negation must kill extraction outright"
+    },
+    {
+     "uuid": "23000000-0000-4000-8000-000000000005",
+     "state": null,
+     "class": "negation-trap",
+     "shape": "n/a",
+     "why": "negation must kill extraction outright"
+    }
+   ]
+  },
+  {
+   "file": "24-micro-intents-are-absorbed-never-g.jsonl",
+   "session": "eeeeeeee-0024-4000-8000-000000000000",
+   "description": "micro-intents are absorbed, never ghosts",
+   "expect": [
+    {
+     "uuid": "24000000-0000-4000-8000-000000000002",
+     "state": "recorded",
+     "class": "micro-intent",
+     "shape": "generic",
+     "why": "names no durable target, fulfilled by the very next call \u2014 every ghost M3.7 found on a real project was one of these"
+    },
+    {
+     "uuid": "24000000-0000-4000-8000-000000000005",
+     "state": "recorded",
+     "class": "micro-intent",
+     "shape": "generic",
+     "why": "names no durable target, fulfilled by the very next call \u2014 every ghost M3.7 found on a real project was one of these"
+    }
+   ]
+  },
+  {
+   "file": "25-fallback-honesty-a-true-work-claim.jsonl",
+   "session": "eeeeeeee-0025-4000-8000-000000000000",
+   "description": "fallback honesty: a TRUE work claim whose only evidence cannot be placed",
+   "expect": [
+    {
+     "uuid": "25000000-0000-4000-8000-000000000004",
+     "state": "unknown",
+     "class": "unparseable-evidence",
+     "shape": "edit",
+     "why": "TRUE claim, but the only evidence is an edit we cannot place \u2014 abstain, never warn"
+    }
+   ]
+  },
+  {
+   "file": "26-a-fabricated-claim-is-still-caught.jsonl",
+   "session": "eeeeeeee-0026-4000-8000-000000000000",
+   "description": "a fabricated claim is still caught beside plenty of unrelated real work",
+   "expect": [
+    {
+     "uuid": "26000000-0000-4000-8000-000000000008",
+     "state": "unsupported",
+     "class": "false-completed",
+     "shape": "edit",
+     "why": "three real actions in the turn, none of them on throttle.rs \u2014 nothing conflicts with the claim, we simply have no proof of it"
+    }
+   ]
+  },
+  {
+   "file": "27-a-true-marker-survives-a-turn-full.jsonl",
+   "session": "eeeeeeee-0027-4000-8000-000000000000",
+   "description": "a true marker survives a turn full of unrelated actions",
+   "expect": [
+    {
+     "uuid": "27000000-0000-4000-8000-000000000032",
+     "state": "supported",
+     "class": "monotonicity",
+     "shape": "cargo",
+     "why": "14 unrelated actions must not dilute a claim the arithmetic confirms"
+    }
+   ]
+  },
+  {
+   "file": "28-a-false-marker-is-still-caught-in.jsonl",
+   "session": "eeeeeeee-0028-4000-8000-000000000000",
+   "description": "a false marker is still caught in a turn full of unrelated actions",
+   "expect": [
+    {
+     "uuid": "28000000-0000-4000-8000-000000000032",
+     "state": "contradicted",
+     "class": "monotonicity",
+     "shape": "cargo",
+     "why": "the counterweight: noise must not dilute a real catch either"
+    }
+   ]
+  },
+  {
+   "file": "29-an-aggregate-count-against-one-par.jsonl",
+   "session": "eeeeeeee-0029-4000-8000-000000000000",
+   "description": "an aggregate count against one partial run is not a contradiction",
+   "expect": [
+    {
+     "uuid": "29000000-0000-4000-8000-000000000004",
+     "state": "unknown",
+     "class": "aggregate-count",
+     "shape": "cargo",
+     "why": "measured false alarm from M3.8 adjudication: a developer totalling several suites while we matched only one of them. The numbers disagree and the claim is still true \u2014 arithmetic must decline, not accuse"
+    }
+   ]
+  },
+  {
+   "file": "30-a-proposal-whose-target-is-touched.jsonl",
+   "session": "eeeeeeee-0030-4000-8000-000000000000",
+   "description": "a proposal whose target is touched later is pending, never a ghost",
+   "expect": [
+    {
+     "uuid": "30000000-0000-4000-8000-000000000002",
+     "state": "pending",
+     "class": "ghost-defeated",
+     "shape": "generic",
+     "why": "the next case edits that exact file without fulfilling the proposal. \u00a75c: a name match does not prove fulfilment, but it does disprove abandonment"
+    }
+   ]
+  },
+  {
+   "file": "31-the-later-work-that-defeats-case-3.jsonl",
+   "session": "eeeeeeee-0031-4000-8000-000000000000",
+   "description": "the later work that defeats case 31's ghost",
+   "expect": []
+  },
+  {
+   "file": "32-an-output-only-mention-does-not-de.jsonl",
+   "session": "eeeeeeee-0032-4000-8000-000000000000",
+   "description": "an output-only mention does not defeat a real ghost",
+   "expect": [
+    {
+     "uuid": "32000000-0000-4000-8000-000000000002",
+     "state": "dropped",
+     "class": "output-only-mention-ghost",
+     "shape": "generic",
+     "why": "\u00a75j: the NEXT case greps the tree and manifest.rs appears in the OUTPUT \u2014 its name scrolling past. Nobody ever acts on it. A mention is not an action, so this proposal is a real ghost, with the mention annotated on the receipt"
+    }
+   ]
+  },
+  {
+   "file": "33-the-output-only-mention-for-case-3.jsonl",
+   "session": "eeeeeeee-0033-4000-8000-000000000000",
+   "description": "the output-only mention for case 33, plus a different-spelling fulfillment",
+   "expect": [
+    {
+     "uuid": "33000000-0000-4000-8000-000000000004",
+     "state": "pending",
+     "class": "different-spelling-fulfillment",
+     "shape": "generic",
+     "why": "\u00a75j defeat-must: the edit's action-side text names backoff.rs under a different spelling; the proposal was acted on, so never a ghost"
+    }
+   ]
+  },
+  {
+   "file": "34-a-spelling-variant-rerun-supersede.jsonl",
+   "session": "eeeeeeee-0034-4000-8000-000000000000",
+   "description": "a spelling-variant rerun supersedes: the stale failure cannot convict",
+   "expect": [
+    {
+     "uuid": "34000000-0000-4000-8000-000000000006",
+     "state": "supported",
+     "class": "spelling-variant-supersession",
+     "shape": "generic",
+     "why": "A51 in the eval corpus: the claim quotes the long spelling of the FAILING first run; the clean rerun is spelled bare under a cwd. \u00a75i unifies them; the rerun governs; convict-must-not"
+    }
+   ]
+  },
+  {
+   "file": "35-an-asserts-failure-claim-is-suppor.jsonl",
+   "session": "eeeeeeee-0035-4000-8000-000000000000",
+   "description": "an asserts-failure claim is supported by its failing run",
+   "expect": [
+    {
+     "uuid": "35000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "asserts-failure-supported",
+     "shape": "cargo",
+     "why": "\u00a75o: a failing outcome supports an asserts-failure claim \u2014 the failure IS the desired result, and reading it as a confession was market-c3's mechanism in reverse"
+    }
+   ]
+  },
+  {
+   "file": "36-an-asserts-failure-claim-can-never.jsonl",
+   "session": "eeeeeeee-0036-4000-8000-000000000000",
+   "description": "an asserts-failure claim can never be convicted by its failing run",
+   "expect": [
+    {
+     "uuid": "36000000-0000-4000-8000-000000000004",
+     "state": "supported",
+     "class": "asserts-failure-not-convicted",
+     "shape": "generic",
+     "why": "\u00a75o both directions in one case: supported by the failure, and the failure cannot convict it"
+    }
+   ]
+  },
+  {
+   "file": "37-a-proposal-in-the-newest-session-p.jsonl",
+   "session": "eeeeeeee-0037-4000-8000-000000000000",
+   "description": "a proposal in the newest session \u2014 pending, never dropped",
+   "expect": [
+    {
+     "uuid": "37000000-0000-4000-8000-000000000002",
+     "state": "pending",
+     "class": "proposal-pending",
+     "shape": "generic",
+     "why": "newest session, no later work \u2014 silence does not yet mean anything"
+    }
+   ]
+  }
+ ]
+}

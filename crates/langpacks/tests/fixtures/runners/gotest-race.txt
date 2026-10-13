@@ -1,0 +1,68 @@
+=== RUN   TestCounterConcurrent
+==================
+WARNING: DATA RACE
+Read at 0x00c0000bc188 by goroutine 13:
+  example.com/capture/racy.(*Counter).Inc()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy.go:7 +0x90
+  example.com/capture/racy.TestCounterConcurrent.func1()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:16 +0x8c
+
+Previous write at 0x00c0000bc188 by goroutine 9:
+  example.com/capture/racy.(*Counter).Inc()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy.go:7 +0xa0
+  example.com/capture/racy.TestCounterConcurrent.func1()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:16 +0x8c
+
+Goroutine 13 (running) created at:
+  example.com/capture/racy.TestCounterConcurrent()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:13 +0x70
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x34
+
+Goroutine 9 (finished) created at:
+  example.com/capture/racy.TestCounterConcurrent()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:13 +0x70
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x34
+==================
+==================
+WARNING: DATA RACE
+Write at 0x00c0000bc188 by goroutine 14:
+  example.com/capture/racy.(*Counter).Inc()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy.go:7 +0xa0
+  example.com/capture/racy.TestCounterConcurrent.func1()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:16 +0x8c
+
+Previous write at 0x00c0000bc188 by goroutine 13:
+  example.com/capture/racy.(*Counter).Inc()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy.go:7 +0xa0
+  example.com/capture/racy.TestCounterConcurrent.func1()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:16 +0x8c
+
+Goroutine 14 (running) created at:
+  example.com/capture/racy.TestCounterConcurrent()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:13 +0x70
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x34
+
+Goroutine 13 (running) created at:
+  example.com/capture/racy.TestCounterConcurrent()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/racy/racy_test.go:13 +0x70
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x34
+==================
+    testing.go:1865: race detected during execution of test
+--- FAIL: TestCounterConcurrent (0.00s)
+=== RUN   TestCounterSerial
+--- PASS: TestCounterSerial (0.00s)
+FAIL
+FAIL	example.com/capture/racy	1.098s
+FAIL

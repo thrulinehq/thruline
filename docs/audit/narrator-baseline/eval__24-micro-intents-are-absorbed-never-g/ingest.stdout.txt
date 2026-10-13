@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__24-micro-intents-are-absorbed-never-g/store/ledger.db
+projects 1
+sessions 1
+lines    7 read · 0 already ingested
+events   7 new
+           assistant_text       2
+           tool_result          2
+           tool_use             2
+           user_msg             1
+unknown  none
+malformed none
+head     eval 4b10f0a1a0b0a29f20ba05c49bcb4d0ad6f868f648dd2c471f243a244fdfbb1f
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

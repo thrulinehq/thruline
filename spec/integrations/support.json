@@ -1,0 +1,360 @@
+{
+  "ast-grep": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "0.45.3",
+    "language_scope": "JavaScript direct eval and Rust unsafe-block structural patterns.",
+    "graph": "Syntax-tree rule matches; not a dependency graph.",
+    "required_inputs": [
+      "Reviewed local YAML rule, source paths, pinned scanner and entity diagnostics for directory scans."
+    ],
+    "evidence_limits": [
+      "Other language grammars/rules require separate qualification.",
+      "Structural matches do not establish runtime exploitability.",
+      "Bounded source audits retain active/unknown suppression effects; unsupported or unavailable source scope is unknown."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "cargo-deny": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "0.20.2",
+    "language_scope": "Rust Cargo dependency bans and source restrictions.",
+    "graph": "Cargo package inventory under accepted bans/sources policy.",
+    "required_inputs": [
+      "Cargo.toml, Cargo.lock, reviewed deny.toml and offline dependencies."
+    ],
+    "evidence_limits": [
+      "License/advisory rules are not covered by the guided bans/sources recipe.",
+      "A permitted dependency is not necessarily free of vulnerabilities."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "dependency-cruiser": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "18.2.0",
+    "language_scope": "JavaScript, JSX, TypeScript and TSX static module dependencies within the reviewed resolver configuration.",
+    "graph": "Resolved module imports/re-exports and recognized literal requires; cycle violations require an explicit rule.",
+    "required_inputs": [
+      "Reviewed dependency-cruiser config, explicit entry paths, tsconfig aliases when applicable, installed TypeScript/runtime and dependencies."
+    ],
+    "evidence_limits": [
+      "Computed dynamic loading and arbitrary framework/plugin resolution can leave the graph incomplete.",
+      "Exclude/doNotFollow boundaries and unresolved imports must be inspected; this is not a whole-project clean verdict.",
+      "Package dependency cycles and runtime execution cycles are different graph properties."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "knip": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "6.35.0",
+    "language_scope": "JavaScript/TypeScript reachability under explicit entry points.",
+    "graph": "Reachability candidates under Knip project/plugin configuration.",
+    "required_inputs": [
+      "Reviewed knip.json, actual entry points, project files, pinned reporter and runtime."
+    ],
+    "evidence_limits": [
+      "Dynamic/plugin usage outside the configured inventory is not proven unused.",
+      "No deletion or proof that code is unnecessary follows from a candidate."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "betterleaks": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "95237cf8eb4d8e9f67409595b245e674832992cf",
+    "language_scope": "Text secret-pattern candidates in selected local files.",
+    "graph": null,
+    "required_inputs": [
+      "Reviewed .betterleaks.toml and local binary; credential validation disabled."
+    ],
+    "evidence_limits": [
+      "Only fabricated-marker controls are historically exercised.",
+      "Remote credential validity and broad detection precision are not established.",
+      "Raw secret bodies are withheld; normalized locations and digests remain."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "cargo-mutants": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "27.1.0",
+    "language_scope": "Rust mutations against an accepted local test suite.",
+    "graph": null,
+    "required_inputs": [
+      "Buildable Cargo project, pinned Rust compiler/libraries, dependencies and reviewed test selection."
+    ],
+    "evidence_limits": [
+      "Equivalent/unviable mutations and timeouts are not successful test detection.",
+      "Excluded source and baseline failures limit the result.",
+      "A finite mutation sample cannot prove test completeness."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "playwright": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "1.63.0",
+    "language_scope": "Authored browser assertions against the configured isolated local application.",
+    "graph": null,
+    "required_inputs": [
+      "Pinned container/browser image, reviewed test/config files, application startup and actual data fixtures."
+    ],
+    "evidence_limits": [
+      "Only authored workflows are checked; broad usability and accessibility are not implied.",
+      "Network is limited to the isolated container loopback target.",
+      "Host broker RSS excludes browser, Docker daemon and VM totals."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "schemathesis": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "4.26.1",
+    "language_scope": "Configured HTTP operations and schema assertions.",
+    "graph": null,
+    "required_inputs": [
+      "Pinned container, reviewed OpenAPI schema, fixed bounded generation configuration and isolated application."
+    ],
+    "evidence_limits": [
+      "Omitted/skipped/errored operations remain incomplete.",
+      "Business invariants and multi-operation persistence need explicit behavioral tests."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "semgrep": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "1.176.0",
+    "language_scope": "Semgrep OSS local Python eval rule; other language/rule combinations require qualification.",
+    "graph": null,
+    "required_inputs": [
+      "Pinned isolated image, reviewed local rules, selected source paths and explicit --disable-nosem in the guided recipe."
+    ],
+    "evidence_limits": [
+      "Pro rules, whole-program analysis and broad security claims are excluded.",
+      "Errors, skipped files/rules and suppression effects limit completion. Legacy/default raw-line suppression can make coverage unknown; guided captures disable suppression explicitly."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "osv-scanner": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "2.5.1",
+    "language_scope": "Recognized crates.io versions in Cargo.lock against a dated offline advisory snapshot.",
+    "graph": "Package-version/advisory matches; no call graph.",
+    "required_inputs": [
+      "Cargo.lock, exact offline database bytes and provenance, pinned executable."
+    ],
+    "evidence_limits": [
+      "No exploitability, reachability, unknown-vulnerability or other-ecosystem claim.",
+      "Missing database and unrecognized inventory cannot produce a clean result.",
+      "No automatic Cargo dependency or API migration. Native advisory interval events are preserved; a selected upgrade still requires a build and independent behavior verification."
+    ],
+    "qualification": "Scoped development evidence exists; this candidate is not yet qualified.",
+    "execution_platform": "macOS arm64 host; container routes additionally require the pinned Linux image."
+  },
+  "ruff": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "0.16.7",
+    "language_scope": "Python .py/.pyi/notebook files selected by Ruff; F401 unused imports and F841 unused local variables.",
+    "graph": null,
+    "required_inputs": [
+      "Pinned Ruff executable, Python runtime and retained coverage wrapper; a nonempty Python source selection."
+    ],
+    "evidence_limits": [
+      "No whole-program correctness claim. Project configuration is deliberately not loaded; the accepted recipe explicitly chooses two rules.",
+      "Requested/selected file differences and symlinks remain incomplete. The wrapper is not an independent scanner.",
+      "Upstream safe/unsafe applicability is preserved. Scanning applies no fix."
+    ],
+    "qualification": "Implemented; real process and product qualification in progress.",
+    "execution_platform": "macOS arm64 bounded local worker; network denied."
+  },
+  "opengrep": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "1.30.0",
+    "language_scope": "Languages supported by the selected owned local rules; tested Python intrafile source-to-sink flow.",
+    "graph": "Intrafile calls/dataflow only; native source/intermediate/sink locations preserved.",
+    "required_inputs": [
+      "Pinned executable and private runtime cache; reviewed .thruline/semgrep.yml; nonempty applicable source."
+    ],
+    "evidence_limits": [
+      "Static potential flow does not establish exploitability. A separate behavior reproducer is required.",
+      "Opengrep and Semgrep results remain separate observations; shared rule identity is not independent confirmation.",
+      "Cross-file alpha is not enabled by this stable recipe. Configured exclusions and unsupported languages remain gaps."
+    ],
+    "qualification": "Implemented; native real execution captured; product qualification pending.",
+    "execution_platform": "macOS arm64 bounded local worker; network denied."
+  },
+  "infer": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "1.3.0",
+    "language_scope": "Explicit Java17 source files compiled by javac",
+    "graph": null,
+    "required_inputs": [
+      "Pinned Infer+javac and .thruline/infer.json compile contract"
+    ],
+    "evidence_limits": [
+      "Java17 selected javac capture; other build systems and languages remain unqualified.",
+      "Native observations remain advisory; independent accepted behavior checks must evaluate proposals."
+    ],
+    "qualification": "Product execution qualification pending.",
+    "execution_platform": "macOS arm64 bounded worker; no network"
+  },
+  "aider": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "0.86.0",
+    "language_scope": "Explicitly selected source context",
+    "graph": null,
+    "required_inputs": [
+      "Pinned runtime, explicit source selection, accepted task and local model11435"
+    ],
+    "evidence_limits": [
+      "Selected repository context; native edits and independent checks remain separate.",
+      "Native observations remain advisory; independent accepted behavior checks must evaluate proposals."
+    ],
+    "qualification": "Product execution qualification pending.",
+    "execution_platform": "macOS arm64 isolated optional runtime; local model only"
+  },
+  "openhands-sdk": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "1.47.0",
+    "language_scope": "Explicitly selected source context",
+    "graph": null,
+    "required_inputs": [
+      "Pinned runtime, explicit source selection, accepted task and local model11435"
+    ],
+    "evidence_limits": [
+      "SDK component only; persisted completion is not verified behavior.",
+      "Native observations remain advisory; independent accepted behavior checks must evaluate proposals."
+    ],
+    "qualification": "Product execution qualification pending.",
+    "execution_platform": "macOS arm64 isolated optional runtime; local model only"
+  },
+  "pr-agent": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "0.45.0",
+    "language_scope": "Explicitly selected source context",
+    "graph": null,
+    "required_inputs": [
+      "Pinned runtime, explicit source selection, accepted task and local model11436"
+    ],
+    "evidence_limits": [
+      "Local committed merge-base diff excludes unchanged files and dirty working-tree changes. Pinned tag package metadata says0.43.0.",
+      "Native observations remain advisory; independent accepted behavior checks must evaluate proposals."
+    ],
+    "qualification": "Product execution qualification pending.",
+    "execution_platform": "macOS arm64 isolated optional runtime; local model only"
+  },
+  "mini-swe-agent": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "2.4.6",
+    "language_scope": "Explicitly selected source context",
+    "graph": null,
+    "required_inputs": [
+      "Pinned runtime, explicit source selection, accepted task and local model11435"
+    ],
+    "evidence_limits": [
+      "Submitted, finished or limit-reached states never establish acceptance.",
+      "Native observations remain advisory; independent accepted behavior checks must evaluate proposals.",
+      "Native work edits a private captured workspace with protected Git/context mounts. Original source changes only after separate accepted proposal verification/apply. Whole-candidate qualification remains pending."
+    ],
+    "qualification": "Product execution qualification pending.",
+    "execution_platform": "macOS arm64 coordinator; pinned Linux arm64 native container with no network and private PID/IPC namespaces. Model requests pass through the exact local11435 mailbox broker."
+  },
+  "clippy": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "0.1.97",
+    "language_scope": "Compiler-backed Rust lint with explicit feature/target scope",
+    "graph": null,
+    "required_inputs": [
+      "Explicit selected sources, targets or recipe in .thruline/clippy.json"
+    ],
+    "evidence_limits": [
+      "The executable component comes from Rust1.97.1 official sources, separately pinned from R09 nightly HEAD. Only needless_return is selected."
+    ],
+    "qualification": "Final product qualification pending.",
+    "execution_platform": "macOS arm64 bounded local worker"
+  },
+  "joern": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "4.0.626",
+    "language_scope": "C property graph and cross-function dataflow query",
+    "graph": null,
+    "required_inputs": [
+      "Explicit selected sources, targets or recipe in .thruline/joern.json"
+    ],
+    "evidence_limits": [
+      "Selected C source and an owned query; unresolved methods and omitted inputs remain incomplete. Other frontends/query catalogs remain unqualified."
+    ],
+    "qualification": "Final product qualification pending.",
+    "execution_platform": "macOS arm64 bounded local worker"
+  },
+  "openrewrite": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "8.90.4",
+    "language_scope": "Named Java semantic migration across selected modules",
+    "graph": null,
+    "required_inputs": [
+      "Explicit selected sources, targets or recipe in .thruline/openrewrite.json"
+    ],
+    "evidence_limits": [
+      "Apache Java ChangeMethodName recipe8.90.4 with matching source artifacts; acquired8.92.1 is distinct. Broader classpaths and restricted modules remain gaps."
+    ],
+    "qualification": "Final product qualification pending.",
+    "execution_platform": "macOS arm64 bounded local worker"
+  },
+  "sonarqube": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "26.9.0.129388",
+    "language_scope": "Explicit source files supported by the pinned Community server analyzers",
+    "graph": null,
+    "required_inputs": [
+      "Pinned internal-network server, scanner8.1.0, protected local token and .thruline/sonarqube.json"
+    ],
+    "evidence_limits": [
+      "Completed asynchronous job and exact revision required. Scanner runs in a disposable internal-network service. Commercial features and mutable external servers are outside this recipe.",
+      "Broker cancellation alone does not establish remote analysis-task termination."
+    ],
+    "qualification": "Final product qualification pending.",
+    "execution_platform": "Local Docker service; no external network"
+  },
+  "megalinter": {
+    "schema": "thruline.tool-support.v1",
+    "version": 1,
+    "tool_version": "10.1.0",
+    "language_scope": "Python F401/F841 and YAML default yamllint rules",
+    "graph": null,
+    "required_inputs": [
+      "Pinned wrapper/analyzers and explicit .thruline/megalinter.json Advisor choice"
+    ],
+    "evidence_limits": [
+      "Ruff and yamllint only in this recipe. MegaLinter is the wrapper, not another independent scanner. Native YAML has no SARIF. Advisor remains optional advisory text.",
+      "Supported native fix requires separate isolated executor and frozen independent oracle."
+    ],
+    "qualification": "Final product qualification pending.",
+    "execution_platform": "macOS monitored broker and sandboxed analyzer children; optional localhost model"
+  }
+}

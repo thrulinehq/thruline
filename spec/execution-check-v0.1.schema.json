@@ -1,0 +1,650 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thrulinehq.com/spec/execution-check/v0.1",
+  "title": "ThruLine execution-check receipt",
+  "description": "The in-toto Statement carried inside a ThruLine receipt's DSSE envelope (BUILD-SPEC §8.1). DERIVED FROM THE PRODUCER, NOT FROM PROSE: every property, every required/optional split and every value domain below was read out of `crates/attest/src/statement.rs` (the serde types that ARE the wire format), `crates/cli/src/receipt_cmd.rs` (the only thing that populates them), and `crates/attest/src/verify.rs` (which decides what a well-formed receipt is). Where BUILD-SPEC §8.1's example disagrees with those, this schema follows the code and the disagreement is listed under `x-spec-disagreements` — consumers receive what the code emits. Held to the producer by `crates/attest/tests/spec_conformance.rs`.",
+  "x-stability": {
+    "version": "v0.1",
+    "what-v0.1-promises": "Only this: the property NAMES, the required/optional split, and the value domains below describe every receipt this build emits, and a receipt that fails this schema is a receipt `thruline verify` also refuses. Nothing more. Pin fixtures against it, and expect to re-pin.",
+    "what-may-still-change-without-a-major-version": [
+      "`predicate.claims`, `predicate.checks` and `predicate.verdicts` may gain properties. §8.1 lists check fields this build does not yet emit (stdout_hash, stderr_hash, duration_ms, reruns, deterministic, coverage_changed_lines_pct, test_tamper_findings) and a `materials` array on the predicate; when they arrive they arrive as new properties, and `additionalProperties: false` means a consumer pinned to v0.1 will REJECT such a receipt rather than ignore the new fields. That is deliberate: silent acceptance of a document you do not understand is how an unverified receipt gets read as verified.",
+      "`predicate.capture` is the least settled object in the document. §8.1 specifies `mechanism`, `ceiling`, `degraded` and `degraded_causes`; this build emits none of them and emits `capture_degraded`, `content_filters` and `git_env_digest` instead. Expect this object to change shape at v0.2.",
+      "`verdictEntry` has no `cause` for `unverifiable`. BUILD-SPEC §6 (amendment A-4.4) makes a named cause REQUIRED on every `unverifiable` verdict, drawn from a closed set; no code in this build produces one. When it lands, `cause` becomes a required property of any entry whose verdict is `unverifiable`, which is a breaking change to this document.",
+      "`predicate.promises` is `{open: [], fulfilled: []}` in every receipt this build emits — nothing populates it. Its element type is therefore asserted by nothing and may be re-specified.",
+      "`session.harness` is hardcoded to `claude-code` by the only producer, whatever harness actually ran. The enum below is §8.1's vocabulary, not a measured range."
+    ],
+    "what-will-not-change-inside-v0.1": [
+      "`predicateType` and this `$id`. Both were ruled by the operator on 2026-09-05 (docs/DECISIONS-PENDING.md D4). A verifier keys on `predicateType`; changing it invalidates every receipt already issued.",
+      "`verdict` is a required string and its domain is exactly `supported` / `unsupported` / `unverifiable`. See `x-unverifiable-may-not-collapse`."
+    ]
+  },
+  "x-unverifiable-may-not-collapse": "BUILD-SPEC §6: `unverifiable` must NEVER collapse into `supported`. This schema is load-bearing for that rule, not decorative about it. `crates/attest/src/verify.rs` decides how many verdicts are unverifiable by the string comparison `v.verdict == \"unverifiable\"` over a plain `String` field, so a verdict of `\"Unverifiable\"`, `\"unverified\"`, `\"ok\"`, `null`, or no verdict at all is counted as NOT unverifiable and the receipt reports `none left unverifiable` — the collapse, in the product's most visible sentence. The schema therefore makes `verdict` required, non-null, and closed over exactly three lowercase strings, and the conformance suite asserts each of those near-miss documents is refused.",
+  "x-spec-disagreements": [
+    "§8.1 predicate.capture specifies `mechanism`, `ceiling`, `degraded`, `degraded_causes`. The code emits `capture_degraded` (bool), `content_filters` (optional string) and `git_env_digest` (optional string). Schema follows the code.",
+    "§8.1 predicate specifies a `materials` array. No code produces it. Absent here.",
+    "§8.1 checks specify stdout_hash, stderr_hash, duration_ms, reruns, deterministic, coverage_changed_lines_pct, test_tamper_findings. The producer emits none of them (`reruns` and `deterministic` are columns in the ledger's `checks` table and are simply not carried into the receipt). Absent here.",
+    "§8.1's capture.sources example says `exec-shim`; the producer writes `exec-recorder`, which is the spelling §3.1's `source` vocabulary uses. Schema leaves `sources` open rather than pick a side.",
+    "§6.1 says to record which binding rule let evidence count, and `thruline_verify::VerdictRecord` carries a `binding` field for it — the receipt's `VerdictEntry` drops it. So a reader of a receipt cannot tell rule 1 (`check ran on the final tree`) from rule 2 (`the relaxation`). Absent here because it is absent there.",
+    "§8.1 shows `promises` as promise objects; the code's type is `Vec<String>` and is never populated."
+  ],
+  "type": "object",
+  "required": [
+    "_type",
+    "subject",
+    "predicateType",
+    "predicate"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "_type": {
+      "type": "string",
+      "const": "https://in-toto.io/Statement/v1"
+    },
+    "subject": {
+      "type": "array",
+      "minItems": 1,
+      "description": "What the receipt is about. `Statement::validate` refuses an empty list. `attest::verify` recomputes EVERY subject, not just the first.",
+      "items": {
+        "$ref": "#/$defs/subject"
+      }
+    },
+    "predicateType": {
+      "type": "string",
+      "const": "https://thrulinehq.com/attestation/execution-check/v0.1",
+      "description": "A verifier keys on this. A correctly signed statement of another type is a valid signature over a document this build does not understand."
+    },
+    "predicate": {
+      "$ref": "#/$defs/predicate"
+    }
+  },
+  "$defs": {
+    "subject": {
+      "type": "object",
+      "required": [
+        "name",
+        "digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "`git+<remote-or-path>`. The producer uses the local path, so it is not portable and is not verified against anything."
+        },
+        "digest": {
+          "type": "object",
+          "required": [
+            "gitTree"
+          ],
+          "description": "Open by design: in-toto permits further algorithms. `gitTree` is mandatory — a subject without one cannot be bound to a tree, and `Statement::validate` refuses it. `attest::verify` additionally REFUSES git's empty tree, which is byte-identical in every repository; that is a value check this schema cannot make without hardcoding a hash it would then have to keep true for both sha1 and sha256 repositories.",
+          "properties": {
+            "gitTree": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40,64}$"
+            },
+            "gitCommit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40,64}$"
+            }
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "required": [
+        "session",
+        "claims",
+        "checks",
+        "verdicts",
+        "promises",
+        "verifier",
+        "capture"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "session": {
+          "$ref": "#/$defs/session"
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claimEntry"
+          }
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/checkEntry"
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/verdictEntry"
+          }
+        },
+        "promises": {
+          "$ref": "#/$defs/promises"
+        },
+        "verifier": {
+          "$ref": "#/$defs/verifierInfo"
+        },
+        "capture": {
+          "$ref": "#/$defs/capture"
+        }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "id",
+        "harness",
+        "event_chain_head",
+        "event_count"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "harness": {
+          "type": "string",
+          "enum": [
+            "claude-code",
+            "codex",
+            "gemini",
+            "generic"
+          ],
+          "description": "§8.1's vocabulary. NOT a measured range: `receipt_cmd.rs` writes the literal `claude-code` regardless of which harness produced the session, so a Codex session yields a receipt that names Claude Code."
+        },
+        "model": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ended": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_chain_head": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "The head of the session's hash-chained event log, RECOMPUTED by the producer from ledger rows rather than read from a cache. This is what makes the receipt checkable against a ledger instead of merely self-consistent. `Statement::validate` refuses an empty one."
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Part of the chain's identity, not decoration: a PREFIX of a session verifies as a chain in its own right, so a matching head with a different count is a truncated session and `attest::verify` fails it."
+        }
+      }
+    },
+    "claimEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "text",
+        "asserted_by"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "description": "`thruline_claims::ClaimKind`, re-derived by the conformance suite rather than transcribed.",
+          "enum": [
+            "behavior_unchanged",
+            "build_ok",
+            "dependency_added",
+            "did_x",
+            "docs_updated",
+            "file_changed",
+            "lint_ok",
+            "migration_added",
+            "secrets_absent",
+            "task_complete",
+            "tests_pass",
+            "typecheck_ok"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "description": "The agent's own words. UNTRUSTED CONTENT: it is the transcript, and §0 principle 2 says the transcript is a hint. Never render it as if the product asserted it, and never let it reach a shell or a policy expression."
+        },
+        "asserted_by": {
+          "type": "object",
+          "required": [
+            "harness"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "checkEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "category",
+        "runner",
+        "argv_hash",
+        "env_hash",
+        "cwd_hash",
+        "input_tree_hash",
+        "exit_code",
+        "parsed",
+        "reexecuted"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reexecuted": {
+                "const": true
+              }
+            },
+            "required": [
+              "reexecuted"
+            ]
+          },
+          "then": {
+            "required": [
+              "container_image_digest"
+            ],
+            "description": "`attest::verify`: a bare boolean is a claim, not evidence. `reexecuted` is DERIVED from an exec event carrying the image digest inside the hash chain the receipt names, so it cannot be turned on after the fact without breaking the chain head."
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reexecuted": {
+                "const": false
+              }
+            },
+            "required": [
+              "reexecuted"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "container_image_digest"
+              ]
+            },
+            "description": "The inverse, or the digest is decorative: a check carrying an image digest and `reexecuted: false` is a record whose halves disagree about whether §7 ran. `attest::verify` fails it."
+          }
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "build",
+            "lint",
+            "test",
+            "typecheck"
+          ],
+          "description": "The four `CATEGORY_*` constants in `crates/verify/src/check.rs`. They are separate consts rather than an enum, so the conformance suite censuses the declaration site as well as importing them."
+        },
+        "runner": {
+          "type": "string",
+          "minLength": 1,
+          "description": "DELIBERATELY NOT ENUMERATED. The value is either `Runner::as_str` (nine public variants) or a name from `check.rs`'s private TOOL_TABLE (fifteen more). Half of that domain cannot be read from outside the crate, so enumerating it here would be transcription — the exact failure that cost this program two withdrawn constants. Consumers must treat an unrecognised runner as unrecognised, not as absent."
+        },
+        "argv_hash": {
+          "type": "string",
+          "description": "THE EMPTY STRING IS MEANINGFUL AND VALID. `fold.rs` reads these off the exec payload with an empty-string default, so a malformed or partial capture yields an empty hash. Empty means 'not recorded' — it can never equal a real hash, which is how an unrecorded value is kept from matching one."
+        },
+        "env_hash": {
+          "type": "string",
+          "description": "See `argv_hash`: the empty string is valid and means not recorded."
+        },
+        "cwd_hash": {
+          "type": "string",
+          "description": "See `argv_hash`: the empty string is valid and means not recorded."
+        },
+        "input_tree_hash": {
+          "type": "string",
+          "description": "§6.1's binding: the tree the check ran against. EMPTY WHEN NO SNAPSHOT COULD BE TAKEN, and that is a valid, honest record — an empty string can never equal a tree hash, so an unbound check can never be mistaken for a bound one. A schema that demanded a hash here would refuse the truthful record of a failed snapshot."
+        },
+        "exit_code": {
+          "type": "integer",
+          "description": "No minimum: `-1` is written when the capture layer could not read one."
+        },
+        "parsed": {
+          "type": "object",
+          "minProperties": 1,
+          "description": "§3.3's parsed block. NEVER `{}` and never null: a defaulted parsed block reads as a clean run, which is the exact collapse the product exists to catch. Three shapes are produced today — a tally (`tests_total`/`passed`/`failed`/`skipped`/`xfail`/`test_ids`/`duration_ms`), `{\"unverifiable\": {\"reason\", \"hint\"}}` when no parser recognised the runner, and `{\"exit_only\": true, \"bypass\": …}` for a §6.4 build/lint/typecheck check whose only evidence is its exit code. A re-executed check additionally carries a `reexec` object. The interior is left open because it is a union that is still growing; a consumer MUST branch on which keys are present and must not read a missing `failed` as zero."
+        },
+        "reexecuted": {
+          "type": "boolean"
+        },
+        "container_image_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{32,}$",
+          "description": "Present exactly when `reexecuted` is true. The bound is `attest::verify`'s own: a `sha256:` prefix and at least 32 hex characters."
+        }
+      }
+    },
+    "verdictEntry": {
+      "type": "object",
+      "required": [
+        "claim_id",
+        "verdict",
+        "verifier",
+        "evidence",
+        "reasons"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "unsupported",
+            "unverifiable"
+          ],
+          "description": "`thruline_verify::Verdict`. REQUIRED, non-null, and closed — see `x-unverifiable-may-not-collapse` at the root. A consumer that encounters a value outside this set must refuse the receipt, never default it."
+        },
+        "verifier": {
+          "type": "string",
+          "minLength": 1,
+          "description": "`<name>@<version>`, e.g. `tests_pass@1` — which code produced this verdict."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Check ids and event ids. The schema cannot say they resolve to anything: see `x-cannot-be-expressed`."
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Omitted when empty. Absent and empty mean the same thing here, and only here."
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/finding"
+          },
+          "description": "Omitted when empty. §6.7 / §6.8 detector output."
+        }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "required": [
+        "severity",
+        "detector",
+        "detail"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warn",
+            "fail"
+          ],
+          "description": "`thruline_verify::Severity`."
+        },
+        "detector": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The stable name a report refers to: `narrowed_run`, `assertion_weakened`, `tests_ran_before_final_edit`. Open by design — detectors are added often — so a consumer must render an unknown detector rather than drop it."
+        },
+        "path": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        }
+      }
+    },
+    "promises": {
+      "type": "object",
+      "required": [
+        "open",
+        "fulfilled"
+      ],
+      "additionalProperties": false,
+      "description": "BOTH ARRAYS ARE EMPTY IN EVERY RECEIPT THIS BUILD EMITS. `receipt_cmd.rs` constructs this by `Default::default()` and never populates it, so §10's promise reporting does not reach the receipt. The element type is `String` in the producer and is asserted by nothing.",
+      "properties": {
+        "open": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fulfilled": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verifierInfo": {
+      "type": "object",
+      "required": [
+        "thruline_version",
+        "mode",
+        "policy_hash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "thruline_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "local",
+            "clean-sandbox-reexec"
+          ],
+          "description": "Derived from the same lookup as `checks[].reexecuted`, so a receipt cannot say `clean-sandbox-reexec` with no re-executed check behind it."
+        },
+        "policy_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "REQUIRED, and the empty string is refused. The Rust type is an `Option<String>` that distinguishes three states, and `attest::verify` FAILS all but one: absent is a missing assertion (every session is judged under some policy, the shipped defaults included), empty is a producer that wrote a placeholder, and only a real digest is compared against the policy resolved on the verifying machine. 'No policy file' is itself a stated digest, never an empty string. This field being unbound is how a policy rewritten to its literal opposite once produced byte-identical `Verified.` output at exit 0."
+        }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "required": [
+        "sources",
+        "redactions_applied",
+        "capture_degraded"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "content_filters"
+            ]
+          },
+          "then": {
+            "properties": {
+              "capture_degraded": {
+                "const": true
+              }
+            },
+            "description": "`attest::verify`: a receipt that names content transforms and says capture was not degraded is a record disagreeing with itself about whether the tree hash names the bytes on disk."
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "degraded_causes"
+            ]
+          },
+          "then": {
+            "properties": {
+              "capture_degraded": {
+                "const": true
+              }
+            },
+            "description": "A stated cause with `capture_degraded: false` is a record disagreeing with itself."
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "capture_degraded": {
+                "const": true
+              }
+            },
+            "required": [
+              "capture_degraded"
+            ]
+          },
+          "then": {
+            "required": [
+              "degraded_causes"
+            ],
+            "description": "Degraded capture must say WHY. The defect this closes is a receipt that flips the flag and leaves a reader nothing to search for (Track Q's D18, Track R's F7)."
+          }
+        }
+      ],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Left open: the harness set grows, and §8.1's example (`exec-shim`) already disagrees with the producer (`exec-recorder`). MAY BE EMPTY, and an empty list is not evidence that nothing captured — it is the producer saying nothing."
+        },
+        "transcript_hash": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Never produced by this build."
+        },
+        "redactions_applied": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Hardcoded to 0 by the producer today, so a 0 here means 'not counted' as often as it means 'none applied'."
+        },
+        "capture_degraded": {
+          "type": "boolean",
+          "description": "§13. True when the session recorded degraded capture OR the subject tree was snapshotted under a content transform. §8.1 calls this field `degraded` and pairs it with a `degraded_causes` list; the list now exists and is REQUIRED to be non-empty when this is true, so a `true` here always carries a stated cause. (It did not until 2026-09-06: a session whose Stop hook never fired reached a green receipt, and then a true flag with nothing to search for.)"
+        },
+        "content_filters": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The `.gitattributes` content transforms in scope when the subject tree was snapshotted. Present exactly when they degrade capture. A clean filter breaks §0.3's tree binding at its root: git runs it on the way into the object database, so the tree names the FILTERED bytes while the working tree holds the originals."
+        },
+        "git_env_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "A digest of the git conditions the evidence was produced under, including settings that live OUTSIDE the tree and that no diff-based detector can reach. Absent only when git itself could not be run."
+        },
+        "degraded_causes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "description": "§8.1's `degraded_causes`. Each entry is a machine-readable token, a colon, and a sentence — `hook_events_missing: …`, `content_filters: …`. The token is what a consumer matches on; the sentence is what a person reads. The token set is OPEN by design: a consumer that meets an unknown cause must report it, never drop it, because a cause it does not recognise is still a reason the capture was incomplete."
+        }
+      }
+    },
+    "dsseEnvelope": {
+      "type": "object",
+      "description": "THE FILE ON DISK. `thruline receipt --out` writes this, not the statement: consumers open an envelope and must base64-decode `payload` to get a document matching the root of this schema. Kept in the same file because a consumer handed only the statement shape will guess wrong about the transport.",
+      "required": [
+        "payload",
+        "payloadType",
+        "signatures"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "payload": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Base64 (standard alphabet, padded) of the raw statement bytes. THE SIGNATURE COVERS THE RAW BYTES, not this encoding, via DSSE PAE: `DSSEv1 <len(type)> <type> <len(body)> <body>`, lengths in ASCII decimal bytes. A verifier that reconstructs PAE differently does not fail loudly — it fails as `signature invalid`, which reads as tampering."
+        },
+        "payloadType": {
+          "type": "string",
+          "const": "application/vnd.in-toto+json"
+        },
+        "signatures": {
+          "type": "array",
+          "minItems": 1,
+          "description": "At least one. An empty list satisfies 'all signatures are valid' vacuously, which is how an unsigned artifact gets treated as signed; `Envelope::verify` returns an error rather than a pass on an empty list.",
+          "items": {
+            "$ref": "#/$defs/signature"
+          }
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "required": [
+        "sig"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sig": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Base64 of the raw signature bytes. Ed25519 today."
+        },
+        "keyid": {
+          "type": "string",
+          "description": "`sha256:` of the raw public key bytes. A HINT ONLY — a verifier must still check the signature. Omitted when the signer supplied none."
+        }
+      }
+    }
+  },
+  "x-cannot-be-expressed": [
+    "REFERENTIAL INTEGRITY. Nothing here says `verdicts[].claim_id` names a claim in `claims`, or that `verdicts[].evidence` entries name checks in `checks`. A document with a verdict about a claim that is not present is schema-valid and meaningless. Consumers must resolve the ids themselves and treat a dangling one as an error, not as an absence.",
+    "COMPLETENESS. Nothing says every claim has a verdict. A receipt listing ten claims and zero verdicts is schema-valid, and `attest::verify`'s own verdict check passes it vacuously ('0 verdicts, none left unverifiable'). If you gate on verdicts, count the claims too.",
+    "HASH RELATIONSHIPS — all of them. That `session.event_chain_head` is the head of a real chain; that `event_count` matches it; that `subject.digest.gitTree` is a tree in the repository, or that it is not git's empty tree; that `argv_hash` is a digest of the recorded argv; that `container_image_digest` names the image a check actually ran in; that the DSSE signature verifies over the PAE of this payload; that `policy_hash` matches the policy on the verifying machine. Every one of these is a recomputation, and every one of them is why `thruline verify` exists. THIS SCHEMA IS NOT A VERIFIER: a document can satisfy every line of it and be a lie.",
+    "ORDERING. `checks` are in ledger insertion order and `claims`/`verdicts` are in extraction order, index-aligned with one another. JSON Schema cannot state that, and nothing in the producer promises it will hold — do not pair `claims[i]` with `verdicts[i]`; join on `claim_id`.",
+    "THE BINDING RULE. §6.1 lets a check count either because it ran on the final tree or because nothing relevant changed after it. Which rule applied is recorded in the ledger and dropped on the way into the receipt, so no field here can carry it.",
+    "THE CAUSE OF AN `unverifiable`. §6 (A-4.4) requires one, from a closed set, and nothing produces it. A consumer cannot tell `no_exec_capture` from `venv_shadow` from `out_of_repo_check` — only the free-text `reasons` array hints at it.",
+    "THE CAPTURE CEILING. §4.4.5's strata — what the PATH shim could never have seen for this session — are a property of the mechanism and §8.1 says the receipt must state them. This build states nothing, so absence of a finding in this document is NOT evidence that nothing was there to find.",
+    "THAT `text` IS SAFE. `claims[].text` is agent-authored prose reproduced verbatim. Escape it."
+  ]
+}

@@ -1,0 +1,121 @@
+# dist-workspace.toml — cargo-dist configuration.
+#
+# STATUS: `dist plan` has been run against this file with the pinned tool (see
+# RELEASING.md for the output). What is validated is the *plan*: the targets,
+# the artifacts and the generated CI. What is NOT validated is a release —
+# no tag has been pushed and the workflow has never executed on GitHub.
+
+[workspace]
+members = ["cargo:."]
+
+[dist]
+cargo-dist-version = "0.28.0"
+ci = "github"
+# The release workflow has additional Apple signing and private-to-public
+# publication gates. Keep these manual steps when dist regenerates metadata.
+allow-dirty = ["ci"]
+# The shell installer plus plain archives. "homebrew" stays absent until a real
+# tap exists — packaging/homebrew/ holds the formula template and RELEASING.md
+# has the tap step.
+# **No generated shell installer, on measured evidence.**
+#
+# `installers = ["shell"]` was set, and the installer it generated was read.
+# Its `verify_checksum` says, in the shipped script:
+#
+#     skipping sha256 checksum verification (it requires the 'sha256sum' command)
+#
+# and then installs the binary anyway. **macOS has no `sha256sum`** — it has
+# `shasum` — so on every Mac that script downloads a binary over the network,
+# announces that it is not checking it, and runs it. It also prints "no
+# checksums to verify" and proceeds when the checksum style is unset.
+#
+# `packaging/install.sh` is the published `curl | sh` path instead. It refuses:
+# no `SHA256SUMS` entry, no `shasum` **and** no `sha256sum`, or a mismatch, and
+# it exits without installing. An installer that verifies when it happens to be
+# able to is not an installer that verifies.
+#
+# Keeping both would also have meant two doors onto the same release, which is
+# how one of them goes stale. `crates/cli/tests/m6_release_paths.rs` pins the
+# remaining one to the artifact names `dist` actually emits.
+installers = []
+# cargo-dist adds README*, LICENSE* and CHANGELOG* to each archive on its own.
+# The third-party notices are not among them, so they are named here.
+include = ["THIRD_PARTY_NOTICES.md"]
+
+# Public downloads are the four platform binaries. Do not add cargo-dist's
+# separate source.tar.gz artifact to the release.
+source-tarball = false
+
+# `.tar.gz`, not the default `.tar.xz`. Every install path here extracts with
+# `tar -xzf` and the npx shim shells out to the same, and `xz` is not present
+# by default on a minimal container. The archive format is part of the install
+# path's contract, not a compression preference.
+unix-archive = ".tar.gz"
+
+# Four targets. Two changes from the previous list, both on evidence:
+#
+# 1. **Linux is musl, statically linked.** It was `-gnu`. The bench measured
+#    what a dynamically linked release costs: a binary built against glibc 2.41
+#    will not start on 2.36 — `libc.so.6: version 'GLIBC_2.39' not found` — and
+#    its instrument runs hit it directly, under an error string
+#    ("asciinema is not installed in the container") that named the wrong cause.
+#    The fix applied there was to build on the oldest target, which works and is
+#    a standing obligation to keep guessing right about every machine anyone
+#    will ever run the binary on. Static linking removes the obligation.
+#
+#    **Both Linux architectures are listed on purpose.** Static musl closes the
+#    libc half of that failure class, not the arch half: bench task images that
+#    pin `--platform=linux/amd64` cannot execute an aarch64 binary however it is
+#    linked. Publishing one and calling the class closed would be the same
+#    overstatement one layer up. A static musl
+#    binary has no libc to be wrong about. `crt-static` is on by default for
+#    these targets, and `packaging/build-musl.sh` refuses to emit an artifact
+#    `file` does not call `statically linked`.
+#
+# 2. **x86_64-apple-darwin is back.** It was excluded on real evidence — the
+#    default (ORT) build fails there with "ort-sys: no prebuilt binaries
+#    available for target x86_64-apple-darwin". That evidence was about the ORT
+#    build, and `default-features = false` below means no release build has ORT
+#    in it. The exclusion outlived its reason. It has still never been *run* on
+#    an Intel Mac, which RELEASING.md's preconditions now require before the
+#    first tag.
+targets = [
+    "aarch64-apple-darwin",
+    "x86_64-apple-darwin",
+    "x86_64-unknown-linux-musl",
+    "aarch64-unknown-linux-musl",
+]
+
+# Ship the no-ONNX build. Two reasons, both load-bearing:
+# 1. The `ort` build script may fetch ONNX Runtime binaries at compile time — a
+#    release artifact must not depend on an unpinned mid-build download.
+# 2. ORT has no musl build at all, so the Linux targets above could not be
+#    produced with it on.
+# Consequence, stated honestly everywhere: `annotate` and `eval` refuse in the
+# shipped binary and say why. Every truth-loop verb works.
+default-features = false
+
+# No self-updater: the README's stated position is that secure updates are a
+# binary-distribution obligation that has to be designed, not defaulted on.
+install-updater = false
+
+# The manual draft-release workflow stages exactly the four archives,
+# SHA256SUMS, public README, LICENSE.md, and THIRD_PARTY_NOTICES.md. Keep the earlier Sigstore/SBOM
+# workflow out of cargo-dist's generated release graph.
+
+# GitHub's Linux arm64 runners. Without this the aarch64 target is
+# cross-compiled from x86_64, and a cross-compiled musl binary is exactly the
+# artifact nobody would have run before publishing it.
+[dist.github-custom-runners]
+# **`global` is not optional here.** cargo-dist 0.28.0 defaults the plan, host
+# and announce jobs to `ubuntu-20.04`, and GitHub retired that runner label —
+# a job requesting it does not start. The generated workflow would have failed
+# on its very first job, before building anything, and the failure reads as an
+# infrastructure error rather than as a config one. Found by reading what
+# `dist generate` actually wrote.
+global = "ubuntu-latest"
+aarch64-unknown-linux-musl = "ubuntu-24.04-arm"
+x86_64-unknown-linux-musl = "ubuntu-latest"
+aarch64-apple-darwin = "macos-latest"
+# macos-13 was retired in December 2025. Keep an Intel host for this target.
+x86_64-apple-darwin = "macos-15-intel"

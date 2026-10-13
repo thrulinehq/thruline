@@ -1,0 +1,31 @@
+### Every third-party crate, with the licence it declares
+
+For a crate that declares a choice (`A OR B`), the licence text reproduced below
+is the first alternative listed in `about.toml`'s `accepted` order.
+
+| Crate | Version | Declared licence |
+| --- | --- | --- |
+{{#each crates}}
+| {{{package.name}}} | {{{package.version}}} | {{{license}}} |
+{{/each}}
+
+### Licences, by the text each crate ships
+
+{{#each overview}}
+- **{{{name}}}** (`{{{id}}}`): {{count}} crate(s)
+{{/each}}
+
+{{#each licenses}}
+#### {{{name}}} (`{{{id}}}`)
+
+Applies to:
+
+{{#each used_by}}
+- {{{crate.name}}} {{{crate.version}}}{{#if crate.repository}} — <{{{crate.repository}}}>{{/if}}
+{{/each}}
+
+~~~~~~
+{{{text}}}
+~~~~~~
+
+{{/each}}

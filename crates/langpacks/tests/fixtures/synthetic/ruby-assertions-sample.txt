@@ -1,0 +1,47 @@
+# ruby — a SMALL INVENTED SAMPLE of assertions, written for this repository.
+#
+# Every line below is made up for the public copy of ThruLine: invented
+# identifiers, invented file paths, no third-party source. It has the shapes a
+# ruby test suite uses, so `tests/corpus_ambiguity.rs` can check on any machine
+# that the classifier does not flag ordinary assertions as ambiguous. It is a
+# sample of nothing and proves no corpus figure; the recorded corpus
+# measurements live in `MEASUREMENTS.toml` and `tests/measured_constants.rs`.
+#
+# Format: <path>:<line><TAB><assertion text, with \\ \n \r \t escaped>.
+# Lines beginning with '#' are comments.
+ruby/sample_store/test/stack_test.rb:10	assert_equal 3, stack.size
+ruby/sample_store/test/cart_test.rb:17	assert queue.empty?
+ruby/sample_store/test/registry_test.rb:24	assert_not registry.has?("beta")
+ruby/sample_store/test/cache_test.rb:31	assert_nil cache.get("missing")
+ruby/sample_store/test/session_test.rb:38	assert_not_nil session.token
+ruby/sample_store/test/parser_test.rb:45	assert_equal "alpha", cart.first_item.name
+ruby/sample_store/test/handler_test.rb:52	assert_includes names, "gamma"
+ruby/sample_store/test/counter_test.rb:59	assert_not_includes names, "delta"
+ruby/sample_store/test/limiter_test.rb:66	assert_same first, second
+ruby/sample_store/test/buffer_test.rb:73	assert_not_equal left, right
+ruby/sample_store/test/stack_test.rb:80	assert_empty errors
+ruby/sample_store/test/cart_test.rb:87	assert_raises(ArgumentError) { stack.pop }
+ruby/sample_store/test/registry_test.rb:94	assert_equal :ready, job.status
+ruby/sample_store/test/cache_test.rb:101	assert_equal [1, 2, 3], values
+ruby/sample_store/test/session_test.rb:108	assert File.exist?(path)
+ruby/sample_store/test/parser_test.rb:115	assert_in_delta 2.5, price.amount, 0.001
+ruby/sample_store/test/handler_test.rb:122	assert_kind_of ReadyState, job.state
+ruby/sample_store/test/counter_test.rb:129	assert_equal "ok", handler.handle(request)
+ruby/sample_store/test/limiter_test.rb:136	assert_equal 0, counter.value
+ruby/sample_store/test/buffer_test.rb:143	refute validator.valid?("")
+ruby/sample_store/test/stack_test.rb:150	assert_not_same copy, original
+ruby/sample_store/test/cart_test.rb:157	assert_equal expected, actual
+ruby/sample_store/test/registry_test.rb:164	assert_predicate limiter, :allowed?
+ruby/sample_store/test/cache_test.rb:171	assert_equal "zz", formatter.pad("z", 2)
+ruby/sample_store/test/session_test.rb:178	assert_operator timer.elapsed, :>, 0
+ruby/sample_store/test/parser_test.rb:185	assert_equal 10, buffer.capacity
+ruby/sample_store/test/handler_test.rb:192	assert_match(/\\Aid-/, record.key)
+ruby/sample_store/test/counter_test.rb:199	assert_no_match(/secret/, output)
+ruby/sample_store/test/limiter_test.rb:206	assert_equal 42, answer.value
+ruby/sample_store/test/buffer_test.rb:213	assert_respond_to widget, :render
+ruby/sample_store/test/stack_test.rb:220	assert_instance_of Parser, factory.build
+ruby/sample_store/test/cart_test.rb:227	assert_equal({ a: 1 }, config.to_h)
+ruby/sample_store/test/registry_test.rb:234	assert_difference("Order.count", 1) do\n      place_order\n    end
+ruby/sample_store/test/cache_test.rb:241	assert_nothing_raised { parser.parse("1+2") }
+ruby/sample_store/test/session_test.rb:248	assert_equal ["a", "b"], tags.sort
+ruby/sample_store/test/parser_test.rb:255	assert_not queue.full?

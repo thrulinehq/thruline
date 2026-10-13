@@ -1,0 +1,17 @@
+task = "T-3-2"
+order = 30
+built_on_commit = "c42092b1"
+pinned_schema_digest = "schema_sha256_ce646279ffdd3719cc760cd18fd060325423979a09d6fe05c4134fab849a2381"
+migration_test = "crates/core/tests/examined_inputs_migration.rs"
+note = "What exactly was examined when a criterion was checked, so coverage is a set of named inputs rather than a feeling."
+
+tables = ["examination_inputs"]
+
+indexes = ["idx_examination_inputs_subject"]
+
+triggers = [
+  "examination_inputs_no_replace",
+  "examination_inputs_no_update",
+  "examination_inputs_no_delete",
+  "examination_inputs_subject_exists",
+]

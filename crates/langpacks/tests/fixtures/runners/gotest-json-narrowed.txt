@@ -1,0 +1,8 @@
+{"Time":"2026-09-05T03:08:45.386863+05:30","Action":"start","Package":"example.com/capture/allpass"}
+{"Time":"2026-09-05T03:08:45.623965+05:30","Action":"run","Package":"example.com/capture/allpass","Test":"TestAdd"}
+{"Time":"2026-09-05T03:08:45.629301+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestAdd","Output":"=== RUN   TestAdd\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:45.629465+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestAdd","Output":"--- PASS: TestAdd (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:45.630677+05:30","Action":"pass","Package":"example.com/capture/allpass","Test":"TestAdd","Elapsed":0}
+{"Time":"2026-09-05T03:08:45.630705+05:30","Action":"output","Package":"example.com/capture/allpass","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:45.634166+05:30","Action":"output","Package":"example.com/capture/allpass","Output":"ok  \texample.com/capture/allpass\t0.235s\n"}
+{"Time":"2026-09-05T03:08:45.634293+05:30","Action":"pass","Package":"example.com/capture/allpass","Elapsed":0.247}

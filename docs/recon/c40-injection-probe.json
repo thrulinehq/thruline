@@ -1,0 +1,48 @@
+{
+  "probe": "C4.0 — the rescue-injection and continuation-surface probe",
+  "date": "2026-08-13",
+  "supersedes_nothing": "A166's delivery finding stands; this probe adds the attention measurement A166 explicitly refused to assume",
+  "claude_code": {
+    "version": "2.1.227",
+    "continuation_flags_measured": {
+      "-r, --resume [value]": "resume a conversation by session ID, or interactive picker",
+      "-c, --continue": "continue the most recent conversation",
+      "--fork-session": "when resuming, create a new session ID",
+      "--session-id <uuid>": "use a specific session ID (must be a valid UUID)",
+      "--append-system-prompt <prompt>": "append a system prompt to the default",
+      "--settings <file-or-json>": "load additional settings"
+    },
+    "injection_surface": "SessionStart hook stdout: hookSpecificOutput.additionalContext",
+    "delivery": {
+      "measured": true,
+      "evidence": "the token appears in the session transcript as a hook_success attachment carrying additionalContext; re-measured on 2.1.227 with the C1 sensor installed globally"
+    },
+    "attention": {
+      "status": "observed once",
+      "measured": true,
+      "evidence": "prompted 'What is the probe token in your context? Reply with only the token.' — the model replied with exactly RESCUE-TOKEN-A172-PLUGH, so the injected text reached the model's working context, not merely the transcript",
+      "caveat_do_not_overclaim": "this is the EASIEST possible attention test: the prompt asked directly for the token. It proves the injected bytes are readable by the model. It does NOT prove a model will honor capsule constraints, respect a do-not-repeat list, or restate an objective unprompted. Those are C4.3's handshake checks and are measured there, per session, never assumed from this run.",
+      "specimens": 1
+    },
+    "coexistence": {
+      "measured": true,
+      "note": "the injection hook ran alongside the globally installed C1 sensor's own SessionStart appender; the sensor printed nothing to stdout (its absolute) and the injection was delivered intact — a rescue injection and the sensor can share the SessionStart slot"
+    }
+  },
+  "codex": {
+    "version": "codex-cli 0.146.0",
+    "surfaces_measured": {
+      "codex [PROMPT]": "optional user prompt to start the session — the prompt-file path",
+      "codex exec": "run non-interactively",
+      "codex resume --last": "resume a previous interactive session"
+    },
+    "injection_surface": "none — no hook-equivalent context injection is exposed; the capsule reaches codex as a prompt file or clipboard, exactly as ADAPTER-CAPABILITIES.md states",
+    "attention": "not measured for codex; no claim is made"
+  },
+  "binding_rule": "the capability matrix is the only authority for what rescue offers. A surface not measured here is not offered by `thruline rescue`; the preview says so instead of degrading silently.",
+  "unmeasured_and_named": [
+    "whether a resumed (--resume) session re-fires SessionStart and therefore re-injects — untested",
+    "whether additionalContext survives a compaction boundary — untested",
+    "codex context-injection of any kind — no surface found to test"
+  ]
+}

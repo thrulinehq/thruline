@@ -1,0 +1,47 @@
+# java — a SMALL INVENTED SAMPLE of assertions, written for this repository.
+#
+# Every line below is made up for the public copy of ThruLine: invented
+# identifiers, invented file paths, no third-party source. It has the shapes a
+# java test suite uses, so `tests/corpus_ambiguity.rs` can check on any machine
+# that the classifier does not flag ordinary assertions as ambiguous. It is a
+# sample of nothing and proves no corpus figure; the recorded corpus
+# measurements live in `MEASUREMENTS.toml` and `tests/measured_constants.rs`.
+#
+# Format: <path>:<line><TAB><assertion text, with \\ \n \r \t escaped>.
+# Lines beginning with '#' are comments.
+java/sample-store/src/test/java/example/store/StackTest.java:10	assertEquals(3, stack.size())
+java/sample-store/src/test/java/example/store/CartTest.java:17	assertEquals("alpha", cart.firstItem().name())
+java/sample-store/src/test/java/example/store/RegistryTest.java:24	assertTrue(queue.isEmpty())
+java/sample-store/src/test/java/example/store/CacheTest.java:31	assertFalse(registry.has("beta"))
+java/sample-store/src/test/java/example/store/SessionTest.java:38	assertNull(cache.get("missing"))
+java/sample-store/src/test/java/example/store/ParserTest.java:45	assertNotNull(session.token())
+java/sample-store/src/test/java/example/store/HandlerTest.java:52	assertThat(report.total()).isEqualTo(12)
+java/sample-store/src/test/java/example/store/CounterTest.java:59	assertThat(names).containsExactly("a", "b")
+java/sample-store/src/test/java/example/store/LimiterTest.java:66	assertThat(result.isOk()).isTrue()
+java/sample-store/src/test/java/example/store/BufferTest.java:73	assertSame(first, second)
+java/sample-store/src/test/java/example/store/StackTest.java:80	assertNotEquals(left, right)
+java/sample-store/src/test/java/example/store/CartTest.java:87	assertEquals(0, counter.value())
+java/sample-store/src/test/java/example/store/RegistryTest.java:94	assertThrows(IllegalStateException.class, () -> stack.pop())
+java/sample-store/src/test/java/example/store/CacheTest.java:101	assertArrayEquals(new int[] {1, 2, 3}, values)
+java/sample-store/src/test/java/example/store/SessionTest.java:108	assertEquals(Status.READY, job.status())
+java/sample-store/src/test/java/example/store/ParserTest.java:115	assertTrue(list.contains("gamma"))
+java/sample-store/src/test/java/example/store/HandlerTest.java:122	assertFalse(list.contains("delta"))
+java/sample-store/src/test/java/example/store/CounterTest.java:129	assertEquals(2.5, price.amount(), 0.001)
+java/sample-store/src/test/java/example/store/LimiterTest.java:136	assertNotNull(parser.parse("1+2"))
+java/sample-store/src/test/java/example/store/BufferTest.java:143	assertEquals("ok", handler.handle(request))
+java/sample-store/src/test/java/example/store/StackTest.java:150	assertThat(timer.elapsed()).isGreaterThan(0)
+java/sample-store/src/test/java/example/store/CartTest.java:157	assertThat(order.lines()).hasSize(4)
+java/sample-store/src/test/java/example/store/RegistryTest.java:164	assertTrue(file.exists())
+java/sample-store/src/test/java/example/store/CacheTest.java:171	assertNull(node.next())
+java/sample-store/src/test/java/example/store/SessionTest.java:178	assertEquals(10, buffer.capacity())
+java/sample-store/src/test/java/example/store/ParserTest.java:185	assertThat(config.get("mode")).isEqualTo("fast")
+java/sample-store/src/test/java/example/store/HandlerTest.java:192	assertFalse(validator.isValid(""))
+java/sample-store/src/test/java/example/store/CounterTest.java:199	assertEquals(List.of(1, 2), pair.toList())
+java/sample-store/src/test/java/example/store/LimiterTest.java:206	assertTrue(limiter.tryAcquire())
+java/sample-store/src/test/java/example/store/BufferTest.java:213	assertNotSame(copy, original)
+java/sample-store/src/test/java/example/store/StackTest.java:220	assertEquals(expected, actual)
+java/sample-store/src/test/java/example/store/CartTest.java:227	assertThat(tags).doesNotContain("hidden")
+java/sample-store/src/test/java/example/store/RegistryTest.java:234	assertEquals(42, answer.value())
+java/sample-store/src/test/java/example/store/CacheTest.java:241	assertTrue(range.covers(5))
+java/sample-store/src/test/java/example/store/SessionTest.java:248	assertEquals("zz", formatter.pad("z", 2))
+java/sample-store/src/test/java/example/store/ParserTest.java:255	assertThat(lookup.find(7)).isPresent()

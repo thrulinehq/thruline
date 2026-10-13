@@ -1,0 +1,35 @@
+task = "P6-5B"
+order = 110
+built_on_commit = "8a1acba8"
+pinned_schema_digest = "schema_sha256_de2b05e56a94443dfecc594e763bf6fa2249e8bf030a0062fc83a90673dd7d4a"
+migration_test = "crates/core/tests/run_permission_migration.rs"
+note = """
+A person's permission for checks to run in one project folder, and every time
+it was taken back: one row per act, append-only, on its own hash chain. The
+file the run route writes under the project's `.thruline/` is a lookup cache
+of the latest row here, not the record.
+
+Built on the same schema as T-5-3 (`8fe2761a`; `8a1acba8`, P6-5 READY, carries
+byte-identical DDL, so the pinned digest is the same one 090-t-5-3.toml pins).
+The run lane landed after T-5-3 and R-2026-09-24-22, in the A2 merge of
+`p6/run-route`, so its order is after both; its own migration test reads the
+tables T-5-3 added on the same base from this directory rather than listing
+them. The lane predates this registry, and its hand-written
+`ADDED_BY_LATER_TASKS` entries were replaced by this file at the merge
+(R-2026-09-24-21).
+
+One table, one index, three append-only triggers, no ALTER of anything
+already there. Cost (A193): nothing of its own; the bill is the existing
+full-schema path's, and `thruline upgrade` is still the only thing that may
+pay it.
+"""
+
+tables = ["run_permissions"]
+
+indexes = ["idx_run_permissions_folder"]
+
+triggers = [
+  "run_permissions_no_replace",
+  "run_permissions_no_update",
+  "run_permissions_no_delete",
+]

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f4262c88-b37f-4384-b623-5531d4c69040" name="@Dev-MacBook-Pro 2026-09-05 05:59:00.408" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-05T05:59:00.303908Z" queuing="2026-09-05T05:59:00.303908Z" start="2026-09-05T05:59:00.303908Z" finish="2026-09-05T05:59:00.408641Z" />
+  <TestSettings name="default" id="4fe3eb23-198a-410f-8727-c2e3369c5e1d">
+    <Deployment runDeploymentRoot="_Dev-MacBook-Pro_2026-09-05_05_59_00.408" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="de71dff9-33c6-424b-835c-3900de4d4e71" testId="224c58b0-1cac-19ff-4d4c-0dcbdd603209" testName="SmallParcelUsesFlatBase" computerName="Dev-MacBook-Pro" duration="00:00:00.0016225" startTime="2026-09-05T05:59:00.3829620+00:00" endTime="2026-09-05T05:59:00.3894080+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="Passed" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="de71dff9-33c6-424b-835c-3900de4d4e71" />
+    <UnitTestResult executionId="c8d499e3-8b6a-49d7-b8d7-ff9ce3cc6190" testId="5b0b9c36-8cb0-7b93-74ae-58cef8d4eb36" testName="BoundaryAtFiveKilos" computerName="Dev-MacBook-Pro" duration="00:00:00.0001261" startTime="2026-09-05T05:59:00.3915130+00:00" endTime="2026-09-05T05:59:00.3917330+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="Passed" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="c8d499e3-8b6a-49d7-b8d7-ff9ce3cc6190" />
+    <UnitTestResult executionId="a8df8f2c-1c46-4cfc-ab8d-1c92892c65a1" testId="2de0ec80-d0e4-025f-5750-692b9852c526" testName="LargeParcelUsesPerKilo" computerName="Dev-MacBook-Pro" duration="00:00:00.0088927" startTime="2026-09-05T05:59:00.3917780+00:00" endTime="2026-09-05T05:59:00.4008240+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="Failed" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="a8df8f2c-1c46-4cfc-ab8d-1c92892c65a1">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;30.00&gt;. Actual:&lt;29.50&gt;. </Message>
+          <StackTrace>   at Shipping.MSTest.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/ShippingTests.cs:line 19
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0352c9ae-77f4-48b5-b232-6c592ddfbd80" testId="b20751cb-8c57-6023-a0d9-5d3460e9a218" testName="InternationalSurcharge" computerName="Dev-MacBook-Pro" duration="00:00:00.0000000" startTime="2026-09-05T05:59:00.4009580+00:00" endTime="2026-09-05T05:59:00.4010650+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="NotExecuted" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="0352c9ae-77f4-48b5-b232-6c592ddfbd80" />
+    <UnitTestResult executionId="f4fe1572-c77e-407f-bf0a-7369611ae4da" testId="0688a05e-e739-3574-905f-e9190fe287e2" testName="OversizeRejectsHeavyParcel" computerName="Dev-MacBook-Pro" duration="00:00:00.0002490" startTime="2026-09-05T05:59:00.4011550+00:00" endTime="2026-09-05T05:59:00.4014500+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="Failed" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="f4fe1572-c77e-407f-bf0a-7369611ae4da">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue failed. </Message>
+          <StackTrace>   at Shipping.MSTest.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/ShippingTests.cs:line 26
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c66f505e-cd49-4b7e-b81c-2708b951772a" testId="49e2432d-dfec-8055-ab5d-2ba13abb1e50" testName="OversizeThreshold (31,True)" computerName="Dev-MacBook-Pro" duration="00:00:00.0001699" startTime="2026-09-05T05:59:00.4014960+00:00" endTime="2026-09-05T05:59:00.4038880+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="Passed" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="c66f505e-cd49-4b7e-b81c-2708b951772a" />
+    <UnitTestResult executionId="a5238a3e-539c-40f4-9b8c-23e4654f7da8" testId="20536c12-1047-8ed1-7b44-a07f697cf957" testName="OversizeThreshold (30,False)" computerName="Dev-MacBook-Pro" duration="00:00:00.0001406" startTime="2026-09-05T05:59:00.4039270+00:00" endTime="2026-09-05T05:59:00.4043850+00:00" testType="13CDC9D9-DDB5-4fa4-A97D-D965CCFC6D4B" outcome="Passed" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" relativeResultsDirectory="a5238a3e-539c-40f4-9b8c-23e4654f7da8" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SmallParcelUsesFlatBase" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="224c58b0-1cac-19ff-4d4c-0dcbdd603209">
+      <Execution id="de71dff9-33c6-424b-835c-3900de4d4e71" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="SmallParcelUsesFlatBase" />
+    </UnitTest>
+    <UnitTest name="BoundaryAtFiveKilos" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="5b0b9c36-8cb0-7b93-74ae-58cef8d4eb36">
+      <Execution id="c8d499e3-8b6a-49d7-b8d7-ff9ce3cc6190" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="BoundaryAtFiveKilos" />
+    </UnitTest>
+    <UnitTest name="LargeParcelUsesPerKilo" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="2de0ec80-d0e4-025f-5750-692b9852c526">
+      <Execution id="a8df8f2c-1c46-4cfc-ab8d-1c92892c65a1" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="LargeParcelUsesPerKilo" />
+    </UnitTest>
+    <UnitTest name="InternationalSurcharge" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="b20751cb-8c57-6023-a0d9-5d3460e9a218">
+      <Execution id="0352c9ae-77f4-48b5-b232-6c592ddfbd80" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="InternationalSurcharge" />
+    </UnitTest>
+    <UnitTest name="OversizeRejectsHeavyParcel" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="0688a05e-e739-3574-905f-e9190fe287e2">
+      <Execution id="f4fe1572-c77e-407f-bf0a-7369611ae4da" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="OversizeRejectsHeavyParcel" />
+    </UnitTest>
+    <UnitTest name="OversizeThreshold (31,True)" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="49e2432d-dfec-8055-ab5d-2ba13abb1e50">
+      <Execution id="c66f505e-cd49-4b7e-b81c-2708b951772a" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="OversizeThreshold (31,True)" />
+    </UnitTest>
+    <UnitTest name="OversizeThreshold (30,False)" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/debug/net9.0/shipping.mtptrx.dll" id="20536c12-1047-8ed1-7b44-a07f697cf957">
+      <Execution id="a5238a3e-539c-40f4-9b8c-23e4654f7da8" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-trx/bin/Debug/net9.0/Shipping.MtpTrx.dll" adapterTypeName="executor://MSTestExtension/3.6.4" className="Shipping.MSTest.ShippingRateTests" name="OversizeThreshold (30,False)" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="224c58b0-1cac-19ff-4d4c-0dcbdd603209" executionId="de71dff9-33c6-424b-835c-3900de4d4e71" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestEntry testId="5b0b9c36-8cb0-7b93-74ae-58cef8d4eb36" executionId="c8d499e3-8b6a-49d7-b8d7-ff9ce3cc6190" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestEntry testId="2de0ec80-d0e4-025f-5750-692b9852c526" executionId="a8df8f2c-1c46-4cfc-ab8d-1c92892c65a1" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestEntry testId="b20751cb-8c57-6023-a0d9-5d3460e9a218" executionId="0352c9ae-77f4-48b5-b232-6c592ddfbd80" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestEntry testId="0688a05e-e739-3574-905f-e9190fe287e2" executionId="f4fe1572-c77e-407f-bf0a-7369611ae4da" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestEntry testId="49e2432d-dfec-8055-ab5d-2ba13abb1e50" executionId="c66f505e-cd49-4b7e-b81c-2708b951772a" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestEntry testId="20536c12-1047-8ed1-7b44-a07f697cf957" executionId="a5238a3e-539c-40f4-9b8c-23e4654f7da8" testListId="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8C84FA94-04C1-424b-9868-57A2D4851A1D" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="7" executed="6" passed="4" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="1" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

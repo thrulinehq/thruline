@@ -1,0 +1,435 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thrulinehq.com/schema/capsule/v1",
+  "title": "ThruLine Recovery Capsule v1",
+  "description": "The smallest sufficient, receipt-carrying context for continuing interrupted AI coding work in a fresh session. Open, vendor-neutral, and readable without ThruLine. Written to be read by strangers, because it will be.\n\nFour laws this schema encodes rather than describes:\n1. NO LINE WITHOUT PROVENANCE. Every line carries a provenance object. There is deliberately no 'unknown' provenance: a line that cannot say where it came from does not render, and its SECTION says why it is empty instead. (Adopted from the packet compiler, whose Origin enum has no no-origin variant, and from NORTHSTAR-v2's refusal of 'summaries without receipts'.)\n2. AN EMPTY SECTION STATES WHICH KIND OF EMPTY IT IS. 'No source object exists' and 'the source was queried and measured zero' are different facts about the world and are never collapsed into each other.\n3. THE CAPSULE STATES ITS OWN SCOPE. A capsule covers one named scope; where repository identity does not resolve, it says so rather than implying completeness it cannot have.\n4. UNKNOWN FIELDS SURVIVE A ROUND TRIP. A reader that does not understand a field preserves it rather than dropping it, so a newer producer never loses data through an older consumer.",
+  "type": "object",
+  "required": [
+    "capsule_version",
+    "generator",
+    "scope",
+    "binding",
+    "sections",
+    "secrets_policy"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "capsule_version": {
+      "const": 1,
+      "description": "The SCHEMA version, not an instance identity. The capsule mints no id of its own: its identity is the (scope, chain_position) pair it is bound to, because the chain position IS the snapshot id and there is no second identity."
+    },
+    "generator": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "compiled_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO-8601 UTC. Supplied by the caller, never read from a clock inside the compiler, so a capsule is reproducible from the same rows."
+    },
+    "scope": {
+      "type": "object",
+      "description": "What this capsule covers, stated as a fact. Law 3.",
+      "required": [
+        "kind",
+        "id",
+        "sessions",
+        "repo_identity"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "kind": {
+          "enum": [
+            "project",
+            "session"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sessions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "repo_identity": {
+          "type": "object",
+          "description": "Whether this scope resolves to a repository. When it does not, the capsule says so: sibling working roots are NEVER guessed from path prefixes.",
+          "required": [
+            "resolves"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "resolves": {
+              "type": "boolean"
+            },
+            "repo_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "note": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "description": "Freshness. The chain position this capsule was compiled at; a reader can ask whether it is still current without re-reading history.",
+      "required": [
+        "chain_position",
+        "event_total"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "chain_position": {
+          "type": "string"
+        },
+        "event_total": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "workspace_snapshot": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The C2 workspace snapshot this capsule was compiled beside, cited by digest. Null when none was taken \u2014 an absent snapshot is stated, never implied.",
+      "required": [
+        "id",
+        "taken_at",
+        "doc_sha256",
+        "complete"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "taken_at": {
+          "type": "string"
+        },
+        "doc_sha256": {
+          "type": "string"
+        },
+        "complete": {
+          "type": "boolean",
+          "description": "False means the working tree moved during capture and the snapshot must be taken again before it is trusted."
+        },
+        "head": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "description": "Ordered. A section is either filled or explicitly empty \u2014 never absent without a reason.",
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "secrets_policy": {
+      "type": "object",
+      "description": "What this capsule RECEIVED, never what is true of it. 'Secrets excluded by default' is a denylist promise and denylists fail silently toward disclosure, so this object records the TREATMENT: which detector ran, how many spans it masked, and which patterns fired. `scrubbed` remains and remains false \u2014 a producer that flips it true on the strength of a detector is making the promise this schema refuses. A consumer that needs a guarantee must obtain it elsewhere; a consumer that needs to decide whether to inject this into another model has what it needs here.",
+      "required": [
+        "scrubbed",
+        "statement",
+        "treatment"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "scrubbed": {
+          "type": "boolean",
+          "description": "Always false in the reference producer. Retained so a future producer that can actually PROVE absence has somewhere to say so, and so a reader never has to infer it from silence."
+        },
+        "statement": {
+          "type": "string"
+        },
+        "structural_exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Exclusions that hold by construction rather than by scrubbing \u2014 e.g. environment variable NAMES are recorded and values never are."
+        },
+        "treatment": {
+          "type": "object",
+          "description": "The detect-and-mask record. A masked span is replaced in place with a marker naming the detector that fired, so a reader can see where content was removed and by which rule.",
+          "required": [
+            "detector",
+            "masked",
+            "patterns",
+            "statement"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "detector": {
+              "type": "string",
+              "description": "Detector generation, e.g. 'v1' \u2014 an artifact says which rules saw it."
+            },
+            "masked": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Which detectors fired. A name states what was MATCHED (a shape), never what was decided (a live credential)."
+            },
+            "statement": {
+              "type": "string",
+              "description": "The sentence a reader acts on. Must not promise absence."
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": [
+        "key",
+        "title",
+        "lines"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Stable machine key. Readers key on this, never on the title.",
+          "enum": [
+            "objective",
+            "supported_with_receipts",
+            "caution",
+            "in_flight",
+            "operations_observed",
+            "where_the_work_stopped",
+            "uncertainties",
+            "freshness"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Human heading. May be re-worded by a producer's voice authority; the key may not."
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/line"
+          }
+        },
+        "empty": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Present exactly when lines is empty. Law 2.",
+          "required": [
+            "kind",
+            "reason"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "kind": {
+              "enum": [
+                "no_source_object",
+                "source_queried_and_empty",
+                "withheld"
+              ],
+              "description": "no_source_object: nothing in the model can produce this. source_queried_and_empty: the source exists and measured zero. withheld: content exists but policy holds it back \u2014 the reason must say which policy."
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "required": [
+        "text",
+        "provenance"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "origin": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The source object this line came from, e.g. 'node:<id>' or 'session:<id>'."
+        },
+        "axes": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The three proof axes, where the line has them. Never collapsed into one badge.",
+          "additionalProperties": true,
+          "properties": {
+            "evidence": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "currency": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "applicability": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Law 1. Exactly three kinds, and no fourth for 'we do not know' \u2014 that is what an empty section is for.",
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "properties": {
+            "kind": {
+              "const": "evidence_backed"
+            },
+            "receipts": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/receipt"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "receipts"
+          ]
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "user_note"
+            },
+            "author": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "inferred"
+            },
+            "basis": {
+              "type": "string",
+              "description": "The rule that produced this line, in plain words. An inferred line may state a POSITION in the record; it may not attach a meaning to one. 'The last claim the record backs is X' is a position; 'X was abandoned' is a meaning and requires proof, an operator attestation, or a labeled shadow proposal instead."
+            }
+          },
+          "required": [
+            "kind",
+            "basis"
+          ]
+        }
+      ]
+    },
+    "receipt": {
+      "type": "object",
+      "description": "A pointer back to the raw record. Every evidence-backed line carries at least one.",
+      "required": [
+        "event_id"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

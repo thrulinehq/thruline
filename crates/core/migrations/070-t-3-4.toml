@@ -1,0 +1,26 @@
+task = "T-3-4"
+order = 70
+built_on_commit = ""
+pinned_schema_digest = ""
+migration_test = ""
+note = """
+What became of a check's execution. NO migration test of its own: its
+compatibility evidence is the `added` assertion in every later-ordered task's
+migration test, which now reads this file. A `run_execution_migration.rs`
+pinning a fresh pre-T-3-4 schema fixture is owed, and the two empty fields
+above are that debt stated by name rather than left in a comment inside
+another task's test.
+"""
+
+tables = ["change_run_executions"]
+
+indexes = [
+  "idx_change_run_executions_change",
+  "idx_change_run_executions_run",
+]
+
+triggers = [
+  "change_run_executions_no_replace",
+  "change_run_executions_no_update",
+  "change_run_executions_no_delete",
+]

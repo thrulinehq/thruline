@@ -1,0 +1,1 @@
+const r=/[|&;<>()`\n]|\$\(|^\s*[A-Za-z_][A-Za-z0-9_]*=/,e=n=>"'"+String(n).replace(/'/g,"'\\''")+"'";function l({changeId:n,runner:c,scope:o}={}){if(!c)return null;const t=[c,...Array.isArray(o)?o:[]].join(" "),a=r.test(t);return["thruline check"].concat(a?["--shell"]:[]).concat(n?["--for-change "+n]:[]).concat(["--",a?e(t):t]).join(" ")}export{l as t};

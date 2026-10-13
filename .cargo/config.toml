@@ -1,0 +1,9 @@
+# The unit tests in `thruline-cli` parse the whole command tree (`Cli::try_parse_from`,
+# `Cli::command()`). In a debug build that recursion needs between 2 and 3 MiB, and
+# the test harness gives each test thread 2 MiB by default, so every test that parses
+# the tree overflows its stack once the tree has grown by a few verbs. The product
+# runs the parse on the main thread (8 MiB, and an optimised build uses far less),
+# so this is a test-thread setting and nothing else. It does not override a value
+# already in the environment.
+[env]
+RUST_MIN_STACK = { value = "8388608", force = false }

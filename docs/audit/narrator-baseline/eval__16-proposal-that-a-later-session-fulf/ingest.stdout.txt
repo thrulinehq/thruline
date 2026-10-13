@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__16-proposal-that-a-later-session-fulf/store/ledger.db
+projects 1
+sessions 1
+lines    2 read · 0 already ingested
+events   2 new
+           assistant_text       1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 3ec29428de45bfb2348c7de108de03cd51f36f6ccc659db4740839a9f6e63b7a
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

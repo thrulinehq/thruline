@@ -1,0 +1,9 @@
+---
+source: crates/core/tests/parse_fixtures.rs
+expression: reasons
+---
+[
+    "2:invalid JSON: EOF while parsing a string at line 1 column 142",
+    "6:invalid JSON: expected ident at line 1 column 2",
+    "8:truncated final line (interrupted session)",
+]

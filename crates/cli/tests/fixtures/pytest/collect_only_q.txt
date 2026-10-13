@@ -1,0 +1,7 @@
+test_pass.py::test_a
+test_pass.py::test_b
+test_pass.py::test_c
+test_pass.py::test_d
+test_pass.py::test_e
+
+5 tests collected in 0.00s

@@ -1,0 +1,17 @@
+---
+source: crates/core/tests/a201_why.rs
+expression: out
+---
+left open when the session ended
+  "I'll wire the new panel into `layout.rs` next."
+
+what happened
+  the session's final turn proposed this, and the record shows no tool
+  activity after it — a fact about where the record stops, not a
+  judgment of the work
+
+the receipt
+  promise      /home/dev/.claude/projects/-repo-app/aaaaaaaa-1111-4222-8333-444444444444.jsonl:2
+  session      aaaaaaaa-1111-4222-8333-444444444444
+  digest       -repo-app.json (written 2026-08-31T02:02:00.000Z, session-end hook)
+  id           spkp_91f368e86cecadbb34321d294a630d1da8d6f3c46a93dceb182086a42393e47c

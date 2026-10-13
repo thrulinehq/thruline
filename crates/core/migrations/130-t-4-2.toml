@@ -1,0 +1,31 @@
+task = "T-4-2"
+order = 130
+built_on_commit = "7768962f"
+pinned_schema_digest = "schema_sha256_962adc5422449383aa29caeac49b43fe5341543056fa93d0f94120f1799d3af1"
+migration_test = "crates/core/tests/finding_standing_migration.rs"
+note = """
+Where each thing a review found stands, one appended row per change of
+standing. Seven standings, none of them a claim verdict: a fix names its
+evidence and the version it was examined on, setting one aside carries a
+reason and an authority, and a "resolved" mark reaches "waiting for a
+re-check" and nothing further. A finding with no row is `open`; the migration
+inserts nothing, so an upgrade can never fabricate a standing.
+
+Built on T-4-1's schema (`7768962f`, whose DDL is T-4-1's). Landed with it in
+the A2 merge of `p4/review-repair`, directly after it.
+
+One table, one index, four triggers (one chain guard, three append-only), no
+ALTER of anything already there. Cost (A193): nothing of its own; the bill is
+the existing full-schema path's.
+"""
+
+tables = ["change_review_finding_standings"]
+
+indexes = ["idx_change_review_finding_standings_finding"]
+
+triggers = [
+  "change_review_finding_standings_chain",
+  "change_review_finding_standings_no_replace",
+  "change_review_finding_standings_no_update",
+  "change_review_finding_standings_no_delete",
+]

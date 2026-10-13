@@ -1,0 +1,14 @@
+# go — A SMALL INVENTED RESIDUE of assertions whose Strength changes when
+# string literals are stripped, written for this repository.
+#
+# Every line is made up for the public copy of ThruLine (invented identifiers,
+# invented paths, no third-party source). Each one carries a matcher word or
+# operator INSIDE a string literal, so reading the literal exposes a different
+# Strength than the stripped text does. `tests/corpus_ambiguity.rs` asserts every
+# record here is STILL ambiguous.
+#
+# Format: <path>:<line><TAB><stripped>-><exposed><TAB><assertion text, escaped>.
+go/samplestore/stack_test.go:20	Equality->Truthy	if countItems("/path/:id/static/*rest") != 2 {\n\t\tt.Fail()\n\t}
+go/samplestore/cart_test.go:29	Truthy->Equality	t.Errorf("<-sig.Wait() == %v want nothing (it should block)", v)
+go/samplestore/registry_test.go:38	Truthy->Equality	t.Errorf("<-done == %v want nothing (should block)", v)
+go/samplestore/cache_test.go:47	Equality->Truthy	if parseRoute("/a/:b/*c") != 3 {\n\t\tt.Fail()\n\t}

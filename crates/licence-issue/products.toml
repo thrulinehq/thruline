@@ -1,0 +1,47 @@
+# ThruLine licence issuer — the product mapping (T-DIST-6). Not a secret.
+#
+# PROVISIONAL. The plans ("pro", "team") are T-DIST-4's provisional set
+# (`PLANS` in crates/licence/src/lib.rs) and the one-year durations are
+# provisional with them: the founder has not ruled plans, prices or terms.
+#
+# PLACEHOLDER IDS. No payment provider account exists yet, so every `id` below
+# is a placeholder and matches nothing a real provider sends. Replace each with
+# the real id from the provider's dashboard: for Lemon Squeezy the VARIANT id,
+# for Paddle Billing the PRICE id (`pri_...`).
+#
+# CHOOSING A PROVIDER is a change to this one file: keep the chosen name in
+# `providers` and delete the other name and its products. A provider not named
+# in `providers` is refused at `/webhook/<name>`.
+#
+# An id that is not listed here is REFUSED. There is no default plan, and
+# there must never be one.
+#
+# `accept_test_mode = false` refuses every test-mode payment: a Lemon Squeezy
+# event marked test mode, and every event verified with a Paddle sandbox secret.
+
+providers = ["lemonsqueezy", "paddle"]
+accept_test_mode = false
+
+[[product]]
+provider = "lemonsqueezy"
+id = "PLACEHOLDER-lemonsqueezy-variant-pro-one-year"
+plan = "pro"
+days = 365
+
+[[product]]
+provider = "lemonsqueezy"
+id = "PLACEHOLDER-lemonsqueezy-variant-team-one-year"
+plan = "team"
+days = 365
+
+[[product]]
+provider = "paddle"
+id = "PLACEHOLDER-paddle-price-pro-one-year"
+plan = "pro"
+days = 365
+
+[[product]]
+provider = "paddle"
+id = "PLACEHOLDER-paddle-price-team-one-year"
+plan = "team"
+days = 365

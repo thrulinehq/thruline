@@ -1,0 +1,27 @@
+{"Time":"2026-09-05T03:08:14.476788+05:30","Action":"start","Package":"example.com/capture/mixed"}
+{"Time":"2026-09-05T03:08:14.71255+05:30","Action":"run","Package":"example.com/capture/mixed","Test":"TestDivOk"}
+{"Time":"2026-09-05T03:08:14.712753+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestDivOk","Output":"=== RUN   TestDivOk\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713453+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestDivOk","Output":"--- PASS: TestDivOk (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713497+05:30","Action":"pass","Package":"example.com/capture/mixed","Test":"TestDivOk","Elapsed":0}
+{"Time":"2026-09-05T03:08:14.713534+05:30","Action":"run","Package":"example.com/capture/mixed","Test":"TestDivByZero"}
+{"Time":"2026-09-05T03:08:14.713538+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestDivByZero","Output":"=== RUN   TestDivByZero\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713542+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestDivByZero","Output":"    mixed_test.go:14: Div(1,0) = 0, want 42\n","OutputType":"error"}
+{"Time":"2026-09-05T03:08:14.713561+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestDivByZero","Output":"--- FAIL: TestDivByZero (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713565+05:30","Action":"fail","Package":"example.com/capture/mixed","Test":"TestDivByZero","Elapsed":0}
+{"Time":"2026-09-05T03:08:14.71357+05:30","Action":"run","Package":"example.com/capture/mixed","Test":"TestName"}
+{"Time":"2026-09-05T03:08:14.713572+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestName","Output":"=== RUN   TestName\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713576+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestName","Output":"--- PASS: TestName (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713578+05:30","Action":"pass","Package":"example.com/capture/mixed","Test":"TestName","Elapsed":0}
+{"Time":"2026-09-05T03:08:14.713581+05:30","Action":"run","Package":"example.com/capture/mixed","Test":"TestNameUpper"}
+{"Time":"2026-09-05T03:08:14.713583+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestNameUpper","Output":"=== RUN   TestNameUpper\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713586+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestNameUpper","Output":"    mixed_test.go:26: Name() = \"mixed\", want \"MIXED\"\n","OutputType":"error"}
+{"Time":"2026-09-05T03:08:14.713629+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestNameUpper","Output":"--- FAIL: TestNameUpper (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713631+05:30","Action":"fail","Package":"example.com/capture/mixed","Test":"TestNameUpper","Elapsed":0}
+{"Time":"2026-09-05T03:08:14.713634+05:30","Action":"run","Package":"example.com/capture/mixed","Test":"TestSkippedHere"}
+{"Time":"2026-09-05T03:08:14.713638+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestSkippedHere","Output":"=== RUN   TestSkippedHere\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713641+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestSkippedHere","Output":"    mixed_test.go:31: no fixture on this machine\n"}
+{"Time":"2026-09-05T03:08:14.713644+05:30","Action":"output","Package":"example.com/capture/mixed","Test":"TestSkippedHere","Output":"--- SKIP: TestSkippedHere (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.713658+05:30","Action":"skip","Package":"example.com/capture/mixed","Test":"TestSkippedHere","Elapsed":0}
+{"Time":"2026-09-05T03:08:14.713661+05:30","Action":"output","Package":"example.com/capture/mixed","Output":"FAIL\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.714087+05:30","Action":"output","Package":"example.com/capture/mixed","Output":"FAIL\texample.com/capture/mixed\t0.235s\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:14.714164+05:30","Action":"fail","Package":"example.com/capture/mixed","Elapsed":0.237}

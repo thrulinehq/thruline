@@ -1,0 +1,11 @@
+=== RUN   TestColouredPass
+    ansiout_test.go:19: [32mexpected[0m vs [31mactual[0m
+--- PASS: TestColouredPass (0.00s)
+=== RUN   TestColouredFail
+    ansiout_test.go:26: [1mdiff:[0m
+        [31m- want: label[0m
+        [32m+ got:  label[0m
+--- FAIL: TestColouredFail (0.00s)
+FAIL
+FAIL	example.com/capture/ansiout	0.451s
+FAIL

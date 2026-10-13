@@ -1,0 +1,95 @@
+{
+  "note": "M3.15.2 dev partition. Grammars are mined from Round-6 diagnoses; all names, values, paths, and sentences are synthetic per A22.",
+  "cases": [
+    {
+      "id": "r6-u01",
+      "family": "directory-listing",
+      "claim": "The `ModuleSections` fan-out has produced most sections.",
+      "tool": "Bash",
+      "path": null,
+      "tail": "s51.html\ns52.html\ns53.html",
+      "detail": "=== ModuleSections present ===\ns51.html\ns52.html\ns53.html\ns54.html\ns55.html\ns56.html\ns57.html\ns58.html",
+      "must_contain": "ModuleSections present"
+    },
+    {
+      "id": "r6-u02",
+      "family": "compound-custody-receipt",
+      "claim": "Custody is exact: `ab12cd34` and 12,345 bytes agree in the manifest and local artifact.",
+      "tool": "Bash",
+      "path": null,
+      "tail": "checks complete",
+      "detail": "manifest: ab12cd34 / 12345 bytes\nuploaded: ab12cd34 / 12345 bytes\nlocal artifact: ab12cd34 / 12345 bytes",
+      "must_contain": "local artifact"
+    },
+    {
+      "id": "r6-u03",
+      "family": "mcp-structured-result",
+      "claim": "Preview interactions work: split 0%, flag sent and resolved, rescue done.",
+      "tool": "mcp__Preview__eval",
+      "path": null,
+      "tail": "{\"ok\":true}",
+      "detail": "{\"splitRemaining\":\"0%\",\"flagSent\":true,\"flagResolved\":true,\"rescueDone\":true}",
+      "must_contain": "flagResolved"
+    },
+    {
+      "id": "r6-u04",
+      "family": "task-record-plus-git",
+      "claim": "The `LaneAudit` rerun completed and no lane merged.",
+      "tool": "TaskNotification",
+      "path": null,
+      "tail": "completed",
+      "detail": "<status>completed</status><result>{\"audit\":\"LaneAudit\",\"agents_done\":2,\"agents_error\":8,\"merged_lanes\":0}</result>",
+      "must_contain": "merged_lanes"
+    },
+    {
+      "id": "r6-u05",
+      "family": "same-turn-test-and-edit",
+      "claim": "The `UrlScrubber` redacts invite tokens, queries, and fragments.",
+      "tool": "Bash",
+      "path": null,
+      "tail": "# tests 14\n# pass 14\n# fail 0",
+      "detail": "UrlScrubber: invite token redacted\nUrlScrubber: query redacted\nUrlScrubber: fragment redacted\n# tests 14\n# pass 14\n# fail 0",
+      "must_contain": "fragment redacted"
+    },
+    {
+      "id": "r6-u06",
+      "family": "task-recon-result",
+      "claim": "Recon completed with no `StopCondition` triggered.",
+      "tool": "TaskNotification",
+      "path": null,
+      "tail": "completed",
+      "detail": "<status>completed</status><result>{\"recon\":\"complete\",\"StopCondition\":[],\"authorization_sites\":\"covered\"}</result>",
+      "must_contain": "StopCondition"
+    },
+    {
+      "id": "r6-u07",
+      "family": "task-schema-comparison",
+      "claim": "`FixtureBuilder` writes `acme.recording.v1` while committed JSON writes `acme-recording-v1`.",
+      "tool": "TaskNotification",
+      "path": null,
+      "tail": "completed",
+      "detail": "<status>completed</status><result>{\"FixtureBuilder\":\"acme.recording.v1\",\"committed_json\":\"acme-recording-v1\",\"verdict\":\"mismatch\"}</result>",
+      "must_contain": "acme-recording-v1"
+    },
+    {
+      "id": "r6-u08",
+      "family": "named-assertion-plus-final-tap",
+      "claim": "The `GroundingContract` assertion proves the merged chunk contains the full value.",
+      "tool": "Bash",
+      "path": null,
+      "tail": "# tests 21\n# pass 21\n# fail 0",
+      "detail": "ok 11 - GroundingContract: merged chunk contains the full value\n# tests 21\n# pass 21\n# fail 0",
+      "must_contain": "merged chunk contains the full value"
+    },
+    {
+      "id": "r6-u09",
+      "family": "task-capability-verdict",
+      "claim": "`CapabilityA4` strict structured plan is built, with an enrichment caveat.",
+      "tool": "TaskNotification",
+      "path": null,
+      "tail": "completed",
+      "detail": "<status>completed</status><result>{\"capId\":\"CapabilityA4\",\"title\":\"strict structured plan\",\"verdict\":\"built\",\"caveat\":\"enrichment gated\"}</result>",
+      "must_contain": "\"verdict\":\"built\""
+    }
+  ]
+}

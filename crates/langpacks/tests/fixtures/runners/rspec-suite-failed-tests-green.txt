@@ -1,0 +1,12 @@
+....
+An error occurred in an `after(:suite)` hook.
+Failure/Error: Calc::Ledger.close!
+
+NameError:
+  uninitialized constant Calc::Ledger
+# ./spec/spec_helper.rb:11:in 'block (2 levels) in <top (required)>'
+
+
+Finished in 0.01902 seconds (files took 0.07726 seconds to load)
+4 examples, 0 failures, 1 error occurred outside of examples
+

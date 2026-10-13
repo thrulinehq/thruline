@@ -1,0 +1,13 @@
+failed OversizeRejectsHeavyParcel (8ms)
+  Assert.IsTrue failed. 
+    at Shipping.MSTest.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/ShippingTests.cs:26
+    at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+    
+
+Test run summary: Failed! - /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/bin/Debug/net9.0/Shipping.Mtp.dll (net9.0|arm64)
+  total: 3
+  failed: 1
+  succeeded: 2
+  skipped: 0
+  duration: 89ms

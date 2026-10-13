@@ -1,0 +1,82 @@
+[package]
+publish = false
+name = "thruline-sigstore"
+version = "0.1.0"
+edition = "2021"
+# Declared, unlike `sigstore`, whose every published version carries
+# rust_version = null. ThruLine pins its toolchain because byte-identical
+# rebuilds are the project's thesis; a dependency that can raise its MSRV in a
+# patch release without saying so is a hole in that.
+rust-version = "1.97"
+license.workspace = true
+description = "Sigstore keyless signing and offline bundle verification for ThruLine (BUILD-SPEC §8.1)."
+
+[features]
+# The core is OFFLINE and carries no transport. `crates/attest` depends on it
+# in this configuration, and `tests/no_network.rs` here proves the property
+# rather than asserting it — see docs/DECISION.md.
+default = []
+# Fulcio issuance, Rekor upload/fetch, TUF refresh. Adds the only HTTP client.
+net = ["dep:ureq"]
+# OAuth device flow for keyless signing. Implies `net`.
+oidc = ["net"]
+
+[dependencies]
+# --- ECDSA -----------------------------------------------------------------
+# p384 is NOT optional and this is measured, not assumed: the live Fulcio
+# intermediate and root are P-384 / ecdsa-with-SHA384. A P-256-only build
+# verifies leaves and then fails to check the chain above them.
+p256 = { version = "0.14.0", features = ["ecdsa", "pkcs8", "pem", "std"] }
+p384 = { version = "0.14.0", features = ["ecdsa", "pkcs8", "pem", "std"] }
+signature = "3.0.0"
+# Matches ~/thruline/Cargo.toml's workspace pin exactly. Holding this line is
+# why `sigstore-merkle` was not adopted: it would add sha2 0.10 beside it.
+sha2 = "0.11.0"
+
+# --- X.509 and ASN.1 -------------------------------------------------------
+x509-cert = { version = "0.3.0", features = ["pem", "std"] }
+der = { version = "0.8.1", features = ["oid", "alloc", "derive", "pem", "std"] }
+const-oid = { version = "0.10.2", features = ["db"] }
+
+# --- key encodings ---------------------------------------------------------
+pkcs8 = { version = "0.11.0", features = ["pem", "std"] }
+sec1 = { version = "0.8.1", features = ["pem", "std"] }
+spki = { version = "0.8.0", features = ["pem", "std"] }
+
+# --- the cosign.key envelope ----------------------------------------------
+# scrypt + NaCl secretbox (XSalsa20-Poly1305, 24-byte nonce). Not the ChaCha
+# variant: cosign's files would not open.
+scrypt = "0.12.0"
+crypto_secretbox = "0.1.1"
+
+# --- misc ------------------------------------------------------------------
+base64 = "0.22.1"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+hex = "0.4.3"
+thiserror = "2.0.19"
+time = { version = "0.3.55", features = ["parsing", "formatting", "macros"] }
+getrandom = { version = "0.4.3", features = ["sys_rng"] }
+rand_core = "0.10.1"
+
+# --- transport, feature-gated ---------------------------------------------
+# Blocking, no tokio — matching CLAUDE.md's "HTTP: ureq (blocking, simple) …
+# No tokio until the watcher daemon milestone."
+ureq = { version = "3.4.0", features = ["json"], optional = true }
+
+[dev-dependencies]
+tempfile = "3.27.0"
+base64 = "0.22.1"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+# scrypt is a deliberately slow KDF, and the key tests exercise all three cost
+# levels (up to N=131072). In an unoptimised build that alone is ~40 s of the
+# suite. Optimising just this package keeps `cargo test` usable without
+# changing what is tested.
+[profile.dev.package.scrypt]
+opt-level = 3
+
+[profile.test.package.scrypt]
+opt-level = 3

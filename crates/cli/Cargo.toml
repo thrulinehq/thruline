@@ -1,0 +1,103 @@
+[package]
+publish = false
+name = "thruline-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+# Inherited from the workspace, which is the one definition. cargo-dist reads it
+# from the crate it packages, not from the workspace root.
+repository.workspace = true
+description = "thruline: receipt-linked continuity for local AI coding sessions."
+
+[package.metadata.dist]
+# The CLI ships as a binary while Cargo publication remains forbidden.
+dist = true
+
+[[bin]]
+name = "thruline"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[features]
+default = ["ort"]
+# Forwards to thruline-core/ort. With it off, `annotate` and `eval` refuse with
+# a message that names the cause rather than failing to compile.
+ort = ["thruline-core/ort"]
+# §14's `thruline sync`, off by default: §18's answer is that the hosted sync
+# server does not ship in v1 and the client stays a reference implementation.
+# With the feature off the verb still exists and refuses, because a verb that is
+# simply missing reads as an oversight and gets implemented by the next person.
+sync = ["dep:thruline-sync"]
+# AI-REVIEW-OUT-OF-LAUNCH (founder ruling R-2026-09-28-20): the PR-Agent review
+# route, off by default. The launch build is the default build, so it lists no
+# PR-Agent recipe or source, refuses the recipe by name at every door, never
+# probes the review model's port, and serves `ai_review: false` so the screens
+# offer no AI review. Turning it on is a build choice (`--features ai-review`),
+# never a project file or an environment variable.
+ai-review = []
+
+[dependencies]
+base64 = "0.22.1"
+anyhow = "1.0.104"
+tempfile = "3.27.0"
+clap = { version = "4.6.4", features = ["derive"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.11.0"
+thruline-core = { version = "0.2.0", path = "../core", default-features = false }
+tracing = "0.1.44"
+tracing-subscriber = "0.3.23"
+walkdir = "2.5.0"
+# `change new` mints the id for a Change it opens. Same generator as the core,
+# same version, so an id minted at the CLI edge is indistinguishable from one
+# minted inside the engine.
+ulid = "3.0.0"
+thruline-ledger = { version = "0.2.0", path = "../ledger" }
+thruline-capture = { version = "0.2.0", path = "../capture" }
+thruline-verify = { version = "0.2.0", path = "../verify" }
+thruline-claims = { version = "0.2.0", path = "../claims" }
+thruline-explain = { version = "0.2.0", path = "../explain" }
+thruline-attest = { version = "0.2.0", path = "../attest" }
+thruline-reexec = { version = "0.2.0", path = "../reexec" }
+thruline-tui = { version = "0.2.0", path = "../tui" }
+# `thruline bench` loads the §12 corpora. The CLI is the measurer's door; the
+# forbidden direction is `verify` depending on anything, not this.
+thruline-bench = { version = "0.2.0", path = "../bench" }
+thruline-policy = { version = "0.2.0", path = "../policy" }
+# T-DIST-4: offline licence verification and the one entitlement table. A
+# pure crate that names no network crate (`crates/licence/tests/no_network.rs`).
+thruline-licence = { version = "0.2.0", path = "../licence" }
+thruline-sync = { version = "0.2.0", path = "../sync", optional = true }
+# ADV-run-security-6: the run route reads rustup's toolchain files and settings
+# as data. The version the core already depends on, so no new crate enters the
+# tree.
+toml = "1.1.4"
+# Serve-time projections look up a session's project in the execution store.
+# A193's process tests inspect schema-fingerprint rows directly; G2's gate
+# tests write a block-ledger row by hand to prove a refusal paid nothing.
+rusqlite = { version = "0.40.1", features = ["bundled"] }
+
+[target.'cfg(unix)'.dependencies]
+rustix = { version = "1.1.4", features = ["process", "fs"] }
+signal-hook = "0.3.18"
+
+[dev-dependencies]
+base64 = "0.22"
+# T-DIST-4: the process-level licence tests sign licences with a key pair
+# generated at run time. Both crates are already in Cargo.lock.
+ed25519-dalek = { version = "2.2.0", features = ["rand_core"] }
+rand_core = { version = "0.6.4", features = ["getrandom"] }
+thruline-licence = { version = "0.2.0", path = "../licence" }
+# T-DIST-6 acceptance A: a licence issued from a signed webhook fixture must be
+# one this binary installs. Path-only, no network crate (its own no_network test).
+thruline-licence-issue = { version = "0.2.0", path = "../licence-issue" }
+
+[build-dependencies]
+# The build script stamps the binary with a digest of the engine source it was
+# built from (P2b). Same crate the engine already hashes with; no new dependency
+# enters the tree, only a second place it is used.
+sha2 = "0.11.0"

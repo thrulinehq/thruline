@@ -1,0 +1,28 @@
+=== RUN   TestUpper
+=== RUN   TestUpper/a
+=== RUN   TestUpper/bc
+=== RUN   TestUpper/Zz
+=== RUN   TestUpper/q
+    subtests_test.go:15: Upper("q") = "Q", want "Q!"
+--- FAIL: TestUpper (0.00s)
+    --- PASS: TestUpper/a (0.00s)
+    --- PASS: TestUpper/bc (0.00s)
+    --- PASS: TestUpper/Zz (0.00s)
+    --- FAIL: TestUpper/q (0.00s)
+=== RUN   TestParallelGroup
+=== RUN   TestParallelGroup/one
+=== PAUSE TestParallelGroup/one
+=== RUN   TestParallelGroup/two
+=== PAUSE TestParallelGroup/two
+=== RUN   TestParallelGroup/three
+=== PAUSE TestParallelGroup/three
+=== CONT  TestParallelGroup/one
+=== CONT  TestParallelGroup/three
+=== CONT  TestParallelGroup/two
+--- PASS: TestParallelGroup (0.00s)
+    --- PASS: TestParallelGroup/one (0.00s)
+    --- PASS: TestParallelGroup/three (0.00s)
+    --- PASS: TestParallelGroup/two (0.00s)
+FAIL
+FAIL	example.com/capture/subtests	0.439s
+FAIL

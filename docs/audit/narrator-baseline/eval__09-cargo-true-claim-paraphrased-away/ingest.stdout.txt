@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__09-cargo-true-claim-paraphrased-away/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval c5794ca37944c0fd73139f6347a718fbb74d0d1a892bf6095bb61a33df5783b3
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

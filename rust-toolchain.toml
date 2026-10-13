@@ -1,0 +1,7 @@
+# Pinned, not floating: byte-identical rebuilds are the project's thesis
+# (CLAUDE.md invariant — `nodes`/`edges` must rebuild identically), so the
+# toolchain that produces them is part of the contract. Bump deliberately.
+[toolchain]
+channel = "1.97.1"
+components = ["clippy", "rustfmt"]
+profile = "minimal"

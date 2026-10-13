@@ -1,0 +1,24 @@
+=== RUN   TestOkBeforePanic
+--- PASS: TestOkBeforePanic (0.00s)
+=== RUN   TestNilDeref
+--- FAIL: TestNilDeref (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x100bb6748]
+
+goroutine 8 [running]:
+testing.tRunner.func1.2({0x100d0e4e8, 0x100d44f80})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x100d0e4e8?, 0x100d44f80?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+example.com/capture/panicking.Deref(...)
+	/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/panicking/panicking.go:3
+example.com/capture/panicking.TestNilDeref(0x54474086488?)
+	/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/panicking/panicking_test.go:14 +0x8
+testing.tRunner(0x54474086488, 0x100d2b3e8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	example.com/capture/panicking	0.480s
+FAIL

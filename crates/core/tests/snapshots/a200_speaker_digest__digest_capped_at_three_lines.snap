@@ -1,0 +1,8 @@
+---
+source: crates/core/tests/a200_speaker_digest.rs
+expression: rendered
+---
+THRULINE — what the previous session's own record shows (/home/dev/.claude/projects/-repo-app/aaaaaaaa-1111-4222-8333-444444444444.jsonl)
+- claimed, and no proof found in the record: "All 12 parser tests pass." — looked for a passing test or build run; the session record holds no tool events · receipt aaaaaaaa-1111-4222-8333-444444444444.jsonl:2 · why spkf_86576c00abaf
+- claimed, and no proof found in the record: "Committed the schema change on `main`." — looked for a git commit; the session record holds no tool events · receipt aaaaaaaa-1111-4222-8333-444444444444.jsonl:2 · why spkf_a1f32fc3516d
+- claimed, and no proof found in the record: "I've added retry logic to `client.rs`." — looked for an edit touching what the claim names; the session record holds no tool events · receipt aaaaaaaa-1111-4222-8333-444444444444.jsonl:2 · why spkf_9d01fa6cd9c0

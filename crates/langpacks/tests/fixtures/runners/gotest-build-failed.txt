@@ -1,0 +1,6 @@
+# example.com/broken/broken [example.com/broken/broken.test]
+broken/broken_test.go:12:16: undefined: undefinedHelper
+broken/broken_test.go:16:16: undefined: oops
+FAIL	example.com/broken/broken [build failed]
+ok  	example.com/broken/fine	0.186s
+FAIL

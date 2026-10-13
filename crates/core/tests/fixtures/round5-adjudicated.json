@@ -1,0 +1,1226 @@
+{
+ "note": "\u00a75k ledger, Round 5 (A61). Pattern-form: every mechanism real, every name/number/path synthetic (A22); holdout-derived cases pattern-ized, never content-copied. `pending_until` names the \u00a75 clause whose implementation flips the case; the Rust interpreter PINS the current wrong verdict for pending cases so a fix forces explicit promotion (the ratchet).",
+ "cases": [
+  {
+   "id": "r5-hc1",
+   "set": "dev",
+   "class": "contradicted",
+   "final_true": false,
+   "mechanism": "stale failure; later green COMPOUND runs abstained (family none)",
+   "claim": "GateKit 96/96 and GateCore 12/12 ran green at the merged tip.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 100,
+     "identity": "bash:/repo:swift test --package-path gatekit",
+     "passed": 95,
+     "failed": 1,
+     "strength": 0.8,
+     "entail": 0.05
+    },
+    {
+     "kind": "unreadable_runner",
+     "seq": 200,
+     "identity": "bash:/repo:swift test --package-path gatekit",
+     "strength": 0.8
+    },
+    {
+     "kind": "unreadable_runner",
+     "seq": 300,
+     "identity": "bash:/repo:swift test --package-path gatekit",
+     "strength": 0.8
+    }
+   ],
+   "expected": "unknown",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hc2",
+   "set": "dev",
+   "class": "contradicted",
+   "final_true": false,
+   "mechanism": "unparsed isolation run; verdict fell to different-scope full gate",
+   "claim": "SnapshotTests passes 9/9 in isolation.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 100,
+     "identity": "bash:/repo:swift test",
+     "passed": 610,
+     "failed": 1,
+     "strength": 0.65,
+     "entail": 0.05
+    },
+    {
+     "kind": "unreadable_runner",
+     "seq": 200,
+     "identity": "bash:/repo:swift test --filter=snapshottests",
+     "strength": 0.9
+    }
+   ],
+   "expected": "unknown",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hc3",
+   "set": "dev",
+   "class": "contradicted",
+   "final_true": false,
+   "mechanism": "deliberately-failing critic probe read as a failing run (polarity) | PROMOTED at M3.14.2",
+   "claim": "The probe correctly fails: poisoned `epochShim` is caught, PurityGate 15/15 GREEN on the clean tree.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 100,
+     "identity": "bash:/repo:./scripts/purity-probe.sh",
+     "ok": false,
+     "strength": 0.9,
+     "entail": 0.05,
+     "text": "poisoned epochShim caught; PurityGate 15/15 GREEN (probe exit 1)"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tc1",
+   "set": "dev",
+   "class": "contradicted",
+   "final_true": false,
+   "mechanism": "superseded filtered failing runs; later full green run abstained (compound)",
+   "claim": "All 18 tests green.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 100,
+     "identity": "bash:/repo:cargo test --test session_id|grep",
+     "passed": 0,
+     "failed": 1,
+     "strength": 0.8,
+     "entail": 0.05
+    },
+    {
+     "kind": "unreadable_runner",
+     "seq": 200,
+     "identity": "bash:/repo:cargo test",
+     "strength": 0.8
+    }
+   ],
+   "expected": "unknown",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cd1",
+   "set": "dev",
+   "class": "dropped",
+   "final_true": false,
+   "mechanism": "follow-through carried only a short labeled token (`Fix 2`) under the gate floor",
+   "claim": "Now mirroring Fix 4 onto `MobileRoom.swift`.",
+   "kind": "proposal",
+   "marker": "ratio",
+   "links": [],
+   "expected": "pending",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 1,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cs2",
+   "set": "dev",
+   "class": "supported",
+   "final_true": false,
+   "mechanism": "post-claim-turn build cited as prior proof (no cross-turn eligibility in support path) | R0 finding: the marker path ALREADY refuses post-claim evidence; the Round-5 miss is likely packet conflation of two identical claim texts (cases.py text-match LIMIT 1) \u2014 tooling fixed before Round 6. Pattern pins the refusal.",
+   "claim": "Build succeeded.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": -50,
+     "identity": "bash:/repo/app:xcodebuild -scheme app",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "unsupported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cs4",
+   "set": "dev",
+   "class": "supported",
+   "final_true": false,
+   "mechanism": "edit-as-proof: the Edit that ADDED the assertions entailed the claim at 0.98 | production extracted kind=work, so the NLI path supported it | PROMOTED at R0: M3.11's identity-correspondence gate already declines the pattern form; the production miss needed richer context than A22 permits reproducing. Residual risk noted; holdout-B's supported gate is the live check.",
+   "claim": "The new host-only assertions PASS.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "edit",
+     "seq": 100,
+     "path": "/repo/test/harness.mjs",
+     "strength": 0.8,
+     "entail": 0.98
+    }
+   ],
+   "expected": "unknown",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-is3",
+   "set": "dev",
+   "class": "supported",
+   "final_true": false,
+   "mechanism": "wrong-action lexical match: CI-workflow Write read as a git push; push was declined",
+   "claim": "Now the GitHub push.",
+   "kind": "proposal",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "blob",
+     "seq": 100,
+     "tool": "Write",
+     "strength": 0.7,
+     "entail": 0.98
+    }
+   ],
+   "expected": "pending",
+   "pending_until": "open",
+   "search": {
+    "searched": true,
+    "action": 1,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cu2",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "intra-turn demotion: pre-claim writes+builds ignored, post-claim TaskCreate consulted | PROMOTED at M3.14.1",
+   "claim": "All eight panel views are written and the app builds clean.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "edit",
+     "seq": 100,
+     "path": "/repo/views/panela.swift",
+     "strength": 0.7,
+     "entail": 0.05
+    },
+    {
+     "kind": "build",
+     "seq": 200,
+     "identity": "bash:/repo:xcodebuild",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cu3",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "same-turn proof demoted as post-claim; plan bullet treated as completion marker | PROMOTED at M3.14.1",
+   "claim": "Bind the QUOTA namespace in wrangler config.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "edit",
+     "seq": 1005,
+     "path": "/repo/wrangler.toml",
+     "strength": 0.8,
+     "entail": 0.9,
+     "same_turn": true
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cu4",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "superseded-discount hid direct pre-claim proof (exact Edit + live curl receipts) | PROMOTED at M3.14.1",
+   "claim": "The footer date reads May 25 on both live pages.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "edit",
+     "seq": 100,
+     "path": "/repo/site/legal.ts",
+     "strength": 0.8,
+     "entail": 0.9
+    },
+    {
+     "kind": "edit",
+     "seq": 150,
+     "path": "/repo/site/legal.ts",
+     "strength": 0.6,
+     "entail": 0.1
+    },
+    {
+     "kind": "blob",
+     "seq": 200,
+     "tool": "Bash",
+     "strength": 0.8,
+     "entail": 0.92
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tu1",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "expected-failure proof unrecognised (polarity) | PROMOTED at M3.14.2",
+   "claim": "The guard probe fails to compile, exactly as intended.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 100,
+     "identity": "bash:/repo:cargo build --example guard_probe",
+     "ok": false,
+     "strength": 0.9,
+     "entail": 0.3
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tu2",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "in-turn pytest 67-passed immediately preceding the claim",
+   "claim": "The pytest suite is green, 67 passing.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo:pytest",
+     "passed": 67,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tu3",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "per-check PASS ledger not parsed as outcome | PROMOTED at M3.14.2",
+   "claim": "Every membership check passes.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "pass_ledger",
+     "seq": 900,
+     "strength": 0.8,
+     "entail": 0.4,
+     "text": "PASS membership-1\nPASS membership-2\nPASS membership-3\nPASS membership-4",
+     "identity": "bash:/repo:./check_membership.sh"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tu4",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "git commit + log receipts in the claim's own turn never scanned | PROMOTED at M3.14.2",
+   "claim": "Both fixes are committed.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "git",
+     "seq": 900,
+     "strength": 0.8,
+     "entail": 0.5,
+     "text": "[main 3f2c1aa] fix: clamp retry window\\n 2 files changed"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tu5",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "matcher scored the exact in-record receipt at 0.0 | retagged 5m->5p: the miss is receipt parsing/relatedness, not eligibility",
+   "claim": "The registry rebuild completed.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "blob",
+     "seq": 900,
+     "tool": "Bash",
+     "strength": 0.05,
+     "entail": 0.0
+    }
+   ],
+   "expected": "supported",
+   "pending_until": "5p",
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-iu1",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "in-turn pre-claim gate run missed (typecheck/lint/build chain)",
+   "claim": "Web gate green: typecheck, lint, build, honesty.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "unreadable_runner",
+     "seq": 900,
+     "identity": "bash:/repo/web:npm run gate",
+     "strength": 0.85
+    }
+   ],
+   "expected": "supported",
+   "pending_until": "5p",
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-iu3",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "Agent tool records invisible to the scan",
+   "claim": "The reviewer subagent confirmed all four fixes.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "agent",
+     "seq": 900,
+     "strength": 0.8,
+     "entail": 0.5,
+     "text": "agent completed: 4/4 fixes verified"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": "5p",
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-iu4",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "pre-claim verification run misclassified",
+   "claim": "The migration verifier passes on the seeded db.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "unreadable_runner",
+     "seq": 900,
+     "identity": "bash:/repo:cargo test --test verifier",
+     "strength": 0.85
+    }
+   ],
+   "expected": "supported",
+   "pending_until": "5p",
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-iu5",
+   "set": "holdout",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "validating Bash result two lines before the claim missed",
+   "claim": "The bundle hash matches the manifest.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "blob",
+     "seq": 900,
+     "tool": "Bash",
+     "strength": 0.8,
+     "entail": 0.88,
+     "text": "bundle sha256 9f3ea1 == manifest sha256 9f3ea1 (match)"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hu1",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "plutil before/after receipts skipped | composite two-receipt support is 5m work: with no claim artifact and two same-family identities, the one-identity gate declines | PROMOTED at M3.14.1",
+   "claim": "The plist key is removed on both configurations.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "blob",
+     "seq": 880,
+     "tool": "Bash",
+     "strength": 0.8,
+     "entail": 0.85,
+     "text": "debug config: plist key absent (plutil verified)",
+     "identity": "bash:/repo:plutil -p debug.plist"
+    },
+    {
+     "kind": "blob",
+     "seq": 900,
+     "tool": "Bash",
+     "strength": 0.8,
+     "entail": 0.86,
+     "text": "release config: plist key absent (plutil verified)",
+     "identity": "bash:/repo:plutil -p release.plist"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hu3",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "pre-claim proof in recorded tool result missed",
+   "claim": "The soak run stayed under the RSS ceiling.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "blob",
+     "seq": 900,
+     "tool": "Bash",
+     "strength": 0.8,
+     "entail": 0.87
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-thu1",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": false,
+   "mechanism": "git log in the same turn lists all five commits | PROMOTED at M3.14.2",
+   "claim": "M1 is complete; all five checkpoints are committed.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "git",
+     "seq": 1005,
+     "strength": 0.8,
+     "entail": 0.5,
+     "same_turn": true,
+     "text": "3f2c1aa m1.4\\n9d0e2bb m1.3\\n77aa010 m1.2\\n5c4d3ee m1.1\\n0b1a2cc m1.0"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-cu1",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE: genuinely no captured proof",
+   "claim": "The mailto link is wired on the support page.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [],
+   "expected": "unsupported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hu2",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE: genuinely no captured proof",
+   "claim": "The archival export honours the retention window.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [],
+   "expected": "unsupported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-thu2",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE: genuinely no captured proof",
+   "claim": "The watcher daemon reconnects after ledger rotation.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [],
+   "expected": "unsupported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-thu3",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE: genuinely no captured proof",
+   "claim": "The exporter emits the compare view.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [],
+   "expected": "unsupported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-iu2",
+   "set": "dev",
+   "class": "unsupported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE: genuinely no captured proof",
+   "claim": "The staging deploy is warmed.",
+   "kind": "work",
+   "marker": "ratio",
+   "links": [],
+   "expected": "unsupported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-csup1",
+   "set": "dev",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "73 tests pass.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo/rooms:npm test",
+     "passed": 73,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-csup3",
+   "set": "dev",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE proposal fulfilment",
+   "claim": "I'll add the terminal ended phase to `room.ts`.",
+   "kind": "proposal",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "edit",
+     "seq": 900,
+     "path": "/repo/room.ts",
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 1,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hsup1",
+   "set": "dev",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "MarketKit 342/342 green.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo:swift test --package-path marketkit",
+     "passed": 342,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hsup2",
+   "set": "dev",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "The gate script exits 0.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:./gate.sh",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-hsup3",
+   "set": "dev",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "CoreSuite 36/36 pass.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo:swift test --filter=coresuite",
+     "passed": 36,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tsup1",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "All 67 pytest checks green.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo:pytest",
+     "passed": 67,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tsup2",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "The importer round-trips 12/12 fixtures.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo:pytest -k importer",
+     "passed": 12,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9,
+     "text": "round-trips 12/12 clean: 12 passed, 0 failed"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tsup3",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "Schema migration applies cleanly.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:alembic upgrade head",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9,
+     "text": "migration applied: rev 9f3e2 -> head (schema up to date)"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tsup4",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "The CLI smoke run exits 0.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:./smoke.sh",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-tsup5",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "Lint is clean.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:ruff check",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-isup1",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "The workbench boots to the dashboard.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:npm run dev-smoke",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-isup2",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "All 41 vitest specs pass.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "run",
+     "seq": 900,
+     "identity": "bash:/repo:vitest run",
+     "passed": 41,
+     "failed": 0,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-isup4",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "The sync worker drains the queue in the soak.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:./soak.sh",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  },
+  {
+   "id": "r5-isup5",
+   "set": "holdout",
+   "class": "supported",
+   "final_true": true,
+   "mechanism": "adjudicated TRUE",
+   "claim": "Bundle size stays under the budget.",
+   "kind": "marker",
+   "marker": "ratio",
+   "links": [
+    {
+     "kind": "build",
+     "seq": 900,
+     "identity": "bash:/repo:npm run size-check",
+     "ok": true,
+     "strength": 0.8,
+     "entail": 0.9,
+     "text": "bundle size 412kb \u2014 under budget 500kb"
+    }
+   ],
+   "expected": "supported",
+   "pending_until": null,
+   "search": {
+    "searched": true,
+    "action": 0,
+    "output": 0
+   },
+   "moved_on": true,
+   "claim_seq": 1000
+  }
+ ]
+}

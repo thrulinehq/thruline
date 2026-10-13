@@ -1,0 +1,473 @@
+# Build and draft handoff for one ThruLine release, run from thrulinehq/thruline,
+# the repository that holds the source. Manual only. This workflow never
+# publishes a GitHub Release and pushes nothing: it creates one DRAFT release for
+# an annotated tag that already exists here, holding exactly five assets (the
+# four CLI archives and SHA256SUMS), and a person reviews and publishes it.
+# Without the Apple secrets it still makes the draft, builds the macOS archives
+# unsigned, and says "not notarized" in the draft's notes.
+name: Prepare binary release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Cargo version without v (for example 0.1.1)"
+        required: true
+        type: string
+      dry_run:
+        description: "Build (sign and notarize when the Apple secrets are set); upload nothing"
+        required: false
+        default: true
+        type: boolean
+      confirm_sha:
+        description: "Full source commit SHA, required for a draft release"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prepare-release-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.validate.outputs.tag }}
+      notarize: ${{ steps.validate.outputs.notarize }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate version, source tag and signing secrets before any artifact upload
+        id: validate
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          CONFIRM_SHA: ${{ inputs.confirm_sha }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          APPLE_DEVELOPER_ID_P12_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_P12_BASE64 }}
+          APPLE_DEVELOPER_ID_P12_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_P12_PASSWORD }}
+          APPLE_NOTARY_KEY_P8_BASE64: ${{ secrets.APPLE_NOTARY_KEY_P8_BASE64 }}
+          APPLE_NOTARY_KEY_ID: ${{ secrets.APPLE_NOTARY_KEY_ID }}
+          APPLE_NOTARY_ISSUER_ID: ${{ secrets.APPLE_NOTARY_ISSUER_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+          import subprocess
+          import sys
+          import tomllib
+
+          def fail(message):
+              print(f"::error::{message}", file=sys.stderr)
+              raise SystemExit(1)
+
+          # The Apple secrets are all-or-nothing. All five: the macOS archives
+          # are signed and notarized. None: the draft is still made, the macOS
+          # archives are built unsigned, and the draft says "not notarized".
+          apple = (
+              "APPLE_DEVELOPER_ID_P12_BASE64",
+              "APPLE_DEVELOPER_ID_P12_PASSWORD",
+              "APPLE_NOTARY_KEY_P8_BASE64",
+              "APPLE_NOTARY_KEY_ID",
+              "APPLE_NOTARY_ISSUER_ID",
+          )
+          missing = [name for name in apple if not os.environ.get(name, "").strip()]
+          if missing and len(missing) != len(apple):
+              fail("Apple signing secrets are only partly set; missing: " + ", ".join(missing))
+          notarize = not missing
+          version = os.environ["RELEASE_VERSION"]
+          if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version):
+              fail("Version must be a stable major.minor.patch value without a v prefix")
+          with Path("Cargo.toml").open("rb") as source:
+              cargo_version = tomllib.load(source)["workspace"]["package"]["version"]
+          if version != cargo_version:
+              fail(f"Requested version {version} does not match Cargo.toml version {cargo_version}")
+          tag = "v" + version
+          dry_run = os.environ["DRY_RUN"] == "true"
+          if not dry_run:
+              source_sha = os.environ["GITHUB_SHA"]
+              confirmed = os.environ.get("CONFIRM_SHA", "").strip()
+              default_ref = "refs/heads/" + os.environ["DEFAULT_BRANCH"]
+              if os.environ["GITHUB_REPOSITORY"].lower() != "thrulinehq/thruline":
+                  fail("Draft releases are made only from thrulinehq/thruline")
+              if os.environ["GITHUB_REF"] != default_ref:
+                  fail("Draft builds must run on the default branch")
+              if not re.fullmatch(r"[0-9a-f]{40}", confirmed) or confirmed != source_sha:
+                  fail("confirm_sha must equal the full commit SHA being built")
+              head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
+              if head.returncode or head.stdout.strip() != source_sha:
+                  fail("Checkout does not match the confirmed source commit")
+              tag_ref = "refs/tags/" + tag
+              tag_type = subprocess.run(["git", "cat-file", "-t", tag_ref], capture_output=True, text=True)
+              if tag_type.returncode or tag_type.stdout.strip() != "tag":
+                  fail(f"{tag} must be an annotated source tag created by the user")
+              peeled = subprocess.run(["git", "rev-parse", tag_ref + "^{commit}"], capture_output=True, text=True)
+              if peeled.returncode or peeled.stdout.strip() != source_sha:
+                  fail(f"Annotated source tag {tag} does not point to the confirmed commit")
+              paid_gate = Path("crates/licence/src/lib.rs").read_text()
+              if not re.search(r"^pub const PAID_GATE: bool = true;", paid_gate, re.MULTILINE):
+                  fail("Confirmed source commit does not enable the paid gate")
+              if Path("crates/licence/src/trial.rs").exists() or "Source::Trial" in paid_gate:
+                  fail("Confirmed source commit still contains the removed approval trial")
+          # No release may exist yet for this tag. `gh release view` also finds
+          # drafts when the token can see them; the draft job asks again with a
+          # write token just before it creates the draft.
+          tag_release = subprocess.run(
+              ["gh", "release", "view", tag, "--repo", os.environ["GITHUB_REPOSITORY"]],
+              capture_output=True, text=True,
+          )
+          if tag_release.returncode == 0:
+              fail(f"Release {tag} already exists in this repository")
+          if "release not found" not in tag_release.stderr.lower():
+              fail("Could not check for an existing release: " + tag_release.stderr.strip()[:200])
+
+          with Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
+              print(f"tag={tag}", file=output)
+              print(f"notarize={'true' if notarize else 'false'}", file=output)
+          print(f"Preflight passed for {tag}; dry_run={dry_run}; notarize={notarize}")
+          PY
+      - name: Install pinned dependency audit tool
+        run: cargo install cargo-deny --version 0.20.2 --locked
+      - name: Block release on dependency policy
+        run: |
+          set -euo pipefail
+          cargo deny check
+      - name: Generate private CycloneDX SBOM for the shipped CLI
+        run: |
+          set -euo pipefail
+          cargo install cargo-cyclonedx --version 0.5.9 --locked
+          cargo cyclonedx \
+            --manifest-path crates/cli/Cargo.toml \
+            --no-default-features \
+            --target all \
+            --describe binaries \
+            --all \
+            --format json
+          git diff --exit-code -- Cargo.lock
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import shutil
+
+          generated = list(Path("crates/cli").glob("*.cdx.json"))
+          if len(generated) != 1:
+              raise SystemExit(f"Expected one CLI CycloneDX JSON file, found {len(generated)}")
+          document = json.loads(generated[0].read_text(encoding="utf-8"))
+          if document.get("bomFormat") != "CycloneDX" or not document.get("components"):
+              raise SystemExit("Generated CLI SBOM is not a nonempty CycloneDX document")
+          private = Path("private-sbom")
+          private.mkdir()
+          shutil.copyfile(generated[0], private / "thruline-cli.cdx.json")
+          PY
+      - name: Retain private CycloneDX SBOM for the operator
+        if: ${{ !inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-cyclonedx-sbom
+          path: private-sbom/
+          if-no-files-found: error
+          retention-days: 14
+
+  build:
+    needs: preflight
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: aarch64-apple-darwin
+            runner: macos-15
+            platform: macos
+            host_arch: arm64
+          - target: x86_64-apple-darwin
+            runner: macos-15-intel
+            platform: macos
+            host_arch: x86_64
+          - target: aarch64-unknown-linux-musl
+            runner: ubuntu-24.04-arm
+            platform: linux
+            host_arch: aarch64
+          - target: x86_64-unknown-linux-musl
+            runner: ubuntu-latest
+            platform: linux
+            host_arch: x86_64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Check runner architecture
+        env:
+          EXPECTED_ARCH: ${{ matrix.host_arch }}
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "$EXPECTED_ARCH"
+      - name: Check Apple secrets before compiling
+        if: ${{ matrix.platform == 'macos' && needs.preflight.outputs.notarize == 'true' }}
+        env:
+          APPLE_DEVELOPER_ID_P12_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_P12_BASE64 }}
+          APPLE_DEVELOPER_ID_P12_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_P12_PASSWORD }}
+          APPLE_NOTARY_KEY_P8_BASE64: ${{ secrets.APPLE_NOTARY_KEY_P8_BASE64 }}
+          APPLE_NOTARY_KEY_ID: ${{ secrets.APPLE_NOTARY_KEY_ID }}
+          APPLE_NOTARY_ISSUER_ID: ${{ secrets.APPLE_NOTARY_ISSUER_ID }}
+        run: |
+          python3 - <<'PY'
+          import os, sys
+          names = (
+              "APPLE_DEVELOPER_ID_P12_BASE64",
+              "APPLE_DEVELOPER_ID_P12_PASSWORD",
+              "APPLE_NOTARY_KEY_P8_BASE64",
+              "APPLE_NOTARY_KEY_ID",
+              "APPLE_NOTARY_ISSUER_ID",
+          )
+          missing = [name for name in names if not os.environ.get(name, "").strip()]
+          if missing:
+              print("::error::Missing Apple release secrets: " + ", ".join(missing), file=sys.stderr)
+              raise SystemExit(1)
+          print("Apple release secrets are present")
+          PY
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Install musl toolchain
+        if: ${{ matrix.platform == 'linux' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y musl-tools
+      - name: Install pinned dist
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -LsSf \
+            https://github.com/axodotdev/cargo-dist/releases/download/v0.28.0/cargo-dist-installer.sh \
+            -o "$RUNNER_TEMP/cargo-dist-installer.sh"
+          sh "$RUNNER_TEMP/cargo-dist-installer.sh"
+          test "$(dist --version)" = "cargo-dist 0.28.0"
+      - name: Install Rust target
+        env:
+          TARGET: ${{ matrix.target }}
+        run: rustup target add "$TARGET"
+      - name: Build local archive
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          dist build --allow-dirty --artifacts=local --target "$TARGET" \
+            --tag=${{ needs.preflight.outputs.tag }} --output-format=json > dist-manifest.json
+          test -s "target/distrib/thruline-cli-$TARGET.tar.gz"
+          test -s "target/distrib/thruline-cli-$TARGET.tar.gz.sha256"
+      - name: Sign and notarize macOS executable
+        if: ${{ matrix.platform == 'macos' && needs.preflight.outputs.notarize == 'true' }}
+        timeout-minutes: 75
+        env:
+          TARGET: ${{ matrix.target }}
+          APPLE_DEVELOPER_ID_P12_BASE64: ${{ secrets.APPLE_DEVELOPER_ID_P12_BASE64 }}
+          APPLE_DEVELOPER_ID_P12_PASSWORD: ${{ secrets.APPLE_DEVELOPER_ID_P12_PASSWORD }}
+          APPLE_NOTARY_KEY_P8_BASE64: ${{ secrets.APPLE_NOTARY_KEY_P8_BASE64 }}
+          APPLE_NOTARY_KEY_ID: ${{ secrets.APPLE_NOTARY_KEY_ID }}
+          APPLE_NOTARY_ISSUER_ID: ${{ secrets.APPLE_NOTARY_ISSUER_ID }}
+        run: python3 packaging/sign-and-notarize-macos.py "$TARGET" dist-manifest.json
+      - name: Record that this macOS archive is not notarized
+        if: ${{ matrix.platform == 'macos' && needs.preflight.outputs.notarize != 'true' }}
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          echo "::warning::$TARGET is NOT signed or notarized: the Apple secrets are not set. The draft says so."
+          echo "$TARGET: not notarized" >> "$GITHUB_STEP_SUMMARY"
+      - name: Verify static Linux binary
+        if: ${{ matrix.platform == 'linux' }}
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          tar -xzf "target/distrib/thruline-cli-$TARGET.tar.gz" -C "$RUNNER_TEMP"
+          file "$RUNNER_TEMP/thruline-cli-$TARGET/thruline"
+          file "$RUNNER_TEMP/thruline-cli-$TARGET/thruline" | grep -Eq 'statically linked|static-pie linked'
+      - name: Check final local checksum
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          cd target/distrib
+          if command -v shasum >/dev/null 2>&1; then
+            shasum -a 256 -c "thruline-cli-$TARGET.tar.gz.sha256"
+          else
+            sha256sum -c "thruline-cli-$TARGET.tar.gz.sha256"
+          fi
+          tar -tzf "thruline-cli-$TARGET.tar.gz"
+      # D-326 (a): run the binary that ships, taken out of the final archive
+      # (after macOS signing), as `licence status --json` in a fresh, empty
+      # HOME and THRULINE_HOME, and fail the job unless the document says the
+      # paid gate is on and at least one built-in production key is trusted.
+      # Field names come from the source: shape `thruline.licence.status`
+      # (crates/cli/src/json_out.rs), top-level `paid_gate` and
+      # `technical.keys_built_in` (status_body in crates/cli/src/licence_cmd.rs).
+      # No secret, no network.
+      # It runs on every target because every target executes on its runner:
+      # the architecture check above pins uname -m to the target's, and the
+      # two musl targets are static binaries run on the Linux runner of their
+      # own architecture. Nothing here is cross-built. A cross target added
+      # later must skip this step where its binary cannot run, and
+      # m6_packaging's test refuses the matrix until that is decided.
+      - name: Refuse a built binary with the paid gate off or no production key
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          check="$(mktemp -d "$RUNNER_TEMP/licence-check.XXXXXX")"
+          mkdir "$check/home" "$check/thruline-home" "$check/archive"
+          tar -xzf "target/distrib/thruline-cli-$TARGET.tar.gz" -C "$check/archive"
+          bin="$check/archive/thruline-cli-$TARGET/thruline"
+          test -x "$bin"
+          env -i PATH="$PATH" HOME="$check/home" THRULINE_HOME="$check/thruline-home" \
+            "$bin" licence status --json > "$check/status.json"
+          cat "$check/status.json"
+          filter='.shape == "thruline.licence.status" and .schema_version == 4 and .paid_gate == true and .headline == "free" and (has("trial") | not) and (.entitlements.approve_version.allowed == false) and (.technical.keys_built_in | type == "number" and . >= 1)'
+          if ! jq -e "$filter" "$check/status.json" > /dev/null; then
+            echo "::error::$TARGET: the built binary reports the paid gate off or no built-in production key" >&2
+            exit 1
+          fi
+          echo "$TARGET: paid gate on, built-in production key present"
+      - name: Upload private build artifacts
+        if: ${{ !inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-${{ matrix.target }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            target/distrib/thruline-cli-${{ matrix.target }}.tar.gz
+            target/distrib/thruline-cli-${{ matrix.target }}.tar.gz.sha256
+
+  dry-summary:
+    if: ${{ inputs.dry_run }}
+    needs: [preflight, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report successful no-upload build
+        env:
+          TAG: ${{ needs.preflight.outputs.tag }}
+          NOTARIZE: ${{ needs.preflight.outputs.notarize }}
+        run: |
+          {
+            echo "## $TAG dry release passed"
+            echo ""
+            if [ "$NOTARIZE" = "true" ]; then
+              echo "All four build jobs completed. The macOS jobs logged strict code-signature verification and Apple notarization acceptance. No artifacts were uploaded."
+            else
+              echo "All four build jobs completed. NOT NOTARIZED: the Apple secrets are not set, so the macOS archives are unsigned. No artifacts were uploaded."
+            fi
+            echo ""
+            echo "- thruline-cli-aarch64-apple-darwin.tar.gz"
+            echo "- thruline-cli-x86_64-apple-darwin.tar.gz"
+            echo "- thruline-cli-aarch64-unknown-linux-musl.tar.gz"
+            echo "- thruline-cli-x86_64-unknown-linux-musl.tar.gz"
+            echo "- SHA256SUMS (created during a separately authorized draft run)"
+            echo ""
+            echo "This is the five-name asset allowlist. LICENSE.md and THIRD_PARTY_NOTICES.md travel inside each archive. The no-upload dry run does not collect the four runners' archives or stage the five files together."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  assemble:
+    if: ${{ !inputs.dry_run }}
+    needs: [preflight, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Fetch private build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: built-*
+          path: built
+          merge-multiple: true
+      - name: Stage exactly five release assets
+        run: |
+          set -euo pipefail
+          python3 packaging/public-release/release_assets.py stage \
+            --artifacts built --source "$GITHUB_WORKSPACE" --out release-payload
+          python3 packaging/public-release/release_assets.py verify --dir release-payload
+          ls -lh release-payload
+          cat release-payload/SHA256SUMS
+          for archive in release-payload/thruline-cli-*.tar.gz; do
+            echo "$archive"
+            tar -tzf "$archive"
+          done
+      - name: Upload private release payload
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-payload
+          if-no-files-found: error
+          retention-days: 14
+          path: release-payload/
+
+  draft:
+    if: ${{ !inputs.dry_run }}
+    needs: [preflight, assemble]
+    runs-on: ubuntu-latest
+    # The one job that can write. It creates a draft release in this repository
+    # for a tag that already exists, and nothing else.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Recheck confirmed annotated source tag after approval
+        env:
+          TAG: ${{ needs.preflight.outputs.tag }}
+          CONFIRM_SHA: ${{ inputs.confirm_sha }}
+        run: |
+          set -euo pipefail
+          test "$CONFIRM_SHA" = "$GITHUB_SHA"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git cat-file -t "refs/tags/$TAG")" = tag
+          test "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$GITHUB_SHA"
+      - name: Fetch staged payload
+        uses: actions/download-artifact@v4
+        with:
+          name: release-payload
+          path: release-payload
+      - name: Verify staged payload again
+        run: python3 packaging/public-release/release_assets.py verify --dir release-payload
+      - name: Recheck that no release exists for the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.preflight.outputs.tag }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "thrulinehq/thruline"
+          if found="$(gh release view "$TAG" --repo thrulinehq/thruline 2>&1)"; then
+            echo "::error::Release $TAG appeared after preflight" >&2
+            exit 1
+          fi
+          case "$found" in
+            *"release not found"*) echo "No release exists for $TAG" ;;
+            *) echo "::error::Could not check for an existing release: $found" >&2; exit 1 ;;
+          esac
+      - name: Create draft release with five assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.preflight.outputs.tag }}
+          NOTARIZED: ${{ needs.preflight.outputs.notarize }}
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN"
+          if [ "$NOTARIZED" = "true" ]; then
+            mac="The macOS binaries are Developer ID signed and Apple notarized."
+          else
+            mac="Not notarized: this draft was built without Apple signing credentials. The macOS binaries are not Developer ID signed or Apple notarized, and macOS will warn on first run."
+          fi
+          notes="Four CLI archives and SHA256SUMS. Each archive holds the thruline binary, LICENSE.md and THIRD_PARTY_NOTICES.md. $mac Review this draft before publishing."
+          gh release create "$TAG" release-payload/* \
+            --repo thrulinehq/thruline \
+            --verify-tag \
+            --draft \
+            --title "ThruLine $TAG" \
+            --notes "$notes"

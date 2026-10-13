@@ -1,0 +1,18 @@
+F.
+
+Failures:
+
+  1) a warm cache is populated
+     Failure/Error: expect(n).to be > 0
+
+       expected: > 0
+            got:   0
+     # ./spec/flaky_spec.rb:12:in 'block (2 levels) in <top (required)>'
+
+Finished in 0.00765 seconds (files took 0.0556 seconds to load)
+2 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/flaky_spec.rb:8 # a warm cache is populated
+

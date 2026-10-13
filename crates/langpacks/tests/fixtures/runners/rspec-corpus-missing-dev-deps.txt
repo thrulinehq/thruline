@@ -1,0 +1,40 @@
+
+An error occurred while loading spec_helper. - Did you mean?
+                    rspec ./spec/spec_helper.rb
+
+Failure/Error: require 'aruba/api'
+
+LoadError:
+  cannot load such file -- aruba/api
+# ./spec/support/aruba_support.rb:28:in 'Kernel#require'
+# ./spec/support/aruba_support.rb:28:in 'block in <module:ArubaLoader>'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-support-3.13.7/lib/rspec/support/spec/with_isolated_stderr.rb:9:in 'RSpec::Support::WithIsolatedStdErr#with_isolated_stderr'
+# ./spec/support/aruba_support.rb:27:in '<module:ArubaLoader>'
+# ./spec/support/aruba_support.rb:25:in '<top (required)>'
+# ./spec/spec_helper.rb:24:in 'Kernel#require'
+# ./spec/spec_helper.rb:24:in 'block in <top (required)>'
+# ./spec/spec_helper.rb:17:in 'Array#map'
+# ./spec/spec_helper.rb:17:in '<top (required)>'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2144:in 'Kernel#require'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2144:in 'RSpec::Core::Configuration#load_file_handling_errors'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:1601:in 'block in RSpec::Core::Configuration#requires='
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:1600:in 'Array#each'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:1600:in 'RSpec::Core::Configuration#requires='
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration_options.rb:117:in 'block in RSpec::Core::ConfigurationOptions#process_options_into'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration_options.rb:116:in 'Array#each'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration_options.rb:116:in 'RSpec::Core::ConfigurationOptions#process_options_into'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration_options.rb:22:in 'RSpec::Core::ConfigurationOptions#configure'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:132:in 'RSpec::Core::Runner#configure'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:99:in 'RSpec::Core::Runner#setup'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:86:in 'RSpec::Core::Runner#run'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:71:in 'RSpec::Core::Runner.run'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:45:in 'RSpec::Core::Runner.invoke'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/exe/rspec:4:in '<top (required)>'
+# /opt/homebrew/Cellar/ruby/4.0.6_1/lib/ruby/4.0.0/rubygems.rb:305:in 'Kernel#load'
+# /opt/homebrew/Cellar/ruby/4.0.6_1/lib/ruby/4.0.0/rubygems.rb:305:in 'Gem.activate_and_load_bin_path'
+# /opt/homebrew/lib/ruby/gems/4.0.0/bin/rspec:25:in '<main>'
+No examples found.
+
+Finished in 0.00003 seconds (files took 0.17555 seconds to load)
+0 examples, 0 failures, 1 error occurred outside of examples
+

@@ -1,0 +1,2 @@
+test5/test_calc_stats.rb:5:in 'Kernel#require': cannot load such file -- calc/stats (LoadError)
+	from test5/test_calc_stats.rb:5:in '<main>'

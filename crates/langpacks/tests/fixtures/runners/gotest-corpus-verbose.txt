@@ -1,0 +1,1161 @@
+=== RUN   TestActiveHelpAlone
+--- PASS: TestActiveHelpAlone (0.02s)
+=== RUN   TestActiveHelpWithComps
+--- PASS: TestActiveHelpWithComps (0.00s)
+=== RUN   TestMultiActiveHelp
+--- PASS: TestMultiActiveHelp (0.00s)
+=== RUN   TestActiveHelpForFlag
+--- PASS: TestActiveHelpForFlag (0.00s)
+=== RUN   TestConfigActiveHelp
+--- PASS: TestConfigActiveHelp (0.00s)
+=== RUN   TestDisableActiveHelp
+--- PASS: TestDisableActiveHelp (0.01s)
+=== RUN   TestNoArgs
+--- PASS: TestNoArgs (0.00s)
+=== RUN   TestNoArgs_WithArgs
+--- PASS: TestNoArgs_WithArgs (0.00s)
+=== RUN   TestNoArgs_WithValid_WithArgs
+--- PASS: TestNoArgs_WithValid_WithArgs (0.00s)
+=== RUN   TestNoArgs_WithValid_WithInvalidArgs
+--- PASS: TestNoArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestNoArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestNoArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestOnlyValidArgs
+--- PASS: TestOnlyValidArgs (0.00s)
+=== RUN   TestOnlyValidArgs_WithInvalidArgs
+--- PASS: TestOnlyValidArgs_WithInvalidArgs (0.00s)
+=== RUN   TestNoDuplicateArgs
+--- PASS: TestNoDuplicateArgs (0.00s)
+=== RUN   TestNoDuplicateArgs_WithDuplicateArgs
+--- PASS: TestNoDuplicateArgs_WithDuplicateArgs (0.00s)
+=== RUN   TestNoDuplicateArgs_WithValid_WithDuplicateArgs
+--- PASS: TestNoDuplicateArgs_WithValid_WithDuplicateArgs (0.00s)
+=== RUN   TestNoDuplicateArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestNoDuplicateArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestArbitraryArgs
+--- PASS: TestArbitraryArgs (0.00s)
+=== RUN   TestArbitraryArgs_WithValid
+--- PASS: TestArbitraryArgs_WithValid (0.00s)
+=== RUN   TestArbitraryArgs_WithValid_WithInvalidArgs
+--- PASS: TestArbitraryArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestArbitraryArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestArbitraryArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestMinimumNArgs
+--- PASS: TestMinimumNArgs (0.00s)
+=== RUN   TestMinimumNArgs_WithValid
+--- PASS: TestMinimumNArgs_WithValid (0.00s)
+=== RUN   TestMinimumNArgs_WithValid__WithInvalidArgs
+--- PASS: TestMinimumNArgs_WithValid__WithInvalidArgs (0.00s)
+=== RUN   TestMinimumNArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestMinimumNArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestMinimumNArgs_WithLessArgs
+--- PASS: TestMinimumNArgs_WithLessArgs (0.00s)
+=== RUN   TestMinimumNArgs_WithLessArgs_WithValid
+--- PASS: TestMinimumNArgs_WithLessArgs_WithValid (0.00s)
+=== RUN   TestMinimumNArgs_WithLessArgs_WithValid_WithInvalidArgs
+--- PASS: TestMinimumNArgs_WithLessArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestMinimumNArgs_WithLessArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestMinimumNArgs_WithLessArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestMaximumNArgs
+--- PASS: TestMaximumNArgs (0.00s)
+=== RUN   TestMaximumNArgs_WithValid
+--- PASS: TestMaximumNArgs_WithValid (0.00s)
+=== RUN   TestMaximumNArgs_WithValid_WithInvalidArgs
+--- PASS: TestMaximumNArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestMaximumNArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestMaximumNArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestMaximumNArgs_WithMoreArgs
+--- PASS: TestMaximumNArgs_WithMoreArgs (0.00s)
+=== RUN   TestMaximumNArgs_WithMoreArgs_WithValid
+--- PASS: TestMaximumNArgs_WithMoreArgs_WithValid (0.00s)
+=== RUN   TestMaximumNArgs_WithMoreArgs_WithValid_WithInvalidArgs
+--- PASS: TestMaximumNArgs_WithMoreArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestMaximumNArgs_WithMoreArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestMaximumNArgs_WithMoreArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestExactArgs
+--- PASS: TestExactArgs (0.00s)
+=== RUN   TestExactArgs_WithValid
+--- PASS: TestExactArgs_WithValid (0.00s)
+=== RUN   TestExactArgs_WithValid_WithInvalidArgs
+--- PASS: TestExactArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestExactArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestExactArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestExactArgs_WithInvalidCount
+--- PASS: TestExactArgs_WithInvalidCount (0.00s)
+=== RUN   TestExactArgs_WithInvalidCount_WithValid
+--- PASS: TestExactArgs_WithInvalidCount_WithValid (0.00s)
+=== RUN   TestExactArgs_WithInvalidCount_WithValid_WithInvalidArgs
+--- PASS: TestExactArgs_WithInvalidCount_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestExactArgs_WithInvalidCount_WithValidOnly_WithInvalidArgs
+--- PASS: TestExactArgs_WithInvalidCount_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestRangeArgs
+--- PASS: TestRangeArgs (0.00s)
+=== RUN   TestRangeArgs_WithValid
+--- PASS: TestRangeArgs_WithValid (0.00s)
+=== RUN   TestRangeArgs_WithValid_WithInvalidArgs
+--- PASS: TestRangeArgs_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestRangeArgs_WithValidOnly_WithInvalidArgs
+--- PASS: TestRangeArgs_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestRangeArgs_WithInvalidCount
+--- PASS: TestRangeArgs_WithInvalidCount (0.00s)
+=== RUN   TestRangeArgs_WithInvalidCount_WithValid
+--- PASS: TestRangeArgs_WithInvalidCount_WithValid (0.00s)
+=== RUN   TestRangeArgs_WithInvalidCount_WithValid_WithInvalidArgs
+--- PASS: TestRangeArgs_WithInvalidCount_WithValid_WithInvalidArgs (0.00s)
+=== RUN   TestRangeArgs_WithInvalidCount_WithValidOnly_WithInvalidArgs
+--- PASS: TestRangeArgs_WithInvalidCount_WithValidOnly_WithInvalidArgs (0.00s)
+=== RUN   TestRootTakesNoArgs
+--- PASS: TestRootTakesNoArgs (0.00s)
+=== RUN   TestRootTakesArgs
+--- PASS: TestRootTakesArgs (0.00s)
+=== RUN   TestChildTakesNoArgs
+--- PASS: TestChildTakesNoArgs (0.00s)
+=== RUN   TestChildTakesArgs
+--- PASS: TestChildTakesArgs (0.00s)
+=== RUN   TestMatchAll
+=== RUN   TestMatchAll/happy_path
+=== RUN   TestMatchAll/incorrect_number_of_args
+=== RUN   TestMatchAll/incorrect_number_of_bytes_in_one_arg
+--- PASS: TestMatchAll (0.00s)
+    --- PASS: TestMatchAll/happy_path (0.00s)
+    --- PASS: TestMatchAll/incorrect_number_of_args (0.00s)
+    --- PASS: TestMatchAll/incorrect_number_of_bytes_in_one_arg (0.00s)
+=== RUN   TestExactValidArgs
+--- PASS: TestExactValidArgs (0.00s)
+=== RUN   TestExactValidArgs_WithInvalidCount
+--- PASS: TestExactValidArgs_WithInvalidCount (0.00s)
+=== RUN   TestExactValidArgs_WithInvalidCount_WithInvalidArgs
+--- PASS: TestExactValidArgs_WithInvalidCount_WithInvalidArgs (0.00s)
+=== RUN   TestExactValidArgs_WithInvalidArgs
+--- PASS: TestExactValidArgs_WithInvalidArgs (0.00s)
+=== RUN   TestLegacyArgsRootAcceptsArgs
+--- PASS: TestLegacyArgsRootAcceptsArgs (0.00s)
+=== RUN   TestLegacyArgsSubcmdAcceptsArgs
+--- PASS: TestLegacyArgsSubcmdAcceptsArgs (0.00s)
+=== RUN   TestBashCompletionV2WithActiveHelp
+--- PASS: TestBashCompletionV2WithActiveHelp (0.00s)
+=== RUN   TestBashCompletions
+--- PASS: TestBashCompletions (4.11s)
+=== RUN   TestBashCompletionHiddenFlag
+--- PASS: TestBashCompletionHiddenFlag (0.00s)
+=== RUN   TestBashCompletionDeprecatedFlag
+--- PASS: TestBashCompletionDeprecatedFlag (0.00s)
+=== RUN   TestBashCompletionTraverseChildren
+--- PASS: TestBashCompletionTraverseChildren (0.00s)
+=== RUN   TestBashCompletionNoActiveHelp
+--- PASS: TestBashCompletionNoActiveHelp (0.00s)
+=== RUN   TestAddTemplateFunctions
+--- PASS: TestAddTemplateFunctions (0.00s)
+=== RUN   TestLevenshteinDistance
+=== RUN   TestLevenshteinDistance/Equal_strings_(case-sensitive)
+=== RUN   TestLevenshteinDistance/Equal_strings_(case-insensitive)
+=== RUN   TestLevenshteinDistance/Different_strings_(case-sensitive)
+=== RUN   TestLevenshteinDistance/Different_strings_(case-insensitive)
+=== RUN   TestLevenshteinDistance/Empty_strings
+=== RUN   TestLevenshteinDistance/One_empty_string
+=== RUN   TestLevenshteinDistance/Both_empty_strings
+--- PASS: TestLevenshteinDistance (0.00s)
+    --- PASS: TestLevenshteinDistance/Equal_strings_(case-sensitive) (0.00s)
+    --- PASS: TestLevenshteinDistance/Equal_strings_(case-insensitive) (0.00s)
+    --- PASS: TestLevenshteinDistance/Different_strings_(case-sensitive) (0.00s)
+    --- PASS: TestLevenshteinDistance/Different_strings_(case-insensitive) (0.00s)
+    --- PASS: TestLevenshteinDistance/Empty_strings (0.00s)
+    --- PASS: TestLevenshteinDistance/One_empty_string (0.00s)
+    --- PASS: TestLevenshteinDistance/Both_empty_strings (0.00s)
+=== RUN   TestStringInSlice
+=== RUN   TestStringInSlice/String_in_slice_(case-sensitive)
+=== RUN   TestStringInSlice/String_not_in_slice_(case-sensitive)
+=== RUN   TestStringInSlice/String_in_slice_(case-insensitive)
+=== RUN   TestStringInSlice/Empty_slice
+=== RUN   TestStringInSlice/Empty_string
+=== RUN   TestStringInSlice/Empty_strings_match
+=== RUN   TestStringInSlice/Empty_string_in_empty_slice
+--- PASS: TestStringInSlice (0.00s)
+    --- PASS: TestStringInSlice/String_in_slice_(case-sensitive) (0.00s)
+    --- PASS: TestStringInSlice/String_not_in_slice_(case-sensitive) (0.00s)
+    --- PASS: TestStringInSlice/String_in_slice_(case-insensitive) (0.00s)
+    --- PASS: TestStringInSlice/Empty_slice (0.00s)
+    --- PASS: TestStringInSlice/Empty_string (0.00s)
+    --- PASS: TestStringInSlice/Empty_strings_match (0.00s)
+    --- PASS: TestStringInSlice/Empty_string_in_empty_slice (0.00s)
+=== RUN   TestRpad
+=== RUN   TestRpad/Padding_required
+=== RUN   TestRpad/No_padding_required
+=== RUN   TestRpad/Empty_string
+=== RUN   TestRpad/Zero_padding
+--- PASS: TestRpad (0.00s)
+    --- PASS: TestRpad/Padding_required (0.00s)
+    --- PASS: TestRpad/No_padding_required (0.00s)
+    --- PASS: TestRpad/Empty_string (0.00s)
+    --- PASS: TestRpad/Zero_padding (0.00s)
+=== RUN   TestDeadcodeElimination
+--- PASS: TestDeadcodeElimination (3.62s)
+=== RUN   TestSingleCommand
+--- PASS: TestSingleCommand (0.00s)
+=== RUN   TestChildCommand
+--- PASS: TestChildCommand (0.00s)
+=== RUN   TestCallCommandWithoutSubcommands
+--- PASS: TestCallCommandWithoutSubcommands (0.00s)
+=== RUN   TestRootExecuteUnknownCommand
+--- PASS: TestRootExecuteUnknownCommand (0.00s)
+=== RUN   TestSubcommandExecuteC
+--- PASS: TestSubcommandExecuteC (0.00s)
+=== RUN   TestExecuteContext
+--- PASS: TestExecuteContext (0.00s)
+=== RUN   TestExecuteContextC
+--- PASS: TestExecuteContextC (0.00s)
+=== RUN   TestExecute_NoContext
+--- PASS: TestExecute_NoContext (0.00s)
+=== RUN   TestRootUnknownCommandSilenced
+--- PASS: TestRootUnknownCommandSilenced (0.00s)
+=== RUN   TestCommandAlias
+--- PASS: TestCommandAlias (0.00s)
+=== RUN   TestEnablePrefixMatching
+--- PASS: TestEnablePrefixMatching (0.00s)
+=== RUN   TestAliasPrefixMatching
+--- PASS: TestAliasPrefixMatching (0.00s)
+=== RUN   TestPlugin
+--- PASS: TestPlugin (0.00s)
+=== RUN   TestPluginWithSubCommands
+--- PASS: TestPluginWithSubCommands (0.00s)
+=== RUN   TestChildSameName
+--- PASS: TestChildSameName (0.00s)
+=== RUN   TestGrandChildSameName
+--- PASS: TestGrandChildSameName (0.00s)
+=== RUN   TestFlagLong
+--- PASS: TestFlagLong (0.00s)
+=== RUN   TestFlagShort
+--- PASS: TestFlagShort (0.00s)
+=== RUN   TestChildFlag
+--- PASS: TestChildFlag (0.00s)
+=== RUN   TestChildFlagWithParentLocalFlag
+--- PASS: TestChildFlagWithParentLocalFlag (0.00s)
+=== RUN   TestFlagInvalidInput
+--- PASS: TestFlagInvalidInput (0.00s)
+=== RUN   TestFlagBeforeCommand
+--- PASS: TestFlagBeforeCommand (0.00s)
+=== RUN   TestStripFlags
+--- PASS: TestStripFlags (0.00s)
+=== RUN   TestDisableFlagParsing
+--- PASS: TestDisableFlagParsing (0.00s)
+=== RUN   TestPersistentFlagsOnSameCommand
+--- PASS: TestPersistentFlagsOnSameCommand (0.00s)
+=== RUN   TestEmptyInputs
+--- PASS: TestEmptyInputs (0.00s)
+=== RUN   TestChildFlagShadowsParentPersistentFlag
+--- PASS: TestChildFlagShadowsParentPersistentFlag (0.00s)
+=== RUN   TestPersistentFlagsOnChild
+--- PASS: TestPersistentFlagsOnChild (0.00s)
+=== RUN   TestRequiredFlags
+--- PASS: TestRequiredFlags (0.00s)
+=== RUN   TestPersistentRequiredFlags
+--- PASS: TestPersistentRequiredFlags (0.00s)
+=== RUN   TestPersistentRequiredFlagsWithDisableFlagParsing
+--- PASS: TestPersistentRequiredFlagsWithDisableFlagParsing (0.00s)
+=== RUN   TestInitHelpFlagMergesFlags
+--- PASS: TestInitHelpFlagMergesFlags (0.00s)
+=== RUN   TestHelpCommandExecuted
+--- PASS: TestHelpCommandExecuted (0.00s)
+=== RUN   TestHelpCommandExecutedOnChild
+--- PASS: TestHelpCommandExecutedOnChild (0.00s)
+=== RUN   TestHelpCommandExecutedOnChildWithFlagThatShadowsParentFlag
+--- PASS: TestHelpCommandExecutedOnChildWithFlagThatShadowsParentFlag (0.00s)
+=== RUN   TestSetHelpCommand
+--- PASS: TestSetHelpCommand (0.00s)
+=== RUN   TestSetHelpTemplate
+--- PASS: TestSetHelpTemplate (0.00s)
+=== RUN   TestHelpFlagExecuted
+--- PASS: TestHelpFlagExecuted (0.00s)
+=== RUN   TestHelpFlagExecutedOnChild
+--- PASS: TestHelpFlagExecutedOnChild (0.00s)
+=== RUN   TestHelpFlagInHelp
+--- PASS: TestHelpFlagInHelp (0.00s)
+=== RUN   TestFlagsInUsage
+--- PASS: TestFlagsInUsage (0.00s)
+=== RUN   TestHelpExecutedOnNonRunnableChild
+--- PASS: TestHelpExecutedOnNonRunnableChild (0.00s)
+=== RUN   TestSetUsageTemplate
+--- PASS: TestSetUsageTemplate (0.00s)
+=== RUN   TestVersionFlagExecuted
+--- PASS: TestVersionFlagExecuted (0.00s)
+=== RUN   TestVersionFlagExecutedDiplayName
+--- PASS: TestVersionFlagExecutedDiplayName (0.00s)
+=== RUN   TestVersionFlagExecutedWithNoName
+--- PASS: TestVersionFlagExecutedWithNoName (0.00s)
+=== RUN   TestShortAndLongVersionFlagInHelp
+--- PASS: TestShortAndLongVersionFlagInHelp (0.00s)
+=== RUN   TestLongVersionFlagOnlyInHelpWhenShortPredefined
+--- PASS: TestLongVersionFlagOnlyInHelpWhenShortPredefined (0.00s)
+=== RUN   TestShorthandVersionFlagExecuted
+--- PASS: TestShorthandVersionFlagExecuted (0.00s)
+=== RUN   TestVersionTemplate
+--- PASS: TestVersionTemplate (0.00s)
+=== RUN   TestShorthandVersionTemplate
+--- PASS: TestShorthandVersionTemplate (0.00s)
+=== RUN   TestRootErrPrefixExecutedOnSubcommand
+--- PASS: TestRootErrPrefixExecutedOnSubcommand (0.00s)
+=== RUN   TestRootAndSubErrPrefix
+--- PASS: TestRootAndSubErrPrefix (0.00s)
+=== RUN   TestVersionFlagExecutedOnSubcommand
+--- PASS: TestVersionFlagExecutedOnSubcommand (0.00s)
+=== RUN   TestShorthandVersionFlagExecutedOnSubcommand
+--- PASS: TestShorthandVersionFlagExecutedOnSubcommand (0.00s)
+=== RUN   TestVersionFlagOnlyAddedToRoot
+--- PASS: TestVersionFlagOnlyAddedToRoot (0.00s)
+=== RUN   TestShortVersionFlagOnlyAddedToRoot
+--- PASS: TestShortVersionFlagOnlyAddedToRoot (0.00s)
+=== RUN   TestVersionFlagOnlyExistsIfVersionNonEmpty
+--- PASS: TestVersionFlagOnlyExistsIfVersionNonEmpty (0.00s)
+=== RUN   TestShorthandVersionFlagOnlyExistsIfVersionNonEmpty
+--- PASS: TestShorthandVersionFlagOnlyExistsIfVersionNonEmpty (0.00s)
+=== RUN   TestShorthandVersionFlagOnlyAddedIfShorthandNotDefined
+--- PASS: TestShorthandVersionFlagOnlyAddedIfShorthandNotDefined (0.00s)
+=== RUN   TestShorthandVersionFlagOnlyAddedIfVersionNotDefined
+--- PASS: TestShorthandVersionFlagOnlyAddedIfVersionNotDefined (0.00s)
+=== RUN   TestUsageIsNotPrintedTwice
+--- PASS: TestUsageIsNotPrintedTwice (0.00s)
+=== RUN   TestVisitParents
+--- PASS: TestVisitParents (0.00s)
+=== RUN   TestSuggestions
+--- PASS: TestSuggestions (0.00s)
+=== RUN   TestCaseInsensitive
+--- PASS: TestCaseInsensitive (0.01s)
+=== RUN   TestCaseSensitivityBackwardCompatibility
+--- PASS: TestCaseSensitivityBackwardCompatibility (0.00s)
+=== RUN   TestRemoveCommand
+--- PASS: TestRemoveCommand (0.00s)
+=== RUN   TestReplaceCommandWithRemove
+--- PASS: TestReplaceCommandWithRemove (0.00s)
+=== RUN   TestDeprecatedCommand
+--- PASS: TestDeprecatedCommand (0.00s)
+=== RUN   TestHooks
+--- PASS: TestHooks (0.00s)
+=== RUN   TestPersistentHooks
+--- PASS: TestPersistentHooks (0.00s)
+=== RUN   TestGlobalNormFuncPropagation
+--- PASS: TestGlobalNormFuncPropagation (0.00s)
+=== RUN   TestNormPassedOnLocal
+--- PASS: TestNormPassedOnLocal (0.00s)
+=== RUN   TestNormPassedOnInherited
+--- PASS: TestNormPassedOnInherited (0.00s)
+=== RUN   TestConsistentNormalizedName
+--- PASS: TestConsistentNormalizedName (0.00s)
+=== RUN   TestFlagOnPflagCommandLine
+--- PASS: TestFlagOnPflagCommandLine (0.00s)
+=== RUN   TestHiddenCommandExecutes
+--- PASS: TestHiddenCommandExecutes (0.00s)
+=== RUN   TestHiddenCommandIsHidden
+--- PASS: TestHiddenCommandIsHidden (0.00s)
+=== RUN   TestCommandsAreSorted
+--- PASS: TestCommandsAreSorted (0.00s)
+=== RUN   TestEnableCommandSortingIsDisabled
+--- PASS: TestEnableCommandSortingIsDisabled (0.00s)
+=== RUN   TestUsageWithGroup
+--- PASS: TestUsageWithGroup (0.00s)
+=== RUN   TestUsageHelpGroup
+--- PASS: TestUsageHelpGroup (0.00s)
+=== RUN   TestUsageCompletionGroup
+--- PASS: TestUsageCompletionGroup (0.00s)
+=== RUN   TestUngroupedCommand
+--- PASS: TestUngroupedCommand (0.00s)
+=== RUN   TestAddGroup
+--- PASS: TestAddGroup (0.00s)
+=== RUN   TestWrongGroupFirstLevel
+--- PASS: TestWrongGroupFirstLevel (0.00s)
+=== RUN   TestWrongGroupNestedLevel
+--- PASS: TestWrongGroupNestedLevel (0.00s)
+=== RUN   TestWrongGroupForHelp
+--- PASS: TestWrongGroupForHelp (0.00s)
+=== RUN   TestWrongGroupForCompletion
+--- PASS: TestWrongGroupForCompletion (0.00s)
+=== RUN   TestSetOutput
+--- PASS: TestSetOutput (0.00s)
+=== RUN   TestSetOut
+--- PASS: TestSetOut (0.00s)
+=== RUN   TestSetErr
+--- PASS: TestSetErr (0.00s)
+=== RUN   TestSetIn
+--- PASS: TestSetIn (0.00s)
+=== RUN   TestUsageStringRedirected
+--- PASS: TestUsageStringRedirected (0.00s)
+=== RUN   TestCommandPrintRedirection
+--- PASS: TestCommandPrintRedirection (0.00s)
+=== RUN   TestFlagErrorFunc
+--- PASS: TestFlagErrorFunc (0.00s)
+=== RUN   TestFlagErrorFuncHelp
+--- PASS: TestFlagErrorFuncHelp (0.00s)
+=== RUN   TestSortedFlags
+--- PASS: TestSortedFlags (0.00s)
+=== RUN   TestMergeCommandLineToFlags
+--- PASS: TestMergeCommandLineToFlags (0.00s)
+=== RUN   TestUseDeprecatedFlags
+--- PASS: TestUseDeprecatedFlags (0.00s)
+=== RUN   TestTraverseWithParentFlags
+--- PASS: TestTraverseWithParentFlags (0.00s)
+=== RUN   TestTraverseNoParentFlags
+--- PASS: TestTraverseNoParentFlags (0.00s)
+=== RUN   TestTraverseWithBadParentFlags
+--- PASS: TestTraverseWithBadParentFlags (0.00s)
+=== RUN   TestTraverseWithBadChildFlag
+--- PASS: TestTraverseWithBadChildFlag (0.00s)
+=== RUN   TestTraverseWithTwoSubcommands
+--- PASS: TestTraverseWithTwoSubcommands (0.00s)
+=== RUN   TestUpdateName
+--- PASS: TestUpdateName (0.00s)
+=== RUN   TestCalledAs
+=== RUN   TestCalledAs/find/conflict
+=== RUN   TestCalledAs/traverse/real-name
+    command_test.go:2447: called: "child1"
+=== RUN   TestCalledAs/traverse/no-args
+    command_test.go:2447: called: "parent"
+=== RUN   TestCalledAs/find/full-alias
+    command_test.go:2447: called: "child2"
+=== RUN   TestCalledAs/traverse/full-alias
+    command_test.go:2447: called: "child2"
+=== RUN   TestCalledAs/traverse/part-no-prefix
+=== RUN   TestCalledAs/traverse/part-alias
+    command_test.go:2447: called: "child1"
+=== RUN   TestCalledAs/traverse/conflict
+=== RUN   TestCalledAs/find/no-args
+    command_test.go:2447: called: "parent"
+=== RUN   TestCalledAs/find/real-name
+    command_test.go:2447: called: "child1"
+=== RUN   TestCalledAs/find/part-no-prefix
+=== RUN   TestCalledAs/find/part-alias
+    command_test.go:2447: called: "child1"
+--- PASS: TestCalledAs (0.00s)
+    --- PASS: TestCalledAs/find/conflict (0.00s)
+    --- PASS: TestCalledAs/traverse/real-name (0.00s)
+    --- PASS: TestCalledAs/traverse/no-args (0.00s)
+    --- PASS: TestCalledAs/find/full-alias (0.00s)
+    --- PASS: TestCalledAs/traverse/full-alias (0.00s)
+    --- PASS: TestCalledAs/traverse/part-no-prefix (0.00s)
+    --- PASS: TestCalledAs/traverse/part-alias (0.00s)
+    --- PASS: TestCalledAs/traverse/conflict (0.00s)
+    --- PASS: TestCalledAs/find/no-args (0.00s)
+    --- PASS: TestCalledAs/find/real-name (0.00s)
+    --- PASS: TestCalledAs/find/part-no-prefix (0.00s)
+    --- PASS: TestCalledAs/find/part-alias (0.00s)
+=== RUN   TestFParseErrWhitelistBackwardCompatibility
+--- PASS: TestFParseErrWhitelistBackwardCompatibility (0.00s)
+=== RUN   TestFParseErrWhitelistSameCommand
+--- PASS: TestFParseErrWhitelistSameCommand (0.00s)
+=== RUN   TestFParseErrWhitelistParentCommand
+--- PASS: TestFParseErrWhitelistParentCommand (0.00s)
+=== RUN   TestFParseErrWhitelistChildCommand
+--- PASS: TestFParseErrWhitelistChildCommand (0.00s)
+=== RUN   TestFParseErrWhitelistSiblingCommand
+--- PASS: TestFParseErrWhitelistSiblingCommand (0.00s)
+=== RUN   TestSetContext
+--- PASS: TestSetContext (0.00s)
+=== RUN   TestSetContextPreRun
+--- PASS: TestSetContextPreRun (0.00s)
+=== RUN   TestSetContextPreRunOverwrite
+--- PASS: TestSetContextPreRunOverwrite (0.00s)
+=== RUN   TestSetContextPersistentPreRun
+--- PASS: TestSetContextPersistentPreRun (0.00s)
+=== RUN   TestNoRootRunCommandExecutedWithVersionSet
+--- PASS: TestNoRootRunCommandExecutedWithVersionSet (0.00s)
+=== RUN   TestNoRootRunCommandExecutedWithoutVersionSet
+--- PASS: TestNoRootRunCommandExecutedWithoutVersionSet (0.00s)
+=== RUN   TestHelpCommandExecutedWithVersionSet
+--- PASS: TestHelpCommandExecutedWithVersionSet (0.00s)
+=== RUN   TestHelpCommandExecutedWithoutVersionSet
+--- PASS: TestHelpCommandExecutedWithoutVersionSet (0.00s)
+=== RUN   TestHelpflagCommandExecutedWithVersionSet
+--- PASS: TestHelpflagCommandExecutedWithVersionSet (0.00s)
+=== RUN   TestHelpflagCommandExecutedWithoutVersionSet
+--- PASS: TestHelpflagCommandExecutedWithoutVersionSet (0.00s)
+=== RUN   TestFind
+=== RUN   TestFind/[child]
+=== RUN   TestFind/[child_child]
+=== RUN   TestFind/[child_foo_child_bar_child_baz_child]
+=== RUN   TestFind/[-f_child_child]
+=== RUN   TestFind/[child_-f_child]
+=== RUN   TestFind/[-b_child_child]
+=== RUN   TestFind/[child_-b_child]
+=== RUN   TestFind/[child_-b]
+=== RUN   TestFind/[-b_-f_child_child]
+=== RUN   TestFind/[-f_child_-b_something_child]
+=== RUN   TestFind/[-f_child_child_-b]
+=== RUN   TestFind/[-f=child_-b=something_child]
+=== RUN   TestFind/[--foo_child_--bar_something_child]
+--- PASS: TestFind (0.00s)
+    --- PASS: TestFind/[child] (0.00s)
+    --- PASS: TestFind/[child_child] (0.00s)
+    --- PASS: TestFind/[child_foo_child_bar_child_baz_child] (0.00s)
+    --- PASS: TestFind/[-f_child_child] (0.00s)
+    --- PASS: TestFind/[child_-f_child] (0.00s)
+    --- PASS: TestFind/[-b_child_child] (0.00s)
+    --- PASS: TestFind/[child_-b_child] (0.00s)
+    --- PASS: TestFind/[child_-b] (0.00s)
+    --- PASS: TestFind/[-b_-f_child_child] (0.00s)
+    --- PASS: TestFind/[-f_child_-b_something_child] (0.00s)
+    --- PASS: TestFind/[-f_child_child_-b] (0.00s)
+    --- PASS: TestFind/[-f=child_-b=something_child] (0.00s)
+    --- PASS: TestFind/[--foo_child_--bar_something_child] (0.00s)
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace_foo_--unknown_child_--bar
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace_foo_child_--unknown_--bar
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace_foo_child_--bar_--unknown
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--unknown_--namespace=foo_child_--bar
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_--unknown_child_--bar
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--unknown_--bar
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--bar_--unknown
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--unknown_--namespace=foo_child_--bar=true
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_--unknown_child_--bar=true
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--unknown_--bar=true
+=== RUN   TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--bar=true_--unknown
+--- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace_foo_--unknown_child_--bar (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace_foo_child_--unknown_--bar (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace_foo_child_--bar_--unknown (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--unknown_--namespace=foo_child_--bar (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_--unknown_child_--bar (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--unknown_--bar (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--bar_--unknown (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--unknown_--namespace=foo_child_--bar=true (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_--unknown_child_--bar=true (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--unknown_--bar=true (0.00s)
+    --- PASS: TestUnknownFlagShouldReturnSameErrorRegardlessOfArgPosition/--namespace=foo_child_--bar=true_--unknown (0.00s)
+=== RUN   TestHelpFuncExecuted
+--- PASS: TestHelpFuncExecuted (0.00s)
+=== RUN   TestCmdNameCompletionInGo
+--- PASS: TestCmdNameCompletionInGo (0.00s)
+=== RUN   TestNoCmdNameCompletionInGo
+[Debug] [Error] Error while parsing flags from args [--localroot value]: unknown flag: --localroot
+--- PASS: TestNoCmdNameCompletionInGo (0.00s)
+=== RUN   TestValidArgsCompletionInGo
+--- PASS: TestValidArgsCompletionInGo (0.00s)
+=== RUN   TestValidArgsAndCmdCompletionInGo
+--- PASS: TestValidArgsAndCmdCompletionInGo (0.00s)
+=== RUN   TestValidArgsFuncAndCmdCompletionInGo
+--- PASS: TestValidArgsFuncAndCmdCompletionInGo (0.00s)
+=== RUN   TestFlagNameCompletionInGo
+--- PASS: TestFlagNameCompletionInGo (0.00s)
+=== RUN   TestFlagNameCompletionInGoWithDesc
+--- PASS: TestFlagNameCompletionInGoWithDesc (0.00s)
+=== RUN   TestFlagNameCompletionRepeat
+--- PASS: TestFlagNameCompletionRepeat (0.00s)
+=== RUN   TestRequiredFlagNameCompletionInGo
+--- PASS: TestRequiredFlagNameCompletionInGo (0.00s)
+=== RUN   TestFlagFileExtFilterCompletionInGo
+--- PASS: TestFlagFileExtFilterCompletionInGo (0.00s)
+=== RUN   TestFlagDirFilterCompletionInGo
+--- PASS: TestFlagDirFilterCompletionInGo (0.00s)
+=== RUN   TestValidArgsFuncCmdContext
+--- PASS: TestValidArgsFuncCmdContext (0.00s)
+=== RUN   TestValidArgsFuncSingleCmd
+--- PASS: TestValidArgsFuncSingleCmd (0.00s)
+=== RUN   TestValidArgsFuncSingleCmdInvalidArg
+--- PASS: TestValidArgsFuncSingleCmdInvalidArg (0.00s)
+=== RUN   TestValidArgsFuncChildCmds
+--- PASS: TestValidArgsFuncChildCmds (0.00s)
+=== RUN   TestValidArgsFuncAliases
+--- PASS: TestValidArgsFuncAliases (0.00s)
+=== RUN   TestValidArgsFuncInBashScript
+--- PASS: TestValidArgsFuncInBashScript (0.00s)
+=== RUN   TestNoValidArgsFuncInBashScript
+--- PASS: TestNoValidArgsFuncInBashScript (0.00s)
+=== RUN   TestCompleteCmdInBashScript
+--- PASS: TestCompleteCmdInBashScript (0.00s)
+=== RUN   TestCompleteNoDesCmdInZshScript
+--- PASS: TestCompleteNoDesCmdInZshScript (0.00s)
+=== RUN   TestCompleteCmdInZshScript
+--- PASS: TestCompleteCmdInZshScript (0.00s)
+=== RUN   TestFlagCompletionInGo
+--- PASS: TestFlagCompletionInGo (0.00s)
+=== RUN   TestValidArgsFuncChildCmdsWithDesc
+--- PASS: TestValidArgsFuncChildCmdsWithDesc (0.00s)
+=== RUN   TestFlagCompletionWithNotInterspersedArgs
+--- PASS: TestFlagCompletionWithNotInterspersedArgs (0.00s)
+=== RUN   TestFlagCompletionWorksRootCommandAddedAfterFlags
+--- PASS: TestFlagCompletionWorksRootCommandAddedAfterFlags (0.00s)
+=== RUN   TestFlagCompletionForPersistentFlagsCalledFromSubCmd
+--- PASS: TestFlagCompletionForPersistentFlagsCalledFromSubCmd (0.00s)
+=== RUN   TestFlagCompletionConcurrentRegistration
+--- PASS: TestFlagCompletionConcurrentRegistration (0.01s)
+=== RUN   TestFlagCompletionInGoWithDesc
+--- PASS: TestFlagCompletionInGoWithDesc (0.00s)
+=== RUN   TestValidArgsNotValidArgsFunc
+--- PASS: TestValidArgsNotValidArgsFunc (0.00s)
+=== RUN   TestArgAliasesCompletionInGo
+--- PASS: TestArgAliasesCompletionInGo (0.00s)
+=== RUN   TestCompleteHelp
+--- PASS: TestCompleteHelp (0.00s)
+=== RUN   TestDefaultCompletionCmd
+--- PASS: TestDefaultCompletionCmd (0.00s)
+=== RUN   TestCompleteCompletion
+--- PASS: TestCompleteCompletion (0.00s)
+=== RUN   TestMultipleShorthandFlagCompletion
+--- PASS: TestMultipleShorthandFlagCompletion (0.00s)
+=== RUN   TestCompleteWithDisableFlagParsing
+--- PASS: TestCompleteWithDisableFlagParsing (0.00s)
+=== RUN   TestCompleteWithRootAndLegacyArgs
+--- PASS: TestCompleteWithRootAndLegacyArgs (0.00s)
+=== RUN   TestCompletionFuncCompatibility
+=== RUN   TestCompletionFuncCompatibility/validate_signature
+=== RUN   TestCompletionFuncCompatibility/validate_signature/format_with_[]string
+=== RUN   TestCompletionFuncCompatibility/validate_signature/format_with_[]Completion
+=== RUN   TestCompletionFuncCompatibility/validate_signature/format_with_CompletionFunc
+=== RUN   TestCompletionFuncCompatibility/user_defined_completion_helper
+=== RUN   TestCompletionFuncCompatibility/user_defined_completion_helper/type_helper
+=== RUN   TestCompletionFuncCompatibility/user_defined_completion_helper/type_alias_helper
+--- PASS: TestCompletionFuncCompatibility (0.00s)
+    --- PASS: TestCompletionFuncCompatibility/validate_signature (0.00s)
+        --- PASS: TestCompletionFuncCompatibility/validate_signature/format_with_[]string (0.00s)
+        --- PASS: TestCompletionFuncCompatibility/validate_signature/format_with_[]Completion (0.00s)
+        --- PASS: TestCompletionFuncCompatibility/validate_signature/format_with_CompletionFunc (0.00s)
+    --- PASS: TestCompletionFuncCompatibility/user_defined_completion_helper (0.00s)
+        --- PASS: TestCompletionFuncCompatibility/user_defined_completion_helper/type_helper (0.00s)
+        --- PASS: TestCompletionFuncCompatibility/user_defined_completion_helper/type_alias_helper (0.00s)
+=== RUN   TestFixedCompletions
+--- PASS: TestFixedCompletions (0.00s)
+=== RUN   TestFixedCompletionsWithCompletionHelpers
+=== RUN   TestFixedCompletionsWithCompletionHelpers/completion_with_description
+=== RUN   TestFixedCompletionsWithCompletionHelpers/completion_with_no_description
+--- PASS: TestFixedCompletionsWithCompletionHelpers (0.00s)
+    --- PASS: TestFixedCompletionsWithCompletionHelpers/completion_with_description (0.00s)
+    --- PASS: TestFixedCompletionsWithCompletionHelpers/completion_with_no_description (0.00s)
+=== RUN   TestCompletionForGroupedFlags
+=== RUN   TestCompletionForGroupedFlags/flags_in_group_not_suggested_without_-_prefix
+=== RUN   TestCompletionForGroupedFlags/flags_in_group_suggested_with_-_prefix
+=== RUN   TestCompletionForGroupedFlags/when_flag_in_group_present,_other_flags_in_group_suggested_even_without_-_prefix
+=== RUN   TestCompletionForGroupedFlags/when_all_flags_in_group_present,_flags_not_suggested_without_-_prefix
+=== RUN   TestCompletionForGroupedFlags/group_ignored_if_some_flags_not_applicable
+--- PASS: TestCompletionForGroupedFlags (0.00s)
+    --- PASS: TestCompletionForGroupedFlags/flags_in_group_not_suggested_without_-_prefix (0.00s)
+    --- PASS: TestCompletionForGroupedFlags/flags_in_group_suggested_with_-_prefix (0.00s)
+    --- PASS: TestCompletionForGroupedFlags/when_flag_in_group_present,_other_flags_in_group_suggested_even_without_-_prefix (0.00s)
+    --- PASS: TestCompletionForGroupedFlags/when_all_flags_in_group_present,_flags_not_suggested_without_-_prefix (0.00s)
+    --- PASS: TestCompletionForGroupedFlags/group_ignored_if_some_flags_not_applicable (0.00s)
+=== RUN   TestCompletionForOneRequiredGroupFlags
+=== RUN   TestCompletionForOneRequiredGroupFlags/flags_in_group_suggested_without_-_prefix
+=== RUN   TestCompletionForOneRequiredGroupFlags/flags_in_group_suggested_with_-_prefix
+=== RUN   TestCompletionForOneRequiredGroupFlags/when_any_flag_in_group_present,_other_flags_in_group_not_suggested_without_-_prefix
+=== RUN   TestCompletionForOneRequiredGroupFlags/when_all_flags_in_group_present,_flags_not_suggested_without_-_prefix
+=== RUN   TestCompletionForOneRequiredGroupFlags/group_ignored_if_some_flags_not_applicable
+--- PASS: TestCompletionForOneRequiredGroupFlags (0.00s)
+    --- PASS: TestCompletionForOneRequiredGroupFlags/flags_in_group_suggested_without_-_prefix (0.00s)
+    --- PASS: TestCompletionForOneRequiredGroupFlags/flags_in_group_suggested_with_-_prefix (0.00s)
+    --- PASS: TestCompletionForOneRequiredGroupFlags/when_any_flag_in_group_present,_other_flags_in_group_not_suggested_without_-_prefix (0.00s)
+    --- PASS: TestCompletionForOneRequiredGroupFlags/when_all_flags_in_group_present,_flags_not_suggested_without_-_prefix (0.00s)
+    --- PASS: TestCompletionForOneRequiredGroupFlags/group_ignored_if_some_flags_not_applicable (0.00s)
+=== RUN   TestCompletionForMutuallyExclusiveFlags
+=== RUN   TestCompletionForMutuallyExclusiveFlags/flags_in_mutually_exclusive_group_not_suggested_without_the_-_prefix
+=== RUN   TestCompletionForMutuallyExclusiveFlags/flags_in_mutually_exclusive_group_suggested_with_the_-_prefix
+=== RUN   TestCompletionForMutuallyExclusiveFlags/when_flag_in_mutually_exclusive_group_present,_other_flags_in_group_not_suggested_even_with_the_-_prefix
+=== RUN   TestCompletionForMutuallyExclusiveFlags/group_ignored_if_some_flags_not_applicable
+--- PASS: TestCompletionForMutuallyExclusiveFlags (0.00s)
+    --- PASS: TestCompletionForMutuallyExclusiveFlags/flags_in_mutually_exclusive_group_not_suggested_without_the_-_prefix (0.00s)
+    --- PASS: TestCompletionForMutuallyExclusiveFlags/flags_in_mutually_exclusive_group_suggested_with_the_-_prefix (0.00s)
+    --- PASS: TestCompletionForMutuallyExclusiveFlags/when_flag_in_mutually_exclusive_group_present,_other_flags_in_group_not_suggested_even_with_the_-_prefix (0.00s)
+    --- PASS: TestCompletionForMutuallyExclusiveFlags/group_ignored_if_some_flags_not_applicable (0.00s)
+=== RUN   TestCompletionCobraFlags
+=== RUN   TestCompletionCobraFlags/completion_of_help_and_version_flags
+=== RUN   TestCompletionCobraFlags/no_completion_after_--help_flag
+=== RUN   TestCompletionCobraFlags/no_completion_after_-h_flag
+=== RUN   TestCompletionCobraFlags/no_completion_after_--version_flag
+=== RUN   TestCompletionCobraFlags/no_completion_after_-v_flag
+=== RUN   TestCompletionCobraFlags/no_completion_after_--help_flag_even_with_other_completions
+=== RUN   TestCompletionCobraFlags/no_completion_after_-h_flag_even_with_other_completions
+=== RUN   TestCompletionCobraFlags/no_completion_after_--version_flag_even_with_other_completions
+=== RUN   TestCompletionCobraFlags/no_completion_after_-v_flag_even_with_other_completions
+=== RUN   TestCompletionCobraFlags/no_completion_after_-v_flag_even_with_other_flag_completions
+=== RUN   TestCompletionCobraFlags/completion_after_--help_flag_when_created_by_program
+=== RUN   TestCompletionCobraFlags/completion_after_-h_flag_when_created_by_program
+=== RUN   TestCompletionCobraFlags/completion_after_--version_flag_when_created_by_program
+=== RUN   TestCompletionCobraFlags/completion_after_-v_flag_when_created_by_program
+=== RUN   TestCompletionCobraFlags/completion_after_--version_when_only_-v_flag_was_created_by_program
+=== RUN   TestCompletionCobraFlags/completion_after_-v_flag_when_only_-v_flag_was_created_by_program
+=== RUN   TestCompletionCobraFlags/no_completion_for_--help/-h_and_--version/-v_flags_when_DisableFlagParsing=true
+=== RUN   TestCompletionCobraFlags/completions_for_program-defined_--help/-h_and_--version/-v_flags_even_when_DisableFlagParsing=true
+--- PASS: TestCompletionCobraFlags (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_of_help_and_version_flags (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_--help_flag (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_-h_flag (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_--version_flag (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_-v_flag (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_--help_flag_even_with_other_completions (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_-h_flag_even_with_other_completions (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_--version_flag_even_with_other_completions (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_-v_flag_even_with_other_completions (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_after_-v_flag_even_with_other_flag_completions (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_after_--help_flag_when_created_by_program (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_after_-h_flag_when_created_by_program (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_after_--version_flag_when_created_by_program (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_after_-v_flag_when_created_by_program (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_after_--version_when_only_-v_flag_was_created_by_program (0.00s)
+    --- PASS: TestCompletionCobraFlags/completion_after_-v_flag_when_only_-v_flag_was_created_by_program (0.00s)
+    --- PASS: TestCompletionCobraFlags/no_completion_for_--help/-h_and_--version/-v_flags_when_DisableFlagParsing=true (0.00s)
+    --- PASS: TestCompletionCobraFlags/completions_for_program-defined_--help/-h_and_--version/-v_flags_even_when_DisableFlagParsing=true (0.00s)
+=== RUN   TestArgsNotDetectedAsFlagsCompletionInGo
+=== RUN   TestArgsNotDetectedAsFlagsCompletionInGo/empty
+=== RUN   TestArgsNotDetectedAsFlagsCompletionInGo/service_only
+=== RUN   TestArgsNotDetectedAsFlagsCompletionInGo/service_last
+=== RUN   TestArgsNotDetectedAsFlagsCompletionInGo/two_digit_prefixed_dash_last
+=== RUN   TestArgsNotDetectedAsFlagsCompletionInGo/one_digit_prefixed_dash_last
+--- PASS: TestArgsNotDetectedAsFlagsCompletionInGo (0.00s)
+    --- PASS: TestArgsNotDetectedAsFlagsCompletionInGo/empty (0.00s)
+    --- PASS: TestArgsNotDetectedAsFlagsCompletionInGo/service_only (0.00s)
+    --- PASS: TestArgsNotDetectedAsFlagsCompletionInGo/service_last (0.00s)
+    --- PASS: TestArgsNotDetectedAsFlagsCompletionInGo/two_digit_prefixed_dash_last (0.00s)
+    --- PASS: TestArgsNotDetectedAsFlagsCompletionInGo/one_digit_prefixed_dash_last (0.00s)
+=== RUN   TestGetFlagCompletion
+=== RUN   TestGetFlagCompletion/get_flag_completion_function_for_command
+=== RUN   TestGetFlagCompletion/get_persistent_flag_completion_function_for_command
+=== RUN   TestGetFlagCompletion/get_flag_completion_function_for_child_command
+=== RUN   TestGetFlagCompletion/get_persistent_flag_completion_function_for_child_command
+=== RUN   TestGetFlagCompletion/cannot_get_flag_completion_function_for_local_parent_flag
+--- PASS: TestGetFlagCompletion (0.00s)
+    --- PASS: TestGetFlagCompletion/get_flag_completion_function_for_command (0.00s)
+    --- PASS: TestGetFlagCompletion/get_persistent_flag_completion_function_for_command (0.00s)
+    --- PASS: TestGetFlagCompletion/get_flag_completion_function_for_child_command (0.00s)
+    --- PASS: TestGetFlagCompletion/get_persistent_flag_completion_function_for_child_command (0.00s)
+    --- PASS: TestGetFlagCompletion/cannot_get_flag_completion_function_for_local_parent_flag (0.00s)
+=== RUN   TestGetEnvConfig
+=== RUN   TestGetEnvConfig/Command_envvar_overrides_global
+=== RUN   TestGetEnvConfig/Missing/empty_command_envvar_falls_back_to_global
+=== RUN   TestGetEnvConfig/Missing/empty_command_and_global_envvars_fall_back_to_empty
+=== RUN   TestGetEnvConfig/Periods_in_command_use_transform_to_underscores_in_env_var_name
+=== RUN   TestGetEnvConfig/Dashes_in_command_use_transform_to_underscores_in_env_var_name
+--- PASS: TestGetEnvConfig (0.00s)
+    --- PASS: TestGetEnvConfig/Command_envvar_overrides_global (0.00s)
+    --- PASS: TestGetEnvConfig/Missing/empty_command_envvar_falls_back_to_global (0.00s)
+    --- PASS: TestGetEnvConfig/Missing/empty_command_and_global_envvars_fall_back_to_empty (0.00s)
+    --- PASS: TestGetEnvConfig/Periods_in_command_use_transform_to_underscores_in_env_var_name (0.00s)
+    --- PASS: TestGetEnvConfig/Dashes_in_command_use_transform_to_underscores_in_env_var_name (0.00s)
+=== RUN   TestDisableDescriptions
+=== RUN   TestDisableDescriptions/No_env_variables_set
+=== RUN   TestDisableDescriptions/Global_value_false
+=== RUN   TestDisableDescriptions/Specific_value_false
+=== RUN   TestDisableDescriptions/Both_values_false
+=== RUN   TestDisableDescriptions/Both_values_true
+--- PASS: TestDisableDescriptions (0.00s)
+    --- PASS: TestDisableDescriptions/No_env_variables_set (0.00s)
+    --- PASS: TestDisableDescriptions/Global_value_false (0.00s)
+    --- PASS: TestDisableDescriptions/Specific_value_false (0.00s)
+    --- PASS: TestDisableDescriptions/Both_values_false (0.00s)
+    --- PASS: TestDisableDescriptions/Both_values_true (0.00s)
+=== RUN   TestInitDefaultCompletionCmd
+=== RUN   TestInitDefaultCompletionCmd/no_child_command_and_not_calling_the_completion_command
+=== RUN   TestInitDefaultCompletionCmd/no_child_command_but_calling_the_completion_command
+=== RUN   TestInitDefaultCompletionCmd/no_child_command_but_calling___complete_on_the_root_command
+=== RUN   TestInitDefaultCompletionCmd/no_child_command_but_calling___complete_on_the_completion_command
+=== RUN   TestInitDefaultCompletionCmd/with_child_command
+=== RUN   TestInitDefaultCompletionCmd/no_child_command_not_passing_args
+=== RUN   TestInitDefaultCompletionCmd/with_child_command_not_passing_args
+--- PASS: TestInitDefaultCompletionCmd (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/no_child_command_and_not_calling_the_completion_command (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/no_child_command_but_calling_the_completion_command (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/no_child_command_but_calling___complete_on_the_root_command (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/no_child_command_but_calling___complete_on_the_completion_command (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/with_child_command (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/no_child_command_not_passing_args (0.00s)
+    --- PASS: TestInitDefaultCompletionCmd/with_child_command_not_passing_args (0.00s)
+=== RUN   TestCustomDefaultShellCompDirective
+=== RUN   TestCustomDefaultShellCompDirective/flag_completion_on_root_command_with_custom_DefaultShellCompDirective
+=== RUN   TestCustomDefaultShellCompDirective/flag_completion_on_subcommand_with_inherited_custom_DefaultShellCompDirective
+=== RUN   TestCustomDefaultShellCompDirective/flag_completion_on_subcommand_with_reset_DefaultShellCompDirective
+--- PASS: TestCustomDefaultShellCompDirective (0.00s)
+    --- PASS: TestCustomDefaultShellCompDirective/flag_completion_on_root_command_with_custom_DefaultShellCompDirective (0.00s)
+    --- PASS: TestCustomDefaultShellCompDirective/flag_completion_on_subcommand_with_inherited_custom_DefaultShellCompDirective (0.00s)
+    --- PASS: TestCustomDefaultShellCompDirective/flag_completion_on_subcommand_with_reset_DefaultShellCompDirective (0.00s)
+=== RUN   TestCompletionDoesNotMutateOsArgs
+--- PASS: TestCompletionDoesNotMutateOsArgs (0.00s)
+=== RUN   TestCompleteNoDesCmdInFishScript
+--- PASS: TestCompleteNoDesCmdInFishScript (0.00s)
+=== RUN   TestCompleteCmdInFishScript
+--- PASS: TestCompleteCmdInFishScript (0.00s)
+=== RUN   TestProgWithDash
+--- PASS: TestProgWithDash (0.00s)
+=== RUN   TestProgWithColon
+--- PASS: TestProgWithColon (0.00s)
+=== RUN   TestFishCompletionNoActiveHelp
+--- PASS: TestFishCompletionNoActiveHelp (0.00s)
+=== RUN   TestGenFishCompletionFile
+--- PASS: TestGenFishCompletionFile (0.05s)
+=== RUN   TestFailGenFishCompletionFile
+--- PASS: TestFailGenFishCompletionFile (0.00s)
+=== RUN   TestValidateFlagGroups
+=== RUN   TestValidateFlagGroups/No_flags_no_problem
+=== RUN   TestValidateFlagGroups/No_flags_no_problem_even_with_conflicting_groups
+=== RUN   TestValidateFlagGroups/Required_flag_group_not_satisfied
+Error: if any flags in the group [a b c] are set they must all be set; missing [b c]
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/One-required_flag_group_not_satisfied
+Error: at least one of the flags in the group [a b] is required
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Exclusive_flag_group_not_satisfied
+Error: if any flags in the group [a b c] are set none of the others can be; [a b] were all set
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Multiple_required_flag_group_not_satisfied_returns_first_error
+Error: if any flags in the group [a b c] are set they must all be set; missing [a b]
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Multiple_one-required_flag_group_not_satisfied_returns_first_error
+Error: at least one of the flags in the group [a b] is required
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Multiple_exclusive_flag_group_not_satisfied_returns_first_error
+Error: if any flags in the group [a b c] are set none of the others can be; [a c] were all set
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Validation_of_required_groups_occurs_on_groups_in_sorted_order
+Error: if any flags in the group [a b] are set they must all be set; missing [b]
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Validation_of_one-required_groups_occurs_on_groups_in_sorted_order
+Error: at least one of the flags in the group [a b] is required
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Validation_of_exclusive_groups_occurs_on_groups_in_sorted_order
+Error: if any flags in the group [a b] are set none of the others can be; [a b] were all set
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Persistent_flags_utilize_required_and_exclusive_groups_and_can_fail_required_groups
+Error: if any flags in the group [a e] are set they must all be set; missing [e]
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Persistent_flags_utilize_one-required_and_exclusive_groups_and_can_fail_one-required_groups
+Error: at least one of the flags in the group [a b] is required
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Persistent_flags_utilize_required_and_exclusive_groups_and_can_fail_mutually_exclusive_groups
+Error: if any flags in the group [f g] are set none of the others can be; [f g] were all set
+Usage:
+  testcmd [flags]
+  testcmd [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  subcmd      
+
+Flags:
+      --a string   
+      --b string   
+      --c string   
+      --d string   
+      --e string   
+      --f string   
+      --g string   
+  -h, --help       help for testcmd
+
+Use "testcmd [command] --help" for more information about a command.
+
+=== RUN   TestValidateFlagGroups/Persistent_flags_utilize_required_and_exclusive_groups_and_can_pass
+=== RUN   TestValidateFlagGroups/Persistent_flags_utilize_one-required_and_exclusive_groups_and_can_pass
+=== RUN   TestValidateFlagGroups/Subcmds_can_use_required_groups_using_inherited_flags
+=== RUN   TestValidateFlagGroups/Subcmds_can_use_one-required_groups_using_inherited_flags
+=== RUN   TestValidateFlagGroups/Subcmds_can_use_one-required_groups_using_inherited_flags_and_fail_one-required_groups
+Error: at least one of the flags in the group [e subonly] is required
+Usage:
+  testcmd subcmd [flags]
+
+Flags:
+  -h, --help             help for subcmd
+      --subonly string
+
+Global Flags:
+      --e string   
+      --f string   
+      --g string
+
+=== RUN   TestValidateFlagGroups/Subcmds_can_use_exclusive_groups_using_inherited_flags
+Error: if any flags in the group [e subonly] are set none of the others can be; [e subonly] were all set
+Usage:
+  testcmd subcmd [flags]
+
+Flags:
+  -h, --help             help for subcmd
+      --subonly string
+
+Global Flags:
+      --e string   
+      --f string   
+      --g string
+
+=== RUN   TestValidateFlagGroups/Subcmds_can_use_exclusive_groups_using_inherited_flags_and_pass
+=== RUN   TestValidateFlagGroups/Flag_groups_not_applied_if_not_found_on_invoked_command
+--- PASS: TestValidateFlagGroups (0.01s)
+    --- PASS: TestValidateFlagGroups/No_flags_no_problem (0.00s)
+    --- PASS: TestValidateFlagGroups/No_flags_no_problem_even_with_conflicting_groups (0.00s)
+    --- PASS: TestValidateFlagGroups/Required_flag_group_not_satisfied (0.00s)
+    --- PASS: TestValidateFlagGroups/One-required_flag_group_not_satisfied (0.00s)
+    --- PASS: TestValidateFlagGroups/Exclusive_flag_group_not_satisfied (0.00s)
+    --- PASS: TestValidateFlagGroups/Multiple_required_flag_group_not_satisfied_returns_first_error (0.00s)
+    --- PASS: TestValidateFlagGroups/Multiple_one-required_flag_group_not_satisfied_returns_first_error (0.00s)
+    --- PASS: TestValidateFlagGroups/Multiple_exclusive_flag_group_not_satisfied_returns_first_error (0.00s)
+    --- PASS: TestValidateFlagGroups/Validation_of_required_groups_occurs_on_groups_in_sorted_order (0.00s)
+    --- PASS: TestValidateFlagGroups/Validation_of_one-required_groups_occurs_on_groups_in_sorted_order (0.00s)
+    --- PASS: TestValidateFlagGroups/Validation_of_exclusive_groups_occurs_on_groups_in_sorted_order (0.00s)
+    --- PASS: TestValidateFlagGroups/Persistent_flags_utilize_required_and_exclusive_groups_and_can_fail_required_groups (0.00s)
+    --- PASS: TestValidateFlagGroups/Persistent_flags_utilize_one-required_and_exclusive_groups_and_can_fail_one-required_groups (0.00s)
+    --- PASS: TestValidateFlagGroups/Persistent_flags_utilize_required_and_exclusive_groups_and_can_fail_mutually_exclusive_groups (0.00s)
+    --- PASS: TestValidateFlagGroups/Persistent_flags_utilize_required_and_exclusive_groups_and_can_pass (0.00s)
+    --- PASS: TestValidateFlagGroups/Persistent_flags_utilize_one-required_and_exclusive_groups_and_can_pass (0.00s)
+    --- PASS: TestValidateFlagGroups/Subcmds_can_use_required_groups_using_inherited_flags (0.00s)
+    --- PASS: TestValidateFlagGroups/Subcmds_can_use_one-required_groups_using_inherited_flags (0.00s)
+    --- PASS: TestValidateFlagGroups/Subcmds_can_use_one-required_groups_using_inherited_flags_and_fail_one-required_groups (0.00s)
+    --- PASS: TestValidateFlagGroups/Subcmds_can_use_exclusive_groups_using_inherited_flags (0.00s)
+    --- PASS: TestValidateFlagGroups/Subcmds_can_use_exclusive_groups_using_inherited_flags_and_pass (0.00s)
+    --- PASS: TestValidateFlagGroups/Flag_groups_not_applied_if_not_found_on_invoked_command (0.00s)
+=== RUN   TestPwshCompletionNoActiveHelp
+--- PASS: TestPwshCompletionNoActiveHelp (0.00s)
+=== RUN   TestZshCompletionWithActiveHelp
+--- PASS: TestZshCompletionWithActiveHelp (0.00s)
+PASS
+ok  	github.com/spf13/cobra	8.730s
+=== RUN   TestGenManDoc
+--- PASS: TestGenManDoc (0.00s)
+=== RUN   TestGenManNoHiddenParents
+--- PASS: TestGenManNoHiddenParents (0.00s)
+=== RUN   TestGenManNoGenTag
+--- PASS: TestGenManNoGenTag (0.00s)
+=== RUN   TestGenManSeeAlso
+--- PASS: TestGenManSeeAlso (0.00s)
+=== RUN   TestManPrintFlagsHidesShortDeprecated
+--- PASS: TestManPrintFlagsHidesShortDeprecated (0.00s)
+=== RUN   TestGenManTree
+--- PASS: TestGenManTree (0.00s)
+=== RUN   TestGenMdDoc
+--- PASS: TestGenMdDoc (0.00s)
+=== RUN   TestGenMdDocWithNoLongOrSynopsis
+--- PASS: TestGenMdDocWithNoLongOrSynopsis (0.00s)
+=== RUN   TestGenMdNoHiddenParents
+--- PASS: TestGenMdNoHiddenParents (0.00s)
+=== RUN   TestGenMdNoTag
+--- PASS: TestGenMdNoTag (0.00s)
+=== RUN   TestGenMdTree
+--- PASS: TestGenMdTree (0.00s)
+=== RUN   TestGenRSTDoc
+--- PASS: TestGenRSTDoc (0.00s)
+=== RUN   TestGenRSTNoHiddenParents
+--- PASS: TestGenRSTNoHiddenParents (0.00s)
+=== RUN   TestGenRSTNoTag
+--- PASS: TestGenRSTNoTag (0.00s)
+=== RUN   TestGenRSTTree
+--- PASS: TestGenRSTTree (0.00s)
+=== RUN   TestGenYamlDoc
+--- PASS: TestGenYamlDoc (0.00s)
+=== RUN   TestGenYamlNoTag
+--- PASS: TestGenYamlNoTag (0.00s)
+=== RUN   TestGenYamlTree
+--- PASS: TestGenYamlTree (0.00s)
+=== RUN   TestGenYamlDocRunnable
+--- PASS: TestGenYamlDocRunnable (0.00s)
+PASS
+ok  	github.com/spf13/cobra/doc	0.349s

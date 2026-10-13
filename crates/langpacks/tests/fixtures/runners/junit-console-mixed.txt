@@ -1,0 +1,55 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ CalculatorTest ✔
+│  │  ├─ comparesGreaterThan() ✔
+│  │  ├─ addsTwoNumbers() ✔
+│  │  └─ multipliesTwoNumbers() ✔
+│  ├─ OrderServiceTest ✔
+│  │  ├─ totalsAnEmptyOrder() ✔
+│  │  ├─ looksUpAMissingCustomer() ✘ Cannot invoke "String.trim()" because "customer" is null
+│  │  └─ appliesDiscountToLargeOrders() ✘ discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+│  └─ ShippingTest ✔
+│     ├─ computesInternationalRate() ↷ flaky against the sandbox carrier API
+│     ├─ computesExpressRate() ■ Assumption failed: no CARRIER_TOKEN in the environment
+│     └─ computesDomesticRate() ✔
+└─ JUnit Vintage ✔
+
+Failures (2):
+  JUnit Jupiter:OrderServiceTest:looksUpAMissingCustomer()
+    MethodSource [className = 'demo.OrderServiceTest', methodName = 'looksUpAMissingCustomer', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "String.trim()" because "customer" is null
+       demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+       java.base/java.lang.reflect.Method.invoke(Method.java:569)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:OrderServiceTest:appliesDiscountToLargeOrders()
+    MethodSource [className = 'demo.OrderServiceTest', methodName = 'appliesDiscountToLargeOrders', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+       demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+       java.base/java.lang.reflect.Method.invoke(Method.java:569)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+Test run finished after 197 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[         9 tests found           ]
+[         1 tests skipped         ]
+[         8 tests started         ]
+[         1 tests aborted         ]
+[         5 tests successful      ]
+[         2 tests failed          ]
+

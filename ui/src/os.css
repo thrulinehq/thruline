@@ -1,0 +1,122 @@
+/* ThruLine — Recovery OS shell tokens (design v3, RA6).
+ *
+ * Provenance: docs/design/Throughline_Recovery_OS.html (sha256 b0646b3a…),
+ * :root emitted verbatim below. These variables are namespaced apart from the
+ * macOS graph tokens (macos.css) on purpose: the Trace tab keeps its
+ * own token system, retained unchanged from RA5. */
+:root {
+  --bg: #0c0f13; --win: #151a20; --side: #171c23;
+  --s1: #1a2028; --s2: #202731; --s3: #28313c;
+  --line: rgba(255,255,255,.075); --line2: rgba(255,255,255,.13);
+  --t1: #f2f5f7; --t2: #b6bec8; --t3: #737e8c;
+  --a: #58d6ca; --as: rgba(88,214,202,.12);
+  --g: #62db8b; --gs: rgba(98,219,139,.12);
+  --o: #ff9257; --os: rgba(255,146,87,.12);
+  --y: #e8bf53; --ys: rgba(232,191,83,.12);
+  --p: #bd86ed; --ps: rgba(189,134,237,.12);
+  --r: #f26c67; --rs: rgba(242,108,103,.12);
+  --b: #6ca6ed; --bs: rgba(108,166,237,.12);
+  --rad: 11px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+.os-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(75rem 42rem at 50% -18%, #273441 0, transparent 68%),
+    linear-gradient(145deg, #0e1116, #090b0f);
+  color: var(--t1);
+  font: 13px/1.4 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+}
+
+.os-sidebar {
+  position: relative; z-index: 20; min-width: 0;
+  display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden;
+  background: var(--side); border-right: 1px solid var(--line);
+}
+.os-main { min-width: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--win); }
+.os-topbar { flex: none; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.os-topbar-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--t2); font: 500 12.5px/1 var(--sans); }
+.os-refresh-region { flex: 0 1 520px; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 8px; padding: 7px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--s1); }
+.os-refresh-region.error { border-color: color-mix(in srgb, var(--r) 62%, var(--line)); }
+.os-refresh-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.os-refresh-copy strong { color: var(--t1); font: 600 10.5px/1.25 var(--sans); }
+.os-refresh-copy span { color: var(--t3); font: 400 9.5px/1.35 var(--sans); overflow-wrap: anywhere; }
+.os-refresh-region > button { min-height: 28px; max-width: 100%; padding: 0 9px; border: 1px solid var(--line2); border-radius: 7px; color: var(--t1); background: var(--as); font: 600 10px/1.2 var(--sans); white-space: normal; overflow-wrap: anywhere; }
+.os-refresh-region > button:disabled { color: var(--t3); background: var(--s2); cursor: wait; }
+.os-refresh-recovery { min-width: 0; color: var(--t3); font: 400 9.5px/1.35 var(--sans); }
+.os-refresh-recovery summary { cursor: pointer; white-space: nowrap; }
+.os-refresh-recovery p { max-width: 58ch; margin: 7px 0 0; overflow-wrap: anywhere; }
+.os-menu-button, .os-sidebar-backdrop, .os-sidebar-close { display: none; }
+.os-project-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 4px 6px; color: var(--t3); font: 600 9.5px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.os-project-heading span:last-child { font-family: var(--mono); font-weight: 400; letter-spacing: 0; }
+.os-project-search { display: flex; align-items: center; gap: 6px; margin: 0 0 7px; padding: 6px 8px; border: 1px solid var(--line2); border-radius: 7px; color: var(--t3); background: var(--s1); }
+.os-project-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--t1); font: 400 11.5px/1.2 var(--sans); }
+.os-project-empty { padding: 5px 4px; color: var(--t3); font: 400 10.5px/1.45 var(--mono); overflow-wrap: anywhere; }
+
+.os-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.os-icon.sm { width: 13px; height: 13px; }
+
+.os-nav {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; padding: 7px 10px; border-radius: 8px;
+  background: transparent; color: var(--t2); text-align: left;
+  font-size: 12.5px;
+}
+.os-nav:hover { background: var(--s1); color: var(--t1); }
+.os-nav.active { background: var(--as); color: var(--a); }
+/* ── The two state machines (C7 Part 3) ────────────────────────────────────
+ *
+ * This app shows two completely different kinds of state, and before C7 they
+ * shared one widget: `.os-dot` rendered both an agent lane's liveness and the
+ * privacy assurance, in the same green, at the same size.
+ *
+ * RUNTIME HEALTH — is something running right now? Agent lanes, liveness,
+ *   "Local — nothing leaves this device". Volatile, re-read every poll, gone
+ *   when the process is. Its vocabulary is the DOT, and its palette is exactly
+ *   two colours: --g (live) and --s3 (quiet).
+ *
+ * EVIDENCE VERDICTS — what does the record say? Attention counts and the C0.2
+ *   verdict words (Supported · Contradicted · No proof found · Insufficient
+ *   evidence · Not evaluated). Durable, derived from the ledger, true whether
+ *   or not anything is running. Its vocabulary is WORDS AND COUNTS, and its
+ *   palette is --o (needs a look) and --t3 (calm).
+ *
+ * The two may not share a widget, a colour, or a glyph. A person should never
+ * have to learn that one green circle means "the agent is writing" and another
+ * means "the claim holds up" — and the palettes above are disjoint so that
+ * confusion is not available even to a careless future edit. Regions are marked
+ * `data-machine="runtime"` / `data-machine="evidence"`, and
+ * `the two state machines do not share a vocabulary` (inbox.test.js) walks the
+ * source and fails if either vocabulary appears in the other's component. */
+
+.os-runtime-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.os-evidence-count { font: 500 10px/1 var(--mono); color: var(--o); }
+.os-evidence-line { font: 400 11.5px/1 var(--sans); color: var(--o); }
+.os-evidence-line.calm { color: var(--t3); }
+.os-scroll { scrollbar-width: thin; scrollbar-color: var(--line2) transparent; }
+.os-scroll::-webkit-scrollbar { width: 10px; }
+.os-scroll::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 8px; border: 3px solid transparent; background-clip: content-box; }
+
+@media (max-width: 900px) {
+  .os-root { display: block; --os-sidebar-drawer-width: min(320px, 88vw); }
+  .os-sidebar { position: absolute; inset: 0 auto 0 0; width: var(--os-sidebar-drawer-width); box-sizing: border-box; transform: translateX(-102%); transition: transform 180ms var(--ease); box-shadow: 18px 0 40px rgba(0,0,0,.35); }
+  .os-sidebar.open { transform: translateX(0); }
+  .os-sidebar-brand { min-width: 0; }
+  .os-sidebar-close { margin-left: auto; min-height: 28px; padding: 0 9px; display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line2); border-radius: 7px; color: var(--t1); background: var(--s1); font: 500 11px/1 var(--sans); }
+  .os-sidebar-close > span:first-child { font-size: 17px; line-height: 1; }
+  .os-sidebar-backdrop { display: block; position: absolute; z-index: 19; top: 0; right: 0; bottom: 0; left: var(--os-sidebar-drawer-width); background: rgba(0,0,0,.55); }
+  .os-main { width: 100%; height: 100%; }
+  .os-topbar { min-height: 44px; box-sizing: border-box; padding: 8px 10px; flex-wrap: wrap; gap: 8px; }
+  .os-refresh-region { order: 2; flex: 1 0 100%; width: 100%; grid-template-columns: minmax(0, 1fr) auto; box-sizing: border-box; }
+  .os-refresh-recovery { grid-column: 1; }
+  .os-refresh-region > button { grid-column: 2; grid-row: 1 / span 2; }
+  .os-menu-button { display: grid; place-items: center; flex: none; width: 30px; height: 28px; border: 1px solid var(--line2); border-radius: 7px; color: var(--t2); }
+  .os-evidence-line { min-width: 0; max-width: 56vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}

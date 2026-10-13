@@ -1,0 +1,10 @@
+--- FAIL: TestExactArgs_WithInvalidCount (0.00s)
+    args_test.go:90: Expected an error
+--- FAIL: TestExactArgs_WithInvalidCount_WithValid (0.00s)
+    args_test.go:90: Expected an error
+--- FAIL: TestExactArgs_WithInvalidCount_WithValid_WithInvalidArgs (0.00s)
+    args_test.go:90: Expected an error
+FAIL
+FAIL	github.com/spf13/cobra	0.532s
+ok  	github.com/spf13/cobra/doc	0.693s [no tests to run]
+FAIL

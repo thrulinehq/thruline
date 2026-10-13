@@ -1,0 +1,3015 @@
+{
+  "build": {
+    "binary": "<CARGO_TARGET_DIR>/release/thruline",
+    "binary_sha256": "903680da8fdd7e274bc3c043fe0bb5f5d78d747a6d01341ff686d7574ff48cab",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "command": "cargo build --locked --offline --profile release -p thruline-cli --bin thruline   (cwd: the export; default features; RUSTFLAGS unset; retried without --offline only under --allow-network)",
+    "profile": "release",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)"
+  },
+  "claim_output": "fixtures[].claim_output, for each session that reached the store: the lengths of the claims, negated and promises arrays in claims.json, and of the claims_vs_proof and promises arrays in explain.json, plus explain.json's why_it_stopped.kind, and claims.verdicts: for each entry of claims.json's claims array, in order, the pair [kind, verdict] of that entry's values (null for an absent key, and null in place of an entry that is not an object). A value is null where its key is absent or has another type. summary.fixtures_with_claim_bearing_output counts the sessions where any of those lengths is above 0, and summary.why_it_stopped_kinds counts the kinds. When fixtures_with_claim_bearing_output is 0, this capture exercises no claim-bearing output, and an empty diff against another capture says nothing about how claims, promises or claims_vs_proof are produced or rendered. summary.fixtures_by_route counts the selected fixtures per route, 0 included. summary.spool_sessions_with_claim_bearing_output counts the route spool fixtures with claim-bearing output, and a route spool fixture without it fails the run (exit 1).",
+  "commands": [
+    "route legacy: thruline --db <WORK>/sessions/<name>/store/ledger.db ingest --apply <SRC>/<fixture path>",
+    "route legacy: thruline import-legacy --source <WORK>/sessions/<name>/store/ledger.db --exec-db <WORK>/sessions/<name>/store/exec.db --json",
+    "route spool: the fixture's bytes copied to <WORK>/sessions/<name>/spool/claude-code.jsonl, then thruline fold --spool <that copy> --exec-db <WORK>/sessions/<name>/store/exec.db --repo <WORK>/repo --json   (never folded in place: fold writes held-back lines to a .quarantine file beside the spool)",
+    "thruline claims --last --exec-db <exec.db> --repo <WORK>/repo --json",
+    "thruline explain --session <id> --exec-db <exec.db> --repo <WORK>/repo --json",
+    "thruline receipt --predicate-version <v> --session <id> --sign-with <WORK>/key/signing.pem --exec-db <exec.db> --repo <WORK>/repo --json   (v = 0.2, then 0.1)",
+    "thruline verify-receipt <that receipt, as emitted> --key <WORK>/key/signing.pub --offline --format json --exec-db <exec.db> --repo <WORK>/repo   (only for an emitted receipt)",
+    "thruline receipt <the same arguments> --trailer   (only for an emitted receipt; only the ThruLine-Receipt line is kept)"
+  ],
+  "commit": "896c9d663de6c87249dc2ed5817ad995034484e3",
+  "environment": {
+    "cli": "env -i PATH=<dir of git>:/usr/bin:/bin HOME=<WORK>/sessions/<name>/home THRULINE_HOME=<that home>/.thruline LC_ALL=C LANG=C TZ=UTC NO_COLOR=1 TERM=dumb GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null; cwd <WORK>/repo; stdin closed",
+    "git": "git version 2.50.1 (Apple Git-155)",
+    "work_repo": {
+      "commit": "84ec0e1398b104136666b20fec11b422b3415a9c",
+      "file": "README",
+      "file_text": "hq-invariance work repository: one fixed commit, so receipts name a non-empty tree.\n",
+      "identity": {
+        "GIT_AUTHOR_DATE": "2000-01-01T00:00:00 +0000",
+        "GIT_AUTHOR_EMAIL": "hq-invariance@invalid",
+        "GIT_AUTHOR_NAME": "hq-invariance",
+        "GIT_COMMITTER_DATE": "2000-01-01T00:00:00 +0000",
+        "GIT_COMMITTER_EMAIL": "hq-invariance@invalid",
+        "GIT_COMMITTER_NAME": "hq-invariance"
+      },
+      "message": "hq-invariance work tree",
+      "path": "<WORK>/repo",
+      "setup": "git -c init.defaultBranch=main init -q --template= <WORK>/repo; write README; git add -- README; git -c commit.gpgsign=false commit -q -m <message>, under the identity below. One repository is shared by every session. The run fails if any command moves its HEAD or leaves `git status --porcelain=v1 --ignored -uall` non-empty",
+      "tree": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+      "why": "with git's empty tree (no commit), verify-receipt fails `subject_tree` on every receipt, and each capture would record only that failure"
+    }
+  },
+  "export": "git archive --format=tar <commit>, extracted to <cache>/src/<commit>",
+  "failures": [],
+  "fixtures": [
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "bad_utf8",
+      "path": "crates/core/tests/fixtures/bad_utf8.jsonl",
+      "route": "legacy",
+      "session_id": "bad_utf8",
+      "sha256": "513eb4d6aedbf0c55611d6f3eef3ef6f731d6d01ca95f63991e67e9e980ec301",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 2,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [
+          [
+            "build_ok",
+            "supported"
+          ],
+          [
+            "tests_pass",
+            "unverifiable"
+          ]
+        ],
+        "explain.claims_vs_proof": 2,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "agent_finished"
+      },
+      "name": "claims__01-three-asks-one-done-one-claimed-one-untouched",
+      "path": "crates/core/tests/fixtures/claims/01-three-asks-one-done-one-claimed-one-untouched.jsonl",
+      "route": "spool",
+      "session_id": "cccccccc-0001-4000-8000-000000000000",
+      "sha256": "2729ffdd00bed723a1ed86e8d5afc8725d33d62a168e7f32b9541fc5605d5a3c",
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 0,
+        "session_id": 1
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 1,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [
+          [
+            "lint_ok",
+            "supported"
+          ]
+        ],
+        "explain.claims_vs_proof": 1,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "agent_finished"
+      },
+      "name": "claims__02-supported-lint-claim",
+      "path": "crates/core/tests/fixtures/claims/02-supported-lint-claim.jsonl",
+      "route": "spool",
+      "session_id": "cccccccc-0002-4000-8000-000000000000",
+      "sha256": "658ac3fe57b994fb33a4bcf74a7ae208dd0a3d97db28e80a69ff34c8cb8a6389",
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 0,
+        "session_id": 1
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 1,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [
+          [
+            "tests_pass",
+            "unsupported"
+          ]
+        ],
+        "explain.claims_vs_proof": 1,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "error"
+      },
+      "name": "claims__03-contradicted-tests-claim",
+      "path": "crates/core/tests/fixtures/claims/03-contradicted-tests-claim.jsonl",
+      "route": "spool",
+      "session_id": "cccccccc-0003-4000-8000-000000000000",
+      "sha256": "a337a2d493e92cfb511ec94ad67116b10632386d8fdc018ff984dfb3c938e3ae",
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 0,
+        "session_id": 1
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 1,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [
+          [
+            "tests_pass",
+            "unverifiable"
+          ]
+        ],
+        "explain.claims_vs_proof": 1,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "agent_finished"
+      },
+      "name": "claims__04-insufficient-evidence-tests-claim",
+      "path": "crates/core/tests/fixtures/claims/04-insufficient-evidence-tests-claim.jsonl",
+      "route": "spool",
+      "session_id": "cccccccc-0004-4000-8000-000000000000",
+      "sha256": "876474cc798111a7ebe0b2af7e0499266eb5d2bd2af3e7953a462a5eb6d7cc69",
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 0,
+        "session_id": 1
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 1,
+        "claims.negated": 0,
+        "claims.promises": 1,
+        "claims.verdicts": [
+          [
+            "build_ok",
+            "supported"
+          ]
+        ],
+        "explain.claims_vs_proof": 1,
+        "explain.promises": 1,
+        "explain.why_it_stopped.kind": "agent_finished"
+      },
+      "name": "claims__05-open-promise-beside-supported-build",
+      "path": "crates/core/tests/fixtures/claims/05-open-promise-beside-supported-build.jsonl",
+      "route": "spool",
+      "session_id": "cccccccc-0005-4000-8000-000000000000",
+      "sha256": "20d207989a227a0397e95dd454b04943e9ba20b8367572fa5d5208fe7bfaeb6b",
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 0,
+        "session_id": 1
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "claude_code_sessions",
+      "path": "crates/core/tests/fixtures/claude_code_sessions.jsonl",
+      "route": "legacy",
+      "session_id": "claude_code_sessions",
+      "sha256": "e32d26ee6ecb41f8e5627b8c2b5ac0042561cba2ad4e435eb5beae6251a131be",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 4,
+        "sessionId": 3,
+        "session_id": 1
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__01-cargo-true-claim-matching-run",
+      "path": "crates/core/tests/fixtures/eval/01-cargo-true-claim-matching-run.jsonl",
+      "route": "legacy",
+      "session_id": "01-cargo-true-claim-matching-run",
+      "sha256": "f2ffe49e283c40ffe0851617cb965b07a45330dd2d191e9ef0c2076627278ceb",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__02-cargo-false-claim-no-run-at-all",
+      "path": "crates/core/tests/fixtures/eval/02-cargo-false-claim-no-run-at-all.jsonl",
+      "route": "legacy",
+      "session_id": "02-cargo-false-claim-no-run-at-all",
+      "sha256": "4940706649e5977eb04862668e57f6423b7287dd93c1868011e421112476dbba",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__03-cargo-misstated-result-the-crown-j",
+      "path": "crates/core/tests/fixtures/eval/03-cargo-misstated-result-the-crown-j.jsonl",
+      "route": "legacy",
+      "session_id": "03-cargo-misstated-result-the-crown-j",
+      "sha256": "a99eb62e80811e5b71b30c6ef79c5502cd59437c06e46bd7d968bf5c50fcc4d1",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__04-cargo-build-succeeded-but-failed",
+      "path": "crates/core/tests/fixtures/eval/04-cargo-build-succeeded-but-failed.jsonl",
+      "route": "legacy",
+      "session_id": "04-cargo-build-succeeded-but-failed",
+      "sha256": "8d2ce99a8f2e62ef153598b97e185ebcc14c190755f603420b82139a4ed790dd",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__05-pytest-true-claim",
+      "path": "crates/core/tests/fixtures/eval/05-pytest-true-claim.jsonl",
+      "route": "legacy",
+      "session_id": "05-pytest-true-claim",
+      "sha256": "797390d436ba09c4f2d00ebf65ec0c0fbc65063d62b6c08e37ed879266927847",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__06-pytest-misstated-result",
+      "path": "crates/core/tests/fixtures/eval/06-pytest-misstated-result.jsonl",
+      "route": "legacy",
+      "session_id": "06-pytest-misstated-result",
+      "sha256": "8efc5e432b700bb0a3632c93f2c64f26d9cf83f9821e3684f1226d5234bedcda",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__07-npm-true-claim",
+      "path": "crates/core/tests/fixtures/eval/07-npm-true-claim.jsonl",
+      "route": "legacy",
+      "session_id": "07-npm-true-claim",
+      "sha256": "00ad16b16446c9bb25b8e236cb1c2285919a217aeb7c4bd8736276d7f3f81836",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__08-vitest-misstated-result",
+      "path": "crates/core/tests/fixtures/eval/08-vitest-misstated-result.jsonl",
+      "route": "legacy",
+      "session_id": "08-vitest-misstated-result",
+      "sha256": "7a88eff72282d462ae6304cebcfe41a3e27aeaac88647d946e7212e4de3914ac",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__09-cargo-true-claim-paraphrased-away",
+      "path": "crates/core/tests/fixtures/eval/09-cargo-true-claim-paraphrased-away.jsonl",
+      "route": "legacy",
+      "session_id": "09-cargo-true-claim-paraphrased-away",
+      "sha256": "d0bbfd28b2e8e370c9c01d2b5cf9ba9f48d7b193e920815e6a34d18e39c810a1",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__10-edit-true-claim-naming-the-file-it",
+      "path": "crates/core/tests/fixtures/eval/10-edit-true-claim-naming-the-file-it.jsonl",
+      "route": "legacy",
+      "session_id": "10-edit-true-claim-naming-the-file-it",
+      "sha256": "4556451b870fb101e7293a593d2773e4dd933946df99f9ca0c5e6ca47a3c69ee",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__11-edit-false-claim-a-different-file",
+      "path": "crates/core/tests/fixtures/eval/11-edit-false-claim-a-different-file.jsonl",
+      "route": "legacy",
+      "session_id": "11-edit-false-claim-a-different-file",
+      "sha256": "cef5edc604ce2528ff867905b015e2deee9e1fd7f6b5ad23dc91fa4cb25c51e8",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__12-edit-true-claim-paraphrased",
+      "path": "crates/core/tests/fixtures/eval/12-edit-true-claim-paraphrased.jsonl",
+      "route": "legacy",
+      "session_id": "12-edit-true-claim-paraphrased",
+      "sha256": "365424369013b227dc3eeec2aeea0fc8f904a4c0655e835cba97bb394a3559f2",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__13-true-claim-whose-only-evidence-the",
+      "path": "crates/core/tests/fixtures/eval/13-true-claim-whose-only-evidence-the.jsonl",
+      "route": "legacy",
+      "session_id": "13-true-claim-whose-only-evidence-the",
+      "sha256": "2386c3de4bdd4c15ab2bd345ed013c80fa5321e9c6aeae0d8a49ec9fd052e50c",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__14-negation-and-hedging",
+      "path": "crates/core/tests/fixtures/eval/14-negation-and-hedging.jsonl",
+      "route": "legacy",
+      "session_id": "14-negation-and-hedging",
+      "sha256": "c71acff1671f2184706a7c417f8c0206aea08344773514ab3bda19732044b6c1",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__15-unverifiable-prose",
+      "path": "crates/core/tests/fixtures/eval/15-unverifiable-prose.jsonl",
+      "route": "legacy",
+      "session_id": "15-unverifiable-prose",
+      "sha256": "c717d3508aadaf658c0695db31c25b4e0d7deb96b9a427643f4b811ae871a629",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__16-proposal-that-a-later-session-fulf",
+      "path": "crates/core/tests/fixtures/eval/16-proposal-that-a-later-session-fulf.jsonl",
+      "route": "legacy",
+      "session_id": "16-proposal-that-a-later-session-fulf",
+      "sha256": "cd365291ee76fb376c689a99d43d91c09be4746b1b4fe6b38a7048bb94e03fa8",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__17-the-fulfilment-for-case-16-plus-it",
+      "path": "crates/core/tests/fixtures/eval/17-the-fulfilment-for-case-16-plus-it.jsonl",
+      "route": "legacy",
+      "session_id": "17-the-fulfilment-for-case-16-plus-it",
+      "sha256": "4a32ef85e6dc55c2913ecc5944a28b859089725ad4912ea3c598ce02b2bf56fa",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__18-the-paraphrased-fulfilment-for-cas",
+      "path": "crates/core/tests/fixtures/eval/18-the-paraphrased-fulfilment-for-cas.jsonl",
+      "route": "legacy",
+      "session_id": "18-the-paraphrased-fulfilment-for-cas",
+      "sha256": "d6f7e4d6a096983caa1a46306fcbdc2b2210fecd3b496ada2587b2e62f594dc9",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__19-worst-claim-wins-one-true-claim-an",
+      "path": "crates/core/tests/fixtures/eval/19-worst-claim-wins-one-true-claim-an.jsonl",
+      "route": "legacy",
+      "session_id": "19-worst-claim-wins-one-true-claim-an",
+      "sha256": "f198c5ac0492ab93990b96170fc3223ce1221ef82a1451d40f270fcf24c55bc2",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__20-analysis-prose-beside-unrelated-to",
+      "path": "crates/core/tests/fixtures/eval/20-analysis-prose-beside-unrelated-to.jsonl",
+      "route": "legacy",
+      "session_id": "20-analysis-prose-beside-unrelated-to",
+      "sha256": "3b059522a2d19c008431b428a3667a261b83a53e817d84c7e3fa91d661ffe938",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__21-a-measurement-report-is-a-finding",
+      "path": "crates/core/tests/fixtures/eval/21-a-measurement-report-is-a-finding.jsonl",
+      "route": "legacy",
+      "session_id": "21-a-measurement-report-is-a-finding",
+      "sha256": "6676ee91e3fe3d124800e3613e0029ab59ce8f66f795918ac5a4d0fd548656d4",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__22-past-participle-adjectives-are-not",
+      "path": "crates/core/tests/fixtures/eval/22-past-participle-adjectives-are-not.jsonl",
+      "route": "legacy",
+      "session_id": "22-past-participle-adjectives-are-not",
+      "sha256": "3552dcd838ba669f80e5c6ba0593953240d91c66d4f743c863fb3002f81d4735",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__23-a-negated-claim-is-not-a-claim-tha",
+      "path": "crates/core/tests/fixtures/eval/23-a-negated-claim-is-not-a-claim-tha.jsonl",
+      "route": "legacy",
+      "session_id": "23-a-negated-claim-is-not-a-claim-tha",
+      "sha256": "5837a59b25e7381dea7e2aef5251e65b70da72902064a39dda8f3b7ff7e9b083",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__24-micro-intents-are-absorbed-never-g",
+      "path": "crates/core/tests/fixtures/eval/24-micro-intents-are-absorbed-never-g.jsonl",
+      "route": "legacy",
+      "session_id": "24-micro-intents-are-absorbed-never-g",
+      "sha256": "40ce5e9a81f3ec85b960cdd492fa1aefc13f4600736d6c8571af22b972d7bb29",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__25-fallback-honesty-a-true-work-claim",
+      "path": "crates/core/tests/fixtures/eval/25-fallback-honesty-a-true-work-claim.jsonl",
+      "route": "legacy",
+      "session_id": "25-fallback-honesty-a-true-work-claim",
+      "sha256": "d322ef235271d89ab3007f8b573c310258536ebedf7558e5aa5184145af779d8",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__26-a-fabricated-claim-is-still-caught",
+      "path": "crates/core/tests/fixtures/eval/26-a-fabricated-claim-is-still-caught.jsonl",
+      "route": "legacy",
+      "session_id": "26-a-fabricated-claim-is-still-caught",
+      "sha256": "3514d3d4fd25a02fbfa60a736633cb69682920e10939b27fe04226f4d6db7338",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__27-a-true-marker-survives-a-turn-full",
+      "path": "crates/core/tests/fixtures/eval/27-a-true-marker-survives-a-turn-full.jsonl",
+      "route": "legacy",
+      "session_id": "27-a-true-marker-survives-a-turn-full",
+      "sha256": "12bd8263dde10cb073ec2fe0736b44ca0bca30f7b7b706a60edcce056cee7540",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__28-a-false-marker-is-still-caught-in",
+      "path": "crates/core/tests/fixtures/eval/28-a-false-marker-is-still-caught-in.jsonl",
+      "route": "legacy",
+      "session_id": "28-a-false-marker-is-still-caught-in",
+      "sha256": "d10ddbf95598628e6c5a202166059efb35f0e4654b56b1eba310c208e8e78e17",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__29-an-aggregate-count-against-one-par",
+      "path": "crates/core/tests/fixtures/eval/29-an-aggregate-count-against-one-par.jsonl",
+      "route": "legacy",
+      "session_id": "29-an-aggregate-count-against-one-par",
+      "sha256": "b970544301ac56d512edd28c1a68510267db9e187f41caf8ac7cab5e44aed1eb",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__30-a-proposal-whose-target-is-touched",
+      "path": "crates/core/tests/fixtures/eval/30-a-proposal-whose-target-is-touched.jsonl",
+      "route": "legacy",
+      "session_id": "30-a-proposal-whose-target-is-touched",
+      "sha256": "4dad60f790ac10aea12ca58348d6e7d0d021790964c4523bdbc1b1b108ad0b5e",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "eval__31-the-later-work-that-defeats-case-3",
+      "path": "crates/core/tests/fixtures/eval/31-the-later-work-that-defeats-case-3.jsonl",
+      "route": "legacy",
+      "session_id": "31-the-later-work-that-defeats-case-3",
+      "sha256": "2b21ebc9b31ef3163aa1b2e88c64d7c0e98cc557b788a4fced63ba4d8deda986",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "name": "eval__32-an-output-only-mention-does-not-de",
+      "path": "crates/core/tests/fixtures/eval/32-an-output-only-mention-does-not-de.jsonl",
+      "route": "legacy",
+      "session_id": null,
+      "sha256": "421b0a07f8708d44be9f52a1709b63cfa459f417badff33ae98381b2c0212c9a",
+      "skipped": [
+        {
+          "reason": "claims exited 1 without a session id",
+          "steps": [
+            "explain",
+            "receipt-v0.2",
+            "receipt-v0.1"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "name": "eval__33-the-output-only-mention-for-case-3",
+      "path": "crates/core/tests/fixtures/eval/33-the-output-only-mention-for-case-3.jsonl",
+      "route": "legacy",
+      "session_id": null,
+      "sha256": "16483341fc2f45dbd29e6d3e7872e37a9a5783b10fb5be6ad0a516223235c97e",
+      "skipped": [
+        {
+          "reason": "claims exited 1 without a session id",
+          "steps": [
+            "explain",
+            "receipt-v0.2",
+            "receipt-v0.1"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "name": "eval__34-a-spelling-variant-rerun-supersede",
+      "path": "crates/core/tests/fixtures/eval/34-a-spelling-variant-rerun-supersede.jsonl",
+      "route": "legacy",
+      "session_id": null,
+      "sha256": "669f940864dead110eb21db911dc5388d6bfded2d32e9c93f198289dd3f0cce4",
+      "skipped": [
+        {
+          "reason": "claims exited 1 without a session id",
+          "steps": [
+            "explain",
+            "receipt-v0.2",
+            "receipt-v0.1"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "name": "eval__35-an-asserts-failure-claim-is-suppor",
+      "path": "crates/core/tests/fixtures/eval/35-an-asserts-failure-claim-is-suppor.jsonl",
+      "route": "legacy",
+      "session_id": null,
+      "sha256": "8287dceaa14f83893767d192f1141caf77facce18cc6cbb633a57e20d3b2ea47",
+      "skipped": [
+        {
+          "reason": "claims exited 1 without a session id",
+          "steps": [
+            "explain",
+            "receipt-v0.2",
+            "receipt-v0.1"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "name": "eval__36-an-asserts-failure-claim-can-never",
+      "path": "crates/core/tests/fixtures/eval/36-an-asserts-failure-claim-can-never.jsonl",
+      "route": "legacy",
+      "session_id": null,
+      "sha256": "6e3dda2388a7999a7144e8da4eb2ab1ea2a78b447e3b0b1b6b10f59b4e7ba5ff",
+      "skipped": [
+        {
+          "reason": "claims exited 1 without a session id",
+          "steps": [
+            "explain",
+            "receipt-v0.2",
+            "receipt-v0.1"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "name": "eval__37-a-proposal-in-the-newest-session-p",
+      "path": "crates/core/tests/fixtures/eval/37-a-proposal-in-the-newest-session-p.jsonl",
+      "route": "legacy",
+      "session_id": null,
+      "sha256": "c15fdde2dc79905022a2cbd2b046381397a1dd63ae6a6ff35a576ecef3355807",
+      "skipped": [
+        {
+          "reason": "claims exited 1 without a session id",
+          "steps": [
+            "explain",
+            "receipt-v0.2",
+            "receipt-v0.1"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "language_tier_acceptance",
+      "path": "crates/core/tests/fixtures/language_tier_acceptance.jsonl",
+      "route": "legacy",
+      "session_id": "language_tier_acceptance",
+      "sha256": "ab3ab08e4108193474b5e8a72936bb78704aa5bd5190a944b94b0f41aa9f95cc",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    },
+    {
+      "claim_output": {
+        "claims.claims": 0,
+        "claims.negated": 0,
+        "claims.promises": 0,
+        "claims.verdicts": [],
+        "explain.claims_vs_proof": 0,
+        "explain.promises": 0,
+        "explain.why_it_stopped.kind": "no_stop_recorded"
+      },
+      "name": "malformed",
+      "path": "crates/core/tests/fixtures/malformed.jsonl",
+      "route": "legacy",
+      "session_id": "malformed",
+      "sha256": "dc06ab9c63c8841e710ced87e777fa0ba4a28f76feb95a0bd47f5f71785cde33",
+      "skipped": [
+        {
+          "reason": "receipt-v0.2 exited 1 without an envelope",
+          "steps": [
+            "receipt-v0.2.verify",
+            "receipt-v0.2.trailer"
+          ]
+        }
+      ],
+      "transcript_session_id_values": {
+        "distinct_across_both": 1,
+        "sessionId": 1,
+        "session_id": 0
+      }
+    }
+  ],
+  "manifest_version": 1,
+  "normalisation": {
+    "by_route": {
+      "legacy": "every rule above",
+      "spool": "every rule above except <elapsed>, which has no ingest line to apply to, and <ULID-n> and <CHAIN_HEAD>, which are not applied. At 451b3950 fold derives each event id from session|seq|raw_sha256 (crates/capture/src/fold.rs:330-338), each fs_change and snapshot id from session|seq|path or tree, stamped 1970-01-01T00:00:00Z (:783-788, :853-859), and each check id from its exec event id (:601-606); claim and promise ids are derived from session, event and offset (crates/claims/src/extract.rs:77-86, :140-143; crates/claims/src/claim.rs:223-226). EventId::derive reads sha256 bytes as a ULID (crates/core/src/spec/event.rs:134-141), so the <ULID-n> pattern would number these ids. They and the receipt's event_chain_head stay raw, so the diff sees a change to id derivation or to section 3.1 event hashing on these sessions"
+    },
+    "not_normalised": "Everything else, including timestamps and paths carried by the fixtures themselves, the legacy ledger head ingest prints, policy and git_env digests (the latter records this machine's git defaults), every exit code, and on route spool every derived id and the receipt's event_chain_head",
+    "per_file": {
+      "bad_utf8/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "bad_utf8/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "bad_utf8/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "bad_utf8/ingest.stdout.txt": {
+        "placeholders": {
+          "<SRC>": 1,
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "bad_utf8/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "bad_utf8/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "bad_utf8/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/fold.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/receipt-v0.1.verify.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/receipt-v0.2.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/receipt-v0.2.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__01-three-asks-one-done-one-claimed-one-untouched/receipt-v0.2.verify.json": {
+        "placeholders": {
+          "<WORK>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claims__02-supported-lint-claim/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__02-supported-lint-claim/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__02-supported-lint-claim/fold.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__02-supported-lint-claim/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__02-supported-lint-claim/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__02-supported-lint-claim/receipt-v0.1.verify.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__02-supported-lint-claim/receipt-v0.2.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__02-supported-lint-claim/receipt-v0.2.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__02-supported-lint-claim/receipt-v0.2.verify.json": {
+        "placeholders": {
+          "<WORK>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claims__03-contradicted-tests-claim/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__03-contradicted-tests-claim/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__03-contradicted-tests-claim/fold.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__03-contradicted-tests-claim/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__03-contradicted-tests-claim/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__03-contradicted-tests-claim/receipt-v0.1.verify.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__03-contradicted-tests-claim/receipt-v0.2.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__03-contradicted-tests-claim/receipt-v0.2.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__03-contradicted-tests-claim/receipt-v0.2.verify.json": {
+        "placeholders": {
+          "<WORK>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claims__04-insufficient-evidence-tests-claim/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__04-insufficient-evidence-tests-claim/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__04-insufficient-evidence-tests-claim/fold.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__04-insufficient-evidence-tests-claim/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__04-insufficient-evidence-tests-claim/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__04-insufficient-evidence-tests-claim/receipt-v0.1.verify.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__04-insufficient-evidence-tests-claim/receipt-v0.2.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__04-insufficient-evidence-tests-claim/receipt-v0.2.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__04-insufficient-evidence-tests-claim/receipt-v0.2.verify.json": {
+        "placeholders": {
+          "<WORK>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claims__05-open-promise-beside-supported-build/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__05-open-promise-beside-supported-build/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__05-open-promise-beside-supported-build/fold.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__05-open-promise-beside-supported-build/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__05-open-promise-beside-supported-build/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__05-open-promise-beside-supported-build/receipt-v0.1.verify.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claims__05-open-promise-beside-supported-build/receipt-v0.2.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claims__05-open-promise-beside-supported-build/receipt-v0.2.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claims__05-open-promise-beside-supported-build/receipt-v0.2.verify.json": {
+        "placeholders": {
+          "<WORK>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claude_code_sessions/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claude_code_sessions/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "claude_code_sessions/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "claude_code_sessions/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "claude_code_sessions/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "claude_code_sessions/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "claude_code_sessions/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__01-cargo-true-claim-matching-run/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__01-cargo-true-claim-matching-run/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__01-cargo-true-claim-matching-run/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__01-cargo-true-claim-matching-run/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__01-cargo-true-claim-matching-run/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__01-cargo-true-claim-matching-run/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__01-cargo-true-claim-matching-run/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__02-cargo-false-claim-no-run-at-all/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__03-cargo-misstated-result-the-crown-j/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__04-cargo-build-succeeded-but-failed/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__04-cargo-build-succeeded-but-failed/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__04-cargo-build-succeeded-but-failed/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__04-cargo-build-succeeded-but-failed/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__04-cargo-build-succeeded-but-failed/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__04-cargo-build-succeeded-but-failed/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__04-cargo-build-succeeded-but-failed/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__05-pytest-true-claim/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__05-pytest-true-claim/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__05-pytest-true-claim/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__05-pytest-true-claim/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__05-pytest-true-claim/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__05-pytest-true-claim/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__05-pytest-true-claim/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__06-pytest-misstated-result/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__06-pytest-misstated-result/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__06-pytest-misstated-result/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__06-pytest-misstated-result/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__06-pytest-misstated-result/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__06-pytest-misstated-result/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__06-pytest-misstated-result/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__07-npm-true-claim/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__07-npm-true-claim/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__07-npm-true-claim/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__07-npm-true-claim/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__07-npm-true-claim/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__07-npm-true-claim/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__07-npm-true-claim/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__08-vitest-misstated-result/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__08-vitest-misstated-result/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__08-vitest-misstated-result/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__08-vitest-misstated-result/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__08-vitest-misstated-result/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__08-vitest-misstated-result/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__08-vitest-misstated-result/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__09-cargo-true-claim-paraphrased-away/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__10-edit-true-claim-naming-the-file-it/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__11-edit-false-claim-a-different-file/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__11-edit-false-claim-a-different-file/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__11-edit-false-claim-a-different-file/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__11-edit-false-claim-a-different-file/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__11-edit-false-claim-a-different-file/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__11-edit-false-claim-a-different-file/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__11-edit-false-claim-a-different-file/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__12-edit-true-claim-paraphrased/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__12-edit-true-claim-paraphrased/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__12-edit-true-claim-paraphrased/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__12-edit-true-claim-paraphrased/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__12-edit-true-claim-paraphrased/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__12-edit-true-claim-paraphrased/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__12-edit-true-claim-paraphrased/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__13-true-claim-whose-only-evidence-the/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__13-true-claim-whose-only-evidence-the/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__13-true-claim-whose-only-evidence-the/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__13-true-claim-whose-only-evidence-the/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__13-true-claim-whose-only-evidence-the/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__13-true-claim-whose-only-evidence-the/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__13-true-claim-whose-only-evidence-the/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__14-negation-and-hedging/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__14-negation-and-hedging/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__14-negation-and-hedging/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__14-negation-and-hedging/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__14-negation-and-hedging/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__14-negation-and-hedging/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__14-negation-and-hedging/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__15-unverifiable-prose/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__15-unverifiable-prose/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__15-unverifiable-prose/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__15-unverifiable-prose/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__15-unverifiable-prose/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__15-unverifiable-prose/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__15-unverifiable-prose/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__16-proposal-that-a-later-session-fulf/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__16-proposal-that-a-later-session-fulf/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__16-proposal-that-a-later-session-fulf/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__16-proposal-that-a-later-session-fulf/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__16-proposal-that-a-later-session-fulf/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__16-proposal-that-a-later-session-fulf/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__16-proposal-that-a-later-session-fulf/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__17-the-fulfilment-for-case-16-plus-it/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__18-the-paraphrased-fulfilment-for-cas/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__19-worst-claim-wins-one-true-claim-an/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__20-analysis-prose-beside-unrelated-to/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__21-a-measurement-report-is-a-finding/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__21-a-measurement-report-is-a-finding/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__21-a-measurement-report-is-a-finding/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__21-a-measurement-report-is-a-finding/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__21-a-measurement-report-is-a-finding/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__21-a-measurement-report-is-a-finding/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__21-a-measurement-report-is-a-finding/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__22-past-participle-adjectives-are-not/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__22-past-participle-adjectives-are-not/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__22-past-participle-adjectives-are-not/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__22-past-participle-adjectives-are-not/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__22-past-participle-adjectives-are-not/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__22-past-participle-adjectives-are-not/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__22-past-participle-adjectives-are-not/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__23-a-negated-claim-is-not-a-claim-tha/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__24-micro-intents-are-absorbed-never-g/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__25-fallback-honesty-a-true-work-claim/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__26-a-fabricated-claim-is-still-caught/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__27-a-true-marker-survives-a-turn-full/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__28-a-false-marker-is-still-caught-in/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__28-a-false-marker-is-still-caught-in/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__28-a-false-marker-is-still-caught-in/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__28-a-false-marker-is-still-caught-in/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__28-a-false-marker-is-still-caught-in/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__28-a-false-marker-is-still-caught-in/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__28-a-false-marker-is-still-caught-in/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__29-an-aggregate-count-against-one-par/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__29-an-aggregate-count-against-one-par/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__29-an-aggregate-count-against-one-par/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__29-an-aggregate-count-against-one-par/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__29-an-aggregate-count-against-one-par/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__29-an-aggregate-count-against-one-par/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__29-an-aggregate-count-against-one-par/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__30-a-proposal-whose-target-is-touched/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__30-a-proposal-whose-target-is-touched/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__30-a-proposal-whose-target-is-touched/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__30-a-proposal-whose-target-is-touched/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__30-a-proposal-whose-target-is-touched/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__30-a-proposal-whose-target-is-touched/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__30-a-proposal-whose-target-is-touched/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__31-the-later-work-that-defeats-case-3/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__31-the-later-work-that-defeats-case-3/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "eval__31-the-later-work-that-defeats-case-3/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__31-the-later-work-that-defeats-case-3/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__31-the-later-work-that-defeats-case-3/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "eval__31-the-later-work-that-defeats-case-3/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "eval__31-the-later-work-that-defeats-case-3/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__32-an-output-only-mention-does-not-de/import-legacy.json": {
+        "placeholders": {
+          "<ULID-n>": 2,
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__32-an-output-only-mention-does-not-de/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__33-the-output-only-mention-for-case-3/import-legacy.json": {
+        "placeholders": {
+          "<ULID-n>": 6,
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__33-the-output-only-mention-for-case-3/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__34-a-spelling-variant-rerun-supersede/import-legacy.json": {
+        "placeholders": {
+          "<ULID-n>": 6,
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__34-a-spelling-variant-rerun-supersede/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__35-an-asserts-failure-claim-is-suppor/import-legacy.json": {
+        "placeholders": {
+          "<ULID-n>": 4,
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__35-an-asserts-failure-claim-is-suppor/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__36-an-asserts-failure-claim-can-never/import-legacy.json": {
+        "placeholders": {
+          "<ULID-n>": 4,
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__36-an-asserts-failure-claim-can-never/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "eval__37-a-proposal-in-the-newest-session-p/import-legacy.json": {
+        "placeholders": {
+          "<ULID-n>": 2,
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "eval__37-a-proposal-in-the-newest-session-p/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "language_tier_acceptance/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "language_tier_acceptance/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "language_tier_acceptance/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "language_tier_acceptance/ingest.stdout.txt": {
+        "placeholders": {
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "language_tier_acceptance/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "language_tier_acceptance/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "language_tier_acceptance/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      },
+      "malformed/claims.json": {
+        "reserialised_changed_bytes": false
+      },
+      "malformed/explain.json": {
+        "reserialised_changed_bytes": false
+      },
+      "malformed/import-legacy.json": {
+        "placeholders": {
+          "<WORK>": 2
+        },
+        "reserialised_changed_bytes": false
+      },
+      "malformed/ingest.stdout.txt": {
+        "placeholders": {
+          "<SRC>": 3,
+          "<WORK>": 1,
+          "<elapsed>": 1
+        }
+      },
+      "malformed/receipt-v0.1.json": {
+        "dsse_payload_run_dependent": true,
+        "placeholders": {
+          "<CHAIN_HEAD>": 1,
+          "<SIG>": 1,
+          "<WORK>": 1
+        }
+      },
+      "malformed/receipt-v0.1.trailer.txt": {
+        "placeholders": {
+          "<TRAILER_DIGEST>": 1
+        }
+      },
+      "malformed/receipt-v0.1.verify.json": {
+        "placeholders": {
+          "<CHAIN_HEAD>": 1
+        },
+        "reserialised_changed_bytes": false
+      }
+    },
+    "rules": [
+      "<WORK>: the temporary work directory (as created and canonicalised); it holds every ledger, execution store, home, key and the work repository",
+      "<SRC>: the export directory the fixtures are read from",
+      "<REPO_ID>: sha256 of the work repository's path (thruline_ledger::RepoId), which is run-dependent only because the path is",
+      "<elapsed>: the number on ingest's `elapsed N ms` line (wall time; route legacy, the only route that runs ingest)",
+      "<ULID-n> (route legacy only): a 26-character ULID (the legacy ledger mints event ids from the clock at ingest), numbered by first appearance within its file",
+      "<CHAIN_HEAD> (route legacy only): a string under an event_chain_head key in a receipt payload, measured to change between two runs of the same binary on the same fixture. It is run-dependent because legacy ingest mints each event id as a ULID from the clock, import-legacy keeps that id, and the id is part of the section 3.1 hash preimage. It is replaced in that receipt, its verify-receipt output and its trailer file only when verify-receipt's chain_head check passed in-run and its detail names that same head. REACH: the diff cannot see a change to section 3.1 event hashing, and a change to event content does not show in the receipt. Such a change shows only where the content surfaces elsewhere, such as ingest's legacy `head` line in ingest.stdout.txt, which is not normalised",
+      "receipt-v*.json: the DSSE payload is stored decoded (payload_decoded) after the substitutions above; when that changed it, `payload` and each `sig` are replaced (the signature only after verify-receipt reported it passing in-run); keyid is kept; payload_normalised_sha256 is the sha256 of the normalised payload text",
+      "receipt-v*.trailer.txt: the digest is replaced only when it equals the sha256 of the emitted envelope, the --trailer run emitted the same envelope, and that envelope's payload carried a run-dependent value"
+    ]
+  },
+  "not_selected": [
+    {
+      "path": "crates/core/tests/fixtures/codex/representative.jsonl",
+      "reason": "Codex rollout, not a Claude Code transcript. `import-codex` (with --sessions-root or --session-file) imports only rollouts whose recorded cwd lies inside --repo, and this fixture records a synthetic cwd that no temporary repository can have (measured: rollouts_for_other_repos = 1, sessions = 0)."
+    },
+    {
+      "path": "crates/core/tests/fixtures/redaction-corpus/corpus.jsonl",
+      "reason": "Redaction masking corpus (one specimen per line), not a session transcript. `ingest --apply` refuses it (measured: auto source detection found no recognized transcript envelope)."
+    },
+    {
+      "path": "crates/core/tests/fixtures/spec/chain-20.jsonl",
+      "reason": "BUILD-SPEC section 3.1 hash-chain golden vector (crates/core/tests/spec_chain_golden.rs): already-chained execution events, not a harness transcript. `ingest --apply` refuses it (measured: auto source detection found no recognized transcript envelope)."
+    }
+  ],
+  "ordering": "Sessions and MANIFEST lists are in path order. Every stored JSON document is re-serialised with sorted keys and a 2-space indent; array order is kept exactly as emitted. This canonicalises. It is not what makes two captures of one binary equal, since a binary prints a stable order on its own. It changes bytes only where a binary prints keys in another order, and there a difference in key order alone does not show in the diff. normalisation.per_file.*.reserialised_changed_bytes records, per CLI JSON file, whether re-serialising changed any byte of what the CLI printed (after placeholder substitution). summary.cli_json_files_changed_by_reserialisation counts those files. Where it is 0, the binary already printed this form and the step changed nothing.",
+  "ref": "narrator-baseline",
+  "selection_rule": "Every regular file matching crates/core/tests/fixtures/*.jsonl or crates/core/tests/fixtures/eval/*.jsonl or crates/core/tests/fixtures/claims/*.jsonl in the git archive export of the ref, in one list ordered by path (code-point order). fixtures[].route is the route of the glob the file matched. Route legacy (crates/core/tests/fixtures/*.jsonl or crates/core/tests/fixtures/eval/*.jsonl): the committed Claude Code transcript fixtures, each replayed alone through ingest and import-legacy into its own fresh ledger and execution store. Route spool (crates/core/tests/fixtures/claims/*.jsonl): committed hook and exec-recorder spool lines, each copied into the work directory and replayed alone through fold into its own fresh execution store; ingest and import-legacy are not run. Each file is one fixture session. The session name is its path under crates/core/tests/fixtures, with '/' written as '__' and '.jsonl' dropped. The session id is the `session` field of that store's `claims --last --json`. The self-checks on it differ by route (see session_identity).",
+  "session_identity": "Route legacy: a store that imports more than one session fails the run, and that check cannot fire at every ref. One fixture is captured as one session, whatever it carries. Where legacy ingest keys a session by the fixture's file stem (at 457ea1ac: crates/core/src/ingest.rs:254-258, used at :811), a fixture that carries several transcript session ids is imported and captured as one session. At 457ea1ac, claude_code_sessions.jsonl carries 4 distinct values: 3 in top-level sessionId fields and 1 in a session_id field. At such refs the self-check that fails the run when import-legacy reports sessions_seen above 1 cannot fire. fixtures[].transcript_session_id_values counts the distinct string values of the top-level sessionId and session_id fields over the fixture's lines that parse as JSON objects. A fixture with more than one is printed as a NOTE and does not fail the run. Route spool: fold groups a spool's lines by their session_id string (at 451b3950: crates/capture/src/fold.rs:235-239, counted at :252-254), so a spool fixture is one session when its lines carry one session_id value. The run fails (exit 1) when fold's --json output does not carry ok true and sessions 1, or when claims --last reports a session id other than that value; a fixture whose lines carry no session_id value, or several, has no such value and fails. Before any capture, a spool fixture with an exec line (a spec_payload whose kind is exec) that does not name the work repository's tree as input_tree_hash refuses the run (exit 2).",
+  "signing_key": {
+    "algorithm": "Ed25519",
+    "public_key_spki_base64": "MCowBQYDK2VwAyEAO2onvM62pC1io6jQKm8Nc2UyFXcd4kOmOsBIoYtZ2ik=",
+    "seed": "32 zero bytes: a public test key that proves nothing about authorship"
+  },
+  "summary": {
+    "cli_json_files": 171,
+    "cli_json_files_changed_by_reserialisation": 0,
+    "failures": 0,
+    "fixtures_by_route": {
+      "legacy": 41,
+      "spool": 5
+    },
+    "fixtures_carrying_several_transcript_session_ids": 1,
+    "fixtures_selected": 46,
+    "fixtures_with_claim_bearing_output": 5,
+    "fixtures_with_session": 40,
+    "fixtures_with_skipped_steps": 41,
+    "not_selected": 3,
+    "spool_sessions_with_claim_bearing_output": 5,
+    "why_it_stopped_kinds": {
+      "agent_finished": 4,
+      "error": 1,
+      "no_stop_recorded": 35
+    }
+  },
+  "tool": "scripts/hq-invariance.sh",
+  "wall_clock_guard": "Every output file, MANIFEST.json included, is scanned for a YYYY-MM-DD date within one day of the run and for a 10-digit epoch-seconds or 13-digit epoch-milliseconds number within one day of the run. A hit carried by no selected fixture fails the run (exit 1). A hit a fixture carries is printed as a NOTE."
+}

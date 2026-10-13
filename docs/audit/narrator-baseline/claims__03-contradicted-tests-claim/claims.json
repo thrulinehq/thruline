@@ -1,0 +1,40 @@
+{
+  "checks": 1,
+  "claims": [
+    {
+      "binding": null,
+      "evidence": [],
+      "extractor": "rules",
+      "findings": [
+        {
+          "detail": "`cargo test` exited 101",
+          "detector": "test_run_failed",
+          "severity": "fail"
+        }
+      ],
+      "id": "clm_1S72BR9TPG20VZ79A3KK4PK8F4",
+      "kind": "tests_pass",
+      "reasons": [
+        "a captured test run failed: `cargo test` exited 101"
+      ],
+      "scope": "all",
+      "span": {
+        "event_id": "evt_538CWDRNV9JSRXJK78F7YHWFZY",
+        "offset": [
+          42,
+          56
+        ]
+      },
+      "text": "All tests pass.",
+      "verdict": "unsupported",
+      "verifier": "tests_pass@1",
+      "warnings": []
+    }
+  ],
+  "final_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "cccccccc-0003-4000-8000-000000000000",
+  "shape": "thruline.claims"
+}

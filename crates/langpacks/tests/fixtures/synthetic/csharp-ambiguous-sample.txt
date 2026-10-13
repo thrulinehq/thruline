@@ -1,0 +1,15 @@
+# csharp — A SMALL INVENTED RESIDUE of assertions whose Strength changes when
+# string literals are stripped, written for this repository.
+#
+# Every line is made up for the public copy of ThruLine (invented identifiers,
+# invented paths, no third-party source). Each one carries a matcher word or
+# operator INSIDE a string literal, so reading the literal exposes a different
+# Strength than the stripped text does. `tests/corpus_ambiguity.rs` asserts every
+# record here is STILL ambiguous.
+#
+# Format: <path>:<line><TAB><stripped>-><exposed><TAB><assertion text, escaped>.
+csharp/SampleStore/tests/SampleStore.Tests/StackTests.cs:20	Truthy->Equality	Assert.IsNotNull(doc.SelectToken(@"Items[?(@.Id == 7)]"))
+csharp/SampleStore/tests/SampleStore.Tests/CartTests.cs:29	Truthy->Equality	Assert.IsNotNull(doc.SelectToken(@"Rows[?(@.Count == 1.0)]"))
+csharp/SampleStore/tests/SampleStore.Tests/RegistryTests.cs:38	Truthy->Equality	Assert.True(Validator.Check(@"Name == 'x'"))
+csharp/SampleStore/tests/SampleStore.Tests/CacheTests.cs:47	Truthy->Equality	Assert.True(Validator.Check(@"Count == 3"))
+csharp/SampleStore/tests/SampleStore.Tests/SessionTests.cs:56	Truthy->Equality	Assert.IsNotNull(doc.SelectToken(@"Cells[?(@.Value == 'a')]"))

@@ -1,0 +1,35 @@
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m[32m.[0m[31mF[0m[31mF[0m
+
+Failures:
+
+  1) Calc.div rounds toward zero, not away
+     [31mFailure/Error: expect(Calc.div(7, 2)).to eq(4)[0m
+     [31m[0m
+     [31m  expected: 4[0m
+     [31m       got: 3[0m
+     [31m[0m
+     [31m  (compared using ==)[0m
+     [36m# ./spec/calc_div_spec.rb:12:in 'block (3 levels) in <top (required)>'[0m
+
+  2) Calc.div returns a Rational for inexact division
+     [31mFailure/Error: expect(Calc.div(7, 2)).to be_a(Rational)[0m
+     [31m  expected 3 to be a kind of Rational[0m
+     [36m# ./spec/calc_div_spec.rb:20:in 'block (3 levels) in <top (required)>'[0m
+
+  3) Calc.div propagates the underlying TypeError
+     [31mFailure/Error: a / b[0m
+     [31m[0m
+     [31mNoMethodError:[0m
+     [31m  undefined method '/' for an instance of String[0m
+     [36m# ./lib/calc.rb:11:in 'Calc.div'[0m
+     [36m# ./spec/calc_div_spec.rb:24:in 'block (3 levels) in <top (required)>'[0m
+
+Finished in 0.0866 seconds (files took 0.65208 seconds to load)
+[31m9 examples, 3 failures[0m
+
+Failed examples:
+
+[31mrspec ./spec/calc_div_spec.rb:11[0m [36m# Calc.div rounds toward zero, not away[0m
+[31mrspec ./spec/calc_div_spec.rb:19[0m [36m# Calc.div returns a Rational for inexact division[0m
+[31mrspec ./spec/calc_div_spec.rb:23[0m [36m# Calc.div propagates the underlying TypeError[0m
+

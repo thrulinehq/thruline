@@ -1,0 +1,35 @@
+{
+  "claims_vs_proof": [],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "bad_utf8",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "user_prompt",
+      "seq": 1,
+      "text": ""
+    },
+    {
+      "kind": "user_prompt",
+      "seq": 2,
+      "text": ""
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "no_stop_recorded",
+    "last_events": [
+      "",
+      ""
+    ],
+    "summary": "no `stop` event is in the record: the session is still open, or the Stop hook never fired"
+  }
+}

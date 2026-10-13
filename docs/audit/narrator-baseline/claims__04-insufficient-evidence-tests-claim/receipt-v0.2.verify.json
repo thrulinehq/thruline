@@ -1,0 +1,197 @@
+{
+  "badge_label": "Couldn't check",
+  "capture_ground": "rules_unverifiable",
+  "cause_title": "Couldn't check: evidence is incomplete on this machine",
+  "claim_origins": [
+    {
+      "claim_id": "clm_7CTD8YKPDWEYN1B3BE4DKWWHCD",
+      "extractor": "rules"
+    }
+  ],
+  "conclusion": "neutral",
+  "evidence_trust": "local",
+  "ground": "integrity_incomplete",
+  "integrity": {
+    "checks": [
+      {
+        "detail": "signature 0 verifies over the DSSE PAE",
+        "name": "signature",
+        "outcome": "pass"
+      },
+      {
+        "detail": "application/vnd.in-toto+json",
+        "name": "payload_type",
+        "outcome": "pass"
+      },
+      {
+        "detail": "in-toto Statement v1, ThruLine predicate",
+        "name": "statement_schema",
+        "outcome": "pass"
+      },
+      {
+        "detail": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c is a tree in this repository",
+        "name": "subject_tree",
+        "outcome": "pass"
+      },
+      {
+        "detail": "84ec0e1398b104136666b20fec11b422b3415a9c is present locally",
+        "name": "subject_commit",
+        "outcome": "pass"
+      },
+      {
+        "detail": "sha256:d5870acff18fbce7d08da75394cd66d918b36d9dc6b9b4b3a2e8757e6a70cb96 recomputed from 11 ledger rows",
+        "name": "chain_head",
+        "outcome": "pass"
+      },
+      {
+        "detail": "no check claims to have been re-executed",
+        "name": "reexecution",
+        "outcome": "pass"
+      },
+      {
+        "detail": "the policy this receipt was judged under is the policy here (sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad)",
+        "name": "policy_hash",
+        "outcome": "pass"
+      },
+      {
+        "detail": "capture was not degraded, and no content transform is in scope here",
+        "name": "capture_fidelity",
+        "outcome": "pass"
+      },
+      {
+        "name": "verdicts",
+        "outcome": "skipped",
+        "reason": "1 of 1 verdict(s) are `unverifiable` — the receipt itself says these claims could not be decided (clm_7CTD8YKPDWEYN1B3BE4DKWWHCD). Reporting that as verified is the collapse §6 forbids. This is NOT a pass."
+      },
+      {
+        "detail": "0 `supported` verdict(s) re-derived from the checks cited beside them, and each ran on a tree this receipt is about",
+        "name": "verdict_derivation",
+        "outcome": "pass"
+      },
+      {
+        "detail": "1 check(s) in this receipt are the ledger's own rows",
+        "name": "check_provenance",
+        "outcome": "pass"
+      },
+      {
+        "detail": "the tree in this working directory IS the tree this receipt is about, so what is being reviewed here is what the checks ran on — no commit needed",
+        "name": "head_binding",
+        "outcome": "pass"
+      }
+    ],
+    "exit": 2,
+    "status": "partial",
+    "verified": false
+  },
+  "schema_version": 2,
+  "shape": "thruline.verify-receipt.session",
+  "signed_record": {
+    "_type": "https://in-toto.io/Statement/v1",
+    "predicate": {
+      "capture": {
+        "capture_degraded": false,
+        "git_env_digest": "sha256:2abecd1babd44fae28bb9f0b46b35ece284a795003a4223f9085ae7e116e0fbe",
+        "redactions_applied": 0,
+        "sources": [
+          "claude-code-hook",
+          "exec-recorder",
+          "git"
+        ]
+      },
+      "checks": [
+        {
+          "argv_hash": "sha256:818f5d18f61b70041897d156adf55978ed540339b17d3b2f7a523efe8aa5e1b9",
+          "category": "test",
+          "cwd_hash": "sha256:a86ba3dad1d203fa99421f1f1239eb817424b55dfd75c226b4711c6982a08676",
+          "env_hash": "sha256:fb1135bf5c58feed09a64a4e26275e520b12e39cafbf159ca87ca19b89e2584b",
+          "exit_code": 0,
+          "id": "chk_5ZB26Q8MA49RVN56C2KR07AQ7Y",
+          "input_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+          "parsed": {
+            "unverifiable": {
+              "hint": "pytest writes `===== N passed in Xs =====` last; if the output was truncated or the run crashed, the result is unknown, not clean",
+              "reason": "no pytest summary line found in the output"
+            }
+          },
+          "reexecuted": false,
+          "runner": "pytest"
+        }
+      ],
+      "claim_origins": [
+        {
+          "claim_id": "clm_7CTD8YKPDWEYN1B3BE4DKWWHCD",
+          "extractor": "rules"
+        }
+      ],
+      "claims": [
+        {
+          "asserted_by": {
+            "harness": "claude-code"
+          },
+          "id": "clm_7CTD8YKPDWEYN1B3BE4DKWWHCD",
+          "kind": "tests_pass",
+          "text": "tests_pass claim clm_7CTD8YKPDWEYN1B3BE4DKWWHCD (original text omitted)"
+        }
+      ],
+      "evidence_trust": "local",
+      "ground": "rules_unverifiable",
+      "kind": "session_claims",
+      "promises": {
+        "fulfilled": [],
+        "open": []
+      },
+      "session": {
+        "ended": "2026-01-02T00:08:00Z",
+        "event_chain_head": "sha256:d5870acff18fbce7d08da75394cd66d918b36d9dc6b9b4b3a2e8757e6a70cb96",
+        "event_count": 11,
+        "harness": "claude-code",
+        "id": "cccccccc-0004-4000-8000-000000000000",
+        "started": "2026-01-02T00:01:00Z"
+      },
+      "verdicts": [
+        {
+          "claim_id": "clm_7CTD8YKPDWEYN1B3BE4DKWWHCD",
+          "evidence": [
+            "chk_5ZB26Q8MA49RVN56C2KR07AQ7Y"
+          ],
+          "reasons": [
+            "ran on the final tree",
+            "the runner's output could not be parsed, so the run's result is unknown — which is not the same as passing"
+          ],
+          "verdict": "unverifiable",
+          "verifier": "tests_pass@1"
+        }
+      ],
+      "verifier": {
+        "mode": "local",
+        "policy_hash": "sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad",
+        "thruline_version": "0.1.0"
+      },
+      "version": 2
+    },
+    "predicateType": "https://thrulinehq.com/attestation/execution-check/v0.2",
+    "subject": [
+      {
+        "digest": {
+          "gitCommit": "84ec0e1398b104136666b20fec11b422b3415a9c",
+          "gitTree": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c"
+        },
+        "name": "git+<WORK>/repo"
+      }
+    ]
+  },
+  "verdict_summary": {
+    "all_supported": false,
+    "other": 0,
+    "other_verdicts": [],
+    "supported": 0,
+    "total": 1,
+    "unsupported": 0,
+    "unsupported_claim_ids": [],
+    "unverifiable": 1,
+    "unverifiable_claim_ids": [
+      "clm_7CTD8YKPDWEYN1B3BE4DKWWHCD"
+    ]
+  },
+  "verified": false
+}

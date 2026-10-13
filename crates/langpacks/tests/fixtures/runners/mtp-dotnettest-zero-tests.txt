@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Shipping.MtpZero -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-zero/bin/Debug/net9.0/Shipping.MtpZero.dll
+  Run tests: '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-zero/bin/Debug/net9.0/Shipping.MtpZero.dll' [net9.0|arm64]
+  Failed! - Failed: 0, Passed: 0, Skipped: 0, Total: 0, Duration: 36ms
+/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-zero/bin/Debug/net9.0/Shipping.MtpZero.dll : error run failed: Tests failed: '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-zero/bin/Debug/net9.0/TestResults/Shipping.MtpZero_net9.0_arm64.log' [net9.0|arm64] [/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-zero/Shipping.MtpZero.csproj]

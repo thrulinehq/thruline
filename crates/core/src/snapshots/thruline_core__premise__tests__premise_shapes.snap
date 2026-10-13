@@ -1,0 +1,11 @@
+---
+source: crates/core/src/premise.rs
+expression: render_all(&rows)
+---
+[
+    "The command cargo build --release completed successfully.",
+    "The command cargo test completed successfully. All 55 tests passed.",
+    "The command ./run.sh was run and it failed.",
+    "The tool Read was run and completed without error. It returned: line one line two",
+    "The file docs/plan.md was created. The new content includes: # Plan Step one",
+]

@@ -1,0 +1,6 @@
+---
+source: crates/core/tests/a201_claim_verifier.rs
+expression: md
+---
+THRULINE — what the record shows for this project
+- claimed as finished, and still no proof recorded: "ship the retry logic" — submitted for verification and not yet checked — run `thruline verify-claims` · why tlc_aaaaaaaaaaaa

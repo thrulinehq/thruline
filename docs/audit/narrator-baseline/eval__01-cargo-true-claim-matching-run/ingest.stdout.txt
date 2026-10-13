@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__01-cargo-true-claim-matching-run/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 506750e622bc8d8aaf36adb1b8fbfa2467d408c940228abbd2e1c16998d60f64
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

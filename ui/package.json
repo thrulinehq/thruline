@@ -1,0 +1,25 @@
+{
+  "name": "thruline-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=2 \"src/**/*.test.js\" ../scripts/testing/chrome-launch.test.mjs ../scripts/testing/ui-test-script.test.mjs ../scripts/testing/axe-sweep.test.mjs ../scripts/testing/docs-schema-version.test.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:gallery": "VITE_MOCK_TOOLING=1 vite --host 127.0.0.1 --port 5174 --strictPort"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.29.7",
+    "@vitejs/plugin-react": "^4.3.4",
+    "axe-core": "4.13.0",
+    "esbuild": "^0.25.12",
+    "jsdom": "29.1.1",
+    "vite": "^6.4.3"
+  }
+}

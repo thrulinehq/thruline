@@ -1,0 +1,8 @@
+The following Tests are available:
+SmallParcelUsesFlatBase
+BoundaryAtFiveKilos
+LargeParcelUsesPerKilo
+InternationalSurcharge
+OversizeRejectsHeavyParcel
+OversizeThreshold (31,True)
+OversizeThreshold (30,False)

@@ -1,0 +1,511 @@
+{
+  "schema": "thruline.qualification-status.v1",
+  "note": "Absolute paths in this file are synthetic substitutions made 2026-09-18; the qualification records they describe are in the evidence folder.",
+  "qualified": false,
+  "counts_are": "Measured scoped development cases; not whole domains or whole catalog checks. Protocol perturbations are not scanner-accuracy samples.",
+  "evidence": {
+    "docs/integrations/validation/qualification-expanded-b112cef.json": "a825e8258092a5ff371183d00dac5ca70e92b31aa13b4bcb56d429538524a9de",
+    "docs/integrations/validation/qualification-evaluation-b112cef.json": "f0af2999744d49e1a66d8d2bbf4febea2108c5e98158cff3a8bb5e79fb31830a",
+    "docs/integrations/validation/protocol-baseline-b112cef.json": "18cee94a515c66bf52c99233628ddca95b0c33ce02a8fba1bca9d23807a0c07d",
+    "docs/integrations/validation/protocol-exit-repair.json": "e16af0766e99fdaf9a73c88c78db0069324ad6996a4a06d7187771076b9c8660",
+    "docs/integrations/validation/setup-freshness-b112cef.json": "077460fd2a709a998633bb0c2b17f818e5eb280c9510fea9054e97ed897d8769",
+    "docs/integrations/validation/container-resources-first.json": "e9334cd6626df86b84808c45b789339626ecd44212fda967df0e5811ca52afd4",
+    "docs/integrations/validation/process-lifecycle-5886c26.json": "f0120911141d1acd0c1d531dbdbd4a89e1950bb0574a49ae091d75bdd2d69cbb",
+    "docs/integrations/validation/process-lifecycle-native-processes-5886c26.json": "b103b2a72a09feeec52f3fe535901e270fab6157f7a0c35b76b073124b97b525",
+    "docs/integrations/validation/process-lifecycle-final-5886c26.json": "7661ca9a04ddd0f2c5992270d7c77329c11ab5a4b2149c349ae4ce71a40b4c36"
+  },
+  "tools": {
+    "ast-grep": {
+      "counts": {
+        "cases": 4,
+        "clean": 1,
+        "clean_abstentions": 0,
+        "detected_violations": 2,
+        "false_positives": 0,
+        "harness_errors": 0,
+        "incomplete": 1,
+        "incomplete_false_clears": 0,
+        "incomplete_overstatements": 0,
+        "missed_failures": 0,
+        "missing_predictions": 0,
+        "violation_abstentions": 0,
+        "violation_false_clears": 0,
+        "violations": 2
+      },
+      "qualified": false,
+      "enabled": "explicit advisory only",
+      "independence": "Upstream-authored oracles, selected/translated by the integration developer. No blind held-out field qualification.",
+      "boundary_cases": 9,
+      "boundary_mismatches": 0,
+      "freshness": {
+        "fresh": "passed",
+        "after_edit": "stale",
+        "receipt_preserved": true
+      },
+      "setup": {
+        "missing_refused": true,
+        "unsupported_version_refused": true
+      },
+      "cancellation": {
+        "established": true,
+        "state": "blocked",
+        "remaining_observed_processes": 0,
+        "binding_id": "d984ded84a82d56a7c49b333461551fd91cd2ae5312323850a91a4ee368ac515",
+        "database": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ledger.db",
+        "root": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ast-grep-enabled-pattern/repo",
+        "limits": "Cancellation after observing the real scanner exec; no graceful-shutdown or late-scan coverage claim. AST uses 100000 fixture lines so the actual process can be observed."
+      },
+      "pending": "One explicit rule and a disabled-rule case; arbitrary inline suppressions and path exclusion coverage still need qualification.",
+      "cases": [
+        {
+          "id": "ast-grep-enabled-pattern",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "RULE1 / Some(123); one enabled structural observation",
+          "oracle": "test_sg_rule_off",
+          "oracle_source": "crates/cli/tests/scan_test.rs",
+          "binding_id": "af303ac5f903b45d36173f87d26790590c64483c3673038a5ff96ad2e7f1e77a",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ast-grep-enabled-pattern/repo"
+        },
+        {
+          "id": "ast-grep-disabled-rule",
+          "label": "incomplete",
+          "actual": "unknown",
+          "case_class": "incomplete",
+          "scope": "RULE2 severity off; zero output cannot cover the disabled rule",
+          "oracle": "test_sg_rule_off",
+          "oracle_source": "crates/cli/tests/scan_test.rs",
+          "binding_id": "5eee7df2be4fca9586c2c1091002b16f6930164a9704251eb98184f647507d89",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ast-grep-disabled-rule/repo"
+        },
+        {
+          "id": "ast-grep-unused-suppression",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "None(123) // ast-grep-ignore; upstream unused-suppression finding",
+          "oracle": "test_scan_unused_suppression",
+          "oracle_source": "crates/cli/tests/scan_test.rs",
+          "binding_id": "95917fe7e075bf59b07490dfb46e6ea7f713c54e7a079b7e5d6e244a819c95ba",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ast-grep-unused-suppression/repo"
+        },
+        {
+          "id": "ast-grep-clean-selected-rule",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "clean_scope",
+          "scope": "None(123) under the selected Some($A) structural rule, with unused-suppression diagnostics outside that explicitly filtered scope.",
+          "oracle": "test_unused_suppression_only_in_scan / RULE1",
+          "oracle_source": "crates/cli/tests/scan_test.rs",
+          "binding_id": "84bdb157fe38cd6d137e1c77bb93b6cdda2c98900ed9295cc66d2a70e722687c",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ast-grep-clean-selected-rule/repo"
+        }
+      ]
+    },
+    "betterleaks": {
+      "counts": {
+        "cases": 5,
+        "clean": 2,
+        "clean_abstentions": 0,
+        "detected_violations": 2,
+        "false_positives": 0,
+        "harness_errors": 0,
+        "incomplete": 1,
+        "incomplete_false_clears": 0,
+        "incomplete_overstatements": 0,
+        "missed_failures": 0,
+        "missing_predictions": 0,
+        "violation_abstentions": 0,
+        "violation_false_clears": 0,
+        "violations": 2
+      },
+      "qualified": false,
+      "enabled": "explicit advisory only",
+      "independence": "Upstream-authored oracles, selected/translated by the integration developer. No blind held-out field qualification.",
+      "boundary_cases": 9,
+      "boundary_mismatches": 0,
+      "freshness": {
+        "fresh": "passed",
+        "after_edit": "stale",
+        "receipt_preserved": true
+      },
+      "setup": {
+        "missing_refused": true,
+        "unsupported_version_refused": true
+      },
+      "cancellation": {
+        "established": true,
+        "state": "blocked",
+        "remaining_observed_processes": 0,
+        "binding_id": "bf8bbb704d7ab288a52744abc4dd5b6420462a2b31048fbccd8bdc7df142ab73",
+        "database": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ledger.db",
+        "root": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/betterleaks-credential-present/repo",
+        "limits": "Cancellation after observing the real scanner exec; no graceful-shutdown or late-scan coverage claim. AST uses 100000 fixture lines so the actual process can be observed."
+      },
+      "pending": "Public fabricated markers and credential URI cases; one deliberately allowed regex is included among clean policy scopes. Detector precision across real languages/history and all suppressions remains unqualified.",
+      "cases": [
+        {
+          "id": "betterleaks-published-test-marker",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "Exact upstream nonfunctional ghp_ test string, one expected candidate; never retained in receipt",
+          "oracle": "TestRunStreamsFindings",
+          "oracle_source": "detect/detect_test.go",
+          "binding_id": "077aaf7b2cb5182c812d0f0848f1f876ae57913cd48d940ff4713e7c0d4a9b96",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/betterleaks-published-test-marker/repo"
+        },
+        {
+          "id": "betterleaks-invalid-config",
+          "label": "incomplete",
+          "actual": "unknown",
+          "case_class": "incomplete",
+          "scope": "Exact upstream invalid-rule configuration",
+          "oracle": "missing rule ID",
+          "oracle_source": "testdata/config/invalid/rule_missing_id.toml",
+          "binding_id": "ac117e7d3afbdbd16324fd5a52b8d362fc78cd8664c74099ce55b646342c9946",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/betterleaks-invalid-config/repo"
+        },
+        {
+          "id": "betterleaks-empty-credential",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "clean_scope",
+          "scope": "An empty password in a URI is not a credential finding; the independently authored detector test expects no match.",
+          "oracle": "generic-credential-uri / empty password",
+          "oracle_source": "detect/detect_test.go",
+          "binding_id": "4b411eef1d7c11e12fe8bac9b26d07e9e2d950c4b0958ffda6f74a3cee634177",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/betterleaks-empty-credential/repo"
+        },
+        {
+          "id": "betterleaks-credential-present",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "genuine_violation",
+          "scope": "The public upstream fabricated production URI contains a password; the detector test expects one candidate. Values must remain withheld.",
+          "oracle": "generic-credential-uri / productionSource",
+          "oracle_source": "detect/detect_test.go",
+          "binding_id": "7623cdfa458691a63b603aa474e923f6452e9f2c00ee96dfe3a318d0b4e277f9",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/betterleaks-credential-present/repo"
+        },
+        {
+          "id": "betterleaks-allowed-regex",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "policy_exclusion",
+          "scope": "The exact public canary is explicitly allowed by the selected upstream allowlist. No finding is correct for this policy; it says nothing about a policy with no exceptions.",
+          "oracle": "global allowlist - ignore regex",
+          "oracle_source": "detect/detect_test.go",
+          "binding_id": "4a2ab4f206383eccf945602bdf3d2a124067257805812f14e6f0fb564f357072",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/betterleaks-allowed-regex/repo"
+        }
+      ]
+    },
+    "cargo-deny": {
+      "counts": {
+        "cases": 2,
+        "clean": 1,
+        "clean_abstentions": 0,
+        "detected_violations": 1,
+        "false_positives": 0,
+        "harness_errors": 0,
+        "incomplete": 0,
+        "incomplete_false_clears": 0,
+        "incomplete_overstatements": 0,
+        "missed_failures": 0,
+        "missing_predictions": 0,
+        "violation_abstentions": 0,
+        "violation_false_clears": 0,
+        "violations": 1
+      },
+      "qualified": false,
+      "enabled": "explicit advisory only",
+      "independence": "Upstream-authored oracles, selected/translated by the integration developer. No blind held-out field qualification.",
+      "boundary_cases": 9,
+      "boundary_mismatches": 0,
+      "freshness": {
+        "fresh": "passed",
+        "after_edit": "stale",
+        "receipt_preserved": true
+      },
+      "setup": {
+        "missing_refused": true,
+        "unsupported_version_refused": true
+      },
+      "cancellation": {
+        "established": true,
+        "state": "blocked",
+        "remaining_observed_processes": 0,
+        "binding_id": "b3a239ec4b54f4d37b82d5a76c2014731490d9a59de2542d1a3071fb60fc2517",
+        "database": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ledger.db",
+        "root": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/cargo-deny-denied-dependency/repo",
+        "limits": "Cancellation after observing the real scanner exec; no graceful-shutdown or late-scan coverage claim. AST uses 100000 fixture lines so the actual process can be observed."
+      },
+      "pending": "Bans/wrappers only; advisory/license rules, exceptions and partial dependency graphs are not qualified.",
+      "cases": [
+        {
+          "id": "cargo-deny-allowed-wrapper",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "clean",
+          "scope": "tests/test_data/allow_wrappers; dangerous-dep allowed through safe-wrapper",
+          "oracle": "allow_wrappers",
+          "oracle_source": "tests/bans.rs",
+          "binding_id": "cd1259c6a889713a4845c8ee658c4cd073889e1abee77849f869cd89a31afb9a",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/cargo-deny-allowed-wrapper/repo"
+        },
+        {
+          "id": "cargo-deny-denied-dependency",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "same source; explicitly deny dangerous-dep",
+          "oracle": "disallows_denied",
+          "oracle_source": "tests/bans.rs",
+          "binding_id": "62948c93970b42cb5ef19f5cfeaae8712cc98aa0661e41ae564c6c55c245a5b1",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/cargo-deny-denied-dependency/repo"
+        }
+      ]
+    },
+    "cargo-mutants": {
+      "counts": {
+        "cases": 3,
+        "clean": 1,
+        "clean_abstentions": 0,
+        "detected_violations": 1,
+        "false_positives": 0,
+        "harness_errors": 0,
+        "incomplete": 1,
+        "incomplete_false_clears": 0,
+        "incomplete_overstatements": 0,
+        "missed_failures": 0,
+        "missing_predictions": 0,
+        "violation_abstentions": 0,
+        "violation_false_clears": 0,
+        "violations": 1
+      },
+      "qualified": false,
+      "enabled": "explicit advisory only",
+      "independence": "Upstream-authored oracles, selected/translated by the integration developer. No blind held-out field qualification.",
+      "boundary_cases": 9,
+      "boundary_mismatches": 0,
+      "freshness": {
+        "fresh": "passed",
+        "after_edit": "stale",
+        "receipt_preserved": true
+      },
+      "setup": {
+        "missing_refused": true,
+        "unsupported_version_refused": true
+      },
+      "cancellation": {
+        "established": true,
+        "state": "blocked",
+        "remaining_observed_processes": 0,
+        "binding_id": "9ed7cad7fef114c3a13ca727e3551b4634fec983b05063ce3a07353b272ad45d",
+        "database": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ledger.db",
+        "root": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/cargo-mutants-surviving-mutant/repo",
+        "limits": "Cancellation after observing the real scanner exec; no graceful-shutdown or late-scan coverage claim. AST uses 100000 fixture lines so the actual process can be observed."
+      },
+      "pending": "Small upstream fixtures with killed/surviving mutants and a failing baseline; equivalent-mutant review and excluded mutation coverage remain unqualified.",
+      "cases": [
+        {
+          "id": "cargo-mutants-well-tested",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "clean",
+          "scope": "Unmodified testdata/small_well_tested; rename Cargo_test.toml as upstream helper does",
+          "oracle": "small_well_tested_tree_is_clean",
+          "oracle_source": "tests/main.rs",
+          "binding_id": "c6e03fc1c1ba3cff1a091c9080e316cdaba4765ffebee3f8157aa4cb7398666b",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/cargo-mutants-well-tested/repo"
+        },
+        {
+          "id": "cargo-mutants-surviving-mutant",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "Unmodified testdata/factorial; upstream asserts exit 2 for surviving mutation",
+          "oracle": "uncaught_mutant_in_factorial",
+          "oracle_source": "tests/main.rs",
+          "binding_id": "2a9561413ccabcb90a7a1e9d89b49fd1185cbee85fce9159a51cd80f8274c618",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/cargo-mutants-surviving-mutant/repo"
+        },
+        {
+          "id": "cargo-mutants-baseline-fails",
+          "label": "incomplete",
+          "actual": "unknown",
+          "case_class": "incomplete",
+          "scope": "Unmodified testdata/already_failing_tests; baseline failure must not pass mutation condition",
+          "oracle": "already_failing_tests_are_detected_before_running_mutants",
+          "oracle_source": "tests/main.rs",
+          "binding_id": "ee9f190d0f0041fdd5078a0ca6e4b6208716e92a437087c1b3f3c968033264fa",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/cargo-mutants-baseline-fails/repo"
+        }
+      ]
+    },
+    "dependency-cruiser": {
+      "counts": {
+        "cases": 2,
+        "clean": 1,
+        "clean_abstentions": 0,
+        "detected_violations": 1,
+        "false_positives": 0,
+        "harness_errors": 0,
+        "incomplete": 0,
+        "incomplete_false_clears": 0,
+        "incomplete_overstatements": 0,
+        "missed_failures": 0,
+        "missing_predictions": 0,
+        "violation_abstentions": 0,
+        "violation_false_clears": 0,
+        "violations": 1
+      },
+      "qualified": false,
+      "enabled": "explicit advisory only",
+      "independence": "Upstream-authored oracles, selected/translated by the integration developer. No blind held-out field qualification.",
+      "boundary_cases": 9,
+      "boundary_mismatches": 0,
+      "freshness": {
+        "fresh": "passed",
+        "after_edit": "stale",
+        "receipt_preserved": true
+      },
+      "setup": {
+        "missing_refused": true,
+        "unsupported_version_refused": true
+      },
+      "cancellation": {
+        "established": true,
+        "state": "blocked",
+        "remaining_observed_processes": 0,
+        "binding_id": "818f7beb5172b533c4d5a5a17c4298d3f232a792aeb4bfd385180ffcbec2862c",
+        "database": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ledger.db",
+        "root": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/dependency-cruiser-circular-graph/repo",
+        "limits": "Cancellation after observing the real scanner exec; no graceful-shutdown or late-scan coverage claim. AST uses 100000 fixture lines so the actual process can be observed."
+      },
+      "pending": "Tiny acyclic/cyclic module graphs; resolver gaps, framework imports and full exclusion semantics remain unqualified.",
+      "cases": [
+        {
+          "id": "dependency-cruiser-acyclic-graph",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "clean",
+          "scope": "x imports y; y has no imports; source graph translated to JavaScript imports",
+          "oracle": "adds circular: false when no cycles",
+          "oracle_source": "test/analyze/derive/circular.spec.mjs",
+          "binding_id": "a591a58f91256aedd28e85eef014c6a6e0b069a7ee830b6fd7b79bd95e457291",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/dependency-cruiser-acyclic-graph/repo"
+        },
+        {
+          "id": "dependency-cruiser-circular-graph",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "a imports b, b imports a; source graph translated to JavaScript imports",
+          "oracle": "detects and adds cycles",
+          "oracle_source": "test/analyze/derive/circular.spec.mjs",
+          "binding_id": "5b439b5defd5d47af8ac0eb08b0d71dad3ca90082517709b854c24fcb2116e92",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/dependency-cruiser-circular-graph/repo"
+        }
+      ]
+    },
+    "knip": {
+      "counts": {
+        "cases": 3,
+        "clean": 1,
+        "clean_abstentions": 0,
+        "detected_violations": 1,
+        "false_positives": 0,
+        "harness_errors": 0,
+        "incomplete": 1,
+        "incomplete_false_clears": 0,
+        "incomplete_overstatements": 0,
+        "missed_failures": 0,
+        "missing_predictions": 0,
+        "violation_abstentions": 0,
+        "violation_false_clears": 0,
+        "violations": 1
+      },
+      "qualified": false,
+      "enabled": "explicit advisory only",
+      "independence": "Upstream-authored oracles, selected/translated by the integration developer. No blind held-out field qualification.",
+      "boundary_cases": 9,
+      "boundary_mismatches": 0,
+      "freshness": {
+        "fresh": "passed",
+        "after_edit": "stale",
+        "receipt_preserved": true
+      },
+      "setup": {
+        "missing_refused": true,
+        "unsupported_version_refused": true
+      },
+      "cancellation": {
+        "established": true,
+        "state": "blocked",
+        "remaining_observed_processes": 0,
+        "binding_id": "34c79cd9bf6fa439242937b8b41f41469ea652304df7aee8e98e92fd3bc58bc4",
+        "database": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/ledger.db",
+        "root": "/Users/dev/thruline/target/integration/validation/process-lifecycle-b_rcrqq8/knip-unused-exports/repo",
+        "limits": "Cancellation after observing the real scanner exec; no graceful-shutdown or late-scan coverage claim. AST uses 100000 fixture lines so the actual process can be observed."
+      },
+      "pending": "Seven-file entrypoint fixture plus unused exports and ignored files; dynamic loading, plugins and large framework projects remain unqualified.",
+      "cases": [
+        {
+          "id": "knip-unused-exports",
+          "label": "failure",
+          "actual": "failed",
+          "case_class": "failure",
+          "scope": "Unmodified fixtures/exports/basic; upstream expects 9 exports, 4 types, 1 duplicate",
+          "oracle": "Find unused exports",
+          "oracle_source": "packages/knip/test/exports/basic.test.ts",
+          "binding_id": "8db84e7f8a8bd515116c342f7c8d6d28a1fe8adfa58d2842f2a43c336063b6aa",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/knip-unused-exports/repo"
+        },
+        {
+          "id": "knip-ignored-files",
+          "label": "incomplete",
+          "actual": "unknown",
+          "case_class": "incomplete",
+          "scope": "Unmodified fixtures/ignore/patterns; processed 1 of 2, zero issues does not cover ignored files",
+          "oracle": "Configuration hints for unused ignore patterns",
+          "oracle_source": "packages/knip/test/ignore/patterns.test.ts",
+          "binding_id": "81d708c04a6924729c31205a121ada4ceffb09e64ab20a53095dc63ca17614d6",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/knip-ignored-files/repo"
+        },
+        {
+          "id": "knip-complete-entry-files",
+          "label": "clean",
+          "actual": "passed",
+          "case_class": "clean_project",
+          "scope": "The upstream seven-file entrypoint fixture: all seven files are processed and issue counters are zero.",
+          "oracle": "Use main, bin and exports fields in package.json to find entry files",
+          "oracle_source": "packages/knip/test/entry/files.test.ts",
+          "binding_id": "50a3329162adcbfa938cf068c6289776ba9a9e10764b1958c32fa0a7629d70a9",
+          "database": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/ledger.db",
+          "root": "/Users/dev/thruline/target/integration/validation/upstream-expanded-b112cef-yid9wl8t/knip-complete-entry-files/repo"
+        }
+      ]
+    }
+  }
+}

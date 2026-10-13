@@ -1,0 +1,20 @@
+{"Time":"2026-09-05T03:08:13.664494+05:30","Action":"start","Package":"example.com/capture/allpass"}
+{"Time":"2026-09-05T03:08:13.909043+05:30","Action":"run","Package":"example.com/capture/allpass","Test":"TestAdd"}
+{"Time":"2026-09-05T03:08:13.910815+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestAdd","Output":"=== RUN   TestAdd\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.910855+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestAdd","Output":"--- PASS: TestAdd (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.910876+05:30","Action":"pass","Package":"example.com/capture/allpass","Test":"TestAdd","Elapsed":0}
+{"Time":"2026-09-05T03:08:13.910886+05:30","Action":"run","Package":"example.com/capture/allpass","Test":"TestMul"}
+{"Time":"2026-09-05T03:08:13.91089+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestMul","Output":"=== RUN   TestMul\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.910893+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestMul","Output":"--- PASS: TestMul (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.910906+05:30","Action":"pass","Package":"example.com/capture/allpass","Test":"TestMul","Elapsed":0}
+{"Time":"2026-09-05T03:08:13.910911+05:30","Action":"run","Package":"example.com/capture/allpass","Test":"TestAddZero"}
+{"Time":"2026-09-05T03:08:13.910914+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestAddZero","Output":"=== RUN   TestAddZero\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.911239+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestAddZero","Output":"--- PASS: TestAddZero (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.911252+05:30","Action":"pass","Package":"example.com/capture/allpass","Test":"TestAddZero","Elapsed":0}
+{"Time":"2026-09-05T03:08:13.911258+05:30","Action":"run","Package":"example.com/capture/allpass","Test":"TestMulZero"}
+{"Time":"2026-09-05T03:08:13.911261+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestMulZero","Output":"=== RUN   TestMulZero\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.911265+05:30","Action":"output","Package":"example.com/capture/allpass","Test":"TestMulZero","Output":"--- PASS: TestMulZero (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.911269+05:30","Action":"pass","Package":"example.com/capture/allpass","Test":"TestMulZero","Elapsed":0}
+{"Time":"2026-09-05T03:08:13.911272+05:30","Action":"output","Package":"example.com/capture/allpass","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:13.912514+05:30","Action":"output","Package":"example.com/capture/allpass","Output":"ok  \texample.com/capture/allpass\t0.243s\n"}
+{"Time":"2026-09-05T03:08:13.912553+05:30","Action":"pass","Package":"example.com/capture/allpass","Elapsed":0.248}

@@ -1,0 +1,449 @@
+{
+ "note": "SEALED HOLDOUT-3 — §5e/§5h. Grammars mined from market + thruline (A37) and provenance-trap families mined from the real corpus (A46 mining table, M3.12.1). Content is synthetic per A22: the grammar is real, every number, name and path is invented. Sealed BEFORE any M3.12.2 classifier or renderer change; opened exactly once at M3.12.3.",
+ "partition": "holdout-3",
+ "sources": [
+  "-Users-dev-Developer-market",
+  "-Users-dev-thruline"
+ ],
+ "api_contract": "Each case carries `provenance` ∈ {executed_output, command_source, prose_context}. The harness must classify through the provenance-aware entry point. command_source and prose_context cases MUST abstain BY CONSTRUCTION (§5g), not by string inspection — a classifier that only passes them because their wording happens to look unusual has not implemented the rule. executed_output traps are the second line: modality guards, quoted shell source, §5f ambiguity, and the A37 ratio rules.",
+ "manifest": {
+  "_rule": "§5h: asserted against contents by tests/sealed_manifests.rs at seal time.",
+  "total_cases": 42,
+  "real_cases": 20,
+  "trap_cases": 22,
+  "real_by_family": {
+   "build": 6,
+   "test": 14
+  },
+  "traps_by_provenance": {
+   "command_source": 5,
+   "executed_output": 12,
+   "prose_context": 5
+  }
+ },
+ "gate": "real-format coverage ≥ 70% · trap misclassifications = 0 · abstentions allowed on real cases. A trap that parses, or any wrong count, fails outright.",
+ "cases": [
+  {
+   "id": "r01",
+   "grammar": "swift-testing run summary",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 61,
+   "failed": 0,
+   "text": "✔ Test run with 61 tests in 7 suites passed after 4.802 seconds."
+  },
+  {
+   "id": "r02",
+   "grammar": "swift-testing, failing",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": null,
+   "failed": 3,
+   "text": "✘ Test run with 61 tests in 7 suites failed after 4.802 seconds with 3 issues."
+  },
+  {
+   "id": "r03",
+   "grammar": "swift-testing, casing+spacing mutation",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 208,
+   "failed": 0,
+   "text": "✔   TEST RUN WITH 208 TESTS IN 19 SUITES PASSED AFTER 31.4 SECONDS."
+  },
+  {
+   "id": "r04",
+   "grammar": "XCTest suite line — outcome known, counts NOT",
+   "provenance": "executed_output",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "text": "Test Suite 'All tests' passed at 2026-04-18 09:41:55.207."
+  },
+  {
+   "id": "r05",
+   "grammar": "XCTest suite line, failing",
+   "provenance": "executed_output",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "text": "Test Suite 'All tests' failed at 2026-04-18 09:41:55.207."
+  },
+  {
+   "id": "r06",
+   "grammar": "cargo, passing (thruline)",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 47,
+   "failed": 0,
+   "text": "test result: ok. 47 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.11s"
+  },
+  {
+   "id": "r07",
+   "grammar": "cargo, failing, whitespace mutation",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 12,
+   "failed": 5,
+   "text": "test result:   FAILED.  12 passed;  5 failed;  0 ignored;  0 measured;  0 filtered out; finished in 0.31s"
+  },
+  {
+   "id": "r08",
+   "grammar": "node TAP summary, field-order mutation",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 26,
+   "failed": 0,
+   "text": "# fail 0\n# pass 26\n# tests 26\n# skipped 0\n# todo 0"
+  },
+  {
+   "id": "r09",
+   "grammar": "node TAP summary, failing",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 68,
+   "failed": 5,
+   "text": "1..73\n# tests 73\n# suites 0\n# pass 68\n# fail 5\n# cancelled 0\n# skipped 0"
+  },
+  {
+   "id": "r10",
+   "grammar": "prose ratio beside an explicit pass word (market)",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 11,
+   "failed": 0,
+   "text": "**Cache suite** `swift test --filter EvictionPolicyTests` → **11/11 pass**."
+  },
+  {
+   "id": "r11",
+   "grammar": "ratio + uppercase PASS, delimiter mutation",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 9,
+   "failed": 0,
+   "text": "`--self-check`: **9/9 PASS**, and both replay suites ran green."
+  },
+  {
+   "id": "r12",
+   "grammar": "prefix harness, single assertion",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 1,
+   "failed": 0,
+   "text": "PASS: cold-start budget respected."
+  },
+  {
+   "id": "r13",
+   "grammar": "prefix harness, mixed lines",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 3,
+   "failed": 1,
+   "text": "PASS: index opens\nPASS: index rebuilds\nFAIL: eviction leaves a dangling page\nPASS: replay is idempotent"
+  },
+  {
+   "id": "r14",
+   "grammar": "checkmark harness, counted lines",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 5,
+   "failed": 0,
+   "text": "✓ handshake completes\n✓ token refresh rotates\n✓ retry backs off\n✓ socket drains on close\n✓ replay is ordered"
+  },
+  {
+   "id": "r15",
+   "grammar": "custom harness final line",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 58,
+   "failed": 0,
+   "text": "=== final: 58 pass, 0 fail ==="
+  },
+  {
+   "id": "r16",
+   "grammar": "custom harness, delimiter+casing mutation",
+   "provenance": "executed_output",
+   "family": "test",
+   "passed": 44,
+   "failed": 7,
+   "text": "--- POST-MERGE: 44 PASS, 7 FAIL ---"
+  },
+  {
+   "id": "r17",
+   "grammar": "exit code zero",
+   "provenance": "executed_output",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "text": "Exit code 0"
+  },
+  {
+   "id": "r18",
+   "grammar": "exit code nonzero",
+   "provenance": "executed_output",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "text": "Exit code 4"
+  },
+  {
+   "id": "r19",
+   "grammar": "xcodebuild success banner",
+   "provenance": "executed_output",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "text": "** BUILD SUCCEEDED **"
+  },
+  {
+   "id": "r20",
+   "grammar": "compiler error line",
+   "provenance": "executed_output",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "text": "error: cannot find 'ReplayCursor' in scope"
+  },
+  {
+   "id": "t01",
+   "grammar": "command source: printf emitting a summary",
+   "provenance": "command_source",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: text in command source is never outcome evidence, by construction.",
+   "text": "printf 'FINAL: %d pass, %d fail\\n' \"$ok\" \"$bad\""
+  },
+  {
+   "id": "t02",
+   "grammar": "command source: echo of a TAP-shaped line",
+   "provenance": "command_source",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: text in command source is never outcome evidence, by construction.",
+   "text": "echo '# pass 31' >> \"$report\""
+  },
+  {
+   "id": "t03",
+   "grammar": "command source: heredoc containing a result banner",
+   "provenance": "command_source",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: text in command source is never outcome evidence, by construction.",
+   "text": "cat <<'EOF' > summary.txt\n=== final: 31 pass, 0 fail ===\nEOF"
+  },
+  {
+   "id": "t04",
+   "grammar": "command source: the grep pattern names the counts",
+   "provenance": "command_source",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: text in command source is never outcome evidence, by construction.",
+   "text": "npm test 2>&1 | grep -E '^# (pass|fail) [0-9]+' | tail -4"
+  },
+  {
+   "id": "t05",
+   "grammar": "command source: a test filter naming a count",
+   "provenance": "command_source",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: text in command source is never outcome evidence, by construction.",
+   "text": "swift test --filter 'Retry12PassTests' 2>&1 | tail -20"
+  },
+  {
+   "id": "t06",
+   "grammar": "prose: a plan stating what a run SHOULD show",
+   "provenance": "prose_context",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: assistant prose is never outcome evidence, by construction.",
+   "text": "Next I'll re-run the gate; it should show 32 pass, 0 fail once the clamp lands."
+  },
+  {
+   "id": "t07",
+   "grammar": "prose: a checklist item carrying counts",
+   "provenance": "prose_context",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: assistant prose is never outcome evidence, by construction.",
+   "text": "4. **Verify** — `swift test` (61/61), then tag and push."
+  },
+  {
+   "id": "t08",
+   "grammar": "prose: a mention of an earlier report",
+   "provenance": "prose_context",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: assistant prose is never outcome evidence, by construction.",
+   "text": "An earlier report mentioned the counts (44 pass, 0 fail); no run is attached to this message."
+  },
+  {
+   "id": "t09",
+   "grammar": "prose: quoting earlier output inside later narration",
+   "provenance": "prose_context",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: assistant prose is never outcome evidence, by construction.",
+   "text": "The prior tail read `# tests 108 / # pass 108 / # fail 0`, which is what I was going on."
+  },
+  {
+   "id": "t10",
+   "grammar": "prose: a table row describing intended behaviour",
+   "provenance": "prose_context",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g provenance: assistant prose is never outcome evidence, by construction.",
+   "text": "| `Retry.swift` | backoff capped at 5 attempts, 3 passes per window |"
+  },
+  {
+   "id": "t11",
+   "grammar": "executed output: a script's own usage text, future tense",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g modality guard: a future/conditional marker inside a scannable span abstains.",
+   "text": "usage: gate.sh [--full]\n  a full run should report 32 pass, 0 fail"
+  },
+  {
+   "id": "t12",
+   "grammar": "executed output: a runner announcing what it WILL do",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g modality guard: a future/conditional marker inside a scannable span abstains.",
+   "text": "Plan: will execute 47 tests across 6 suites."
+  },
+  {
+   "id": "t13",
+   "grammar": "executed output: expectation, not observation",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g modality guard: a future/conditional marker inside a scannable span abstains.",
+   "text": "expected 19 passed; run the suite to confirm"
+  },
+  {
+   "id": "t14",
+   "grammar": "executed output: next-step line printed by a wrapper",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g modality guard: a future/conditional marker inside a scannable span abstains.",
+   "text": "next: re-run to get 26 pass, 0 fail"
+  },
+  {
+   "id": "t15",
+   "grammar": "executed output: prose reporting an earlier run",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g modality guard: a mention verb inside a scannable span abstains.",
+   "text": "the previous log mentioned 58 pass and 0 fail; nothing was executed here"
+  },
+  {
+   "id": "t16",
+   "grammar": "executed output: a doc quoting a result",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g modality guard: a mention verb inside a scannable span abstains.",
+   "text": "As reported in RELEASE.md, the gate stood at 108 pass / 0 fail."
+  },
+  {
+   "id": "t17",
+   "grammar": "executed output: `cat` of a shell script containing printf",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g: quoted shell source inside a result is source, not output — the holdout-2 trap-3 shape.",
+   "text": "  ok=$((ok+1))\n  printf 'FINAL: %d pass, %d fail\\n' \"$ok\" \"$bad\"\n  exit $rc"
+  },
+  {
+   "id": "t18",
+   "grammar": "executed output: `cat` of a harness defining PASS/FAIL helpers",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5g: quoted shell source inside a result is source, not output — the holdout-2 trap-3 shape.",
+   "text": "good() { printf 'PASS: %s\\n' \"$1\"; }\nbad()  { printf 'FAIL: %s\\n' \"$1\"; fails=$((fails+1)); }"
+  },
+  {
+   "id": "t19",
+   "grammar": "executed output: two conflicting summaries (§5f ambiguity)",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "§5f ambiguity: more than one same-family count pair with no resolving final marker abstains.",
+   "text": "test result: ok. 31 passed; 0 failed; 0 ignored\ntest result: FAILED. 12 passed; 19 failed; 0 ignored"
+  },
+  {
+   "id": "t20",
+   "grammar": "executed output: a date, not a ratio",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "A37: n/m adjacent to no pass word is not a ratio.",
+   "text": "POST https://api.example.invalid/v2/sessions - Ok @ 4/18/2026, 9:41:55 AM"
+  },
+  {
+   "id": "t21",
+   "grammar": "executed output: a progress counter",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "A37: n/m adjacent to no pass word is not a ratio.",
+   "text": "[3/9] bundling: 412ms"
+  },
+  {
+   "id": "t22",
+   "grammar": "executed output: a Read listing with line numbers",
+   "provenance": "executed_output",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "defence": "M3.10.2: a line beginning digits+[:\\t] is file content, not program output.",
+   "text": "212\t  XCTAssertEqual(results.passed, 19)\n213\t  XCTAssertEqual(results.failed, 0)"
+  }
+ ]
+}

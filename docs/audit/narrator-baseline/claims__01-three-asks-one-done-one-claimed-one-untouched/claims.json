@@ -1,0 +1,60 @@
+{
+  "checks": 1,
+  "claims": [
+    {
+      "binding": "ran_on_final_tree",
+      "evidence": [
+        "chk_1TFTAQKZWAC6BTFJS9HXZ0R0AY"
+      ],
+      "extractor": "rules",
+      "findings": [],
+      "id": "clm_3YBT2J4E4SD2369MT6MV5NJEHT",
+      "kind": "build_ok",
+      "reasons": [
+        "ran on the final tree",
+        "`cargo build` exited 0"
+      ],
+      "scope": "all",
+      "span": {
+        "event_id": "evt_0093YJYY8X0GMSYWGYZ0EF4DCM",
+        "offset": [
+          44,
+          62
+        ]
+      },
+      "text": "As you asked in 1, the parser fix is in and the build succeeds.",
+      "verdict": "supported",
+      "verifier": "build_ok@1",
+      "warnings": []
+    },
+    {
+      "binding": null,
+      "evidence": [],
+      "extractor": "rules",
+      "findings": [],
+      "id": "clm_51F2WCNCTJ0XS14F02V5ZK5HNN",
+      "kind": "tests_pass",
+      "reasons": [
+        "no test check was captured in this session; the claim may be true and there is no evidence either way"
+      ],
+      "scope": "all",
+      "span": {
+        "event_id": "evt_0093YJYY8X0GMSYWGYZ0EF4DCM",
+        "offset": [
+          83,
+          97
+        ]
+      },
+      "text": "As you asked in 2, all tests pass.",
+      "verdict": "unverifiable",
+      "verifier": "tests_pass@1",
+      "warnings": []
+    }
+  ],
+  "final_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "cccccccc-0001-4000-8000-000000000000",
+  "shape": "thruline.claims"
+}

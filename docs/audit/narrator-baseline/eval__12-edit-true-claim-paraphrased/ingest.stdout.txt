@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__12-edit-true-claim-paraphrased/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval a58e1f7058dbf65ae12aab8babbee8b06f73df9240a5a9e90dd71ad10aac72b0
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

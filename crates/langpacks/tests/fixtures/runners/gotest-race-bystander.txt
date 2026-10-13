@@ -1,0 +1,48 @@
+=== RUN   TestLeaks
+--- PASS: TestLeaks (0.00s)
+=== RUN   TestSleepsPastTheRace
+==================
+WARNING: DATA RACE
+Write at 0x00c000012268 by goroutine 8:
+  example.com/capture/leakrace.(*Box).Set()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/leakrace/leakrace.go:4 +0x40
+  example.com/capture/leakrace.TestLeaks.func1()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/leakrace/leakrace_test.go:15 +0x3c
+
+Previous read at 0x00c000012268 by goroutine 7:
+  example.com/capture/leakrace.(*Box).Get()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/leakrace/leakrace.go:5 +0xa4
+  example.com/capture/leakrace.TestLeaks()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/leakrace/leakrace_test.go:17 +0x18
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x34
+
+Goroutine 8 (running) created at:
+  example.com/capture/leakrace.TestLeaks()
+      /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/leakrace/leakrace_test.go:13 +0x9c
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x34
+
+Goroutine 7 (finished) created at:
+  testing.(*T).Run()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x7bc
+  testing.runTests.func1()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2742 +0x74
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0x164
+  testing.runTests()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2740 +0x7a0
+  testing.(*M).Run()
+      /opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2600 +0xb38
+  main.main()
+      _testmain.go:48 +0x100
+==================
+    testing.go:1865: race detected during execution of test
+--- FAIL: TestSleepsPastTheRace (0.60s)
+FAIL
+FAIL	example.com/capture/leakrace	7.544s
+FAIL

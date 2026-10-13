@@ -1,0 +1,89 @@
+{
+  "claims_vs_proof": [],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "claude_code_sessions",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "user_prompt",
+      "seq": 2,
+      "text": ""
+    },
+    {
+      "input": "{\"file_path\":\"/Users/dev/thruline/CLAUDE.md\"}",
+      "kind": "tool_call",
+      "seq": 4,
+      "text": "Read {\"file_path\":\"/Users/dev/thruline/CLAUDE.md\"}",
+      "tool": "Read"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 5,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "kind": "note",
+      "seq": 6,
+      "text": "note"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 7,
+      "text": "unknown FAILED",
+      "tool": "unknown"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 8,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "kind": "note",
+      "seq": 11,
+      "text": "note"
+    },
+    {
+      "kind": "note",
+      "seq": 12,
+      "text": "note"
+    },
+    {
+      "input": "{\"command\":\"[redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted c\",\"description\":\"[redacted description f2b6815b] [redacted descr\"}",
+      "kind": "tool_call",
+      "seq": 13,
+      "text": "Bash {\"command\":\"[redacted command 541bfcc3] [redacted …",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 14,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "kind": "note",
+      "seq": 15,
+      "text": "legacy `meta` rows record JSONL field names the parser did not                      recognise, not session content — folded to one census rather                      than imported as events "
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "no_stop_recorded",
+    "last_events": [
+      "Bash {\"command\":\"[redacted command 541bfcc3] [redacted …",
+      "unknown ok",
+      "legacy `meta` rows record JSONL field names the parser did not                      recognise, not session content — folded to one census rather                      than imported as events "
+    ],
+    "summary": "no `stop` event is in the record: the session is still open, or the Stop hook never fired"
+  }
+}

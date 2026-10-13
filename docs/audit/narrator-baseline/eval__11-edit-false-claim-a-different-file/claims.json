@@ -1,0 +1,10 @@
+{
+  "checks": 0,
+  "claims": [],
+  "final_tree_hash": null,
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "11-edit-false-claim-a-different-file",
+  "shape": "thruline.claims"
+}

@@ -1,0 +1,12 @@
+go: downloading github.com/stretchr/objx v0.5.3
+go: downloading go.yaml.in/yaml/v3 v3.0.5
+ok  	github.com/stretchr/testify	2.392s
+ok  	github.com/stretchr/testify/assert	4.607s
+ok  	github.com/stretchr/testify/assert/internal/unsafetests	1.807s
+?   	github.com/stretchr/testify/assert/yaml	[no test files]
+?   	github.com/stretchr/testify/http	[no test files]
+ok  	github.com/stretchr/testify/internal/difflib	1.368s
+ok  	github.com/stretchr/testify/internal/spew	2.823s
+ok  	github.com/stretchr/testify/mock	3.351s
+ok  	github.com/stretchr/testify/require	2.320s
+ok  	github.com/stretchr/testify/suite	103.057s

@@ -1,0 +1,4 @@
+/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/corpus/ruby/faker/test/test_helper.rb:3:in 'Kernel#require': cannot load such file -- simplecov (LoadError)
+	from /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/corpus/ruby/faker/test/test_helper.rb:3:in '<top (required)>'
+	from test/faker/default/test_faker_name.rb:3:in 'Kernel#require_relative'
+	from test/faker/default/test_faker_name.rb:3:in '<main>'

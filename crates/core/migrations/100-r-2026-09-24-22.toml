@@ -1,0 +1,64 @@
+task = "R-2026-09-24-22"
+order = 100
+built_on_commit = "4e486e16"
+pinned_schema_digest = "schema_sha256_5bb65e851f76b301222bd234f4c6ddae3120e4e40838301fc81cf78007212805"
+migration_test = "crates/core/tests/obligation_waiver_rename_migration.rs"
+note = """
+A rename, not an addition: `change_dispositions` becomes
+`change_obligation_waivers`, with its index and its three triggers, and the two
+columns that carried the retired word (`disposed_at` on the table itself,
+`disposition_id` on `change_decision_exceptions`) become `recorded_at` and
+`waiver_id`.
+
+Why, in the founder's words (docs/loop/RULINGS.md): "disposition" belongs to
+findings — the review lane's `change_finding_dispositions` records what
+happened to a finding — and this table records that a named person set one
+obligation aside. Two different things under one word is how a query ends up
+reading the wrong table, and the table was hours old, so it is renamed now
+rather than lived with.
+
+This file claims no table: the table it is about is T-5-3's and stays T-5-3's
+in 090-t-5-3.toml, which names it as this tree now creates it. What this file
+owns is the rename itself, which is why `change_dispositions` survives here and
+in `Ledger::migrate_obligation_waiver_rename` and nowhere else in the tree.
+
+THE ONE `ALTER TABLE` IN THE CHANGE LAYER. Every other DDL task adds objects
+and alters nothing; the ruling authorises this one. `ALTER TABLE ... RENAME`
+moves no row's bytes, so the waivers a person recorded before the upgrade are
+the same rows afterwards, and the migration test proves that byte for byte.
+Cost (A193): nothing measurable of its own — three metadata renames and four
+drops. The bill is the existing full-schema path's, about 35 seconds on the
+2.01 M-event corpus by `upgrade::estimate_phrase`, and `thruline upgrade` is
+still the only thing that may pay it.
+"""
+
+tables = []
+
+indexes = []
+
+triggers = []
+
+[[renames]]
+kind = "table"
+from = "change_dispositions"
+to = "change_obligation_waivers"
+
+[[renames]]
+kind = "index"
+from = "idx_change_dispositions_change"
+to = "idx_change_obligation_waivers_change"
+
+[[renames]]
+kind = "trigger"
+from = "change_dispositions_no_replace"
+to = "change_obligation_waivers_no_replace"
+
+[[renames]]
+kind = "trigger"
+from = "change_dispositions_no_update"
+to = "change_obligation_waivers_no_update"
+
+[[renames]]
+kind = "trigger"
+from = "change_dispositions_no_delete"
+to = "change_obligation_waivers_no_delete"

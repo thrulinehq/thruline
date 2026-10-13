@@ -1,0 +1,107 @@
+{
+  "claims_vs_proof": [
+    {
+      "findings": [],
+      "kind": "build_ok",
+      "reasons": [
+        "ran on the final tree",
+        "`cargo build` exited 0"
+      ],
+      "text": "The build succeeds.",
+      "verdict": "supported"
+    }
+  ],
+  "narrative": null,
+  "promises": [
+    {
+      "id": "prm_0MY1FPGXZ5MC7SZ3YC8DFMMF8T",
+      "kind": "follow_up",
+      "opened_event_id": "evt_4DV6REV8FSTMWEZFNNZRMV4Y6G",
+      "session_id": "cccccccc-0005-4000-8000-000000000000",
+      "status": "open",
+      "text": "I'll update the changelog in a follow-up."
+    }
+  ],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "cccccccc-0005-4000-8000-000000000000",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "session_start",
+      "seq": 4,
+      "text": "session started"
+    },
+    {
+      "kind": "user_prompt",
+      "seq": 8,
+      "text": "Rename the `--verbose` flag to `--debug` in `src/cli.rs`."
+    },
+    {
+      "input": "{\"file_path\":\"/Users/dev/demo/src/cli.rs\",\"new_string\":\"    debug: bool,\",\"old_string\":\"    verbose: bool,\",\"replace_all\":false}",
+      "kind": "tool_call",
+      "seq": 12,
+      "text": "Edit {\"file_path\":\"/Users/dev/demo/src/cli.rs\",\"new_str…",
+      "tool": "Edit"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 16,
+      "text": "Edit ok",
+      "tool": "Edit"
+    },
+    {
+      "kind": "fs_change",
+      "seq": 17,
+      "text": "modify /Users/dev/demo/src/cli.rs"
+    },
+    {
+      "kind": "snapshot",
+      "seq": 18,
+      "text": "tree c4eeb65ef913 (taken at fold)"
+    },
+    {
+      "input": "{\"command\":\"cargo build\",\"description\":\"Build the crate\"}",
+      "kind": "tool_call",
+      "seq": 20,
+      "text": "Bash {\"command\":\"cargo build\",\"description\":\"Build the …",
+      "tool": "Bash"
+    },
+    {
+      "kind": "exec",
+      "seq": 24,
+      "text": "cargo build → exit 0"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 28,
+      "text": "Bash ok",
+      "tool": "Bash"
+    },
+    {
+      "kind": "snapshot",
+      "seq": 29,
+      "text": "tree c4eeb65ef913 (taken at fold)"
+    },
+    {
+      "kind": "stop",
+      "seq": 32,
+      "text": "stopped: The flag is now called --debug. The build succeeds. I'll upd…"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "agent_finished",
+    "last_events": [
+      "cargo build → exit 0",
+      "Bash ok",
+      "tree c4eeb65ef913 (taken at fold)"
+    ],
+    "summary": "the agent finished its turn"
+  }
+}

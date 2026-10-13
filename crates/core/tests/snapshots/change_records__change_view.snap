@@ -1,0 +1,85 @@
+---
+source: crates/core/tests/change_records.rs
+expression: view
+---
+{
+  "schema_version": 8,
+  "id": "cccccccc-0000-4000-8000-00000000c001",
+  "project_id": "cccccccc-0000-4000-8000-00000000p001",
+  "opened_at": "2026-01-02T09:00:00Z",
+  "request": {
+    "title": "Retry failed uploads",
+    "purpose": "Uploads that fail once are lost, and the person never finds out.",
+    "prompt_event_id": null,
+    "requester": "sam",
+    "source": "person"
+  },
+  "accepted_scope": {
+    "version": 1,
+    "proposed_at": "2026-01-02T09:05:00Z",
+    "criteria": [
+      "A failed upload is tried again three times.",
+      "The person is told when it finally gives up."
+    ],
+    "exclusions": [
+      "Uploads larger than 2 GB are out of scope."
+    ],
+    "allowed_scope": [
+      "src/upload/**"
+    ],
+    "constraints": [
+      "No new dependency."
+    ],
+    "check_profile": [
+      "unit-tests",
+      "lint"
+    ],
+    "content_sha256": "2f66b941756eaa221b796f446617f89701d62b6a514bafac62947e5661425b1c",
+    "acceptance": {
+      "actor": "sam",
+      "accepted_at": "2026-01-02T09:06:00Z",
+      "rationale": "That is what I asked for."
+    }
+  },
+  "scope_history": [],
+  "implementation": {
+    "version": 1,
+    "bound_at": "2026-01-02T10:00:00Z",
+    "repository_identity": "repo-synthetic-0001",
+    "base_revision": "0000000000000000000000000000000000000001",
+    "snapshot_id": null,
+    "workspace_identity": "workspace-synthetic-0001"
+  },
+  "implementation_history": [],
+  "associations": [
+    {
+      "id": "cccccccc-0000-4000-8000-00000000a001",
+      "session_id": "cccccccc-0000-4000-8000-00000000s001",
+      "provenance": "suggested",
+      "basis": "timing",
+      "actor": null,
+      "asserted_at": "2026-01-02T10:01:00Z",
+      "reason": null
+    }
+  ],
+  "examination": "none_yet",
+  "decision": "none_yet",
+  "decisions": {
+    "standing": null,
+    "history": [],
+    "target_revision": "0000000000000000000000000000000000000001",
+    "scope_version": 1
+  },
+  "notes": [],
+  "seconds": [],
+  "reviews": [],
+  "code_moved": null,
+  "retrospective": null,
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

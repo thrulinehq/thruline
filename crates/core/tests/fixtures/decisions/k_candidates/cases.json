@@ -1,0 +1,66 @@
+[
+  {
+    "code": "K4",
+    "path": "tests/test_math.py",
+    "baseline": "def test_total():\n    assert total(2, 3) == 5\n",
+    "signal": "def test_total():\n    assert True\n",
+    "benign_path": "tests/test_math.py",
+    "benign": "def test_total():\n    assert total(2, 3) == expected_total()\n"
+  },
+  {
+    "code": "K5",
+    "path": "src/app.ts",
+    "baseline": "export function mode() { return 'normal'; }\n",
+    "signal": "export function mode() {\n  if (process.env.NODE_ENV === 'test') return 'mock';\n  return 'normal';\n}\n",
+    "benign_path": "tests/app.test.ts",
+    "benign": "if (process.env.NODE_ENV === 'test') runTestFixture();\n"
+  },
+  {
+    "code": "K6",
+    "path": "src/answer.py",
+    "baseline": "def answer(value):\n    return compute(value)\n",
+    "signal": "def answer(value):\n    return {'fixture-a': 42, 'fixture-b': 7}.get(value, 0)\n",
+    "benign_path": "src/answer.py",
+    "benign": "def answer(value):\n    return compute(value) + 1\n"
+  },
+  {
+    "code": "K7",
+    "path": "src/value.py",
+    "baseline": "class Value:\n    def __eq__(self, other):\n        return self.key == other.key\n",
+    "signal": "class Value:\n    def __eq__(self, other):\n        return True\n",
+    "benign_path": "src/value.py",
+    "benign": "class Value:\n    def __eq__(self, other):\n        return (self.key, self.kind) == (other.key, other.kind)\n"
+  },
+  {
+    "code": "K10",
+    "path": "src/value.ts",
+    "baseline": "export const value: number = compute();\n",
+    "signal": "// @ts-ignore\nexport const value: number = compute();\n",
+    "benign_path": "src/value.ts",
+    "benign": "export const guidance = '@ts-ignore is prohibited';\n"
+  },
+  {
+    "code": "K11",
+    "path": "src/load.ts",
+    "baseline": "try { load(); } catch (error) { report(error); }\n",
+    "signal": "try { load(); } catch {}\n",
+    "benign_path": "src/load.ts",
+    "benign": "try { load(); } catch (error) { throw error; }\n"
+  },
+  {
+    "code": "K12",
+    "path": "src/lib.rs",
+    "baseline": "pub fn result() -> i32 { 42 }\n",
+    "signal": "pub fn result() -> i32 { todo!() }\n",
+    "benign_path": "src/lib.rs",
+    "benign": "// TODO: document this completed implementation.\npub fn result() -> i32 { 43 }\n"
+  },
+  {
+    "code": "K18",
+    "path": "CLAUDE.md",
+    "baseline": "Run tests after edits.\n",
+    "signal": "Run tests after edits.\n",
+    "benign_path": "CLAUDE.md",
+    "benign": "Run tests after edits.\n"
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "vendor_scope": {
+    "path": "vendor/paddle.json",
+    "pointer": "/data/items/0/price/trial_period",
+    "term": "trial"
+  },
+  "paddle_scope": {
+    "path": "crates/licence-issue/fixtures/paddle-transaction_completed.json",
+    "pointer": "/data/items/0/price/trial_period",
+    "term": "trial"
+  },
+  "base_params": {
+    "kind": "text_absent",
+    "terms": [
+      "trial"
+    ],
+    "synonyms": [],
+    "surfaces": [
+      "code",
+      "docs",
+      "other"
+    ],
+    "allowlist": [],
+    "test_allowlist": [],
+    "json_field_allowlist": [],
+    "conditional_path_allowlist": []
+  }
+}

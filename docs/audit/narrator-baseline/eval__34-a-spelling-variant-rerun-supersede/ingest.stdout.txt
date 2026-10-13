@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__34-a-spelling-variant-rerun-supersede/store/ledger.db
+projects 1
+sessions 1
+lines    6 read · 0 already ingested
+events   6 new
+           assistant_text       1
+           tool_result          2
+           tool_use             2
+           user_msg             1
+unknown  none
+malformed none
+head     eval d8cc4e0649d644cf58716e315c5137cc3783c959ed9bdc6ddaa23114d1826d82
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

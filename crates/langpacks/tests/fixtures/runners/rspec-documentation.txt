@@ -1,0 +1,17 @@
+
+Calc
+  .add
+    adds two positive integers
+    adds a negative integer
+    is commutative
+  .sub
+    subtracts
+
+Calc
+  .div
+    divides evenly
+    raises on zero denominator
+
+Finished in 0.00328 seconds (files took 0.09083 seconds to load)
+6 examples, 0 failures
+

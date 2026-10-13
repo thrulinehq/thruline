@@ -1,0 +1,1 @@
+import{h as i}from"./app-DHU9gHYg.js";const t=e=>Number.isInteger(e)&&e>0;function o(e,n){if(!(!t(n)||!e||!e.change))return i("step",{change:e.change,step:n,project:e.project})}function f(e,n){const r={change:e&&e.change,project:e&&e.project||(n?String(n):void 0)};return c=>o(r,c)}export{t as i,f as s};

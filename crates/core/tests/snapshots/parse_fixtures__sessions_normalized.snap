@@ -1,0 +1,250 @@
+---
+source: crates/core/tests/parse_fixtures.rs
+expression: lines
+---
+[
+  {
+    "line": 1,
+    "sha256": "68186cd4a7cab7dfc9dd2f6211171012dd60cbc94c2528fd3f6fe0a1d034aac1",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "queue-operation",
+    "events": [
+      {
+        "kind": "meta",
+        "text": "queue-operation",
+        "is_error": false,
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:37:58.579Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 2,
+    "sha256": "a4fecfade0a4e2671a090e4899ea39413c45efd51be1d68b07cfc2ef03e817bd",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "user",
+    "events": [
+      {
+        "kind": "user_msg",
+        "role": "user",
+        "text": "[redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1d] [redacted content 3e69cd1",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000020",
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:37:59.553Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 3,
+    "sha256": "0fe7a0709dc9edfa5ac5c8740a8b73b5f9ffcca15eac93fd6b6d3d2f1d33b586",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "last-prompt",
+    "events": [
+      {
+        "kind": "meta",
+        "text": "last-prompt",
+        "is_error": false,
+        "is_sidechain": false,
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 4,
+    "sha256": "5d766b41bcef5b5cbf0c06ab39749d546dba26e474ea0ca35370e1dddf4c3b9b",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "assistant",
+    "events": [
+      {
+        "kind": "tool_use",
+        "role": "assistant",
+        "tool_name": "Read",
+        "tool_use_id": "toolu_00000000000000000001",
+        "tool_input": "{\"file_path\":\"/Users/dev/thruline/CLAUDE.md\"}",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000050",
+        "parent_uuid": "00000000-0000-4000-8000-000000000040",
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:38:02.297Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 5,
+    "sha256": "1ead70482b4f731cbf1a061b5232928b9ec9b6c7b18e515567a95cf59dad7dc9",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "user",
+    "events": [
+      {
+        "kind": "tool_result",
+        "role": "user",
+        "tool_use_id": "toolu_00000000000000000001",
+        "tool_result": "{\"content\":\"[redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [redacted content 0e466815] [r\",\"toolUseResult\":{\"file\":{\"content\":\"[redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [redacted content 1b15dde7] [\",\"filePath\":\"/Users/dev/thruline/CLAUDE.md\",\"numLines\":50,\"startLine\":1,\"totalLines\":50},\"type\":\"text\"}}",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000060",
+        "parent_uuid": "00000000-0000-4000-8000-000000000050",
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:38:02.309Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 6,
+    "sha256": "9aff0165725f2b79962354aabc557623d1718f09605af45b1f9e8b8d3abcd61f",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "assistant",
+    "events": [
+      {
+        "kind": "assistant_thinking",
+        "role": "assistant",
+        "text": "[redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted thinking c4583ed1] [redacted think",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000080",
+        "parent_uuid": "00000000-0000-4000-8000-000000000070",
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:38:27.094Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 7,
+    "sha256": "b036a216ea3da2a5bbd358cd2e953bac12038e3cf186a65a53002b7bba03bf2a",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "user",
+    "events": [
+      {
+        "kind": "tool_result",
+        "role": "user",
+        "tool_use_id": "toolu_00000000000000000005",
+        "tool_result": "{\"content\":\"[redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [redacted content 7937f8f3] [red\",\"toolUseResult\":\"Error: Exit code 1\\nmanifest MISSING\\next_resources MISSING\\npage_order MISSING\\ntemplate MISSING\\nnode:internal/errors:540\\n      throw error;\\n      ^\\n\\nTypeError [ERR_INVALID_ARG_TYPE]: The \\\"data\\\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received null\\n    at Object.writeFileSync (node:fs:2434:5)\\n    at [eval]:14:4\\n    at runScriptInThisContext (node:internal/vm:209:10)\\n    at node:internal/process/execution:446:12\\n    at [eval]-wrapper:6:24\\n    at runScriptInContext (node:internal/process/execution:444:60)\\n    at evalFunction (node:internal/process/execution:279:30)\\n    at evalTypeScript (node:internal/process/execution:291:3)\\n    at node:internal/main/eval_string:74:3 {\\n  code: 'ERR_INVALID_ARG_TYPE'\\n}\\n\\nNode.js v22.19.0\"}",
+        "is_error": true,
+        "src_uuid": "00000000-0000-4000-8000-0000000000a0",
+        "parent_uuid": "00000000-0000-4000-8000-000000000090",
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:38:46.603Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 8,
+    "sha256": "52dbc78672560a43fa996f3a339f9e539e2cdee3cd1693afc82664f93a763c16",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "user",
+    "events": [
+      {
+        "kind": "tool_result",
+        "role": "user",
+        "tool_use_id": "toolu_00000000000000000006",
+        "tool_result": "{\"content\":[{\"text\":\"[redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db\",\"type\":\"text\"}],\"toolUseResult\":[{\"text\":\"[redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db14] [redacted text aff4db\",\"type\":\"text\"}]}",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-0000000000c0",
+        "parent_uuid": "00000000-0000-4000-8000-0000000000b0",
+        "is_sidechain": false,
+        "ts": "2026-07-28T20:42:31.492Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 9,
+    "sha256": "1bc14904f7e978fe24ec1f8a5ecef65ba9005633a7b8147cb8214a34c70c345d",
+    "session_id": "00000000-0000-4000-8000-000000000000",
+    "raw_type": "system",
+    "events": [
+      {
+        "kind": "meta",
+        "text": "system",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-0000000000e0",
+        "parent_uuid": "00000000-0000-4000-8000-0000000000d0",
+        "is_sidechain": false,
+        "ts": "2026-07-28T21:10:38.462Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000000"
+      }
+    ]
+  },
+  {
+    "line": 10,
+    "sha256": "0151a6bc6e042b87b76184b7ed42bda6000ba05818fb7e301fbe83830fe32f25",
+    "session_id": null,
+    "raw_type": "file-history-snapshot",
+    "events": [
+      {
+        "kind": "meta",
+        "text": "file-history-snapshot",
+        "is_error": false,
+        "is_sidechain": false
+      }
+    ]
+  },
+  {
+    "line": 11,
+    "sha256": "4b87e36e3049ebb851e313a09d7a65a169d0ac4079a24118fc9793e0ddf16a2c",
+    "session_id": "00000000-0000-4000-8000-000000000130",
+    "raw_type": "assistant",
+    "events": [
+      {
+        "kind": "assistant_thinking",
+        "role": "assistant",
+        "text": "",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000120",
+        "parent_uuid": "00000000-0000-4000-8000-000000000110",
+        "is_sidechain": false,
+        "ts": "2026-07-15T21:25:49.716Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000130"
+      },
+      {
+        "kind": "assistant_text",
+        "role": "assistant",
+        "text": "[redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f1] [redacted text b1c825f",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000120",
+        "parent_uuid": "00000000-0000-4000-8000-000000000110",
+        "is_sidechain": false,
+        "ts": "2026-07-15T21:25:49.716Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000130"
+      },
+      {
+        "kind": "tool_use",
+        "role": "assistant",
+        "tool_name": "Bash",
+        "tool_use_id": "toolu_00000000000000000008",
+        "tool_input": "{\"command\":\"[redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted command 541bfcc3] [redacted c\",\"description\":\"[redacted description f2b6815b] [redacted descr\"}",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000120",
+        "parent_uuid": "00000000-0000-4000-8000-000000000110",
+        "is_sidechain": false,
+        "ts": "2026-07-15T21:25:49.716Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000130"
+      }
+    ]
+  },
+  {
+    "line": 12,
+    "sha256": "24b127bc16554b2be7f8c499523aaf63b50e3665278d3a808da7505594693645",
+    "session_id": "00000000-0000-4000-8000-000000000180",
+    "raw_type": "user",
+    "events": [
+      {
+        "kind": "tool_result",
+        "role": "user",
+        "tool_use_id": "toolu_00000000000000000010",
+        "tool_result": "{\"content\":\"[redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [redacted content b1c2723f] [re\",\"toolUseResult\":{\"interrupted\":false,\"isImage\":false,\"noOutputExpected\":false,\"stderr\":\"\",\"stdout\":\"[redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1c2723f] [redacted stdout b1\"}}",
+        "is_error": false,
+        "src_uuid": "00000000-0000-4000-8000-000000000160",
+        "parent_uuid": "00000000-0000-4000-8000-000000000140",
+        "is_sidechain": false,
+        "ts": "2026-07-08T15:22:38.696Z",
+        "line_session_id": "00000000-0000-4000-8000-000000000180"
+      }
+    ]
+  }
+]

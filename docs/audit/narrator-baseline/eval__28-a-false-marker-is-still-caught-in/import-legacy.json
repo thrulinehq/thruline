@@ -1,0 +1,24 @@
+{
+  "chain_failure_sample": [],
+  "chain_failures": 0,
+  "chains_verified": 0,
+  "dry_run": false,
+  "events_skipped": 0,
+  "events_written": 32,
+  "exec_db": "<WORK>/sessions/eval__28-a-false-marker-is-still-caught-in/store/exec.db",
+  "legacy_kinds": {
+    "assistant_text": 1,
+    "tool_result": 15,
+    "tool_use": 15,
+    "user_msg": 1
+  },
+  "meta_rows_aggregated": 0,
+  "rejected": 0,
+  "rejected_sample": [],
+  "rows_read": 32,
+  "schema_version": 1,
+  "sessions_seen": 1,
+  "sessions_with_dead_source": 0,
+  "shape": "thruline.import-legacy",
+  "source": "<WORK>/sessions/eval__28-a-false-marker-is-still-caught-in/store/ledger.db"
+}

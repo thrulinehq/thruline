@@ -1,0 +1,9 @@
+# example.com/broken/broken [example.com/broken/broken.test]
+broken/broken_test.go:12:16: undefined: undefinedHelper
+broken/broken_test.go:16:16: undefined: oops
+FAIL	example.com/broken/broken [build failed]
+=== RUN   TestTwo
+--- PASS: TestTwo (0.00s)
+PASS
+ok  	example.com/broken/fine	0.214s
+FAIL

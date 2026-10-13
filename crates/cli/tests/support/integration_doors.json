@@ -1,0 +1,181 @@
+{
+  "schema": "thruline.integration-door-census.v1",
+  "card": "AI-REVIEW-OUT-OF-LAUNCH-R6",
+  "about": [
+    "The door census. Every `thruline integration` subcommand and every argument of it, and every action the HQ route POST /api/integrations/action admits, is classified here, and the classification says how each door that reads an id, a pack or a recipe from an operator's flag, file or request body is driven with an id the build does not ship.",
+    "Two tests read this one file. The unit tests (crates/cli/src/integration_cmd/door_census.rs and the tests of crates/cli/src/uiserve/integration_actions.rs) take the subcommands and their arguments from the clap definitions, and the actions from the route's own table, and fail on any that this file does not classify, on any this file names that no longer exists, and on any classified id door that no drive reaches. The process test (crates/cli/tests/integration_door_census.rs) then runs every drive, against the compiled launch build, with every id the rounds attack with, and asserts that the id is refused or counted and is never printed: not in stdout, not in stderr, not in any file written.",
+    "A new subcommand, argument or route action therefore fails a test until it is classified here, and a door classified as reading an id fails a test until a drive reaches it.",
+    "Placeholders in a drive's argv: {id} the id under test; {root} the synthetic repository; {exec} its acceptance store; {plan} a plan file whose `pack` is the id; {cases} and {results} an evaluation's two files with the id as a case's pack; {report} a report file; {action} each of the drive's `for_action` words."
+  ],
+  "classes": {
+    "id": "a recipe, pack or source id typed at a flag or as a positional. A value the build does not ship is refused or counted, and never named.",
+    "id_in_file": "a path to an operator file whose content names a pack or recipe id. The same rule applies to what is in the file.",
+    "word": "one word of a fixed vocabulary (an action, a mode). Anything else is refused in fixed words.",
+    "other_id": "an identifier of something that is not a pack or a recipe (a session, a Change, a receipt). It is driven with the same ids, and must not be echoed either.",
+    "text": "free text the operator typed (a digest). Echoing the operator's own words back is out of scope, as the R6 card rules.",
+    "content": "a file whose content is decoded as data by the pack the person named; the pack is a driven id, the content is the tool's own report.",
+    "path": "a filesystem path.",
+    "number": "a number.",
+    "switch": "a flag with no value.",
+    "argv": "a command line to execute, not an id."
+  },
+  "outcomes": {
+    "refused": "the door exits non-zero (or the route answers 4xx) and prints nothing of the id.",
+    "counted": "the door succeeds and says only how many of what it was given this build does not run, naming none.",
+    "unused": "the door reads the value and does not use it in this mode; it succeeds and prints nothing of it."
+  },
+  "cli": {
+    "native-repair": {
+      "args": {"root": "path", "action": "word", "recipe": "id", "digest": "text"},
+      "drives": [
+        {"via": "recipe", "outcome": "refused", "for_action": ["preview", "verify", "apply", "list"],
+         "argv": ["--root", "{root}", "--action", "{action}", "--recipe", "{id}"]},
+        {"via": "action", "outcome": "refused",
+         "argv": ["--root", "{root}", "--action", "{id}", "--recipe", "clippy"]}
+      ]
+    },
+    "agent-repair": {
+      "args": {"root": "path", "action": "word", "recipe": "id", "digest": "text"},
+      "drives": [
+        {"via": "recipe", "outcome": "refused", "for_action": ["preview", "resume", "verify", "apply", "list"],
+         "argv": ["--root", "{root}", "--action", "{action}", "--recipe", "{id}"]},
+        {"via": "action", "outcome": "refused",
+         "argv": ["--root", "{root}", "--action", "{id}", "--recipe", "aider"]}
+      ]
+    },
+    "review": {
+      "args": {"root": "path", "exec_db": "path", "action": "word", "mode": "word", "digest": "text",
+               "change_id": "other_id", "examined_inputs_id": "other_id"},
+      "operator_files": {"THRULINE_REVIEW_PROJECTS": "a project's `recipes` selection"},
+      "drives": [
+        {"via": "mode", "outcome": "refused", "for_action": ["preview", "accept", "step", "export", "retry"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--mode", "{id}"]},
+        {"via": "mode", "outcome": "unused", "for_action": ["status"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--mode", "{id}"]},
+        {"via": "action", "outcome": "refused",
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{id}", "--mode", "full"]},
+        {"via": ["change_id", "examined_inputs_id"], "outcome": "refused",
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "accept", "--mode", "change", "--change-id", "{id}", "--examined-inputs-id", "{id}"]},
+        {"via": "env:THRULINE_REVIEW_PROJECTS", "outcome": "counted", "for_action": ["preview"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--mode", "full"]},
+        {"via": "env:THRULINE_REVIEW_PROJECTS", "outcome": "unused", "for_action": ["status"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--mode", "full"]},
+        {"via": "env:THRULINE_REVIEW_PROJECTS", "outcome": "refused", "for_action": ["accept", "step", "export", "retry"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--mode", "full"]}
+      ]
+    },
+    "repair": {
+      "args": {"root": "path", "action": "word", "digest": "text"},
+      "drives": [
+        {"via": "action", "outcome": "refused",
+         "argv": ["--root", "{root}", "--action", "{id}"]}
+      ]
+    },
+    "catalog": {
+      "args": {},
+      "drives": []
+    },
+    "evaluate": {
+      "note": "Found by the round-5 adversary: `pack` of each case was printed verbatim as a by_adapter key and as cases[].pack. Refused as the sibling doors refuse a pack: the evaluation is not made if any case, in either file, names a pack this build does not ship. The case id, case_class, oracle, label_origin, binding_id and artifact are the operator's own text and stay out of scope.",
+      "args": {"cases": "id_in_file", "results": "id_in_file"},
+      "drives": [
+        {"via": ["cases", "results"], "outcome": "refused",
+         "argv": ["--cases", "{cases}", "--results", "{results}"]}
+      ]
+    },
+    "workflow": {
+      "args": {"root": "path", "exec_db": "path", "action": "word", "recipe": "id", "digest": "text"},
+      "drives": [
+        {"via": "recipe", "outcome": "refused", "for_action": ["preview", "accept", "run"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--recipe", "{id}"]},
+        {"via": "recipe", "outcome": "unused", "for_action": ["status"],
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{action}", "--recipe", "{id}"]},
+        {"via": "action", "outcome": "refused",
+         "argv": ["--root", "{root}", "--exec-db", "{exec}", "--action", "{id}", "--recipe", "ast-grep"]}
+      ]
+    },
+    "semgrep-snapshot": {
+      "note": "Hidden. Reads one repository path.",
+      "args": {"root": "path"},
+      "drives": []
+    },
+    "worker-exec": {
+      "note": "Hidden, the worker's own re-exec entry. Its trailing argv is a command line to run, not an id; the limits and paths are numbers and paths.",
+      "args": {"cpu_seconds": "number", "memory_mb": "number", "local_model_port": "number",
+               "read_path": "path", "write_path": "path", "argv": "argv"},
+      "drives": []
+    },
+    "workspace": {
+      "args": {"session": "other_id", "presentation": "switch"},
+      "drives": [
+        {"via": "session", "outcome": "refused",
+         "argv": ["--session", "{id}"]}
+      ]
+    },
+    "project": {
+      "args": {"root": "path", "exec_db": "path", "presentation": "switch"},
+      "drives": []
+    },
+    "plan": {
+      "args": {"pack": "id", "root": "path", "executable": "path"},
+      "drives": [
+        {"via": "pack", "outcome": "refused",
+         "argv": ["{id}", "--root", "{root}", "--executable", "/bin/echo"]}
+      ]
+    },
+    "run": {
+      "note": "The plan's `pack` is the id this door reads from an operator file. serde's own quotation of an unknown field or a value of the wrong kind in the rest of the plan is the operator's own text and is out of scope (R6 card).",
+      "args": {"plan": "id_in_file", "accept": "switch"},
+      "drives": [
+        {"via": "plan", "outcome": "refused",
+         "argv": ["--plan", "{plan}", "--accept"]}
+      ]
+    },
+    "decode": {
+      "args": {"pack": "id", "report": "content"},
+      "drives": [
+        {"via": "pack", "outcome": "refused",
+         "argv": ["{id}", "{report}"]}
+      ]
+    },
+    "results": {
+      "note": "Re-evaluates the runs the store holds. A run is stored only for a pack the build ships, and stored rows are out of scope as ruled.",
+      "args": {"root": "path"},
+      "drives": []
+    }
+  },
+  "route": {
+    "path": "POST /api/integrations/action",
+    "body": {"session": "other_id", "action": "word", "recipe": "id", "digest": "text"},
+    "note": "The recipe is gated in front of every action, before anything is spawned: the review screen sends its mode as the recipe, so a review mode and a shipped id are admitted and nothing else is.",
+    "actions": [
+      "preview", "accept", "run", "cancel",
+      "repair-preview", "repair-verify", "repair-apply", "repair-list",
+      "review-status", "review-preview", "review-accept", "review-step", "review-retry", "review-export",
+      "native-repair-preview", "native-repair-verify", "native-repair-apply", "native-repair-list",
+      "agent-repair-preview", "agent-repair-resume", "agent-repair-verify", "agent-repair-apply", "agent-repair-list"
+    ],
+    "drives": [
+      {"via": "recipe", "outcome": "refused", "every_action": true},
+      {"via": "action", "outcome": "refused"},
+      {"via": "session", "outcome": "refused"}
+    ]
+  },
+  "out_of_scope": [
+    {"door": "integration run --plan",
+     "what": "serde's quotation of an unknown field name, or of a wrong-typed value, elsewhere in the plan file (`unknown field`, `invalid type: string`)",
+     "decided": "not an id door. The plan's `pack` is the id it reads, and it is a driven `id_in_file`: a pack the build does not ship is refused and never quoted (a string cannot be the wrong type for a string field). The rest is the operator's own text in the operator's own file."},
+    {"door": "integration agent-repair",
+     "what": "THRULINE_AGENT_REPAIR_CONFIG copied whole into attempts/*/request.json in the operator's own store, and --digest echoed into result.json",
+     "decided": "not an id door. The recipe it acts on is `--recipe`, a driven id: one the build does not ship is refused before any store or attempt record is made. The config is the operator's own configuration carried as data, and the digest is free text."},
+    {"door": "integration repair, workflow status",
+     "what": "THRULINE_REPAIR_CONFIG `files` served as paths in `ruff_repair_configuration`",
+     "decided": "not an id door: file paths the operator wrote, not an id, a pack or a recipe."},
+    {"door": "thruline mcp",
+     "what": "the caller's own unknown tool name in a JSON-RPC error",
+     "decided": "not an integration door, and a tool name is the caller's own words."},
+    {"door": "integration evaluate",
+     "what": "each case's id, case_class, oracle, label_origin, binding_id and artifact, in an evaluation that IS made (every pack shipped)",
+     "decided": "free text the operator typed into their own files. The `pack` of every case is the id this door reads, and it is refused unless shipped."}
+  ]
+}

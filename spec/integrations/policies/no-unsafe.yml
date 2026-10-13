@@ -1,0 +1,6 @@
+id: thruline-no-unsafe-blocks
+language: Rust
+rule:
+  pattern: unsafe { $$$BODY }
+message: An unsafe block violates the repository's accepted No unsafe policy.
+severity: error

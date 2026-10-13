@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__37-a-proposal-in-the-newest-session-p/store/ledger.db
+projects 1
+sessions 1
+lines    2 read · 0 already ingested
+events   2 new
+           assistant_text       1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 70e12785c3969910b6acbfb3051b64dff640da63b11d32dbd66436b4b5b9b1cb
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

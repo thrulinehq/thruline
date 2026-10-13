@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__02-cargo-false-claim-no-run-at-all/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 9004e5dba09c51ffcb251ad46ae0fd3cdceff328e3cdac6ef87b05180b6d13da
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

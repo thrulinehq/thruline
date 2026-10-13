@@ -1,0 +1,1 @@
+Actual Knip6.35.0 output captured by the proposed reporter from owned and pinned upstream fixtures. These are parser regression inputs, not independent detector accuracy samples. Source and command provenance: qualification/open-source-review/20260912-initial/knip-families-proposal-v1/native02 and native03. Original bytes retained.

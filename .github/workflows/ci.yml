@@ -1,0 +1,148 @@
+# ThruLine CI — the gates that were previously run by hand.
+#
+# Scoped deliberately narrow so it is GREEN and HONEST on day one. A broad red
+# pipeline teaches people to ignore it; this one is meant to be believed. Every
+# exclusion below is a measured reason, not a guess, and each is named so the
+# next person can widen the net on purpose rather than by accident.
+#
+# WHAT THIS DOES NOT ENFORCE, stated up front (Rule 12 — never hide skipped work):
+#
+#   * The six NLI calibration tests in crates/core/tests/nli_calibration.rs
+#     SELF-SKIP when ~/.thruline/models/nli-deberta-v3-xsmall/ is absent
+#     (nli_calibration.rs:48-58 returns None and prints SKIP). The model is
+#     never committed (A18), so it is absent on every runner. They are
+#     load-bearing for `premise::render`; CI does NOT cover them, and a
+#     renderer change still requires the local re-measurement A18/§5 demands.
+#   * Every test needing the live ledger at ~/.thruline/ledger.db is #[ignore]d
+#     and therefore not run here. The M3 Docker acceptance tests USED to be in
+#     that sentence too, and should never have been: see the acceptance-docker
+#     job below, which runs them and counts them.
+#   * The 44-project export determinism gate and the in-vivo v4 truth gate are
+#     local measurements against a real ledger; they cannot run on a runner.
+#
+# The toolchain is NOT installed by an action: rust-toolchain.toml pins 1.97.1
+# with clippy+rustfmt, and rustup honours it on first cargo invocation. Pinning
+# is part of the byte-identical-rebuild contract, so CI must not override it.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  # Deny warnings everywhere, matching the standing local gate.
+  RUSTFLAGS: -D warnings
+
+jobs:
+  fmt:
+    name: fmt
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo fmt --all --check
+
+  clippy:
+    name: clippy (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # macos-latest is arm64. macos-13 is x86_64 and MUST NOT be used: the
+        # ort distribution table has no x86_64-apple-darwin row at all, so the
+        # build script cannot resolve a binary for it.
+        os: [ubuntu-latest, macos-latest]
+    env:
+      # ort's default features include `download-binaries`, which fetches ONNX
+      # Runtime from a CDN at build time (A18's flagged build-time egress).
+      # Skipping it defers the failure to the LINK step, and clippy never links
+      # — so this job is fully hermetic and needs no network beyond the crates
+      # registry. Do NOT set CARGO_NET_OFFLINE here: ort treats it as a skip
+      # signal too, and it would also block the registry.
+      ORT_SKIP_DOWNLOAD: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo clippy --all-targets -- -D warnings
+
+  test:
+    name: test (macos-latest)
+    # macOS ONLY, and this is a measured exclusion rather than a preference:
+    # crates/core/tests/m5_capture_substrate.rs has 14 non-#[ignore]d tests
+    # whose path reaches capture.rs:2979, which hardcodes Command::new("/bin/zsh")
+    # with no fallback. On macOS zsh is the system shell. Whether GitHub's ubuntu
+    # image ships /bin/zsh is UNVERIFIED, so ubuntu is excluded rather than
+    # guessed at. Making the shell configurable is the way to widen this, and it
+    # is a code change, not a CI change.
+    runs-on: macos-latest
+    # Generous: this job must download ONNX Runtime, and ort's fetch carries a
+    # 1800-second global timeout, so a CDN stall is reachable inside one build
+    # script. A network failure here surfaces as raw undefined-symbol link
+    # errors, not a friendly message — check the CDN before blaming the code.
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --workspace
+
+  # The `#[ignore]`d M3 acceptance tests — the end-to-end proof that
+  # re-execution works, that the laundering path is closed, and that a flaky
+  # re-execution never reaches `supported`.
+  #
+  # Before this job existed they ran on NO CI: the `test` job above is
+  # `cargo test --workspace`, and this file contained zero occurrences of
+  # `--ignored` or `--include-ignored`. A green check appeared on every commit
+  # over acceptance tests that had never executed, which is worse than having
+  # none — it certifies.
+  #
+  # It is a SEPARATE, SEPARATELY-NAMED job rather than a step in `test` for two
+  # reasons, and the second is the load-bearing one:
+  #
+  #   1. `test` runs on macOS (see its comment); GitHub's macOS runners have no
+  #      Docker daemon, and these tests need one.
+  #   2. A named job can be made a required check on its own. Folded into
+  #      `test`, "the acceptance suite ran" would be indistinguishable from
+  #      "the unit tests ran" in the branch-protection UI, and the whole defect
+  #      being fixed here is a green signal that did not mean what it looked
+  #      like. **This job is not yet in the repository's required-checks list —
+  #      that is a branch-protection setting, not a file — and until it is, its
+  #      red is advisory.**
+  #
+  # It NEVER skips. No Docker, no images, or fewer tests than expected all exit
+  # non-zero with a named reason. The script says why at length.
+  acceptance-docker:
+    name: acceptance (docker, M3)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+      - run: bash .github/workflows/acceptance-docker.sh
+
+  ui:
+    name: ui
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ui
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+      - run: npm run build

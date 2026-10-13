@@ -1,0 +1,19 @@
+task = "T-S-2"
+order = 50
+built_on_commit = "9f294bab"
+pinned_schema_digest = "schema_sha256_a11ca26e743fd3d4cc68f7cfce465ae9db718b10de7cb0cc7c887087e950f4e5"
+migration_test = "crates/core/tests/evidence_applicability_migration.rs"
+note = "Whether a piece of linked evidence still applies once the tree it was checked on has moved."
+
+tables = ["change_criterion_freshness"]
+
+indexes = [
+  "idx_change_criterion_freshness_change",
+  "idx_change_criterion_freshness_criterion",
+]
+
+triggers = [
+  "change_criterion_freshness_no_replace",
+  "change_criterion_freshness_no_update",
+  "change_criterion_freshness_no_delete",
+]

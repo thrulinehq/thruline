@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/bad_utf8/store/ledger.db
+projects 1
+sessions 1
+lines    3 read · 0 already ingested
+events   2 new
+           user_msg             2
+unknown  none
+malformed 1 line(s)
+           <SRC>/crates/core/tests/fixtures/bad_utf8.jsonl:2 — invalid UTF-8 bytes
+head     fixtures 4a48a1a5f973aac68d4c823726977de81216fbd2494d56c07aa424ba4d421109
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

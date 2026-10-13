@@ -1,0 +1,10 @@
+{
+  "claims": 0,
+  "explain": 0,
+  "import-legacy": 0,
+  "ingest": 0,
+  "receipt-v0.1": 0,
+  "receipt-v0.1.trailer": 0,
+  "receipt-v0.1.verify": 2,
+  "receipt-v0.2": 1
+}

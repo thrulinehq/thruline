@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__08-vitest-misstated-result/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval ba13c195f05bef67c0bcba91c045488a2c02d7befb65f92c3eb12620880c1612
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

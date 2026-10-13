@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__32-an-output-only-mention-does-not-de/store/ledger.db
+projects 1
+sessions 1
+lines    2 read · 0 already ingested
+events   2 new
+           assistant_text       1
+           user_msg             1
+unknown  none
+malformed none
+head     eval faa3ce361a521368634bc36e9cb22068f8b2ad136116ba59836b7d46f939ab69
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/language_tier_acceptance/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       2
+           user_msg             2
+unknown  none
+malformed none
+head     fixtures 8f938128dc4967b7a58321eb97401363a7f7c3e9595195090f978630fb088d74
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

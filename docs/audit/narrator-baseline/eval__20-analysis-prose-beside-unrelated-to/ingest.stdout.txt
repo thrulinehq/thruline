@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__20-analysis-prose-beside-unrelated-to/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval de54707d8e58d81bb460660673df533731dfc19fa5c09966d4856b8167ab08d8
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

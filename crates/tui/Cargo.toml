@@ -1,0 +1,20 @@
+[package]
+publish = false
+name = "thruline-tui"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "ratatui flight recorder."
+
+[lints]
+workspace = true
+
+[dependencies]
+# The terminal, and nothing else. This crate deliberately depends on no
+# ThruLine crate: it is handed verdicts, and a flight recorder that could
+# recompute them could disagree with `thruline claims`. A census in
+# `src/tests.rs` fails if `thruline-verify`, `thruline-claims` or
+# `thruline-ledger` ever appears here.
+ratatui = "0.30.0"

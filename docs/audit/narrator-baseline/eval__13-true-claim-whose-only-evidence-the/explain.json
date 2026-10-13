@@ -1,0 +1,49 @@
+{
+  "claims_vs_proof": [],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "13-true-claim-whose-only-evidence-the",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "user_prompt",
+      "seq": 1,
+      "text": ""
+    },
+    {
+      "input": "{\"command\":\"./scripts/smoke q3\"}",
+      "kind": "tool_call",
+      "seq": 2,
+      "text": "Bash {\"command\":\"./scripts/smoke q3\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 3,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "kind": "note",
+      "seq": 4,
+      "text": "note"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "no_stop_recorded",
+    "last_events": [
+      "Bash {\"command\":\"./scripts/smoke q3\"}",
+      "unknown ok",
+      "note"
+    ],
+    "summary": "no `stop` event is in the record: the session is still open, or the Stop hook never fired"
+  }
+}

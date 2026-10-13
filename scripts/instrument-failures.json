@@ -1,0 +1,314 @@
+{
+  "schema": "thruline.instrument-failures/2",
+  "derived_on": "2026-09-04",
+  "derivation": "Two measurements, read off their run records under $THRULINE_PILOT_SP/pilot. (a) The stratified 10-task oracle probe, run-id prefix `probe-p1-`. (b) The 123-task scripted-agent measurement, run-id prefix `m1-`, which is the one the 64/99 chain-coverage figure came from. Per task the sources are: `mount-<rid>/READY`, `mount-<rid>/spool`, `mount-<rid>/exec.db`, `mount-<rid>/hook-install.log`, `mount-<rid>/task-provenance.txt`, `receipts-<rid>/<task>.json` (+ its `.stdout`), `staged-<rid>/<task>/Dockerfile`, `staged-<rid>/.thruline-layer`, and `runs-<rid>/<rid>/run.log` + `results.json`. Paths are recorded relative to that pilot directory on purpose: an absolute path here would carry one machine's home into a committed file.",
+  "why_this_file_exists": "A task the instrument breaks produces an EMPTY spool. Folded into an average whose denominator still counts it, an empty spool contributes a ZERO, and the metric then reports the instrument's own damage as the product under-performing (BUILD-SPEC §12, §20.3, operator Ruling 6). The empty-spool signature is NOT self-explaining: `spring-messaging-vul` below has a byte-for-byte identical signature to two instrument failures and is neither the instrument's fault nor ThruLine's. That is why this is a file a human writes and the report READS, not a heuristic the report guesses.",
+  "why_v2": "v1 could be satisfied by a file that exists. It had no `attestations` (so an empty `entries` list was indistinguishable from a set nobody read against the run being reported), no `applies_to` (so a mechanism measured in one run silently classified every other run naming that task), and no `evidence_tier` (so an argued mechanism read exactly like a reproduced one). All three were live defects: the published 64/99 figure bypassed this file entirely, and of the m1 measurement's 24 exclusions v1 classified 3.",
+  "classes": {
+    "instrument": "ThruLine's own instrumentation BROKE the task. EXCLUDED from every coverage denominator; counted and named separately as `instrument_failures`.",
+    "ceiling": "ThruLine's own instrumentation REFUSED the task and said so, non-zero, before anything ran. Not damage and not a product result — the doctrine's ceiling (`a task the instrument cannot reach`, PILOT-REPORT.md vocabulary note). EXCLUDED and named.",
+    "environment": "Something outside both ThruLine and the task broke it (a busy host port, host DNS, a read timeout on a package index). EXCLUDED from every coverage denominator, reported under its own heading. Not an instrument failure and not a product result.",
+    "task-upstream": "The task's own image or setup no longer builds, on its own terms, independent of ThruLine and of this host — a pinned upstream that changed under it. EXCLUDED and named. Kept apart from `environment` because calling it environmental would assert something false about where the defect lives.",
+    "run-incomplete": "The run did not finish: no `results.json`, and the record ends mid-flight. There is no outcome to attribute to anyone. EXCLUDED and named, because a run nobody finished is not a zero and is not a pass.",
+    "product": "The capture is empty and that IS a ThruLine result. COUNTED in the denominator as a genuine zero. Present so that classifying a task is a decision with two directions, not a way to make numbers go up."
+  },
+  "attestations": [
+    {
+      "run_prefix": "probe-p1-",
+      "attested_on": "2026-09-04",
+      "note": "The stratified 10-task oracle probe. 10 runs, 4 excluded, 6 counted.",
+      "excluded": [
+        "lean4-proof",
+        "privilege-escalation",
+        "shell-deobfuscation",
+        "spring-messaging-vul"
+      ]
+    },
+    {
+      "run_prefix": "m1-",
+      "attested_on": "2026-09-04",
+      "note": "The 123-task scripted-agent measurement that produced the published chain-coverage figure. 123 runs discovered; 23 excluded, all 23 listed here and all 23 classified below with an `m1-` scope; 100 counted. `lean4-proof` is NOT excluded here — see its entry: the mechanism that excluded it from the probe is scoped to `probe-p1-` because the m1 shim provably never wrote the `pytest` wrapper the mechanism depends on. Excluding it anyway is how the published denominator became 99 instead of 100.",
+      "excluded": [
+        "accelerate-maximal-square",
+        "broken-networking",
+        "conda-env-conflict-resolution",
+        "debug-long-program",
+        "extract-safely",
+        "get-bitcoin-nodes",
+        "gpt2-codegolf",
+        "install-windows-xp",
+        "leelachess0-pytorch-conversion",
+        "llm-spec-decoding",
+        "mteb-retrieve",
+        "png-generation",
+        "postgres-csv-clean",
+        "qemu-alpine-ssh",
+        "reverse-engineering",
+        "shell-deobfuscation",
+        "simple-sheets-put",
+        "simple-web-scraper",
+        "slurm-simple-node-monitoring",
+        "spring-messaging-vul",
+        "sudo-llvm-ir",
+        "wasm-pipeline",
+        "word2vec-from-scratch"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "task": "lean4-proof",
+      "applies_to": ["probe-p1-"],
+      "class": "instrument",
+      "stage_lost": "graded",
+      "evidence_tier": "reproduced",
+      "mechanism": "The PATH shim answers `command -v pytest`, so the task's setup skips `uv pip install pytest`; the real pytest is never installed and `run-tests.sh` dies at exit 127. The oracle's own solution was verified complete first, so a task the oracle SOLVES scores as a non-pass.",
+      "evidence": "runs-probe-p1-lean4-proof/probe-p1-lean4-proof/results.json -> is_resolved=null, failure_mode=parse_error; run_metadata.json -> accuracy=0.0, agent_name=oracle. mount-probe-p1-lean4-proof/READY present and spool/codex.jsonl non-empty, so this one reached `started` and lost only `graded`.",
+      "scope_note": "SCOPED TO THE PROBE ON PURPOSE. The shim's shadowing predicate was later amended to write a wrapper only where a real program of that name RESOLVES, and `mount-m1-lean4-proof/shim` holds exactly `make, python3, thruline-shim.json, uv, uvx` — no `pytest`. The m1 run of this task carries is_resolved=false, failure_mode=unset (a graded non-pass, not a parse error) and a complete capture. Carrying this entry unscoped removed a genuinely measured task from the m1 denominator on a mechanism that did not occur there, which is what made the published figure 64/99 rather than 65/100."
+    },
+    {
+      "task": "shell-deobfuscation",
+      "applies_to": ["probe-p1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "stage_lost_per_spec_20_3": "instrumented",
+      "note": "BUILD-SPEC §20.3 records the lost stage as `instrumented`. The run record disagrees and the run record wins: receipts-probe-p1-shell-deobfuscation/shell-deobfuscation.json exists with sha256_before != sha256_after and command_wrapped=true, so under §1.1's own definition (`the patcher wrote a file Compose can parse`) this task WAS instrumented. What it never did was start. Both values are carried rather than blended (Rule 7).",
+      "mechanism": "ThruLine's appended `RUN ... apt-get install git` layer inherits the task Dockerfile's `USER agent`, so apt-get is permission-denied and the image never builds.",
+      "evidence": "mount-probe-p1-shell-deobfuscation: no READY, no exec.db, spool empty (0 files). runs-probe-p1-shell-deobfuscation/.../results.json -> is_resolved=null, failure_mode=unknown_agent_error; run_metadata.json -> accuracy=0.0."
+    },
+    {
+      "task": "privilege-escalation",
+      "applies_to": ["probe-p1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The image builds (git is present), but the compose setup chain's `printf > /etc/profile.d/...` runs as `USER alice` and fails, the container exits, and docker reports 409.",
+      "evidence": "mount-probe-p1-privilege-escalation: no READY, no exec.db, spool empty (0 files). runs-probe-p1-privilege-escalation/.../results.json -> is_resolved=null, failure_mode=unknown_agent_error; run_metadata.json -> accuracy=0.0."
+    },
+    {
+      "task": "spring-messaging-vul",
+      "applies_to": ["probe-p1-"],
+      "class": "environment",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The task publishes host port 127.0.0.1:8080 and that port is already allocated on this machine by an unrelated long-running container. `docker compose up -d` fails to program external connectivity and the container never starts. Nothing about ThruLine or the instrument is involved.",
+      "evidence": "runs-probe-p1-spring-messaging-vul/probe-p1-spring-messaging-vul/run.log -> 'Bind for 127.0.0.1:8080 failed: port is already allocated'. mount-probe-p1-spring-messaging-vul: no READY, no exec.db, spool empty — a signature IDENTICAL to the two instrument failures above, which is the whole reason this set is read rather than inferred."
+    },
+
+    {
+      "task": "broken-networking",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "ThruLine's appended layer runs `if ! command -v git; then apt-get update && apt-get install -y --no-install-recommends git; fi`. This task's own Dockerfile deliberately REPLACES /usr/bin/apt-get and /usr/bin/apt with a two-line stub that prints `E: Could not connect to archive.ubuntu.com` and exits 1 — that sabotage is the task. git is absent from the base, so ThruLine's layer runs the stub and the image never builds. Without ThruLine's layer the image builds; the damage is ours.",
+      "evidence": "runs-m1-broken-networking/m1-broken-networking/run.log -> `failed to solve: process \"/bin/sh -c if ! command -v git >/dev/null 2>&1; then apt-get update && apt-get install -y --no-install-recommends git ...\" did not complete successfully: exit code: 1`. staged-m1-broken-networking/broken-networking/Dockerfile: the apt-get stub, then the ThruLine block appended after CMD (no USER in the final stage)."
+    },
+    {
+      "task": "sudo-llvm-ir",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "ThruLine's uv-provisioning layer ends with its own assertions `test -x $HOME/.local/bin/uv; test -f $HOME/.local/bin/env`. uv installs cleanly (the build log prints `installing to /root/.local/bin` and `everything's installed!`) but writes no `env` script, because this task's own Dockerfile already carries `ENV PATH=\"/root/.local/bin:$PATH\"`, so the installer sees its target directory on PATH and skips the shell-profile step. ThruLine's `test -f` then fails and the image never builds. Nothing but ThruLine's assertion failed.",
+      "evidence": "runs-m1-sudo-llvm-ir/m1-sudo-llvm-ir/run.log lines 1798-1805: step `#11 [6/6]` prints the uv install succeeding and then `#11 ERROR: ... exit code: 1`. staged-m1-sudo-llvm-ir/sudo-llvm-ir/Dockerfile line 71 `ENV PATH=\"/root/.local/bin:$PATH\"`, ThruLine block at lines 75-96.",
+      "corrects": "docs/PILOT-REPORT.md attributes this mechanism to `the injected PATH`. On this task the PATH that shadows uv's install dir is the TASK's own ENV, seventy lines before ThruLine's block. The fix named there — install uv before anything is instrumented — is unaffected; the attribution is not."
+    },
+    {
+      "task": "conda-env-conflict-resolution",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "scripts/pilot-run.sh assumes the task Dockerfile is at `<stage>/<task-id>/Dockerfile` (DF=..., line 792). This task keeps its Dockerfile under `client/`. The awk that computes INSERT_AT then exits 2 on a file that does not exist, and `set -euo pipefail` (line 23) kills the runner before the instrumentation layer is inserted, before compose-instrument, and before Terminal-Bench is invoked at all — which is why these runs have no `runs-` directory and no agent name.",
+      "evidence": "staged-m1-conda-env-conflict-resolution/.thruline-layer STILL EXISTS. That file is written at line 794 and removed at line 869; it survives in exactly 4 of the 123 m1 stage directories, and they are exactly the 4 tasks whose Dockerfile is not at the top level. mount-m1-conda-env-conflict-resolution holds only bin/, claude-projects/, home/, spool/ (empty) and task-provenance.txt; there is no receipts- directory and no runs- directory. Re-run of the same shell pattern (`X=\"$(awk ... /nonexistent/Dockerfile)\"` under `set -euo pipefail`) exits 2."
+    },
+    {
+      "task": "extract-safely",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "Same as `conda-env-conflict-resolution`: the runner assumes `<stage>/<task-id>/Dockerfile`; this task keeps its Dockerfile under `client/`; the awk at scripts/pilot-run.sh:796 exits 2 and `set -euo pipefail` kills the runner before Terminal-Bench is invoked.",
+      "evidence": "staged-m1-extract-safely/.thruline-layer survives (written at pilot-run.sh:794, removed at :869); extract-safely/client/Dockerfile exists and extract-safely/Dockerfile does not; no receipts- and no runs- directory for this run id."
+    },
+    {
+      "task": "simple-sheets-put",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "Same as `conda-env-conflict-resolution`: the runner assumes `<stage>/<task-id>/Dockerfile`; this task keeps its Dockerfiles under `client/` and `api/`; the awk at scripts/pilot-run.sh:796 exits 2 and `set -euo pipefail` kills the runner before Terminal-Bench is invoked.",
+      "evidence": "staged-m1-simple-sheets-put/.thruline-layer survives; simple-sheets-put/client/Dockerfile exists and simple-sheets-put/Dockerfile does not; no receipts- and no runs- directory for this run id."
+    },
+    {
+      "task": "simple-web-scraper",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "Same as `conda-env-conflict-resolution`: the runner assumes `<stage>/<task-id>/Dockerfile`; this task keeps its Dockerfiles under `client/` and `server/`; the awk at scripts/pilot-run.sh:796 exits 2 and `set -euo pipefail` kills the runner before Terminal-Bench is invoked.",
+      "evidence": "staged-m1-simple-web-scraper/.thruline-layer survives; simple-web-scraper/server/Dockerfile and client/Dockerfile exist and simple-web-scraper/Dockerfile does not; no receipts- and no runs- directory for this run id."
+    },
+    {
+      "task": "accelerate-maximal-square",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The host `thruline` binary is bind-mounted read-only into the container at /usr/local/bin/thruline. It is `ELF 64-bit LSB pie executable, ARM aarch64, dynamically linked, interpreter /lib/ld-linux-aarch64.so.1`. This task builds from `taichidev/taichi:v0.7.26`, which `docker image inspect` reports as `amd64/linux`, so the loader for that interpreter does not exist and the shell reports `thruline: not found`. The compose setup chain is one `&&` chain, so it stops at the `thruline hook-install` step: READY is never written, the container exits, and Terminal-Bench then reports `Recording is enabled but asciinema is not installed in the container` — the wrong subsystem entirely.",
+      "evidence": "mount-m1-accelerate-maximal-square/hook-install.log contains exactly `sh: 1: thruline: not found`; no shim-install.log, no READY, no exec.db, spool 0 bytes. runs-m1-accelerate-maximal-square/.../run.log -> RuntimeError asciinema. `file $PILOT/bin/thruline` -> ARM aarch64. `docker image inspect taichidev/taichi:v0.7.26 --format '{{.Architecture}}/{{.Os}}'` -> amd64/linux."
+    },
+    {
+      "task": "get-bitcoin-nodes",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "Same root cause as `accelerate-maximal-square`: the bind-mounted host `thruline` is an aarch64 ELF and this task's Dockerfile pins `FROM --platform=linux/amd64 ghcr.io/laude-institute/t-bench/python-3-13:20250620`, so the interpreter /lib/ld-linux-aarch64.so.1 is absent and `sh` reports `not found`. The setup chain stops at hook-install, the container exits, and Terminal-Bench misreports it as a missing asciinema.",
+      "evidence": "mount-m1-get-bitcoin-nodes/hook-install.log = `sh: 1: thruline: not found`; no READY, no exec.db, spool 0 bytes. staged-m1-get-bitcoin-nodes/get-bitcoin-nodes/Dockerfile line 1 carries `--platform=linux/amd64`."
+    },
+    {
+      "task": "reverse-engineering",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "Same root cause as `accelerate-maximal-square`: `FROM --platform=linux/amd64 ghcr.io/laude-institute/t-bench/python-3-13:20250620` against an aarch64 host binary; `sh: 1: thruline: not found`; the setup chain stops at hook-install and Terminal-Bench misreports it as a missing asciinema.",
+      "evidence": "mount-m1-reverse-engineering/hook-install.log = `sh: 1: thruline: not found`; no READY, no exec.db, spool 0 bytes; Dockerfile line 1 carries `--platform=linux/amd64`."
+    },
+    {
+      "task": "wasm-pipeline",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "Same root cause as `accelerate-maximal-square`: `FROM --platform=linux/amd64 ghcr.io/laude-institute/t-bench/ubuntu-24-04:20250624` against an aarch64 host binary; `sh: 1: thruline: not found`; the setup chain stops at hook-install and Terminal-Bench misreports it as a missing asciinema.",
+      "evidence": "mount-m1-wasm-pipeline/hook-install.log = `sh: 1: thruline: not found`; no READY, no exec.db, spool 0 bytes; Dockerfile line 1 carries `--platform=linux/amd64`."
+    },
+    {
+      "task": "qemu-alpine-ssh",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The same root cause as the four `not found` tasks, wearing a different error string: the bind-mounted host `thruline` is dynamically linked against a newer glibc than the container has. This task builds `FROM debian:bullseye-slim` (glibc 2.31) and the loader resolves but the symbol versions do not. The setup chain stops at hook-install, the container exits, and docker reports 409 `container is not running`. Five m1 tasks share this one root cause and Terminal-Bench names two different wrong subsystems for it.",
+      "evidence": "mount-m1-qemu-alpine-ssh/hook-install.log contains `thruline: /lib/aarch64-linux-gnu/libc.so.6: version 'GLIBC_2.32' not found (required by thruline)` and the same for GLIBC_2.33 and GLIBC_2.34; no READY, no exec.db, spool 0 bytes. staged-m1-qemu-alpine-ssh/qemu-alpine-ssh/Dockerfile line 2 `FROM debian:bullseye-slim`."
+    },
+    {
+      "task": "shell-deobfuscation",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "argued",
+      "mechanism": "The image BUILDS and `docker compose up -d` succeeds; the container then exits before the setup chain finishes, and Terminal-Bench reports docker 409 `container is not running`. Neither /thruline/baseline-tree.txt nor /thruline/hook-install.log exists in the mount, and the compose chain redirects into both, so the chain died at or before `git rev-parse 'HEAD^{tree}'` — i.e. inside the profile.d/git-baseline prologue. WHICH of those nine steps failed is NOT established, and no container log survives. Recorded as argued rather than reproduced.",
+      "evidence": "runs-m1-shell-deobfuscation/m1-shell-deobfuscation/run.log lines 11-12 show `build` then `up -d` both issued and line 15 the 409. receipts-m1-shell-deobfuscation/shell-deobfuscation.json -> command_wrapped=true, sha256_before != sha256_after, service_user=root. mount-m1-shell-deobfuscation holds bin/, claude-projects/, home/, rig-plan.json, rig-requests.log, spool/ (0 bytes), task-provenance.txt, task-run-tests.sh — and no hook-install.log, no baseline-tree.txt, no READY.",
+      "corrects": "The `probe-p1-` entry for this same task says the image NEVER BUILDS because ThruLine's apt-get layer inherits `USER agent`. That is false for m1: the receipt carries service_user=root, the build succeeded, and the container reached `up -d`. The mechanism changed under the file between the two runs, and nothing detected it — which is why entries now carry `applies_to`.",
+      "what_would_settle_it": "Re-run this one task with `docker compose logs` captured, or with the chain's prologue split so each step writes its own sentinel. Both are container work and are NOT authorised at $0.00."
+    },
+    {
+      "task": "llm-spec-decoding",
+      "applies_to": ["m1-"],
+      "class": "instrument",
+      "stage_lost": "started",
+      "evidence_tier": "argued",
+      "mechanism": "The compose file is correctly patched, the container ran, the agent ran, `run-tests.sh` executed and the task was graded — and the mount holds NONE of the setup chain's artefacts: no hook-install.log, no shim-install.log, no baseline-tree.txt, no READY, and a 0-byte spool. So the ThruLine setup chain produced nothing while the harness proceeded normally end to end. The cause is not established. This is the one exclusion in the m1 measurement recorded as argued in the report that produced it, and it stays argued here.",
+      "evidence": "receipts-m1-llm-spec-decoding/llm-spec-decoding.json -> command_wrapped=true, sha256_before=3b3b5627..., sha256_after=15f377b8..., and `wrapped_command` carries the full chain ending `echo instrumented > /thruline/READY && { sleep infinity; }`. runs-m1-llm-spec-decoding/.../run.log shows the agent invocation completing in 47.14s, then `bash /tests/run-tests.sh` completing in 5.77s, then `Unresolved task llm-spec-decoding`. results.json -> failure_mode=unset.",
+      "hypothesis_refuted": "A base-image/ENTRYPOINT explanation was checked and REFUTED: 47 other m1 tasks build `FROM ghcr.io/laude-institute/t-bench/python-3-13:20250620` and captured normally; 8 of the 55 python-3-13 tasks did not, and the other 7 have unrelated, reproduced mechanisms."
+    },
+    {
+      "task": "install-windows-xp",
+      "applies_to": ["m1-"],
+      "class": "ceiling",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "`scripts/compose-instrument.py` REFUSES this compose file with exit 2: `service 'client' declares no 'command', so the container runs the image's own ENTRYPOINT/CMD, which is not readable from the compose file. Setting one would replace behaviour this patcher cannot reconstruct.` The runner dies there under `set -euo pipefail` and Terminal-Bench is never invoked. This is the instrument declining, loudly and by design — not the instrument breaking anything.",
+      "evidence": "receipts-m1-install-windows-xp/install-windows-xp.stdout is 0 bytes and no receipt JSON was written, which is what a non-zero compose-instrument leaves behind; there is no runs- directory for this run id. Re-run on 2026-09-04 against a copy of the staged compose file with the pilot venv python: exit 2, same message, no file modified."
+    },
+    {
+      "task": "slurm-simple-node-monitoring",
+      "applies_to": ["m1-"],
+      "class": "ceiling",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "Identical to `install-windows-xp`: `scripts/compose-instrument.py` refuses with exit 2 because service `client` declares no `command`, so the image's own ENTRYPOINT/CMD would be replaced by a chain the patcher cannot reconstruct. The runner dies there and Terminal-Bench is never invoked.",
+      "evidence": "receipts-m1-slurm-simple-node-monitoring/slurm-simple-node-monitoring.stdout is 0 bytes with no receipt JSON; no runs- directory. Re-run on 2026-09-04 against a copy of the staged compose file with the pilot venv python: exit 2, same message."
+    },
+    {
+      "task": "spring-messaging-vul",
+      "applies_to": ["m1-"],
+      "class": "environment",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The task publishes host port 127.0.0.1:8080 and that port is already allocated on this machine by an unrelated long-running container, so `docker compose up -d` cannot program external connectivity and the container never starts. Nothing about ThruLine is involved. The same cause as in the probe, twelve hours later, on a different agent.",
+      "evidence": "runs-m1-spring-messaging-vul/m1-spring-messaging-vul/run.log -> `Bind for 127.0.0.1:8080 failed: port is already allocated`. mount-m1-spring-messaging-vul: no READY, no exec.db, spool 0 bytes — the same signature as the instrument failures above."
+    },
+    {
+      "task": "postgres-csv-clean",
+      "applies_to": ["m1-"],
+      "class": "environment",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The task publishes host port 127.0.0.1:5432 and that port is already allocated on this machine by an unrelated long-running container; `docker compose up -d` fails and the container never starts. The same shape as `spring-messaging-vul`, a different port.",
+      "evidence": "runs-m1-postgres-csv-clean/m1-postgres-csv-clean/run.log -> `Bind for 127.0.0.1:5432 failed: port is already allocated`, raised from docker_compose_manager `up -d`. mount-m1-postgres-csv-clean: no READY, no exec.db, spool 0 bytes."
+    },
+    {
+      "task": "debug-long-program",
+      "applies_to": ["m1-"],
+      "class": "environment",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "The build fails in the TASK's own Dockerfile at line 4, `RUN apt-get update && apt-get install -y curl`, four lines BEFORE ThruLine's block. apt could not reach deb.debian.org from this host during the build window: `Could not connect to debian.map.fastlydns.net:80 ... connection timed out`, `Temporary failure resolving 'deb.debian.org'`, then `E: Unable to locate package curl`, exit 100. Host network, in the task's own layer.",
+      "evidence": "runs-m1-debug-long-program/m1-debug-long-program/run.log lines 60-77 and 109. staged-m1-debug-long-program/debug-long-program/Dockerfile: the failing RUN is line 4; the ThruLine block occupies lines 8-29.",
+      "caution": "This is EXCLUDED, not counted, and the exclusion favours no one: had the build succeeded the task might have captured or might not. What it may not do is contribute a zero attributed to ThruLine."
+    },
+    {
+      "task": "png-generation",
+      "applies_to": ["m1-"],
+      "class": "environment",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "The build fails in the TASK's own Dockerfile at line 36, `RUN pip install easyocr==1.7.2`, eleven lines BEFORE ThruLine's block: `pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out` after 300.9 of 651.0 MB had been fetched, exit 2. A host network stall mid-download, in the task's own layer.",
+      "evidence": "runs-m1-png-generation/m1-png-generation/run.log lines 1204-1286. staged-m1-png-generation/png-generation/Dockerfile: failing RUN at line 36, ThruLine block at lines 47-68."
+    },
+    {
+      "task": "leelachess0-pytorch-conversion",
+      "applies_to": ["m1-"],
+      "class": "environment",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "The build fails in the TASK's own Dockerfile at line 38, `RUN wget -O leela-network.pb.gz https://training.lczero.org/get_network?sha=47e3f899...`, thirteen lines BEFORE ThruLine's block. wget exits 8, which is its `server issued an error response` code: the third-party host did not serve the pinned network file during the build window.",
+      "evidence": "runs-m1-leelachess0-pytorch-conversion/m1-leelachess0-pytorch-conversion/run.log -> `failed to solve: process \"/bin/sh -c wget -O leela-network.pb.gz https://training.lczero.org/get_network?sha=...\" did not complete successfully: exit code: 8`. staged Dockerfile: failing RUN at line 38, ThruLine block at lines 51-72."
+    },
+    {
+      "task": "word2vec-from-scratch",
+      "applies_to": ["m1-"],
+      "class": "task-upstream",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "The build fails in the TASK's own Dockerfile at line 22, nine lines BEFORE ThruLine's block, and it is NOT a network failure: `huggingface_hub.errors.HfUriError: Invalid HF URI 'hf://datasets/wikitext@b08601e04326c79dfdd32d625aee71d232d685c3/README.md'. Repository id must be 'namespace/name', got 'wikitext'.` The task pins `load_dataset('wikitext','wikitext-2-v1')` against a huggingface_hub that no longer accepts a single-segment repo id. The task's own pinned stack no longer builds, on its own terms; nothing on this host and nothing in ThruLine is involved. Filed as `task-upstream` rather than `environment` because calling it environmental would assert something false about where the defect lives.",
+      "evidence": "runs-m1-word2vec-from-scratch/m1-word2vec-from-scratch/run.log lines 287-288 and 353. staged-m1-word2vec-from-scratch/word2vec-from-scratch/Dockerfile: failing RUN at line 22, ThruLine block at lines 31-52."
+    },
+    {
+      "task": "gpt2-codegolf",
+      "applies_to": ["m1-"],
+      "class": "run-incomplete",
+      "stage_lost": "instrumented",
+      "evidence_tier": "reproduced",
+      "mechanism": "The run never finished. run.log is 11 lines and stops immediately after `Running docker compose ... build`; run_metadata.json was written and results.json never was; the stage directory, the mount and the run directory carry mtimes 04:23:02, 04:23:03 and 04:23:05 — the whole record spans three seconds and then ends. Nothing was measured, so there is no outcome to attribute to the instrument, the environment or ThruLine. Naming that is the point: an unfinished run silently dropped is exactly how a denominator becomes whatever survived.",
+      "evidence": "runs-m1-gpt2-codegolf/m1-gpt2-codegolf/: run.log 653 bytes / 11 lines, run_metadata.json present, results.json absent, tb.lock present. mount-m1-gpt2-codegolf holds no READY, no exec.db, 0-byte spool.",
+      "not_established": "WHY the run stopped is not in the record — no error, no traceback, no non-zero exit captured. This entry claims only that it did not finish."
+    },
+    {
+      "task": "mteb-retrieve",
+      "applies_to": ["m1-"],
+      "class": "run-incomplete",
+      "stage_lost": "started",
+      "evidence_tier": "reproduced",
+      "mechanism": "The run reached further than any other exclusion and still did not finish: the container started (READY present), the agent ran for 126.37s and the spool holds 30,378 bytes of transcript — and then `exec.db` was never created, i.e. the fold never ran, and no results.json was written. run.log ends on `Sending keys: ['bash ', '/tests/run-tests.sh', ...]`. A capture that exists but was never folded is not a zero; it is a measurement that stopped.",
+      "evidence": "mount-m1-mteb-retrieve: READY present, spool 30,378 bytes, no exec.db. runs-m1-mteb-retrieve/m1-mteb-retrieve/: run.log ends mid-test at 09:03, results.json absent, run_metadata.json present.",
+      "not_established": "WHY the fold never ran is not in the record. This entry claims only that it did not."
+    }
+  ]
+}

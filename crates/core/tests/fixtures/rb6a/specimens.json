@@ -1,0 +1,81 @@
+[
+  {
+    "id": "rb6a-01-decision-present",
+    "job": "decision_proposal",
+    "record": "chose SQLite over Postgres for the ledger; local-first, no server to run\ncommitted 3 files\ntests passed",
+    "truth": { "kind": "proposal_expected" },
+    "note": "The deterministic skeleton sees a decision verb and a committed outcome, so it can state that SOMETHING was decided without stating what. A model that abstains here has under-read the record."
+  },
+  {
+    "id": "rb6a-02-decision-absent",
+    "job": "decision_proposal",
+    "record": "<<thin>>",
+    "truth": { "kind": "abstention_expected" },
+    "note": "The direction that matters. The skeleton establishes there is nothing here; a confident proposal about an empty session is exactly the failure Layer 3 exists to contain."
+  },
+  {
+    "id": "rb6a-03-decision-absent-noise",
+    "job": "decision_proposal",
+    "record": "<<thin>>\nls\ncd ..\nls",
+    "truth": { "kind": "abstention_expected" },
+    "note": "Activity is not a decision. A session that only navigated the filesystem has no decision to extract, and volume must not be mistaken for content."
+  },
+  {
+    "id": "rb6a-04-narration-present",
+    "job": "session_narration",
+    "record": "added an index on nodes(project_id)\nre-ran the budget suite\nboth standing reds cleared",
+    "truth": { "kind": "proposal_expected" },
+    "note": "Three deterministic rows, enough to narrate."
+  },
+  {
+    "id": "rb6a-05-narration-too-thin",
+    "job": "session_narration",
+    "record": "<<thin>>",
+    "truth": { "kind": "abstention_expected" },
+    "note": "Nothing to narrate. A narration invented from an empty record is the most persuasive kind of wrong."
+  },
+  {
+    "id": "rb6a-06-narration-empty",
+    "job": "session_narration",
+    "record": "",
+    "truth": { "kind": "abstention_expected" },
+    "note": "The empty record. Separate from 05 because an empty string and a thin string reach the abstention by different paths, and both must."
+  },
+  {
+    "id": "rb6a-07-compaction-safe",
+    "job": "capsule_compaction",
+    "record": "the handoff carries crates/core/src/ledger.rs and the open question about migration cost",
+    "truth": { "kind": "proposal_expected" },
+    "note": "Compactable in principle. Whether the compaction actually preserved the path and the open question is NOT decidable by the skeleton — see specimen 08."
+  },
+  {
+    "id": "rb6a-08-compaction-fidelity",
+    "job": "capsule_compaction",
+    "record": "run `cargo test --no-fail-fast`; the failing case is crates/core/tests/a193_upgrade.rs:62; open question: should exit 3 or exit 0",
+    "truth": {
+      "kind": "undecidable",
+      "question": "Did the compaction preserve every file path, command, identifier and open question in the record? A deterministic check can compare tokens, but whether a paraphrase preserved the OPEN QUESTION is a judgement no row can make."
+    },
+    "note": "The honest undecidable. It is here to be adjudicated, not scored."
+  },
+  {
+    "id": "rb6a-09-decision-ambiguous",
+    "job": "decision_proposal",
+    "record": "tried the cache approach; reverted it; added the index instead",
+    "truth": {
+      "kind": "undecidable",
+      "question": "Is the decision here 'add the index' or 'reject the cache'? Both are supported by the record, and which one a successor needs depends on what they are about to do."
+    },
+    "note": "Two defensible readings of one record. Scoring this against either would encode a preference the skeleton does not have."
+  },
+  {
+    "id": "rb6a-10-narration-hallucination-bait",
+    "job": "session_narration",
+    "record": "ran the test suite",
+    "truth": {
+      "kind": "undecidable",
+      "question": "The record says a suite ran and does not say whether it passed. Does a narration that omits the outcome count as complete, or as misleadingly incomplete?"
+    },
+    "note": "Bait. A model that says 'the tests passed' has invented the only fact anybody cares about, and the skeleton cannot rule on whether omitting it is acceptable."
+  }
+]

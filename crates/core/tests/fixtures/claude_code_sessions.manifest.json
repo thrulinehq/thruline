@@ -1,0 +1,86 @@
+[
+  {
+    "fixture_line": 1,
+    "covers": "meta: queue-operation (no uuid/parentUuid/ts)",
+    "type": "queue-operation",
+    "original_bytes": 570,
+    "redacted_bytes": 568
+  },
+  {
+    "fixture_line": 2,
+    "covers": "user_msg: message.content is a plain string",
+    "type": "user",
+    "original_bytes": 909,
+    "redacted_bytes": 898
+  },
+  {
+    "fixture_line": 3,
+    "covers": "meta: last-prompt (leafUuid, no uuid)",
+    "type": "last-prompt",
+    "original_bytes": 342,
+    "redacted_bytes": 340
+  },
+  {
+    "fixture_line": 4,
+    "covers": "assistant: tool_use only (fan-out 1)",
+    "type": "assistant",
+    "original_bytes": 1347,
+    "redacted_bytes": 1317
+  },
+  {
+    "fixture_line": 5,
+    "covers": "tool_result: content is a string, is_error absent",
+    "type": "user",
+    "original_bytes": 7728,
+    "redacted_bytes": 7522
+  },
+  {
+    "fixture_line": 6,
+    "covers": "assistant: thinking only, with signature",
+    "type": "assistant",
+    "original_bytes": 7623,
+    "redacted_bytes": 2544
+  },
+  {
+    "fixture_line": 7,
+    "covers": "tool_result: is_error true",
+    "type": "user",
+    "original_bytes": 2197,
+    "redacted_bytes": 2160
+  },
+  {
+    "fixture_line": 8,
+    "covers": "tool_result: content is an array of blocks",
+    "type": "user",
+    "original_bytes": 1248,
+    "redacted_bytes": 1185
+  },
+  {
+    "fixture_line": 9,
+    "covers": "meta: system / stop_hook_summary (toolUseID)",
+    "type": "system",
+    "original_bytes": 636,
+    "redacted_bytes": 627
+  },
+  {
+    "fixture_line": 10,
+    "covers": "meta: file-history-snapshot (no sessionId at all)",
+    "type": "file-history-snapshot",
+    "original_bytes": 235,
+    "redacted_bytes": 235
+  },
+  {
+    "fixture_line": 11,
+    "covers": "assistant: thinking + text + tool_use (fan-out 3)",
+    "type": "assistant",
+    "original_bytes": 8391,
+    "redacted_bytes": 3019
+  },
+  {
+    "fixture_line": 12,
+    "covers": "bg sub-session: sessionId != session_id, sessionKind bg",
+    "type": "user",
+    "original_bytes": 3225,
+    "redacted_bytes": 3166
+  }
+]

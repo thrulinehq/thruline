@@ -1,0 +1,1 @@
+{"openapi":"3.0.3","info":{"title":"Versioned fixture API","version":"1.0.0"},"paths":{"/value":{"get":{"operationId":"getValue","responses":{"200":{"description":"A measured value","content":{"application/json":{"schema":{"type":"object","required":["value"],"properties":{"value":{"type":"integer"}}}}}}}}}}}

@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Shipping.V3 -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/xunit3/bin/Debug/net9.0/Shipping.V3.dll
+  Run tests: '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/xunit3/bin/Debug/net9.0/Shipping.V3.dll' [net9.0|arm64]
+  Failed! - Failed: 2, Passed: 5, Skipped: 1, Total: 8, Duration: 126ms - Shipping.V3.dll (net9.0|arm64)
+/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/xunit3/bin/Debug/net9.0/Shipping.V3.dll : error run failed: Tests failed: '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/xunit3/bin/Debug/net9.0/TestResults/Shipping.V3_net9.0_arm64.log' [net9.0|arm64] [/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/xunit3/Shipping.V3.csproj]

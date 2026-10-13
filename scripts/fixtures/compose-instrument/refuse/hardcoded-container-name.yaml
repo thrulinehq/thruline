@@ -1,0 +1,15 @@
+# The client container is named literally, so the harness contract this patcher
+# selects on is absent. Editing `client` by NAME would work here and would also
+# happily edit a sidecar called `client` in a file where the real agent container
+# is called something else. Refusing is the only answer that is right in both.
+services:
+  client:
+    build:
+      dockerfile: Dockerfile
+    image: tb-client-image
+    container_name: tb-client-hardcoded
+    command: [ "sh", "-c", "sleep infinity" ]
+    environment:
+      - TEST_DIR=${T_BENCH_TEST_DIR}
+    volumes:
+      - ${T_BENCH_TASK_LOGS_PATH}:${T_BENCH_CONTAINER_LOGS_PATH}

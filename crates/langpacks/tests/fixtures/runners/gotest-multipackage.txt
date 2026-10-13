@@ -1,0 +1,16 @@
+ok  	example.com/capture/allpass	0.456s
+--- FAIL: TestDivByZero (0.00s)
+    mixed_test.go:14: Div(1,0) = 0, want 42
+--- FAIL: TestNameUpper (0.00s)
+    mixed_test.go:26: Name() = "mixed", want "MIXED"
+FAIL
+FAIL	example.com/capture/mixed	0.587s
+ok  	example.com/capture/skipped	0.822s
+?   	example.com/capture/notests	[no test files]
+--- FAIL: TestUpper (0.00s)
+    --- FAIL: TestUpper/q (0.00s)
+        subtests_test.go:15: Upper("q") = "Q", want "Q!"
+FAIL
+FAIL	example.com/capture/subtests	1.122s
+ok  	example.com/capture/benign	1.275s
+FAIL

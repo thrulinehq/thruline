@@ -1,0 +1,26 @@
+Run options: exclude {slow: true}
+..***
+
+Pending: (Failures listed here are expected and do not affect your suite's status)
+
+  1) Calc supports arbitrary precision
+     # Temporarily skipped with xit
+     # ./spec/calc_spec.rb:14
+
+  2) Calc supports complex numbers
+     # Calc has no Complex support yet
+     # ./spec/calc_spec.rb:18
+
+  3) Calc rounds bankers-style
+     # rounding mode is not implemented
+     Failure/Error: expect(Calc.div(5, 2)).to eq(3)
+
+       expected: 3
+            got: 2
+
+       (compared using ==)
+     # ./spec/calc_spec.rb:25:in 'block (2 levels) in <top (required)>'
+
+Finished in 0.0057 seconds (files took 0.05725 seconds to load)
+5 examples, 0 failures, 3 pending
+

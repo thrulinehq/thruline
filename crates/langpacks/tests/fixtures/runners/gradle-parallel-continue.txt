@@ -1,0 +1,57 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :web:compileJava NO-SOURCE
+> Task :core:compileJava NO-SOURCE
+> Task :web:processResources NO-SOURCE
+> Task :core:processResources NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :web:classes UP-TO-DATE
+> Task :web:compileTestJava
+> Task :core:compileTestJava
+> Task :web:processTestResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :core:testClasses
+> Task :web:testClasses
+
+> Task :web:test FAILED
+
+CheckoutTest > chargesTheSavedCard() FAILED
+    org.opentest4j.AssertionFailedError at CheckoutTest.java:16
+
+CheckoutTest > rendersTheCartPage() PASSED
+
+2 tests completed, 1 failed
+
+> Task :core:test FAILED
+
+CalculatorTest > addsTwoNumbers() PASSED
+
+CalculatorTest > appliesDiscountToLargeOrders() FAILED
+    org.opentest4j.AssertionFailedError at CalculatorTest.java:15
+
+2 tests completed, 1 failed
+
+FAILURE: Build completed with 2 failures.
+
+1: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':web:test'.
+> There were failing tests. See the report at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-multi/web/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+==============================================================================
+
+2: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':core:test'.
+> There were failing tests. See the report at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-multi/core/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+==============================================================================
+
+BUILD FAILED in 2s
+4 actionable tasks: 4 executed

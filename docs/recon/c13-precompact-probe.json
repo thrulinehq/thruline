@@ -1,0 +1,20 @@
+{
+  "probe": "C1.3 — PreCompact and the veto, measured on the installed binary",
+  "date": "2026-08-12",
+  "claude_code_version": "2.1.227",
+  "method": "manual /compact via `claude --continue -p` in the A166 probe workspace, which still carried its ten-event hook set; veto measured by appending an exit-2 PreCompact hook and counting system/compact_boundary transcript lines before and after",
+  "precompact_keys": ["custom_instructions", "cwd", "hook_event_name", "prompt_id", "session_id", "transcript_path", "trigger"],
+  "trigger_measured": ["manual"],
+  "trigger_unmeasured": "auto — needs a context-full session; the sensor wiring is identical for both, and nothing is claimed about auto until it is observed",
+  "veto": {
+    "measured": true,
+    "mechanism": "hook exit code 2",
+    "observed": "the CLI printed 'Compaction blocked by PreCompact hook: [...] PRECOMPACT-VETO-PROBE' and the compact_boundary count stayed at 1 — compaction did not run",
+    "sensor_stance": "the sensor never vetoes: its exit-0 absolute stands; the blocking power is measured, recorded, and deliberately unused — ThruLine reads, it never runs"
+  },
+  "compaction_markers": "a completed compaction lands a system/compact_boundary line in the transcript, and SessionStart re-fires with source=compact immediately after — a second insurance signal the sensor already records",
+  "bonus_measurement": {
+    "SubagentStop_keys": ["agent_id", "agent_transcript_path", "agent_type", "background_tasks", "cwd", "hook_event_name", "last_assistant_message", "permission_mode", "prompt_id", "session_crons", "session_id", "stop_hook_active", "transcript_path"],
+    "note": "SubagentStop fired during the probe runs and carries agent_transcript_path — the subagent-artifact feed a later C-item will want; recorded, not yet wired"
+  }
+}

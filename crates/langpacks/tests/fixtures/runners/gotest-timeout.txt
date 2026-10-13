@@ -1,0 +1,38 @@
+=== RUN   TestQuick
+--- PASS: TestQuick (0.00s)
+=== RUN   TestHangsForever
+panic: test timed out after 5s
+	running tests:
+		TestHangsForever (5s)
+
+goroutine 17 [running]:
+testing.(*M).startAlarm.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2959 +0x2c4
+created by time.goFunc
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/time/sleep.go:182 +0x38
+
+goroutine 1 [chan receive]:
+testing.(*T).Run(0xbb4a1246008, {0x10449b830?, 0xbb4a1218a88?}, 0x1046033e8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2266 +0x3cc
+testing.runTests.func1(0xbb4a1246008)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2742 +0x38
+testing.tRunner(0xbb4a1246008, 0xbb4a1218bb8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+testing.runTests({0x10449c6f7, 0x13}, {0x10449dff8, 0x18}, 0xbb4a1188090, {0x10461e5d0, 0x2, 0x2}, {0xbb4a1218c58?, 0xbb4a11fc180?, ...})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2740 +0x400
+testing.(*M).Run(0xbb4a121c140)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2600 +0x578
+main.main()
+	_testmain.go:48 +0x80
+
+goroutine 8 [sleep]:
+time.Sleep(0x8bb2c97000)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/time.go:368 +0x150
+example.com/capture/hang.TestHangsForever(0xbb4a1246488?)
+	/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/go/proj/hang/hang_test.go:13 +0x28
+testing.tRunner(0xbb4a1246488, 0x1046033e8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	example.com/capture/hang	5.830s
+FAIL

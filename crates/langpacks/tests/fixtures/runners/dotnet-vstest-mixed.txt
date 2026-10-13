@@ -1,0 +1,28 @@
+VSTest version 17.14.1 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.07]     Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel [FAIL]
+[xUnit.net 00:00:00.07]     Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [FAIL]
+[xUnit.net 00:00:00.07]     Shipping.Tests.ShippingRateTests.InternationalSurcharge [SKIP]
+  Failed Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel [< 1 ms]
+  Error Message:
+   Assert.True() Failure
+Expected: True
+Actual:   False
+  Stack Trace:
+     at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs:line 29
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 30.00
+Actual:   29.50
+  Stack Trace:
+     at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs:line 18
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Skipped Shipping.Tests.ShippingRateTests.InternationalSurcharge [1 ms]
+
+Failed!  - Failed:     2, Passed:     5, Skipped:     1, Total:     8, Duration: 9 ms - Shipping.Tests.dll (net9.0)

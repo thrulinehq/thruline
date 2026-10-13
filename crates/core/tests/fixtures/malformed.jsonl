@@ -1,0 +1,8 @@
+{"type":"user","uuid":"00000000-0000-4000-8000-000000009001","sessionId":"aaaaaaaa-0000-4000-8000-000000000001","timestamp":"2026-07-29T00:00:00.000Z","parentUuid":null,"isSidechain":false,"message":{"role":"user","content":"well-formed line before the damage"}}
+{"type":"assistant","uuid":"00000000-0000-4000-8000-000000009002","message":{"role":"assistant","content":[{"type":"text","text":"unterminated
+
+   
+{"type":"brand-new-unknown-kind","sessionId":"aaaaaaaa-0000-4000-8000-000000000001","payload":{"anything":[1,2,3]}}
+not json at all
+{"type":"user","uuid":"00000000-0000-4000-8000-000000009003","sessionId":"aaaaaaaa-0000-4000-8000-000000000001","timestamp":"2026-07-29T00:00:02.000Z","parentUuid":"00000000-0000-4000-8000-000000009001","isSidechain":false,"message":{"role":"user","content":"well-formed line after the damage"}}
+{"type":"assistant","uuid":"00000000-0000-4000-8000-000000009004","message":{"role":"assis

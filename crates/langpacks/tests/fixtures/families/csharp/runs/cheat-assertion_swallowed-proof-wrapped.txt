@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Shipping.Families -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/csfam/bin/Debug/net9.0/Shipping.Families.dll
+  Run tests: '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/csfam/bin/Debug/net9.0/Shipping.Families.dll' [net9.0|arm64]
+  Passed! - Failed: 0, Passed: 1, Skipped: 0, Total: 1, Duration: 110ms - Shipping.Families.dll (net9.0|arm64)
+  Tests succeeded: '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/csfam/bin/Debug/net9.0/Shipping.Families.dll' [net9.0|arm64]

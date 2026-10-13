@@ -1,0 +1,30 @@
+
+[0m[0m
+[0m  shipping[0m
+  [32m  [32m✔[39m[0m[90m rates a small parcel[0m
+  [32m  [32m✔[39m[0m[90m rates a large parcel[0m
+  [36m  - handles zero weight[0m
+  [31m  1) fails on purpose[0m
+
+
+[92m [0m[32m 2 passing[0m[90m (2ms)[0m
+[36m [0m[36m 1 pending[0m
+[31m  1 failing[0m
+
+[0m  1) shipping
+       fails on purpose:
+
+      [31mAssertionError [ERR_ASSERTION]: rate mismatch
+
+1 !== 2
+[0m
+      [32m+ expected[0m [31m- actual[0m
+
+      [31m-1[0m
+      [32m+2[0m
+      [0m[90m
+      at Context.<anonymous> (test/mixed.test.js:6:47)
+      at process.processImmediate (node:internal/timers:485:21)
+[0m
+
+

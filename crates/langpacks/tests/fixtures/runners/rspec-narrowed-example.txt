@@ -1,0 +1,6 @@
+Run options: include {full_description: /adds\ two\ positive\ integers/}
+.
+
+Finished in 0.01472 seconds (files took 0.07147 seconds to load)
+1 example, 0 failures
+

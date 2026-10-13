@@ -1,0 +1,9 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/skiponly
+plugins: anyio-4.13.0
+collected 1 item
+
+test_skip.py s                                                           [100%]
+
+============================== 1 skipped in 0.01s ==============================

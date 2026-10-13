@@ -1,0 +1,47 @@
+# csharp — a SMALL INVENTED SAMPLE of assertions, written for this repository.
+#
+# Every line below is made up for the public copy of ThruLine: invented
+# identifiers, invented file paths, no third-party source. It has the shapes a
+# csharp test suite uses, so `tests/corpus_ambiguity.rs` can check on any machine
+# that the classifier does not flag ordinary assertions as ambiguous. It is a
+# sample of nothing and proves no corpus figure; the recorded corpus
+# measurements live in `MEASUREMENTS.toml` and `tests/measured_constants.rs`.
+#
+# Format: <path>:<line><TAB><assertion text, with \\ \n \r \t escaped>.
+# Lines beginning with '#' are comments.
+csharp/SampleStore/tests/SampleStore.Tests/StackTests.cs:10	Assert.Equal(3, stack.Count)
+csharp/SampleStore/tests/SampleStore.Tests/CartTests.cs:17	Assert.True(queue.IsEmpty)
+csharp/SampleStore/tests/SampleStore.Tests/RegistryTests.cs:24	Assert.False(registry.Has("beta"))
+csharp/SampleStore/tests/SampleStore.Tests/CacheTests.cs:31	Assert.Null(cache.Get("missing"))
+csharp/SampleStore/tests/SampleStore.Tests/SessionTests.cs:38	Assert.NotNull(session.Token)
+csharp/SampleStore/tests/SampleStore.Tests/ParserTests.cs:45	Assert.Equal("alpha", cart.FirstItem.Name)
+csharp/SampleStore/tests/SampleStore.Tests/HandlerTests.cs:52	Assert.Contains("gamma", names)
+csharp/SampleStore/tests/SampleStore.Tests/CounterTests.cs:59	Assert.DoesNotContain("delta", names)
+csharp/SampleStore/tests/SampleStore.Tests/LimiterTests.cs:66	Assert.Same(first, second)
+csharp/SampleStore/tests/SampleStore.Tests/BufferTests.cs:73	Assert.NotEqual(left, right)
+csharp/SampleStore/tests/SampleStore.Tests/StackTests.cs:80	Assert.Empty(errors)
+csharp/SampleStore/tests/SampleStore.Tests/CartTests.cs:87	Assert.Single(results)
+csharp/SampleStore/tests/SampleStore.Tests/RegistryTests.cs:94	Assert.Throws<InvalidOperationException>(() => stack.Pop())
+csharp/SampleStore/tests/SampleStore.Tests/CacheTests.cs:101	Assert.Equal(Status.Ready, job.Status)
+csharp/SampleStore/tests/SampleStore.Tests/SessionTests.cs:108	Assert.Equal(new[] { 1, 2, 3 }, values)
+csharp/SampleStore/tests/SampleStore.Tests/ParserTests.cs:115	Assert.True(file.Exists)
+csharp/SampleStore/tests/SampleStore.Tests/HandlerTests.cs:122	Assert.Equal(2.5m, price.Amount)
+csharp/SampleStore/tests/SampleStore.Tests/CounterTests.cs:129	result.ShouldBe(12)
+csharp/SampleStore/tests/SampleStore.Tests/LimiterTests.cs:136	names.ShouldContain("a")
+csharp/SampleStore/tests/SampleStore.Tests/BufferTests.cs:143	report.Total.ShouldBeGreaterThan(0)
+csharp/SampleStore/tests/SampleStore.Tests/StackTests.cs:150	Assert.NotNull(parser.Parse("1+2"))
+csharp/SampleStore/tests/SampleStore.Tests/CartTests.cs:157	Assert.Equal("ok", handler.Handle(request))
+csharp/SampleStore/tests/SampleStore.Tests/RegistryTests.cs:164	Assert.All(lines, l => Assert.True(l.Quantity > 0))
+csharp/SampleStore/tests/SampleStore.Tests/CacheTests.cs:171	Assert.Equal(0, counter.Value)
+csharp/SampleStore/tests/SampleStore.Tests/SessionTests.cs:178	Assert.IsType<ReadyState>(job.State)
+csharp/SampleStore/tests/SampleStore.Tests/ParserTests.cs:185	Assert.InRange(timer.Elapsed.Seconds, 0, 5)
+csharp/SampleStore/tests/SampleStore.Tests/HandlerTests.cs:192	Assert.Equal(10, buffer.Capacity)
+csharp/SampleStore/tests/SampleStore.Tests/CounterTests.cs:199	Assert.False(validator.IsValid(string.Empty))
+csharp/SampleStore/tests/SampleStore.Tests/LimiterTests.cs:206	Assert.NotSame(copy, original)
+csharp/SampleStore/tests/SampleStore.Tests/BufferTests.cs:213	Assert.Equal(expected, actual)
+csharp/SampleStore/tests/SampleStore.Tests/StackTests.cs:220	Assert.Collection(items, i => Assert.Equal(1, i), i => Assert.Equal(2, i))
+csharp/SampleStore/tests/SampleStore.Tests/CartTests.cs:227	Assert.True(limiter.TryAcquire())
+csharp/SampleStore/tests/SampleStore.Tests/RegistryTests.cs:234	Assert.Equal("zz", formatter.Pad("z", 2))
+csharp/SampleStore/tests/SampleStore.Tests/CacheTests.cs:241	Assert.StartsWith("id-", record.Key)
+csharp/SampleStore/tests/SampleStore.Tests/SessionTests.cs:248	Assert.EndsWith(".log", path)
+csharp/SampleStore/tests/SampleStore.Tests/ParserTests.cs:255	Assert.Equal(42, answer.Value)

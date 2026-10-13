@@ -1,0 +1,16 @@
+---
+source: crates/core/tests/a201_why.rs
+expression: out
+---
+a claim submitted as finished
+  "ship the retry logic"
+  no verdict yet — run `thruline verify-claims` to evaluate it
+
+what happened
+  submitted by claude for project:-repo-app, accepted 2026-08-31T00:00:00Z
+  recorded as ready for verification — the response to the claimant said
+  so and nothing more; the verdict belongs to the verifier
+
+the receipt
+  claim call   aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa (mcp_calls, append-only)
+  request      sha256 3f656154444f91a63d57fcbdab5a892a98878ff61fa364bac102ece32d0b640c

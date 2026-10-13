@@ -1,0 +1,21 @@
+[book]
+title = "ThruLine"
+description = "Proves what an AI coding agent actually did, from the execution record."
+authors = ["ThruLine"]
+language = "en"
+src = "src"
+
+[output.html]
+default-theme = "rust"
+# NO REPOSITORY LINK, DELIBERATELY.
+#
+# mdBook renders this as a link on every page. The work lives in a PRIVATE
+# repository, so that link 404s for anyone reading a published book — and the
+# operator's ruling is that the public repository will be a separate,
+# fresh-history snapshot, so this address is not the one the book will want.
+# Naming a URL that resolves to nothing for the reader is the exact defect this
+# book was corrected for once already (`thruline/thruline`, which is not a
+# repository at all).
+#
+# Set it at launch, to the public repository, once one exists.
+# git-repository-url = "…"

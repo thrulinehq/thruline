@@ -1,0 +1,7 @@
+=== RUN   TestPasses
+--- PASS: TestPasses (0.00s)
+=== RUN   TestFailsButIsHidden
+    benign_test.go:25: Flag() = false, want true
+--- FAIL: TestFailsButIsHidden (0.00s)
+FAIL
+ok  	example.com/capture/benign	0.478s

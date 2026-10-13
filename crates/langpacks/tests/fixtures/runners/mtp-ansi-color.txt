@@ -1,0 +1,29 @@
+[?1h=[?25l[91mfailed[m LargeParcelUsesPerKilo[90m [90m(7ms)[m
+[91m  Assert.AreEqual failed. Expected:<30.00>. Actual:<29.50>. 
+[m[90m    [90mat [m[91mShipping.MSTest.ShippingRateTests.LargeParcelUsesPerKilo()[90m in [90m]8;;file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/ShippingTests.cs\ShippingTests.cs:19]8;;\[m
+    [90mat [m[91mSystem.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+    [90mat [m[91mSystem.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+    
+[m
+[[92m✓2[m/[91mx1[m/[93m↓0[m] Shipping.Mtp.dll (net9.0|arm64)[156G(0s)
+[3F
+[J[93mskipped[m InternationalSurcharge[90m [90m(0ms)[m
+
+[[92m✓2[m/[91mx1[m/[93m↓1[m] Shipping.Mtp.dll (net9.0|arm64)[156G(0s)
+[3F
+[J[91mfailed[m OversizeRejectsHeavyParcel[90m [90m(0ms)[m
+[91m  Assert.IsTrue failed. 
+[m[90m    [90mat [m[91mShipping.MSTest.ShippingRateTests.OversizeRejectsHeavyParcel()[90m in [90m]8;;file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/ShippingTests.cs\ShippingTests.cs:26]8;;\[m
+    [90mat [m[91mSystem.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+    [90mat [m[91mSystem.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+    
+[m
+[[92m✓2[m/[91mx2[m/[93m↓1[m] Shipping.Mtp.dll (net9.0|arm64)[156G(0s)
+[3F
+[J[?25h
+[91mTest run summary: Failed![90m - [m[90m]8;;file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/bin/Debug/net9.0\bin/Debug/net9.0/Shipping.Mtp.dll]8;;\[m (net9.0|arm64)
+[m  total: 7
+[91m  failed: 2
+[m  succeeded: 4
+  skipped: 1
+  duration: 85ms

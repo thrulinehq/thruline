@@ -1,0 +1,16 @@
+# Hand-written, not from the corpus: no pinned task uses a defaulted selector.
+# `${VAR:-default}` is legal Compose interpolation, so a selector regex that only
+# matched the bare `${VAR}` form would silently find zero client services here
+# and the patcher would refuse a file it can handle.
+services:
+  client:
+    build:
+      dockerfile: Dockerfile
+    image: ${T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME:-tb-client-image}
+    container_name: ${T_BENCH_TASK_DOCKER_CLIENT_CONTAINER_NAME:-tb-client}
+    command: [ "bash", "-c", "sleep infinity" ]
+    environment:
+      - TEST_DIR=${T_BENCH_TEST_DIR}
+    volumes:
+      - ${T_BENCH_TASK_LOGS_PATH}:${T_BENCH_CONTAINER_LOGS_PATH}
+      - ${T_BENCH_TASK_AGENT_LOGS_PATH}:${T_BENCH_CONTAINER_AGENT_LOGS_PATH}

@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__11-edit-false-claim-a-different-file/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval d542e3373feb1360ef1058e29d003c4db80be06e8ebe77de52084d0094dba5c1
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

@@ -1,0 +1,67 @@
+{
+  "state": "unverified",
+  "trust": "local",
+  "contract": {
+    "checks": [
+      {
+        "argv": [
+          "python3",
+          "-m",
+          "pytest",
+          "-q"
+        ],
+        "artifacts": [],
+        "category": "test",
+        "cwd": ".",
+        "id": "pytest",
+        "mode": "captured",
+        "runner": "pytest",
+        "timeout_seconds": 120
+      }
+    ],
+    "criteria": [
+      {
+        "check_ids": [
+          "pytest"
+        ],
+        "description": "The declared Python test suite passes",
+        "human_acceptance_required": false,
+        "id": "python-tests"
+      }
+    ],
+    "id": "project-checks",
+    "objective": "Verify the declared checks for this change",
+    "protected_paths": [
+      ".thruline/acceptance.json",
+      "pyproject.toml",
+      "tests"
+    ],
+    "revision": 1,
+    "version": 1
+  },
+  "contract_digest": "sha256:a77d28622af5c4acbaa11990af853e0d64650274a59c5d0b48e5fcadf09c290d",
+  "evaluation": {
+    "checks": [
+      {
+        "check_id": "pytest",
+        "reason": "required check has no evidence",
+        "run_id": null,
+        "state": "unverified"
+      }
+    ],
+    "contract_digest": "sha256:a77d28622af5c4acbaa11990af853e0d64650274a59c5d0b48e5fcadf09c290d",
+    "criteria": [
+      {
+        "criterion_id": "python-tests",
+        "human_acceptance_required": false,
+        "state": "unverified"
+      }
+    ],
+    "state": "unverified",
+    "subject": "900ad6fa6e8a96db17eae3e2120d42f65d752afc"
+  },
+  "runs": [],
+  "next_action": "Inspect pytest, then explicitly run that accepted check once if appropriate.",
+  "protected_inputs_verified": true,
+  "protected_changes": []
+}

@@ -1,0 +1,2580 @@
+{
+  "schema": "thruline.integration-coverage.v1",
+  "catalog_sha256": "fbaa52e850d1a3c8fc65dcb4242c74b5271e7475bc6105fcf6a10241ef236823",
+  "claim": "Capability evidence is scoped; no full catalog check is graduated by this matrix. Tool count is not domain coverage.",
+  "capabilities": [
+    {
+      "id": "accepted-guided-checks",
+      "check_ids": [
+        "REQ-01",
+        "REQ-02",
+        "REQ-04",
+        "REQ-07"
+      ],
+      "scope": "Existing append-only requirement revisions; ten guided recipes; exact reviewed command, rule/runtime identity and typed condition. All unrelated accepted checks are preserved.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "specific condition",
+      "freshness": "requirement and setup revisions",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/guided-workflow.json",
+        "crates/cli/tests/integration_workflow.rs"
+      ]
+    },
+    {
+      "id": "bounded-capture-receipts",
+      "check_ids": [
+        "EVD-01",
+        "EVD-02",
+        "EVD-03",
+        "EVD-04",
+        "EVD-06",
+        "EVD-07",
+        "EVD-10",
+        "EVD-12",
+        "PER-04",
+        "PER-07",
+        "PER-08",
+        "AGT-02",
+        "AGT-07",
+        "AGT-10"
+      ],
+      "scope": "EVB_V1 records for explicitly selected tool runs, nine identified input axes, bounded output/time/RSS, cancellation and one worker per store. Same OS user, not an independent verifier or hostile-process sandbox.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "process and input validity",
+      "freshness": "all nine declared axes",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "crates/cli/tests/integration_capture.rs",
+        "crates/verify/tests/integration_engine.rs",
+        "docs/integrations/validation/guided-workflow.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "structural-source-rule",
+      "check_ids": [
+        "SEC-03"
+      ],
+      "scope": "ast-grep: selected structural patterns, including direct eval and unsafe blocks; not all injection or semantic security vulnerabilities.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "Selected upstream-derived development cases exercised; per-adapter sample sizes and absent classes are explicit; no blind field graduation.",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "typed finding locations",
+      "freshness": "declared source/runtime/rules",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/real-tools.json",
+        "docs/integrations/validation/guided-workflow.json",
+        "docs/integrations/validation/qualification-coverage-repair.json",
+        "docs/integrations/validation/qualification-expanded-b112cef.json",
+        "docs/integrations/validation/protocol-exit-repair.json",
+        "docs/integrations/validation/setup-freshness-b112cef.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "declared-dependency-policy",
+      "check_ids": [
+        "SEC-07"
+      ],
+      "scope": "cargo-deny bans and sources only. License/advisory databases were not exercised and known-vulnerability coverage is not established.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "Selected upstream-derived development cases exercised; per-adapter sample sizes and absent classes are explicit; no blind field graduation.",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "JSONL diagnostics and completion summary",
+      "freshness": "lockfile and declared policy",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/real-tools.json",
+        "docs/integrations/validation/qualification-coverage-repair.json",
+        "docs/integrations/validation/qualification-expanded-b112cef.json",
+        "docs/integrations/validation/protocol-exit-repair.json",
+        "docs/integrations/validation/setup-freshness-b112cef.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "module-boundaries",
+      "check_ids": [
+        "ARC-01",
+        "ARC-02",
+        "ARC-04"
+      ],
+      "scope": "dependency-cruiser configured module boundaries and cycles; tested tiny JS graphs, resolver and larger framework cases remain qualification work.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "Selected upstream-derived development cases exercised; per-adapter sample sizes and absent classes are explicit; no blind field graduation.",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "typed module graph violations",
+      "freshness": "source/configuration/runtime",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/javascript-tools.json",
+        "docs/integrations/validation/qualification-coverage-repair.json",
+        "docs/integrations/validation/qualification-expanded-b112cef.json",
+        "docs/integrations/validation/protocol-exit-repair.json",
+        "docs/integrations/validation/setup-freshness-b112cef.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "unused-candidates",
+      "check_ids": [
+        "MNT-01"
+      ],
+      "scope": "Knip candidates under declared entry points; no automatic deletion or proof dynamic usage is absent.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "Selected upstream-derived development cases exercised; per-adapter sample sizes and absent classes are explicit; no blind field graduation.",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "typed candidates",
+      "freshness": "source/configuration/runtime",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/javascript-tools.json",
+        "docs/integrations/validation/qualification-coverage-repair.json",
+        "docs/integrations/validation/qualification-expanded-b112cef.json",
+        "docs/integrations/validation/protocol-exit-repair.json",
+        "docs/integrations/validation/setup-freshness-b112cef.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "secret-candidates",
+      "check_ids": [
+        "SEC-06"
+      ],
+      "scope": "Betterleaks local fabricated marker case, normalized locations, raw secrets withheld. Remote validation off; no production-secret detection precision established.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "Selected upstream-derived development cases exercised; per-adapter sample sizes and absent classes are explicit; no blind field graduation.",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "redacted candidate locations",
+      "freshness": "source/rules/binary",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/secret-tool.json",
+        "docs/integrations/validation/qualification-coverage-repair.json",
+        "docs/integrations/validation/qualification-expanded-b112cef.json",
+        "docs/integrations/validation/protocol-exit-repair.json",
+        "docs/integrations/validation/setup-freshness-b112cef.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "mutation-control",
+      "check_ids": [
+        "TST-03"
+      ],
+      "scope": "cargo-mutants: dependency-free fixture with five caught versus five surviving mutations. Equivalent/unviable/timeouts are not success.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "Selected upstream-derived development cases exercised; per-adapter sample sizes and absent classes are explicit; no blind field graduation.",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "typed outcome accounting",
+      "freshness": "source/tests/toolchain",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/mutation-tool.json",
+        "docs/integrations/validation/qualification-coverage-repair.json",
+        "docs/integrations/validation/qualification-expanded-b112cef.json",
+        "docs/integrations/validation/protocol-exit-repair.json",
+        "docs/integrations/validation/setup-freshness-b112cef.json",
+        "docs/integrations/validation/process-lifecycle-final-5886c26.json"
+      ]
+    },
+    {
+      "id": "parser-properties-fuzz",
+      "check_ids": [
+        "FUN-04",
+        "TST-05",
+        "ALG-07"
+      ],
+      "scope": "Proptest properties and bounded libFuzzer campaign over external report decoders. A completed budget is not proof of bug absence.",
+      "implemented": true,
+      "integrated": false,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "development_only",
+      "capture": "development_only",
+      "interpretation": "test/fuzz harness",
+      "freshness": "source and harness identities",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "crates/verify/tests/integration_engine.rs",
+        "fuzz/fuzz_targets/external_reports.rs",
+        "docs/integrations/validation/measurements.json"
+      ]
+    },
+    {
+      "id": "decoder-resource-measurement",
+      "check_ids": [
+        "PER-01",
+        "PER-02",
+        "PER-03",
+        "ALG-06",
+        "ALG-08"
+      ],
+      "scope": "Criterion/DHAT decoder workload only: peak live heap reduced 5.3%; final repeat found no statistically significant speed improvement. Not integrated workflow RSS or retention.",
+      "implemented": true,
+      "integrated": false,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "development_only",
+      "capture": "development_only",
+      "interpretation": "measurements with workload and limitations",
+      "freshness": "source/baseline identity",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/measurements.json"
+      ]
+    },
+    {
+      "id": "isolated-product-workflow",
+      "check_ids": [
+        "FUN-03",
+        "FUN-04",
+        "TST-01",
+        "TST-07",
+        "TST-10",
+        "UX-06"
+      ],
+      "scope": "Playwright: authored amount entry, invalid input and persistence after browser reload; isolated loopback target and immutable image. No general browser or accessibility coverage.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "assertion messages and exact report locations",
+      "freshness": "source/build fixtures/browser image/requirement",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/isolated-final.json"
+      ]
+    },
+    {
+      "id": "isolated-api-contract",
+      "check_ids": [
+        "FUN-02",
+        "FUN-04",
+        "TST-01",
+        "TST-05",
+        "TST-10"
+      ],
+      "scope": "Schemathesis 4.26.1: one isolated GET operation, generated positive cases, fixed seed, schema assertions and retained request reproducers. Business invariants and multi-operation state machines remain unqualified.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "typed complete/partial operation and assertion counts",
+      "freshness": "schema/runner/source/image/requirement",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/isolated-final.json",
+        "crates/verify/tests/integration_api.rs"
+      ]
+    },
+    {
+      "id": "local-security-rules",
+      "check_ids": [
+        "SEC-03"
+      ],
+      "scope": "Semgrep OSS 1.176.0: selected local Python eval rule, observed failure and repair; not Pro rules or whole-program security verification.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "typed locations/errors/skips/suppressions",
+      "freshness": "local rules/source/image",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/isolated-final.json"
+      ]
+    },
+    {
+      "id": "dated-advisory-inventory",
+      "check_ids": [
+        "SEC-08"
+      ],
+      "scope": "OSV 2.5.1: one recognized crates.io package, independently authored RustSec affected/fixed versions, exact offline database; no call analysis, exploitability, other ecosystems or unknown-vulnerability claim.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "advisory IDs/package versions; missing database not clear",
+      "freshness": "lockfile/database bytes/provenance/executable",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/osv-final.json"
+      ]
+    },
+    {
+      "id": "isolated-worker-lifecycle",
+      "check_ids": [
+        "PER-04",
+        "PER-07",
+        "PER-08",
+        "SEC-05",
+        "TST-10"
+      ],
+      "scope": "Owned immutable Docker workload, network none, read-only project/root, bounded private tmpfs, cgroup limits. Cancellation/timeout/OOM retained as incomplete; all ten exercised containers removed. Daemon loss and SIGKILL cleanup are not guaranteed.",
+      "implemented": true,
+      "integrated": true,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "explicit_advisory",
+      "capture": "exercised",
+      "interpretation": "captured lifecycle and final container state",
+      "freshness": "image/daemon/command/policy",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/isolated-final.json"
+      ]
+    },
+    {
+      "id": "evidence-gate-model",
+      "check_ids": [
+        "EVD-07",
+        "EVD-10",
+        "AGT-10"
+      ],
+      "scope": "Kani checks the actual production eligibility gate over seven Boolean preconditions; three harnesses. Precondition truth, parsing, OS custody and hashing are assumptions.",
+      "implemented": true,
+      "integrated": false,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "development_only",
+      "capture": "development_only",
+      "interpretation": "bounded formal model result",
+      "freshness": "actual source/harness/toolchain",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/models.json"
+      ]
+    },
+    {
+      "id": "hq-admission-model",
+      "check_ids": [
+        "REL-01",
+        "PER-07"
+      ],
+      "scope": "Loom models the actual HQ interpretation guard, two contenders, exclusivity/release/publication. OS process locks and scheduler fairness are outside the model.",
+      "implemented": true,
+      "integrated": false,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "development_only",
+      "capture": "development_only",
+      "interpretation": "modeled concurrency schedules",
+      "freshness": "actual source/harness/locked dependencies",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/models.json"
+      ]
+    },
+    {
+      "id": "workflow-resource-costs",
+      "check_ids": [
+        "PER-01",
+        "PER-02",
+        "PER-04",
+        "PER-09",
+        "PER-10",
+        "ALG-08"
+      ],
+      "scope": "Startup/idle/host RSS/retention/storage/four explicit reruns measured. Same four-receipt read, five warm repetitions: median 5053.577 to 1255.438 ms, byte-identical results. No RSS improvement or execution reuse claimed.",
+      "implemented": true,
+      "integrated": false,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "development_only",
+      "capture": "development_only",
+      "interpretation": "comparable read-path timings and scoped resource metrics",
+      "freshness": "binary/workload/argv/output identities",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/workflow-resources-before-memo.json",
+        "docs/integrations/validation/workflow-resources-after-memo.json"
+      ]
+    },
+    {
+      "id": "evaluation-accounting",
+      "check_ids": [
+        "TST-09",
+        "AGT-08",
+        "AIP-05",
+        "AIP-06"
+      ],
+      "scope": "Native evaluation binds frozen oracle manifest bytes and exact case/adapter IDs, retains missing predictions and groups false alarms/misses/abstentions by class. Independent authorship does not imply blind field qualification.",
+      "implemented": true,
+      "integrated": false,
+      "qualified": false,
+      "qualification": "authored fixtures; independent field qualification pending",
+      "enabled": "development_only",
+      "capture": "development_only",
+      "interpretation": "deterministic sample accounting; no oracle or model-score authority",
+      "freshness": "oracle/prediction digests and measured binary identity",
+      "requirement_verification": "bounded condition only; full requirement still requires qualified authority and human acceptance",
+      "evidence": [
+        "docs/integrations/validation/qualification-evaluation-b112cef.json",
+        "crates/cli/tests/integration_evaluation.rs"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "REQ-01",
+      "name": "Accepted requirement identity",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "accepted-guided-checks"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-02",
+      "name": "Measurable acceptance criteria",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "accepted-guided-checks"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-03",
+      "name": "Completion coverage",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-04",
+      "name": "Explicit constraints and versions",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "accepted-guided-checks"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-05",
+      "name": "Scope expansion and unauthorized changes",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-06",
+      "name": "Dropped obligations versus unfinished work",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-07",
+      "name": "Supersession and conflicting instructions",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "accepted-guided-checks"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REQ-08",
+      "name": "Handoff fidelity",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-01",
+      "name": "Raw record integrity",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-02",
+      "name": "Capture origin and observer authority",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [
+        "in-toto"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-03",
+      "name": "Collector health and missing intervals",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-04",
+      "name": "Actual execution and process outcome",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-05",
+      "name": "Exact suite, count and coverage scope",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-06",
+      "name": "Artifact and environment binding",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [
+        "in-toto"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-07",
+      "name": "Freshness and dependency invalidation",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts",
+        "evidence-gate-model"
+      ],
+      "candidate_sources": [
+        "salsa"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-08",
+      "name": "Temporal and causal scope",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-09",
+      "name": "Semantic command and target matching",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-10",
+      "name": "Evidence completeness and truncation",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts",
+        "evidence-gate-model"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-11",
+      "name": "Oracle independence and tampering",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "EVD-12",
+      "name": "Reproducible verdict and receipt",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [
+        "in-toto"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-01",
+      "name": "Build and type correctness",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-02",
+      "name": "Public API contract",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-api-contract"
+      ],
+      "candidate_sources": [
+        "schemathesis"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-03",
+      "name": "Real persistence through the full workflow",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-product-workflow"
+      ],
+      "candidate_sources": [
+        "playwright"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-04",
+      "name": "Boundary and malformed input behavior",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "parser-properties-fuzz",
+        "isolated-product-workflow",
+        "isolated-api-contract"
+      ],
+      "candidate_sources": [
+        "cargo-fuzz",
+        "schemathesis"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-05",
+      "name": "Error propagation and failure paths",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-06",
+      "name": "Time, numeric and locale semantics",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-07",
+      "name": "Feature configuration matrix",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "FUN-08",
+      "name": "Implemented behavior versus placeholder",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "ast-grep"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-01",
+      "name": "Tests discovered and actually executed",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-product-workflow",
+        "isolated-api-contract"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-02",
+      "name": "Meaningful assertions and independent expectations",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "cargo-mutants"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-03",
+      "name": "Targeted mutation control",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "mutation-control"
+      ],
+      "candidate_sources": [
+        "cargo-mutants"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-04",
+      "name": "Regression reproduction",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "swe-bench"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-05",
+      "name": "Property and metamorphic checks",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "parser-properties-fuzz",
+        "isolated-api-contract"
+      ],
+      "candidate_sources": [
+        "proptest"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-06",
+      "name": "Differential reference check",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-07",
+      "name": "Integration boundaries beyond mocks",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-product-workflow"
+      ],
+      "candidate_sources": [
+        "schemathesis"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-08",
+      "name": "Flake and nondeterminism classification",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-09",
+      "name": "Coverage relevance and negative cases",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "evaluation-accounting"
+      ],
+      "candidate_sources": [
+        "cargo-mutants"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "TST-10",
+      "name": "Test isolation and contaminated state",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-product-workflow",
+        "isolated-api-contract",
+        "isolated-worker-lifecycle"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-01",
+      "name": "Allowed module and layer dependencies",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "module-boundaries"
+      ],
+      "candidate_sources": [
+        "ast-grep",
+        "dependency-cruiser"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-02",
+      "name": "Dependency cycles",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "module-boundaries"
+      ],
+      "candidate_sources": [
+        "dependency-cruiser"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-03",
+      "name": "Ownership and authoritative state",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-04",
+      "name": "Dependency direction and replaceable adapters",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "module-boundaries"
+      ],
+      "candidate_sources": [
+        "dependency-cruiser"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-05",
+      "name": "Change coupling and fan-out review",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "dependency-cruiser"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-06",
+      "name": "Service boundaries and failure isolation",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-07",
+      "name": "Capacity and topology assumptions",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ARC-08",
+      "name": "Architecture decision consistency",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-01",
+      "name": "Container choice for the actual workload",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "criterion"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-02",
+      "name": "Scaling growth and algorithmic blow-up",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "criterion"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-03",
+      "name": "Equality, hashing and ordering laws",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "proptest",
+        "kani"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-04",
+      "name": "Deterministic ordering and tie-breaking",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "proptest"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-05",
+      "name": "Queue, cache and collection bounds",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-06",
+      "name": "Streaming and materialization",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "decoder-resource-measurement"
+      ],
+      "candidate_sources": [
+        "salsa"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-07",
+      "name": "Arithmetic, indexing and recursion safety",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "parser-properties-fuzz"
+      ],
+      "candidate_sources": [
+        "kani"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "ALG-08",
+      "name": "Semantic parity after optimization",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "decoder-resource-measurement",
+        "workflow-resource-costs"
+      ],
+      "candidate_sources": [
+        "criterion"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-01",
+      "name": "Schema constraints and invariant enforcement",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "kani"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-02",
+      "name": "Transaction atomicity",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-03",
+      "name": "Migration compatibility and data preservation",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-04",
+      "name": "Idempotent writes and duplicate delivery",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "proptest",
+        "schemathesis"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-05",
+      "name": "Concurrent update consistency",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-06",
+      "name": "Query correctness and pagination",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-07",
+      "name": "Backup, restore and recovery integrity",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DAT-08",
+      "name": "Retention, deletion and data minimization",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-01",
+      "name": "Authentication and session boundaries",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-02",
+      "name": "Authorization and tenant isolation",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-03",
+      "name": "Injection and unsafe interpretation",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "structural-source-rule",
+        "local-security-rules"
+      ],
+      "candidate_sources": [
+        "semgrep"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-04",
+      "name": "Path, archive and file boundary safety",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "cargo-fuzz",
+        "semgrep"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-05",
+      "name": "Outbound request and redirect restrictions",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-worker-lifecycle"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-06",
+      "name": "Secrets and sensitive logs",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "secret-candidates"
+      ],
+      "candidate_sources": [
+        "betterleaks"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-07",
+      "name": "Dependency existence and exact identity",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "declared-dependency-policy"
+      ],
+      "candidate_sources": [
+        "cargo-deny",
+        "osv-scanner"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-08",
+      "name": "Dependency vulnerabilities and provenance",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "dated-advisory-inventory"
+      ],
+      "candidate_sources": [
+        "cargo-deny",
+        "osv-scanner"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-09",
+      "name": "Install scripts and build-time permissions",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-10",
+      "name": "Secure defaults and browser protections",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "semgrep"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-11",
+      "name": "Cryptographic construction and randomness review",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "SEC-12",
+      "name": "Privacy boundaries and data export",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "betterleaks"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-01",
+      "name": "Latency and throughput regression",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "decoder-resource-measurement",
+        "workflow-resource-costs"
+      ],
+      "candidate_sources": [
+        "criterion"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-02",
+      "name": "Peak memory and retained growth",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "decoder-resource-measurement",
+        "workflow-resource-costs"
+      ],
+      "candidate_sources": [
+        "dhat"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-03",
+      "name": "Allocation and copy amplification",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "decoder-resource-measurement"
+      ],
+      "candidate_sources": [
+        "dhat"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-04",
+      "name": "Resource lifetime and cleanup",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts",
+        "isolated-worker-lifecycle",
+        "workflow-resource-costs"
+      ],
+      "candidate_sources": [
+        "dhat"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-05",
+      "name": "Query count, N+1 and execution plans",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-06",
+      "name": "Event-loop or UI-thread blocking",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-07",
+      "name": "Backpressure and admission control",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts",
+        "isolated-worker-lifecycle",
+        "hq-admission-model"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-08",
+      "name": "Cancellation, timeout and retry budgets",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts",
+        "isolated-worker-lifecycle"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-09",
+      "name": "Payload, bundle and artifact growth",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "workflow-resource-costs"
+      ],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "PER-10",
+      "name": "Cache correctness and bounded benefit",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "workflow-resource-costs"
+      ],
+      "candidate_sources": [
+        "salsa"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-01",
+      "name": "Data races and unsafe interleavings",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "hq-admission-model"
+      ],
+      "candidate_sources": [
+        "loom"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-02",
+      "name": "Deadlock, starvation and lock contention",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "loom"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-03",
+      "name": "Retry storms and circuit behavior",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-04",
+      "name": "Partial failure and compensating actions",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-05",
+      "name": "Duplicate, reordered and delayed events",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-06",
+      "name": "Crash consistency and atomic file updates",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-07",
+      "name": "Graceful shutdown and drain",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "loom"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "REL-08",
+      "name": "Recovery after collector or tool failure",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "cargo-fuzz"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-01",
+      "name": "Reachable controls perform their promised action",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "playwright"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-02",
+      "name": "Loading, empty, error and retry states",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "playwright"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-03",
+      "name": "Accessibility semantics and keyboard flow",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-04",
+      "name": "Responsive layout and overflow",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-05",
+      "name": "Visual hierarchy and design quality",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-06",
+      "name": "User-data preservation during interaction",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "isolated-product-workflow"
+      ],
+      "candidate_sources": [
+        "playwright"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-07",
+      "name": "Truthful status, counts and receipts",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "playwright"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "UX-08",
+      "name": "Browser and device compatibility",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "playwright"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-01",
+      "name": "Reproducible clean build and artifact identity",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-02",
+      "name": "Effective environment configuration",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-03",
+      "name": "Build-script error handling and dependency pinning",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-04",
+      "name": "Deployment identity and health",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-05",
+      "name": "Rollback or forward-recovery viability",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-06",
+      "name": "Observability for critical outcomes",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-07",
+      "name": "Permissions and infrastructure exposure",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "DEL-08",
+      "name": "Release documentation and operational handoff",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-01",
+      "name": "Unused code, exports and dependencies",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "unused-candidates"
+      ],
+      "candidate_sources": [
+        "knip"
+      ],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-02",
+      "name": "Duplication and unnecessary abstraction",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-03",
+      "name": "Complexity and comprehensibility",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-04",
+      "name": "Temporary artifacts and debug residue",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "ast-grep"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-05",
+      "name": "Comments and documentation agree with behavior",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-06",
+      "name": "Deprecated or incompatible API usage",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "semgrep"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-07",
+      "name": "Change isolation and rollback readability",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "MNT-08",
+      "name": "License and attribution policy metadata",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "knip",
+        "cargo-deny"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-01",
+      "name": "Instruction-source and prompt-injection boundaries",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "promptfoo"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-02",
+      "name": "Tool permissions and approval enforcement",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-03",
+      "name": "Delegated work needs artifact evidence",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-04",
+      "name": "Context and requirement continuity",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-05",
+      "name": "No-progress loops and bounded autonomy",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-06",
+      "name": "Accepted, queued, running and completed task states",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-07",
+      "name": "Tool/model/harness version drift",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-08",
+      "name": "Evaluation manipulation and result laundering",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "evaluation-accounting"
+      ],
+      "candidate_sources": [
+        "swe-bench",
+        "inspect-ai"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-09",
+      "name": "Workspace identity and concurrent agent coordination",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AGT-10",
+      "name": "Verifier failure, budget exhaustion and abstention",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "bounded-capture-receipts",
+        "evidence-gate-model"
+      ],
+      "candidate_sources": [],
+      "capture": "bounded exercised path",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-01",
+      "name": "Claim grounding and source entailment",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "promptfoo"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-02",
+      "name": "Retrieval relevance, permissions and freshness",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-03",
+      "name": "Structured output and tool argument contracts",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "promptfoo"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-04",
+      "name": "Uncertainty and unsupported-answer behavior",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [
+        "inspect-ai"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-05",
+      "name": "Evaluation leakage and train-test separation",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "evaluation-accounting"
+      ],
+      "candidate_sources": [
+        "swe-bench",
+        "inspect-ai"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-06",
+      "name": "Quality regression and distribution shift",
+      "catalog_status": "proposed",
+      "capabilities": [
+        "evaluation-accounting"
+      ],
+      "candidate_sources": [
+        "swe-bench",
+        "inspect-ai",
+        "promptfoo"
+      ],
+      "capture": "no check-specific capture established",
+      "interpretation": "partial, scoped to listed capabilities",
+      "freshness": "declared inputs only",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "explicit advisory or development use only",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-07",
+      "name": "Harm, bias and privacy review for intended use",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    },
+    {
+      "id": "AIP-08",
+      "name": "Inference budgets, fallback and provider failure",
+      "catalog_status": "proposed",
+      "capabilities": [],
+      "candidate_sources": [],
+      "capture": "no check-specific capture established",
+      "interpretation": "not established for this check",
+      "freshness": "common infrastructure available; this check not exercised",
+      "requirement_verification": "not established for the complete catalog specification",
+      "qualified": false,
+      "enabled": "not enabled",
+      "pending": "Qualify the full specified pass/fail contract, coverage and verifier authority on independently labeled representative cases."
+    }
+  ]
+}

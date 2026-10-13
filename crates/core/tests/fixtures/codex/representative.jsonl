@@ -1,0 +1,11 @@
+{"timestamp":"2030-01-01T00:00:00Z","type":"session_meta","payload":{"id":"synthetic-session","cwd":"/synthetic/project"}}
+{"timestamp":"2030-01-01T00:00:01Z","type":"turn_context","payload":{"turn_id":"synthetic-turn","cwd":"/synthetic/project","branch":"synthetic-branch"}}
+{"timestamp":"2030-01-01T00:00:02Z","type":"response_item","payload":{"type":"message","id":"synthetic-message","role":"assistant","content":[{"type":"output_text","text":"Synthetic fixture answer"}]}}
+{"timestamp":"2030-01-01T00:00:03Z","type":"event_msg","payload":{"type":"agent_message","message":"Synthetic fixture answer"}}
+{"timestamp":"2030-01-01T00:00:04Z","type":"response_item","payload":{"type":"reasoning","id":"synthetic-reasoning-visible","summary":[{"type":"summary_text","text":"Synthetic reasoning summary"}],"encrypted_content":"synthetic-unreadable-ciphertext"}}
+{"timestamp":"2030-01-01T00:00:04.500Z","type":"response_item","payload":{"type":"reasoning","id":"synthetic-reasoning-hidden","encrypted_content":"synthetic-unreadable-ciphertext"}}
+{"timestamp":"2030-01-01T00:00:05Z","type":"response_item","payload":{"type":"function_call","id":"synthetic-call-item","call_id":"synthetic-call","name":"shell_command","arguments":"{\"command\":\"synthetic-check\"}"}}
+{"timestamp":"2030-01-01T00:00:06Z","type":"response_item","payload":{"type":"function_call_output","id":"synthetic-output-item","call_id":"synthetic-call","output":{"stdout":"synthetic-ok","exit_code":0}}}
+{"timestamp":"2030-01-01T00:00:07Z","type":"world_state","payload":{"status":"synthetic-running"}}
+{"timestamp":"2030-01-01T00:00:08Z","type":"inter_agent_communication_metadata","payload":{"agent_id":"synthetic-agent","message":"synthetic-metadata-only"}}
+{"timestamp":"2030-01-01T00:00:09Z","type":"synthetic_future_envelope","payload":{"value":"synthetic-unknown"}}

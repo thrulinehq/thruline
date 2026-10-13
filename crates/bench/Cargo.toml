@@ -1,0 +1,47 @@
+[package]
+publish = false
+name = "thruline-bench"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Fixture harness and Overclaim Index report generator."
+
+[lints]
+workspace = true
+
+[dependencies]
+serde_json = { workspace = true }
+# For the protocol commitment hash. The workspace dependency, not a second
+# pin: no new crate enters the tree, only another place the existing one is
+# used.
+sha2 = { workspace = true }
+# For the one fact the pilot must not restate: whether a harness's hook pack
+# can actually be installed. `capture::harness::ALL` owns it; `provides_hook_events`
+# reads it. See the sixth guard-family shape in `harness::Harness::installable`.
+thruline-capture = { version = "0.2.0", path = "../capture" }
+
+[dev-dependencies]
+# `tests/pilot.rs` wires the credential scan to §4.6's OWN predicate rather than
+# reimplementing one: a second credential detector is a second thing to keep
+# correct, and this is the one with the corpus behind it. Dev-only, so the
+# engine's crates do not enter a bench build.
+thruline-core = { version = "0.2.0", path = "../core", default-features = false }
+# `tests/tau2_extractor.rs` drives the REAL §5 extractor over real agent prose.
+# The measurer may depend on the measured; the reverse is what C.9 forbids.
+thruline-claims = { version = "0.2.0", path = "../claims" }
+# `tests/pipeline.rs` drives the REAL verifier through the REAL metrics.
+#
+# A dev-dependency of `bench`, and pointedly not a dependency of `verify`:
+# the measurer may depend on the measured, never the reverse. `crates/verify`
+# depends on no ThruLine crate at all, which is what makes C.9's guard —
+# "a verifier cannot reach `explain`'s honest-failure markers" — hold
+# transitively rather than only directly. Putting this on `verify` broke that
+# guard, and the guard said so.
+thruline-verify = { version = "0.2.0", path = "../verify" }
+# `tests/pilot.rs` opens a real spend ledger on disk, because the money ledger
+# no longer HAS an in-memory constructor: `RunManifest::first()`'s lesson is
+# that a second, easier constructor is the bypass. A test that wants a ledger
+# gets one the same way the product does.
+tempfile = { workspace = true }

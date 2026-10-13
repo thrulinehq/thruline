@@ -1,0 +1,3 @@
+cwd: subtests
+args: pytest -q
+exit: 1

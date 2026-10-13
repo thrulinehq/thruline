@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="demo.CalculatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-09-04T21:40:48.173Z" hostname="Dev-MacBook-Pro.local" time="0.02">
+  <properties/>
+  <testcase name="comparesGreaterThan()" classname="demo.CalculatorTest" time="0.009"/>
+  <testcase name="addsTwoNumbers()" classname="demo.CalculatorTest" time="0.0"/>
+  <testcase name="multipliesTwoNumbers()" classname="demo.CalculatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

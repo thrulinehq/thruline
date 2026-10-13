@@ -1,0 +1,45 @@
+
+While loading ./spec/calc_spec.rb a `raise SyntaxError` occurred, RSpec will now quit.
+Failure/Error: __send__(method, file)
+
+SyntaxError:
+  --> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/ruby/syntaxerr/spec/calc_spec.rb
+
+  Unmatched keyword, missing `end' ?
+
+  > 5  [1;3mRSpec.describe Calc do
+  [0m> 6  [1;3m  it "adds" do
+  [0m> 9  [1;3mend
+  [0m
+  [1m/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/ruby/syntaxerr/spec/calc_spec.rb:9: syntax errors found ([1;4mSyntaxError[m[1m)[m
+  [1m  3 | require "spec_helper"[m
+  [1m  4 | [m
+  [1m> 5 | RSpec.describe Calc do[m
+  [1m    |                     ^~ expected a block beginning with `do` to end with `end`[m
+  [1m  6 |   it "adds" do[m
+  [1m  7 |     expect(Calc.add(1, 1)).to eq(2)[m
+  [1m  8 |   # the `end` closing this example was lost in a bad merge[m
+  [1m> 9 | end[m
+  [1m    |    ^ unexpected end-of-input, assuming it is closing the parent top level context[m
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2144:in 'Kernel#load'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2144:in 'RSpec::Core::Configuration#load_file_handling_errors'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:1643:in 'block in RSpec::Core::Configuration#load_spec_files'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:1641:in 'Array#each'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:1641:in 'RSpec::Core::Configuration#load_spec_files'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:102:in 'RSpec::Core::Runner#setup'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:86:in 'RSpec::Core::Runner#run'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:71:in 'RSpec::Core::Runner.run'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:45:in 'RSpec::Core::Runner.invoke'
+# /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/exe/rspec:4:in '<top (required)>'
+# /opt/homebrew/Cellar/ruby/4.0.6_1/lib/ruby/4.0.0/rubygems.rb:305:in 'Kernel#load'
+# /opt/homebrew/Cellar/ruby/4.0.6_1/lib/ruby/4.0.0/rubygems.rb:305:in 'Gem.activate_and_load_bin_path'
+# /opt/homebrew/lib/ruby/gems/4.0.0/bin/rspec:25:in '<main>'
+# 
+#   Showing full backtrace because every line was filtered out.
+#   See docs for RSpec::Configuration#backtrace_exclusion_patterns and
+#   RSpec::Configuration#backtrace_inclusion_patterns for more information.
+
+
+Finished in 0.00016 seconds (files took 0.25392 seconds to load)
+0 examples, 0 failures, 1 error occurred outside of examples
+

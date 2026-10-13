@@ -1,0 +1,20 @@
+task = "T-3-1"
+order = 20
+built_on_commit = "ee6be52d"
+pinned_schema_digest = "schema_sha256_10a22ce71f7b6b0fbe1ca6d9524377fa931fda7240ad2549e5fb54a661d8d34e"
+migration_test = "crates/core/tests/change_evidence_migration.rs"
+note = "Criterion to evidence: which piece of evidence was linked to which acceptance criterion, and by whom."
+
+tables = ["change_criterion_evidence"]
+
+indexes = [
+  "idx_change_criterion_evidence_criterion",
+  "idx_change_criterion_evidence_evidence",
+]
+
+triggers = [
+  "change_criterion_evidence_no_replace",
+  "change_criterion_evidence_no_update",
+  "change_criterion_evidence_no_delete",
+  "change_criterion_evidence_same_change",
+]

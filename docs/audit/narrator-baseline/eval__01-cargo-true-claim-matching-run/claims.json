@@ -1,0 +1,10 @@
+{
+  "checks": 0,
+  "claims": [],
+  "final_tree_hash": null,
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "01-cargo-true-claim-matching-run",
+  "shape": "thruline.claims"
+}

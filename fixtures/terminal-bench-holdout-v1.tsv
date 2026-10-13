@@ -1,0 +1,395 @@
+# terminal-bench-holdout-v1 — the committed Terminal-Bench split (BUILD-SPEC §20.2, Ruling 5)
+#
+# WHAT THIS FILE IS. The 241-task Terminal-Bench corpus split 50/50 by task-id hash,
+# minus the tasks this investigation has already observed. Membership is PINNED here
+# and never recomputed at run time: a holdout whose membership is recomputed is not a
+# holdout. Every excluded task carries the record that proves it was observed.
+#
+# THE HASH, STATED SO IT CAN BE REPRODUCED IN ANY LANGUAGE.
+#   bucket(id) = int(sha256(salt || 0x00 || id)[0..8], big-endian)
+#   holdout side  <=>  bucket(id) < cut
+# `salt` and `cut` are the fields below. This is byte-for-byte the construction in
+# `crates/bench/src/protocol.rs::bucket`, which the split is derived through — not a
+# second implementation of it. It has no per-process seed: Python's built-in hash() is
+# salted per process by default and would silently repartition the corpus on every run,
+# which is exactly the class of mistake this line exists to refuse.
+#
+# WHAT RE-DERIVES IT, AND FAILS WHEN IT DRIFTS (A205 doctrine: a committed constant
+# with no re-derivation is a liability).
+#   `cargo test -p thruline-bench --test pilot holdout_manifest`
+# The tests recompute every bucket from this file's own ids and refuse a `holdout`/`tune`
+# assignment that disagrees; refuse an `observed` row with no record; refuse an id in
+# `holdout` that also appears in `observed`; and recompute `corpus_digest` from the ids
+# listed here. Set THRULINE_TB_CORPUS=<.../original-tasks> and the same suite additionally
+# compares this file's 241 ids against the directory listing and FAILS on any difference —
+# a corpus bump is a re-measurement, not a refactor.
+#
+# "OBSERVED" — THE DEFINITION APPLIED HERE, AND THE ONE IT SUPERSEDES.
+# A task is observed iff an artefact on disk shows the investigation directed the
+# instrument, or its published reasoning, at THAT task individually. Two tiers, and the
+# tier is on every row so the narrower set is one filter away:
+#   run-record   the task was staged, containerised and run; a Terminal-Bench results.json
+#                carries its task_id and a trial directory exists.  (34 tasks)
+#   staged-only  the task was copied and instrumented and a mount was created, but the
+#                spool is empty and no run tree exists — the instrument reached it and
+#                produced nothing, which is itself task-specific knowledge.  (3 tasks)
+#   repo-named   no execution; the task is named individually in a committed document or
+#                in the shipped instrument, and a property of THAT task is asserted there
+#                (a compose refusal, a COPY . /app special-case, a ceiling stratum).  (18)
+# The corpus-wide static censuses (scripts/classify-corpus.py and the grep censuses in
+# BUILD-SPEC §4.4.4) read all 241 run-tests.sh files equally and are NOT observation:
+# counting them would contaminate the whole corpus and leave no holdout at all.
+#
+# BUILD-SPEC §20.2 asserted "13 observed" and "the holdout is 105". Both are withdrawn by
+# this file. Under the run-record + staged-only tiers the record-derived count is 38, of
+# which 15 fall on the holdout side — so that arithmetic was 118-13; the records say
+# 118-15 = 103 at the narrow definition and 118-25 = 93 at the one adopted here. §20.2's
+# own 8-name list also mixes the two tiers: broken-python, cprofiling-python, lean4-proof,
+# privilege-escalation and shell-deobfuscation have run records; fix-ocaml-gc,
+# install-windows-xp and slurm-simple-node-monitoring were never run and are repo-named.
+#
+# NOT CHECKED, AND NAMED RATHER THAN ASSUMED (Rule 12). The Docker daemon was not running
+# on 2026-09-04, so `docker images` could not be consulted for task images built during
+# runs. Every task with a run record in this file also has a staged-* and mount-* tree, so
+# staging is a necessary precursor in this pipeline and an image built with no staged tree
+# is not a shape it produces — but that argument is a derivation, not a docker listing.
+#
+# A `file:line` record is a POINTER, not the claim. Line numbers drift as the repo
+# moves; the note in the last column says what that record asserts about that task, and
+# that is the part to re-check. The `sha256:` fingerprints on run-record rows pin the
+# exact results.json bytes that were read.
+#
+# THE BREACH, AND WHY THE HOLDOUT IS 93 AND NOT 94 (2026-09-04).
+# `ancient-puzzle` was spent 27 minutes after this file was committed. The fixture landed
+# at 03:10:42 (commit 7e7266d); a Terminal-Bench results.json for task_id=ancient-puzzle
+# was written at 03:37:20 under runs-cc-scripted-4/. It was on the holdout side and had no
+# `observed` row, so it was live holdout, and it is now spent. Nothing refused the run
+# because NOTHING READ THIS FILE: scripts/pilot-run.sh contained zero occurrences of the
+# word "holdout", and pilot::plan / check_from_tune / TerminalBenchSplit had no caller
+# outside this crate's own tests. The construction existed and was wired to nothing.
+# It carries a `run-record` row below, which is the only repair available: a task that was
+# run can never serve as holdout again, and its side column is a HASH FACT that cannot be
+# edited to say otherwise (see AssignmentDrift). scripts/pilot-run.sh now reads this file
+# and refuses a live-holdout id, and crates/bench/tests/split_enforcement_census.rs fails
+# when a split-enforcement symbol has no shipped caller.
+#
+# Tab-separated. `#` starts a comment line. Same shape as the append-only
+# `HoldoutLedger` file in crates/bench/src/protocol.rs, for the same reason: it diffs.
+
+version	1
+corpus	terminal-bench original-tasks
+salt	thruline-bench-holdout-v1
+cut	9223372036854775808
+corpus_size	241
+corpus_digest	sha256:d7f4494342d3af7e165e5045096150432a7e2ca540f831dfb5d8aa67460f2ce5	# sha256 over the 241 ids, sorted, one per line, each NL-terminated
+holdout_side	118	# bucket < cut; measured 118 of 241 = 48.96%
+tune_side	123
+observed_total	56
+observed_run_record_or_staged	38
+holdout_size	93	# holdout side minus every observed task
+holdout_size_run_record_only	103	# the same split under the narrow definition, for comparison
+
+# --- the split: every one of the 241 ids, with the side its bucket puts it on.
+# `holdout` here means the bucket side, NOT eligibility: an id may be `holdout` and also
+# appear in an `observed` row below, and the observed row wins. The holdout that may be
+# spent is `holdout` minus `observed`, and no code in this repo computes it any other way.
+task	3d-model-format-legacy	tune
+task	accelerate-maximal-square	tune
+task	acl-permissions-inheritance	holdout
+task	adaptive-rejection-sampler	tune
+task	add-benchmark-lm-eval-harness	holdout
+task	aimo-airline-departures	tune
+task	amuse-install	holdout
+task	analyze-access-logs	holdout
+task	ancient-puzzle	holdout
+task	assign-seats	holdout
+task	attention-mil	holdout
+task	audio-synth-stft-peaks	holdout
+task	bank-trans-filter	holdout
+task	blind-maze-explorer-5x5	holdout
+task	blind-maze-explorer-algorithm	tune
+task	bn-fit-modify	tune
+task	break-filter-js-from-html	tune
+task	broken-networking	tune
+task	broken-python	tune
+task	build-cython-ext	tune
+task	build-initramfs-qemu	holdout
+task	build-linux-kernel-qemu	holdout
+task	build-pmars	holdout
+task	build-pov-ray	tune
+task	build-stp	holdout
+task	build-tcc-qemu	holdout
+task	caffe-cifar-10	tune
+task	cancel-async-tasks	tune
+task	cartpole-rl-training	holdout
+task	catch-me-if-you-can	tune
+task	causal-inference-r	holdout
+task	chem-property-targeting	tune
+task	chem-rf	holdout
+task	chess-best-move	tune
+task	circuit-fibsqrt	tune
+task	classifier-debug	tune
+task	cobol-modernization	tune
+task	code-from-image	tune
+task	compile-compcert	tune
+task	conda-env-conflict-resolution	tune
+task	configure-git-webserver	tune
+task	constraints-scheduling	holdout
+task	count-call-stack	tune
+task	count-dataset-tokens	tune
+task	countdown-game	holdout
+task	cpp-compatibility	tune
+task	cprofiling-python	holdout
+task	crack-7z-hash	tune
+task	create-bucket	holdout
+task	cron-broken-network	holdout
+task	cross-entropy-method	tune
+task	csv-to-parquet	tune
+task	custom-memory-heap-crash	holdout
+task	db-wal-recovery	tune
+task	debug-long-program	tune
+task	decommissioning-service-with-sensitive-data	holdout
+task	deterministic-tarball	tune
+task	distribution-search	tune
+task	dna-assembly	tune
+task	dna-insert	holdout
+task	download-youtube	tune
+task	enemy-grid-escape	tune
+task	extract-elf	holdout
+task	extract-moves-from-video	holdout
+task	extract-safely	tune
+task	feal-differential-cryptanalysis	holdout
+task	feal-linear-cryptanalysis	tune
+task	fibonacci-server	tune
+task	filter-js-from-html	tune
+task	financial-document-processor	holdout
+task	find-official-code	tune
+task	find-restaurant	holdout
+task	fix-code-vulnerability	holdout
+task	fix-git	tune
+task	fix-ocaml-gc	holdout
+task	fix-pandas-version	holdout
+task	fix-permissions	holdout
+task	flood-monitoring-basic	holdout
+task	fmri-encoding-r	holdout
+task	form-filling	holdout
+task	gcc-compiler-optimization	holdout
+task	gcode-to-text	holdout
+task	get-bitcoin-nodes	tune
+task	git-leak-recovery	holdout
+task	git-multibranch	tune
+task	git-workflow-hack	holdout
+task	gomoku-planner	holdout
+task	gpt2-codegolf	tune
+task	grid-pattern-transform	holdout
+task	hdfs-deployment	tune
+task	hello-world	tune
+task	heterogeneous-dates	tune
+task	hf-lora-adapter	tune
+task	hf-model-inference	holdout
+task	hf-train-lora-adapter	tune
+task	home-server-https	holdout
+task	html-finance-verify	holdout
+task	huarong-dao-solver	holdout
+task	hydra-debug-slurm-mode	holdout
+task	ilp-solver	holdout
+task	implement-eigenvectors-from-eigenvalues-research-paper	tune
+task	incompatible-python-fasttext	holdout
+task	install-klee-minimal	tune
+task	install-windows-3.11	holdout
+task	install-windows-xp	tune
+task	interactive-maze-game	holdout
+task	intrusion-detection	holdout
+task	jq-data-processing	tune
+task	jsonl-aggregator	tune
+task	jupyter-notebook-server	tune
+task	kv-store-grpc	holdout
+task	large-scale-text-editing	tune
+task	largest-eigenval	tune
+task	lean4-proof	tune
+task	leelachess0-pytorch-conversion	tune
+task	llm-inference-batching-scheduler	tune
+task	llm-spec-decoding	tune
+task	log-summary	holdout
+task	log-summary-date-ranges	tune
+task	logistic-regression-divergence	tune
+task	magsac-install	tune
+task	mahjong-winninghand	tune
+task	mailman	tune
+task	make-doom-for-mips	tune
+task	make-mips-interpreter	tune
+task	matlab-python-conversion	holdout
+task	mcmc-sampling-stan	tune
+task	merge-diff-arc-agi-task	holdout
+task	mixed-integer-programming	holdout
+task	mlflow-register	holdout
+task	mnist-learning-fix	tune
+task	model-extraction-relu-logits	tune
+task	modernize-fortran-build	tune
+task	modernize-scientific-stack	tune
+task	movie-helper	holdout
+task	mteb-eval	holdout
+task	mteb-leaderboard	tune
+task	mteb-retrieve	tune
+task	multi-source-data-merger	tune
+task	multistep-definite-integral	holdout
+task	neuron-to-jaxley-conversion	tune
+task	new-encrypt-command	holdout
+task	nginx-request-logging	tune
+task	npm-conflict-resolution	holdout
+task	ode-solver-rk4	tune
+task	oom	holdout
+task	openssl-selfsigned-cert	holdout
+task	optimal-transport	holdout
+task	organization-json-generator	tune
+task	overfull-hbox	tune
+task	pandas-etl	holdout
+task	pandas-sql-query	tune
+task	parallel-particle-simulator	holdout
+task	parallelize-compute-squares	tune
+task	parallelize-graph	holdout
+task	password-recovery	tune
+task	path-tracing	holdout
+task	path-tracing-reverse	holdout
+task	pcap-to-netflow	holdout
+task	play-lord	holdout
+task	play-zork	holdout
+task	play-zork-easy	holdout
+task	png-generation	tune
+task	polyglot-c-py	tune
+task	polyglot-rust-c	tune
+task	port-compressor	tune
+task	portfolio-optimization	holdout
+task	postgres-csv-clean	tune
+task	predicate-pushdown-bench	holdout
+task	predict-customer-churn	tune
+task	privilege-escalation	holdout
+task	processing-pipeline	tune
+task	protein-assembly	tune
+task	protocol-analysis-rs	holdout
+task	prove-plus-comm	holdout
+task	puzzle-solver	holdout
+task	pypi-server	tune
+task	pytorch-model-cli	holdout
+task	pytorch-model-recovery	holdout
+task	qemu-alpine-ssh	tune
+task	qemu-startup	holdout
+task	query-optimize	holdout
+task	raman-fitting	holdout
+task	rare-mineral-allocation	holdout
+task	recover-accuracy-log	holdout
+task	recover-obfuscated-files	holdout
+task	regex-chess	tune
+task	regex-log	holdout
+task	reshard-c4-data	holdout
+task	reverse-engineering	tune
+task	rstan-to-pystan	holdout
+task	run-pdp11-code	holdout
+task	sam-cell-seg	tune
+task	sanitize-git-repo	tune
+task	schedule-vacation	tune
+task	schemelike-metacircular-eval	holdout
+task	security-celery-redis-rce	holdout
+task	security-vulhub-minio	holdout
+task	setup-custom-dev-env	tune
+task	sha-puzzle	tune
+task	shell-deobfuscation	tune
+task	simple-sheets-put	tune
+task	simple-web-scraper	tune
+task	slurm-simple-node-monitoring	tune
+task	solana-data	tune
+task	solve-maze-challenge	holdout
+task	solve-sudoku	tune
+task	sparql-professors-universities	holdout
+task	sparql-university	tune
+task	speech-to-text	holdout
+task	spinning-up-rl	tune
+task	spring-messaging-vul	tune
+task	sql-injection-attack	holdout
+task	sqlite-db-truncate	holdout
+task	sqlite-with-gcov	holdout
+task	stable-parallel-kmeans	holdout
+task	sudo-llvm-ir	tune
+task	swe-bench-astropy-1	holdout
+task	swe-bench-astropy-2	holdout
+task	swe-bench-fsspec	tune
+task	swe-bench-langcodes	tune
+task	tmux-advanced-workflow	holdout
+task	torch-pipeline-parallelism	holdout
+task	torch-tensor-parallelism	holdout
+task	train-bpe-tokenizer	tune
+task	train-fasttext	tune
+task	tree-directory-parser	tune
+task	triton-interpret	holdout
+task	tune-mjcf	tune
+task	unprivileged-headless-pyrender	holdout
+task	vertex-solver	tune
+task	video-processing	holdout
+task	vimscript-vim-quine	holdout
+task	vul-flask	holdout
+task	vul-flink	holdout
+task	vulnerable-secret	tune
+task	wasm-pipeline	tune
+task	weighted-max-sat-solver	holdout
+task	winning-avg-corewars	tune
+task	word2vec-from-scratch	tune
+task	write-compressor	holdout
+
+# --- observed: excluded from the holdout, each with the record that proves it.
+# columns: observed <task-id> <tier> <record> <fingerprint> <note>
+observed	3d-model-format-legacy	run-record	/private/tmp/scratch/scratchpad/pilot/runs-v-uv1-3d-model-format-legacy/v-uv1-3d-model-format-legacy/results.json	sha256:c1349cd4f863e364958036ad045e5e2d8ec2d6c536625fa5f727c0e8e2eeeab2	task_id=3d-model-format-legacy trial=3b4be5a5-4951-44cb-b37d-dc82d14e6870 graded
+observed	add-benchmark-lm-eval-harness	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-bp-add-benchmark-lm-eval-harness/p-bp-add-benchmark-lm-eval-harness/results.json	sha256:4f546a93d8c8d95f607e44feb97ca9dbb7af908a08752699d1a948d3b9e35279	task_id=add-benchmark-lm-eval-harness trial=e88b7e82-979d-4c4a-b082-d7c323c5d524 graded
+observed	ancient-puzzle	run-record	/private/tmp/scratch/scratchpad/pilot/runs-cc-scripted-4/cc-scripted-4/results.json	sha256:2e9eb2cb6753a2f6a14fbadadacb0e0c745b9a1220921b0ae2c9be43b1c1a8e2	task_id=ancient-puzzle trial=2c0d854e-9539-4b9a-8258-f0cd17c30b58 graded is_resolved=false. THE BREACH: run at 03:37:20 on 2026-09-04, 27 minutes after this file was committed at 03:10:42, while filed holdout with no observed row. See docs/PILOT-REPORT.md
+observed	assign-seats	repo-named	crates/bench/tests/class_two_corpora.rs:463	git-tracked	filler id in a synthetic path listing; no property of the task is asserted. The weakest row in this file, kept because over-exclusion is the safe direction
+observed	bank-trans-filter	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-bank-trans-filter/ctl-c1-bank-trans-filter/results.json	sha256:db255dcdb46d90c5a3fc5ffbcd52b3ce16beb5a060b88fdc0447ba7fd5c49374	task_id=bank-trans-filter trial=7665c0a9-e694-4d9a-bb08-aa46512e9768 graded
+observed	blind-maze-explorer-algorithm	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uv3-blind-maze-explorer-algorithm/p-uv3-blind-maze-explorer-algorithm/results.json	sha256:1b5175202bafde37ffe71dd89b027c6de07339dfdbd9a0a417873b22cf9c87a9	task_id=blind-maze-explorer-algorithm trial=de2264d3-c4dc-42af-993c-0bfdeb9b79f3 graded
+observed	broken-python	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-broken-python/ctl-c1-broken-python/results.json	sha256:10093c8195aa7980f4accf58684ad58044572615b9cf165be5a513be697cdada	task_id=broken-python trial=92ec38ce-1a54-433b-a45f-7880425cef06 graded
+observed	build-tcc-qemu	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uvh-build-tcc-qemu/p-uvh-build-tcc-qemu/results.json	sha256:e9b7f7f02b12b9503585ea77e9c52412b7cfa9f4c7c605d376c8439be5734530	task_id=build-tcc-qemu trial=24a7ea0d-6a52-45df-a961-3694b7ab080b graded
+observed	causal-inference-r	repo-named	docs/PILOT-REPORT.md:535	git-tracked	out-of-repo ceiling stratum (BUILD-SPEC 4.4.5): its run-tests.sh does cd $TEST_DIR
+observed	classifier-debug	staged-only	/private/tmp/scratch/scratchpad/pilot/mount-p-uv3-classifier-debug/task-provenance.txt	sha256:5446c123c788c698b852c2ccc936f362c2f627652602d6602b2b8fb9039f2c4b	instrumented and mounted; spool empty; no run tree
+observed	conda-env-conflict-resolution	repo-named	crates/bench/src/class_two.rs:452	git-tracked	member of MULTI_CONTAINER_TASKS, a committed exclusion list in crates/bench/src/class_two.rs
+observed	cpp-compatibility	run-record	/private/tmp/scratch/scratchpad/pilot/runs-v-uv1-cpp-compatibility/v-uv1-cpp-compatibility/results.json	sha256:4f4465851dfe835975ed0251d4bf5c49df041fb277188d94525784d8856036c5	task_id=cpp-compatibility trial=779a7c2f-a879-4582-9ad0-f24012622846 graded
+observed	cprofiling-python	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-cprofiling-python/ctl-c1-cprofiling-python/results.json	sha256:93c71a998847545abcfb4c19bd34f92857a3c6876048e66b8eb404b57b653895	task_id=cprofiling-python trial=a94a2a18-0c05-4492-b938-2e3d3b05693a graded
+observed	cross-entropy-method	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-pym-cross-entropy-method/p-pym-cross-entropy-method/results.json	sha256:e9dd219b3da8312702f4b64dea55ea8dd83bf1fdaea96b714d27866afe6d8bf5	task_id=cross-entropy-method trial=46823a86-764c-42ea-955b-0253bb78e624 graded
+observed	deterministic-tarball	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uv3-deterministic-tarball/p-uv3-deterministic-tarball/results.json	sha256:11c6cf043013babcabea73d2e0fec6c4734ae4a5317a47c790ecf29ca580d8c7	task_id=deterministic-tarball trial=5514f0dc-f479-4353-82b1-0cea21d289b7 graded
+observed	extract-safely	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-vs-extract-safely/p-vs-extract-safely/results.json	sha256:2b6f39f100f84740a6e72bf5289a540282fa2e2ce5b3c3be0cab24ebcd314e9f	task_id=extract-safely trial=2ad57a3e-3252-4394-9672-37911ac0ce5f ungraded
+observed	fibonacci-server	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uv-fibonacci-server/p-uv-fibonacci-server/results.json	sha256:7a9055535b48c989c1782d9baf02a2d4959e84522c2d50d3ededd2606d195cd2	task_id=fibonacci-server trial=44c80da8-c22d-4f15-b410-3330b74ed2e5 graded
+observed	find-official-code	repo-named	docs/PILOT-REPORT.md:536	git-tracked	out-of-repo ceiling stratum (BUILD-SPEC 4.4.5): its run-tests.sh does cd $TEST_DIR
+observed	fix-code-vulnerability	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-pym-fix-code-vulnerability/p-pym-fix-code-vulnerability/results.json	sha256:83033463b27a5b1c05855f3bc2025a3ea5b57f102fcda475cd6b60cba0a3a41a	task_id=fix-code-vulnerability trial=39684a20-8b0b-4b93-8ee4-6f5af919ab58 graded
+observed	fix-ocaml-gc	repo-named	docs/PILOT-REPORT.md:530	git-tracked	named as the CORRECTION to the out-of-repo derivation: its cd ocaml is relative to /app, so it is not in the stratum
+observed	fmri-encoding-r	repo-named	docs/BUILD-SPEC.md:340	git-tracked	one of the 2 existence-guard tasks in the BUILD-SPEC 4.4.4 census (command -v python3)
+observed	form-filling	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uv3-form-filling/p-uv3-form-filling/results.json	sha256:3ace73471f1fa508171e8b309f2aedfbab1e6b0f9e7f2a1e476dbd652262f37b	task_id=form-filling trial=ae0a8536-3dc2-4e4b-9089-81441ed8610d graded
+observed	hdfs-deployment	staged-only	/private/tmp/scratch/scratchpad/pilot/mount-p-uvh-hdfs-deployment/task-provenance.txt	sha256:9403b783b977ac46afb4984777616569380c1a2b7f654a3b85f1ccd2dde4471c	instrumented and mounted; spool empty; no run tree
+observed	home-server-https	repo-named	scripts/pilot-run.sh:1017	git-tracked	the one task of 241 whose compose service is named webserver, not client; the patcher is written around it
+observed	incompatible-python-fasttext	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-bp-incompatible-python-fasttext/p-bp-incompatible-python-fasttext/results.json	sha256:175e8acf8798330e835cbfd1ba7b8795e36cf5bd4a3f640e96512debb9bd5ee1	task_id=incompatible-python-fasttext trial=37cac5a1-c98f-4994-bd9a-bc8ae39cb3b3 graded
+observed	install-windows-xp	repo-named	docs/PILOT-REPORT.md:407	git-tracked	one of the 2 compose-patcher refusals: declares no command:, so behaviour comes from the image ENTRYPOINT/CMD
+observed	largest-eigenval	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-pym-largest-eigenval/p-pym-largest-eigenval/results.json	sha256:3030fee29551438fb2f262dd2ac674be03bd259362243dc1901d2b5f969ac451	task_id=largest-eigenval trial=73fb7ce4-6c24-4466-af18-bdff8c360f35 graded
+observed	lean4-proof	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-lean4-proof/ctl-c1-lean4-proof/results.json	sha256:acae1a8758430877ffd97e2907c9f0bcf14d740fa3d7fc044d63b1828f392f26	task_id=lean4-proof trial=b6f6f02e-b157-4793-b5ad-1e98e32545f2 graded
+observed	magsac-install	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-rt-magsac-install/p-rt-magsac-install/results.json	sha256:3c16f61b4ea7579ac42633c4c7e9d2e91a05e535767bedc7a679e6d13efeec11	task_id=magsac-install trial=3f71c18c-d54d-4bfd-b3f6-a3da92b577b0 graded
+observed	mcmc-sampling-stan	repo-named	docs/PILOT-REPORT.md:536	git-tracked	out-of-repo ceiling stratum (BUILD-SPEC 4.4.5): its run-tests.sh does cd $TEST_DIR
+observed	movie-helper	run-record	/private/tmp/scratch/scratchpad/pilot/runs-v-uv1-movie-helper/v-uv1-movie-helper/results.json	sha256:a2bb862b5cc2263b61fdc2b1efed36736f0f747e6bed849e7d0bbb7e810b86df	task_id=movie-helper trial=a63ccc54-b49c-4528-99d2-b5fc779ba09e graded
+observed	multistep-definite-integral	repo-named	scripts/pilot-run.sh:1024	git-tracked	COPY . /app in its Dockerfile; the receipt path is placed to keep the instrument out of the measured tree
+observed	ode-solver-rk4	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-ode-solver-rk4/ctl-c1-ode-solver-rk4/results.json	sha256:a0bbee64e7eff98b1647c61c10390cb9e678c7db72eb5ae98895de79ca7fdc4d	task_id=ode-solver-rk4 trial=89788434-1205-4a56-9f15-d9152f60869d graded
+observed	password-recovery	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uv-password-recovery/p-uv-password-recovery/results.json	sha256:3e8e11cb45686d4462bb2aad169a1dcbdc467888f5c3378de58df27d0807427b	task_id=password-recovery trial=693fbfcf-43eb-4a2d-ab7b-3c0ae87f8ce6 graded
+observed	play-lord	repo-named	scripts/pilot-run.sh:1024	git-tracked	COPY . /app in its Dockerfile; the receipt path is placed to keep the instrument out of the measured tree
+observed	port-compressor	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-port-compressor/ctl-c1-port-compressor/results.json	sha256:d443011f12ebe60db4f966ba253aa342ccd27ad8b0bc61fc2eef17b04df8c218	task_id=port-compressor trial=3c976b60-cad0-44d9-ad4b-9a7089457076 graded
+observed	postgres-csv-clean	repo-named	scripts/pilot-run.sh:329	git-tracked	bind-mounts ./:/app/data into the tree the setup chain git add -A s; the receipt path is placed around it
+observed	privilege-escalation	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-privilege-escalation/ctl-c1-privilege-escalation/results.json	sha256:d78c8ffac11e65cb123fe94a22b58b05d65b36f10d0f7843c4fa809c62bcd059	task_id=privilege-escalation trial=099bd673-7aa1-4744-9560-501a1e5f74f9 graded
+observed	puzzle-solver	run-record	/private/tmp/scratch/scratchpad/pilot/runs-v-uv1-puzzle-solver/v-uv1-puzzle-solver/results.json	sha256:21caf05a504f37e9ac4e66131b197e81f6feaa81f783ed83ed226c518ff52159	task_id=puzzle-solver trial=4feb5fcc-8ce2-4f8f-8748-011db748f175 ungraded
+observed	rstan-to-pystan	repo-named	docs/PILOT-REPORT.md:536	git-tracked	out-of-repo ceiling stratum (BUILD-SPEC 4.4.5): its run-tests.sh does cd $TEST_DIR
+observed	schemelike-metacircular-eval	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uv-schemelike-metacircular-eval/p-uv-schemelike-metacircular-eval/results.json	sha256:098849e820560c0279e7830a49d27e1ebd97b78e436b636fcb408e2bd2367f4d	task_id=schemelike-metacircular-eval trial=1a9a31ec-69c1-47f8-a5fe-90983d8dc33a graded
+observed	setup-custom-dev-env	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-bp-setup-custom-dev-env/p-bp-setup-custom-dev-env/results.json	sha256:8310553f32975e532ff40a50b21953e7d7fc74e72829d007ce0d27d47f454b04	task_id=setup-custom-dev-env trial=5dd088dc-9a45-443f-8d24-a4ce674bd691 graded
+observed	shell-deobfuscation	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-shell-deobfuscation/ctl-c1-shell-deobfuscation/results.json	sha256:0a3d50176db1ffc38111f3201e60bfdd81e340aa4319e992c6c9ec1158ef2091	task_id=shell-deobfuscation trial=9deb04d4-f004-4b64-a8c9-bd140a601a44 graded
+observed	simple-sheets-put	repo-named	crates/bench/src/class_two.rs:454	git-tracked	member of MULTI_CONTAINER_TASKS, a committed exclusion list in crates/bench/src/class_two.rs
+observed	simple-web-scraper	repo-named	crates/bench/tests/class_two_corpora.rs:862	git-tracked	member of MULTI_CONTAINER_TASKS, a committed exclusion list in crates/bench/src/class_two.rs
+observed	slurm-simple-node-monitoring	repo-named	docs/PILOT-REPORT.md:407	git-tracked	one of the 2 compose-patcher refusals: declares no command:, so behaviour comes from the image ENTRYPOINT/CMD
+observed	solve-sudoku	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-solve-sudoku/ctl-c1-solve-sudoku/results.json	sha256:db65cfd718cca7a8e66ffa5c1444ac02a62484ebcdaedb339c989e152fc98e4c	task_id=solve-sudoku trial=a14ff572-61de-4b36-a4ed-ae359e2564b6 graded
+observed	speech-to-text	repo-named	docs/PILOT-REPORT.md:537	git-tracked	out-of-repo ceiling stratum (BUILD-SPEC 4.4.5): its run-tests.sh does cd $TEST_DIR
+observed	spring-messaging-vul	run-record	/private/tmp/scratch/scratchpad/probe/ctl-runs-ctl-c1-spring-messaging-vul/ctl-c1-spring-messaging-vul/results.json	sha256:94bd3589967a8e107d4bdf0cdf27e5571d6b4958f8502763d7985119a8e55836	task_id=spring-messaging-vul trial=34b2d956-be09-401d-9d62-c46e13606675 ungraded
+observed	swe-bench-astropy-1	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-vs-swe-bench-astropy-1/p-vs-swe-bench-astropy-1/results.json	sha256:a583e27045ac45a3b5c9516aa535fd7783c3caa57d34e805bdad69b9d4b08606	task_id=swe-bench-astropy-1 trial=a43b4e85-4d8e-4042-9e34-181047ce3c01 graded
+observed	swe-bench-astropy-2	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-vs-swe-bench-astropy-2/p-vs-swe-bench-astropy-2/results.json	sha256:85cf67b9b78975a74d5ac502270f58008df928851d6f990acdd83b639cccf7eb	task_id=swe-bench-astropy-2 trial=06226433-1a3c-47e4-9960-6ff1c2827771 graded
+observed	swe-bench-fsspec	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-vs-swe-bench-fsspec/p-vs-swe-bench-fsspec/results.json	sha256:55a64c783dc3bc73f6ce859717ddb32a16cc1579b806af1c1ce9c0bc8a67c7c4	task_id=swe-bench-fsspec trial=d8781bdf-de62-478e-8574-2a1e2e46b64d graded
+observed	swe-bench-langcodes	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-vs-swe-bench-langcodes/p-vs-swe-bench-langcodes/results.json	sha256:bedbc980398d03896258eaf9246073c025b8f323ed5b70c0f513d139f4b94f50	task_id=swe-bench-langcodes trial=2988b4fb-65d9-422b-ae00-91975434f7ce graded
+observed	tmux-advanced-workflow	run-record	/private/tmp/scratch/scratchpad/pilot/runs-p-uvh-tmux-advanced-workflow/p-uvh-tmux-advanced-workflow/results.json	sha256:ca4629ee81fd2c567f33f09083e66169211734ebb6759e63098a4a81bffe630f	task_id=tmux-advanced-workflow trial=a0fdbefc-0faa-4745-9dc0-64089d224f2d graded
+observed	unprivileged-headless-pyrender	repo-named	scripts/pilot-run.sh:962	git-tracked	non-root USER with no compose user: override; user: root is applied and the run is not a scored pass
+observed	word2vec-from-scratch	staged-only	/private/tmp/scratch/scratchpad/pilot/mount-p-pym-word2vec-from-scratch/task-provenance.txt	sha256:f91b2862c0f7231efc1c52740bff38fe9161d3a8b206f7094c64da1d47d56ba1	instrumented and mounted; spool empty; no run tree

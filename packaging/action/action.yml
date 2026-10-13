@@ -1,0 +1,454 @@
+# ThruLine — BUILD-SPEC §9's zero-install path.
+#
+# THE ONE RULE THIS FILE MUST NOT BREAK
+# -------------------------------------
+# It never derives a verdict. `thruline verify-receipt --format check-run`
+# emits the conclusion the verifier computed (`success` / `neutral` /
+# `failure`), and this file posts that value verbatim.
+#
+# THE THREE AXES, AND THE ORDER THE STEPS RUN IN
+# ----------------------------------------------
+# Operator ruling, 2026-09-04. The conclusion is combined from three axes and
+# combined DOWNWARD ONLY — no axis can lift another:
+#
+#   integrity  does the receipt reproduce here?          `thruline verify-receipt`
+#   claims     did every claim in it get proved?         the receipt's own verdicts
+#   policy     may this merge anyway?                    `.thruline/policy.yml`
+#
+# A receipt can be perfect on the first axis and carry an `unsupported` claim on
+# the second. Measured at 10dae44: that produced `conclusion: success` and a
+# green `verified` badge, while only the opt-in policy step went red — two
+# verdicts on one pull request, and the louder one was wrong. The check run may
+# NEVER conclude `success` while any claim is `unsupported`; without a policy it
+# is `neutral` with the verdict table rendered, and `failure` comes only from
+# policy.
+#
+# That is why "Evaluate the policy" now runs FIRST: its word is an input to the
+# one conclusion, carried in `THRULINE_POLICY_CONCLUSION`, not a second verdict
+# posted beside it.
+#
+# The construction that rule exists against was measured: a `--json` consumer
+# using the standard idiom `all(c.outcome != "fail")` read **exit 2 as
+# success**, because a partially-verified receipt contains no failing check. A
+# check run reporting "verified" for a partially-verified receipt is §6's
+# `unverifiable` -> `supported` collapse on the most public surface the product
+# has. `crates/cli/tests/m2_action.rs` walks this file and fails if it ever
+# reads `.checks`, `.outcome` or the exit code to decide an outcome.
+#
+# fetch-depth
+# -----------
+# `actions/checkout` defaults to `fetch-depth: 1`. A shallow clone genuinely
+# does not have the objects a receipt names, so ThruLine reports those checks
+# as SKIPPED (neutral, with instructions) rather than failed — a check that
+# fails honest work is as damaging as one that passes cheating. To get a green
+# check run you need the objects, so check out with `fetch-depth: 0`. This
+# action says so loudly when it detects a shallow clone.
+#
+# **Since the core's `aa69892` this also carries the head binding**, which is
+# what ruling 14 asks this Action to provide. The verifier requires the
+# receipt's commit to be an ancestor of `$GITHUB_SHA`, with only the receipt's
+# own path allowed to differ between the two trees; not an ancestor at all is a
+# `Fail`, and undecidable is a `Skip`. **Ancestry is not computable in a shallow
+# clone**, so `fetch-depth: 0` stopped being about having the objects and became
+# the condition under which that check can run at all. The Action supplies the
+# other half by passing `--head-sha "$GITHUB_SHA"` to every rendering — see the
+# note in "Verify the receipt".
+
+name: 'ThruLine receipt'
+description: 'Verify a ThruLine execution receipt and post a check run plus a PR comment table.'
+author: 'ThruLine'
+branding:
+  icon: 'check-circle'
+  color: 'green'
+
+inputs:
+  receipt:
+    description: 'Path to the DSSE receipt. Defaults to the newest file in .thruline/receipts/.'
+    required: false
+    default: ''
+  key:
+    description: 'Public key to verify against (PKCS#8 PEM ed25519).'
+    required: false
+    default: ''
+  comment:
+    description: 'Post the claims table as a PR comment.'
+    required: false
+    default: 'true'
+  require-full-clone:
+    description: >-
+      Fail the job when the checkout is shallow, before verifying anything.
+      `actions/checkout` defaults to `fetch-depth: 1`, and a shallow clone does
+      not have the objects a receipt names — so the subject checks come back
+      SKIPPED and the conclusion is neutral, which is truthful and is also a
+      weaker posture than the repository asked for. Failing here is about the CI
+      configuration and says exactly what to change; it cannot be mistaken for
+      "your receipt is bad". Set to `false` to accept the neutral conclusion.
+    required: false
+    default: 'true'
+  policy:
+    description: >-
+      Also evaluate `.thruline/policy.yml` (BUILD-SPEC §9) and append its table
+      to the summary. Off by default: a repository that has not written a policy
+      must not acquire one from an action's default.
+    required: false
+    default: ''
+  version:
+    description: >-
+      Install this pinned ThruLine release before running, verifying its
+      checksum first. Leave empty when `thruline` is already on PATH.
+    required: false
+    default: ''
+  sha256:
+    # Named `sha256` and not `checksum` on purpose: `inputs.checksum` contains
+    # the substring `.checks`, which is one of the idioms the M2 census forbids
+    # in this file. The census is a substring walk and cannot tell an input name
+    # from a jq path — the collision is spurious, and renaming the input is the
+    # cheaper fix than loosening a rule that guards the most public surface this
+    # product has.
+    description: 'sha256 of the release archive. Required whenever `version` is set.'
+    required: false
+    default: ''
+  fail-on:
+    description: >-
+      Which conclusion fails the job: `failure` (default) or `neutral`.
+      `neutral` is the strict setting for a repository that requires full
+      verification in CI; it needs the ledger to be present, which the hosted
+      App (§9) provides and a bare Action does not.
+    required: false
+    default: 'failure'
+
+outputs:
+  policy-conclusion:
+    description: >-
+      success | neutral | failure from §9's policy evaluation alone, when
+      enabled. It is an INPUT to `conclusion`, not a second verdict beside it —
+      read `conclusion` to gate on, and this only to see which axis spoke.
+    value: ${{ steps.policy.outputs.conclusion }}
+  conclusion:
+    description: >-
+      success | neutral | failure — the ONE conclusion, over all three axes
+      (receipt integrity, the claim verdicts inside it, and the policy), each
+      combined downward only. Emitted by the binary and posted verbatim; never
+      derived here.
+    value: ${{ steps.verify.outputs.conclusion }}
+  status:
+    description: 'verified | partial | failed — `conclusion` in its other spelling.'
+    value: ${{ steps.verify.outputs.status }}
+  badge:
+    description: >-
+      Path to the rendered `verified-by-thruline` SVG, which has three states
+      and says "verified" in only one of them. Empty when no receipt was found:
+      an absent badge is the honest state for a repository that produced no
+      receipt, and there is no fourth colour for it.
+    value: ${{ steps.badge.outputs.path }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install ThruLine
+      if: ${{ inputs.version != '' }}
+      shell: bash
+      env:
+        TL_VERSION: ${{ inputs.version }}
+        TL_CHECKSUM: ${{ inputs.sha256 }}
+      run: ${{ github.action_path }}/install.sh
+
+    - name: Check the clone is deep enough to verify against
+      shell: bash
+      env:
+        REQUIRE_FULL_CLONE: ${{ inputs.require-full-clone }}
+      run: |
+        set -euo pipefail
+        if [ "$(git rev-parse --is-shallow-repository)" != "true" ]; then exit 0; fi
+        MSG="actions/checkout defaults to fetch-depth: 1, and a shallow clone does not have the objects a ThruLine receipt names."
+        MSG="$MSG Add 'with: {fetch-depth: 0}' to your actions/checkout step, or run 'git fetch --unshallow' before this action."
+        MSG="$MSG Without it the subject checks are SKIPPED and the conclusion is neutral, which is truthful and weaker than you asked for."
+        if [ "$REQUIRE_FULL_CLONE" = "true" ]; then
+          echo "::error title=Shallow clone::${MSG}"
+          exit 1
+        fi
+        echo "::warning title=Shallow clone::${MSG}"
+
+    - name: Evaluate the policy
+      id: policy
+      if: ${{ inputs.policy != '' }}
+      shell: bash
+      env:
+        TL_POLICY: ${{ inputs.policy }}
+        # **The base branch, passed explicitly.** Since core `c37760d` the
+        # policy for a pull request is read from the branch it merges INTO, so a
+        # change cannot weaken the gate that judges it. `thruline policy`
+        # defaults to `GITHUB_BASE_REF`, which the runner sets and which a
+        # composite step does inherit — but it is passed here anyway, because a
+        # step that depends on an inherited variable it never names is a step
+        # nobody can read, and because `github.base_ref` is exactly the same
+        # value with a source you can see.
+        #
+        # Empty on anything that is not a pull request, and `--base` is then
+        # omitted rather than passed empty.
+        # **Not passed as `--base`, deliberately.** The core defaulted
+        # `thruline policy --base` to `GITHUB_BASE_REF` *so the Action need not
+        # remember one*, and the runner sets that variable on every pull request
+        # — a composite step inherits it. Passing `--base` explicitly was tried
+        # here and reverted: it is redundant against a current binary and it
+        # BREAKS against an older one, because `--base` is then an unknown
+        # argument, the step prints no conclusion, and the job fails closed for
+        # a reason that has nothing to do with the pull request. A published
+        # Action runs against whatever `thruline` the user has installed, so a
+        # flag it does not need is a compatibility cost it does not have to pay.
+        #
+        # Kept as an env value only so the step's dependency on the base ref is
+        # visible to someone reading it, rather than inherited invisibly.
+        TL_BASE: ${{ github.base_ref }}
+      run: |
+        set -uo pipefail
+        # **This step runs BEFORE the receipt is rendered**, because the
+        # operator's ruling of 2026-09-04 makes the policy an input to the one
+        # conclusion rather than a second verdict posted beside it. Ruling
+        # point 3: with a policy file present, the conclusion comes from the
+        # policy. Point 5: `failure` comes ONLY from here.
+        #
+        # `shell: bash` runs `bash -e -o pipefail`, and `set -uo pipefail` does
+        # NOT turn -e off — so `set +e` here is load-bearing, not decoration: a
+        # policy that FAILS exits 3, and under -e that aborted this step before
+        # it could write the conclusion, the table or the message saying why.
+        # The gate then failed the job with no reason attached, which is the
+        # one thing a gate must never do. Observed in selftest.py scenario 7.
+        set +e
+        # Same rule as the receipt step: the conclusion is a value the binary
+        # prints, never one this file derives. `--conclusion` emits exactly one
+        # of success/failure/neutral and `--md` renders the table, both covered
+        # by tests in crates/cli/tests/m6_policy_cli.rs.
+        # The exit code is deliberately not read: the
+        # conclusion is the word the binary printed, and the `case` below fails
+        # closed on anything else — including the empty output of a run that
+        # could not decide at all.
+        : "${TL_BASE:=}"
+        # **The gate refuses a binary that cannot read the base branch.**
+        #
+        # Measured, on one fixture where the base requires a receipt and the
+        # pull request deletes both the receipt and the rule that wanted it:
+        #
+        #   core with the base rule, GITHUB_BASE_REF set, no --base  -> failure
+        #   core with the base rule, explicit --base                 -> failure
+        #   older core, GITHUB_BASE_REF set                          -> SUCCESS
+        #
+        # So the env default really does read the base — that is demonstrated
+        # rather than assumed — and `--base` adds nothing to a current binary.
+        # The whole exposure is the older one, where the policy is read from the
+        # head and a pull request can delete the rule that would have stopped
+        # it. `--base` does not fix that; it only turns a silent hole into
+        # `error: unexpected argument '--base' found`, which tells a maintainer
+        # nothing about why their gate stopped working.
+        #
+        # A capability probe does. A policy gate that cannot read the base
+        # branch is not a weaker gate, it is a gate the change under review can
+        # edit, so this refuses and says exactly that.
+        # **Scoped to pull requests, because that is where the attack lives.**
+        # The self-edit needs two versions of the policy — the one a reviewer
+        # agreed to and the one the change carries — and only a pull request has
+        # both. On a `push` there is no base to read and the head IS the state,
+        # so an older binary reading the checkout is not weaker there, it is
+        # correct. Refusing on every event would fail work that was never
+        # exposed, which is the other half of the rule this product is built on.
+        if [ "${GITHUB_EVENT_NAME:-}" = "pull_request" ] \
+           && ! thruline policy --help 2>&1 | grep -q -- '--base'; then
+          MSG="This \`thruline\` reads .thruline/policy.yml from the checkout under review,"
+          MSG="$MSG so a pull request can weaken the policy that judges it in the same change"
+          MSG="$MSG (measured: the base requires a receipt, the PR deletes the receipt and the"
+          MSG="$MSG rule, and the gate says success). Upgrade to a release whose"
+          MSG="$MSG \`thruline policy\` supports --base, or unset the \`policy\` input to stop"
+          MSG="$MSG asking this Action for a gate it cannot honestly provide."
+          echo "::error title=Policy gate cannot read the base branch::${MSG}"
+          exit 1
+        fi
+        # stderr is captured, not discarded. Measured against a binary built at
+        # `c37760d`: a `pull_request` run with no base ref exits 1 with an EMPTY
+        # stdout and the whole reason on stderr —
+        #
+        #   this is a `pull_request` run and no base ref is available (neither
+        #   `--base` nor `GITHUB_BASE_REF`). Policy for a pull request is read
+        #   from the base branch; refusing rather than judging this change by
+        #   the policy it may have just written.
+        #
+        # Without capturing it, the `case` below still fails closed — which is
+        # right — but the annotation a reviewer reads says only "a gate that
+        # cannot run has not passed", and the actionable sentence is buried in
+        # the step log. A gate that fails for a fixable reason must say the
+        # reason where the failure is shown.
+        err="$(mktemp)"
+        conclusion="$(thruline policy --policy "$TL_POLICY" --conclusion 2>"$err")"
+        case "$conclusion" in
+          success|failure|neutral) ;;
+          *)
+            reason="$(tr '\n' ' ' < "$err" | sed 's/  */ /g' | cut -c1-600)"
+            [ -n "$reason" ] || reason="the binary printed no conclusion and no reason."
+            echo "::error title=Policy could not be evaluated::A gate that cannot run has not passed. ${reason}"
+            exit 1
+            ;;
+        esac
+        echo "conclusion=${conclusion}" >> "$GITHUB_OUTPUT"
+        thruline policy --policy "$TL_POLICY" --md >> "$GITHUB_STEP_SUMMARY"
+        if [ "$conclusion" = "failure" ]; then
+          echo "::error title=Policy failed::A claim the policy requires is not supported by the record."
+        fi
+        # **It does NOT exit 1 here.** It used to, and that made the policy a
+        # separate verdict racing the receipt's: the check run still posted
+        # `success` with a green badge while the job went red. The word is
+        # handed to the next step instead, folded into the one conclusion, and
+        # the LAST step fails the job from that. One conclusion, one badge, one
+        # exit status.
+
+    - name: Verify the receipt
+      id: verify
+      shell: bash
+      env:
+        THRULINE_RECEIPT: ${{ inputs.receipt }}
+        THRULINE_KEY: ${{ inputs.key }}
+        # Ruling point 3. Empty when no policy was evaluated, which is how the
+        # binary is told "no policy file"; any other unrecognised word is a
+        # hard error there, never a shrug.
+        THRULINE_POLICY_CONCLUSION: ${{ steps.policy.outputs.conclusion }}
+      run: |
+        set -euo pipefail
+        # Any badge already in the workspace is from somewhere else, and the
+        # stale state a reader keeps believing is the green one. Removed before
+        # anything can fail and leave it standing as this run's answer.
+        rm -f thruline-badge.svg
+        receipt="${THRULINE_RECEIPT}"
+        if [ -z "$receipt" ]; then
+          receipt="$(ls -t .thruline/receipts/*.json 2>/dev/null | head -1 || true)"
+        fi
+        if [ -z "$receipt" ] || [ ! -f "$receipt" ]; then
+          echo "::error title=No receipt::No ThruLine receipt found. Commit one to" \
+               ".thruline/receipts/ or pass the 'receipt' input."
+          exit 1
+        fi
+        # `${key_arg[@]+"${key_arg[@]}"}` and not `"${key_arg[@]}"`: bash 3.2,
+        # which is what `shell: bash` gets on a macos runner, treats the plain
+        # form on an EMPTY array as an unbound variable under `set -u` and kills
+        # the step with `key_arg[@]: unbound variable`. No key is the default,
+        # so the Action failed on macOS in its most common configuration. bash 5
+        # on the ubuntu runners does not, which is why only running it found it.
+        key_arg=()
+        if [ -n "${THRULINE_KEY}" ]; then key_arg=(--key "${THRULINE_KEY}"); fi
+
+        # The ONE call. Its exit code is 0/1/2 and is deliberately not used to
+        # decide anything: `set -e` would abort on 1 or 2, so it is captured.
+        set +e
+        thruline verify-receipt "$receipt" ${key_arg[@]+"${key_arg[@]}"} --offline \
+          --format check-run --head-sha "${GITHUB_SHA}" > check-run.json
+        set -e
+        # **The SAME `--head-sha`.** Since the core's `aa69892` the verifier
+        # binds the receipt to the reviewed head — the receipt's commit must be
+        # an ancestor, with only the receipt's own path allowed to differ — and
+        # that binding is a *check*, so a render without the head sha reaches a
+        # different conclusion from the check run beside it.
+        #
+        # It was passed to `--format check-run` and to nothing else. The table
+        # and the badge would then have rendered the weaker, unbound answer
+        # while the check run posted the bound one: two answers on one pull
+        # request, from one report, which is the exact defect this file is
+        # arranged against. Caught by reading the argv after ruling 14, not by a
+        # test — there is now a test.
+        thruline verify-receipt "$receipt" ${key_arg[@]+"${key_arg[@]}"} --offline \
+          --format md --head-sha "${GITHUB_SHA}" > receipt-table.md || true
+
+        # Read the conclusion the verifier wrote. NOT re-derived.
+        conclusion="$(jq -r '.conclusion' check-run.json)"
+        title="$(jq -r '.output.title' check-run.json)"
+        echo "conclusion=${conclusion}" >> "$GITHUB_OUTPUT"
+        echo "receipt=${receipt}" >> "$GITHUB_OUTPUT"
+        case "$conclusion" in
+          success) echo "status=verified" >> "$GITHUB_OUTPUT" ;;
+          neutral) echo "status=partial"  >> "$GITHUB_OUTPUT" ;;
+          *)       echo "status=failed"   >> "$GITHUB_OUTPUT" ;;
+        esac
+        echo "ThruLine: ${title}"
+        cat receipt-table.md >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Render the badge
+      id: badge
+      shell: bash
+      env:
+        THRULINE_RECEIPT_PATH: ${{ steps.verify.outputs.receipt }}
+        THRULINE_KEY: ${{ inputs.key }}
+        CONCLUSION: ${{ steps.verify.outputs.conclusion }}
+        # The badge is the fourth rendering of the SAME conclusion, so it is
+        # given the same policy word. Without it the badge would be drawn from
+        # two axes while the check run was posted from three, and the guard
+        # below would fire on the product's own disagreement.
+        THRULINE_POLICY_CONCLUSION: ${{ steps.policy.outputs.conclusion }}
+      run: |
+        set -uo pipefail
+        # A fourth rendering of the ONE conclusion, produced by the same binary
+        # from the same report — never drawn here from a word this file chose.
+        #
+        key_arg=()
+        if [ -n "${THRULINE_KEY}" ]; then key_arg=(--key "${THRULINE_KEY}"); fi
+        # The same head sha as the check run and the table; see the note there.
+        # The badge is the fourth rendering of ONE conclusion and must be given
+        # every input the other three had, or the guard below fires on the
+        # product's own disagreement.
+        thruline verify-receipt "$THRULINE_RECEIPT_PATH" ${key_arg[@]+"${key_arg[@]}"} --offline \
+          --format badge --head-sha "${GITHUB_SHA}" > thruline-badge.svg || true
+        if [ ! -s thruline-badge.svg ]; then
+          MSG="The badge is empty. A missing badge is the honest state for a receipt that"
+          MSG="$MSG could not be rendered; a stale one is not, so this step fails rather"
+          MSG="$MSG than leaving whatever was in the workspace."
+          echo "::error title=Badge not rendered::${MSG}"
+          exit 1
+        fi
+        # The guard, and it can only ever turn green into an error: if the SVG
+        # says "verified" while the conclusion the verifier computed is not
+        # `success`, the two renderings of one report disagree and NEITHER is
+        # publishable. It decides nothing — it refuses.
+        if [ "$CONCLUSION" != "success" ] && grep -q ">verified<" thruline-badge.svg; then
+          MSG="The badge reads verified while the verifier concluded ${CONCLUSION}."
+          MSG="$MSG Two renderings of one report disagree, so neither is publishable."
+          echo "::error title=Badge disagrees with the conclusion::${MSG}"
+          exit 1
+        fi
+        echo "path=thruline-badge.svg" >> "$GITHUB_OUTPUT"
+
+    - name: Post the check run
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+        gh api "repos/${GITHUB_REPOSITORY}/check-runs" \
+          --method POST -H "Accept: application/vnd.github+json" \
+          --input check-run.json > /dev/null
+
+    - name: Post the PR comment
+      if: ${{ inputs.comment == 'true' && github.event_name == 'pull_request' }}
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+        gh pr comment "${{ github.event.pull_request.number }}" --body-file receipt-table.md
+
+    - name: Fail the job when policy says to
+      shell: bash
+      env:
+        CONCLUSION: ${{ steps.verify.outputs.conclusion }}
+        FAIL_ON: ${{ inputs.fail-on }}
+      run: |
+        set -euo pipefail
+        # The conclusion is read, never recomputed — and it is now the ONE
+        # conclusion, over all three axes: the receipt's integrity, the claim
+        # verdicts inside it, and `.thruline/policy.yml` when one was
+        # evaluated. `neutral` is a failure only when the repository asked for
+        # it: a partially verified receipt, or one whose claim went unproved
+        # with no policy to judge it, is not a contradicted one, and failing it
+        # by default would fail honest work.
+        if [ "$CONCLUSION" = "failure" ]; then
+          echo "::error title=ThruLine check failed::Either a check contradicted the receipt, or .thruline/policy.yml refused this change. The step summary above says which."
+          exit 1
+        fi
+        if [ "$FAIL_ON" = "neutral" ] && [ "$CONCLUSION" = "neutral" ]; then
+          echo "::error title=Receipt only partially verified::fail-on: neutral is set."
+          exit 1
+        fi

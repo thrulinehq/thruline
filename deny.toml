@@ -1,0 +1,56 @@
+# `cargo deny` configuration — BUILD-SPEC §16's supply-chain gate.
+#
+# The point of this file is that its failures are *actionable*. A deny list that
+# fails on everything gets `--no-deny-warnings` added to CI within a week, so
+# the categories below are the ones where a failure means someone must do
+# something, and the rest are warnings that show up in the report.
+
+[advisories]
+# A known vulnerability in a dependency is a stop, not a note.
+yanked = "deny"
+ignore = [
+    { id = "RUSTSEC-2024-0436", reason = "paste 1.0.15 via tokenizers 0.23.1 (and macro_rules_attribute 0.2.2 -> tokenizers) -> thruline-core: unmaintained, no known vulnerability; replace post-launch (D-328)" },
+]
+
+[licenses]
+# The third-party dependency allow list is unchanged by the first-party licence
+# (FSL-1.1-MIT): every first-party crate is `publish = false`, so
+# `[licenses.private]` below skips it and FSL-1.1-MIT is deliberately not on
+# this list.
+allow = [
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "MIT",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+    "Zlib",
+    "MPL-2.0",
+]
+confidence-threshold = 0.9
+# D-328: webpki-root-certs is the Mozilla CA root data (via ureq -> ort-sys, a
+# build dependency), published under CDLA-Permissive-2.0, a permissive data
+# licence. Allowed for that crate only; it is not added to the global list.
+exceptions = [
+    { crate = "webpki-root-certs", allow = ["CDLA-Permissive-2.0"] },
+]
+
+[licenses.private]
+ignore = true
+
+[bans]
+# Two copies of a crate is usually harmless and occasionally is not — the tree
+# already carries sha2 0.10 and 0.11 because a transitive dependency pins the
+# older one. Warn, so it is visible, and do not fail: a hard ban here would
+# block on someone else's release schedule.
+multiple-versions = "warn"
+wildcards = "deny"
+# The engine makes no network calls (§0). A dependency that could is a change
+# to that property and must be a deliberate one.
+deny = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

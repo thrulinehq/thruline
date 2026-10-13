@@ -1,0 +1,26 @@
+[package]
+publish = false
+name = "thruline-ledger"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "SQLite ledger: schema, migrations, queries, and the legacy importer."
+
+[lints]
+workspace = true
+
+[dependencies]
+rusqlite = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+thruline-core = { workspace = true }
+tracing = { workspace = true }
+ulid = { workspace = true }
+
+[dev-dependencies]
+sysinfo = "0.37"
+tempfile = { workspace = true }

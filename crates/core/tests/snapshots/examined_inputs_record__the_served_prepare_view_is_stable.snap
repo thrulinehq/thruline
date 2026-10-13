@@ -1,0 +1,136 @@
+---
+source: crates/core/tests/examined_inputs_record.rs
+expression: view
+---
+{
+  "schema_version": 1,
+  "change_id": "cccccccc-0000-4000-8000-00000000c001",
+  "inputs": {
+    "subject_kind": "intended",
+    "subject_id": "cccccccc-0000-4000-8000-00000000c001",
+    "snapshot_id": {
+      "state": "unknown"
+    },
+    "source_identity": {
+      "state": "known",
+      "value": "wsid1:1111111111111111111111111111111111111111"
+    },
+    "base_revision": {
+      "state": "known",
+      "value": "1111111111111111111111111111111111111111"
+    },
+    "uncommitted": {
+      "state": "present",
+      "files": 2,
+      "diff_sha256": {
+        "state": "known",
+        "value": "dd"
+      }
+    },
+    "worktree_path": {
+      "state": "known",
+      "value": "/tmp/synthetic-project"
+    },
+    "lockfiles_sha256": {
+      "state": "unknown"
+    },
+    "config_sha256": {
+      "state": "unknown"
+    },
+    "config_files": [],
+    "tools": [
+      {
+        "name": "cargo",
+        "version": {
+          "state": "known",
+          "value": "cargo 1.97.1"
+        },
+        "present": true
+      },
+      {
+        "name": "ruff",
+        "version": {
+          "state": "unknown"
+        },
+        "present": false
+      }
+    ],
+    "target": {
+      "kind": "running_app",
+      "port": 45781,
+      "owner_pid": {
+        "state": "known",
+        "value": "101"
+      },
+      "owner_exe": {
+        "state": "known",
+        "value": "/tmp/synthetic-project/target/debug/serve"
+      },
+      "database_path": {
+        "state": "known",
+        "value": "/tmp/synthetic-project/data/outbox.sqlite3"
+      }
+    }
+  },
+  "lines": [
+    {
+      "slug": "prepare_repository",
+      "value": "/tmp/synthetic-project",
+      "tool": null
+    },
+    {
+      "slug": "prepare_base",
+      "value": "1111111111111111111111111111111111111111",
+      "tool": null
+    },
+    {
+      "slug": "prepare_uncommitted_included",
+      "value": "2",
+      "tool": null
+    },
+    {
+      "slug": "prepare_running_app",
+      "value": "45781",
+      "tool": null
+    },
+    {
+      "slug": "prepare_tool_present",
+      "value": "cargo 1.97.1",
+      "tool": "cargo"
+    },
+    {
+      "slug": "prepare_tool_absent",
+      "value": null,
+      "tool": "ruff"
+    }
+  ],
+  "tools": [
+    {
+      "name": "cargo",
+      "version": {
+        "state": "known",
+        "value": "cargo 1.97.1"
+      },
+      "present": true
+    },
+    {
+      "name": "ruff",
+      "version": {
+        "state": "unknown"
+      },
+      "present": false
+    }
+  ],
+  "missing_slug": "prepare_not_written_down",
+  "app_port": 45781,
+  "app_program": "serve",
+  "record_count": 1,
+  "record_count_slug": "inputs_record_count",
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

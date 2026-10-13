@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__22-past-participle-adjectives-are-not/store/ledger.db
+projects 1
+sessions 1
+lines    6 read · 0 already ingested
+events   6 new
+           assistant_text       3
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval 7b28edbda6d2dc0a7637b054aec4c72dab9e2823219f59bf17f68c258e0fdc60
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

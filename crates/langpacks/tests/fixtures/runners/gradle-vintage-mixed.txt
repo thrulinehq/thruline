@@ -1,0 +1,40 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava NO-SOURCE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+
+> Task :test FAILED
+
+OrderServiceTest > reservesStockAgainstTheCarrier SKIPPED
+
+OrderServiceTest > comparesGreaterThan PASSED
+
+OrderServiceTest > addsTwoNumbers PASSED
+
+OrderServiceTest > appliesTheBulkDiscount FAILED
+    java.lang.AssertionError at OrderServiceTest.java:28
+
+OrderServiceTest > multipliesTwoNumbers PASSED
+
+OrderServiceTest > looksUpAMissingCustomer FAILED
+    java.lang.NullPointerException at OrderServiceTest.java:34
+
+OrderServiceTest > shipsToAnEmbargoedCountry SKIPPED
+
+7 tests completed, 2 failed, 2 skipped
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-vintage/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 4s
+2 actionable tasks: 2 executed

@@ -1,0 +1,26 @@
+[?1h=xUnit.net v3 In-Process Runner v4.0.0+8bf043c053 (64-bit .NET 9.0.19)
+[37m  Discovering: Shipping.V3
+[0m[37m  Discovered:  Shipping.V3
+[0m[37m  Starting:    Shipping.V3
+[0m[91m    Shipping.V3.ShippingRateTests.OversizeRejectsHeavyParcel [FAIL]
+[0m[37m      Assert.True() Failure
+[0m[37m      Expected: True
+[0m[37m      Actual:   False
+[0m[90m      Stack Trace:
+[0m[37m        ShippingTests.cs(27,0): at Shipping.V3.ShippingRateTests.OversizeRejectsHeavyParcel()
+[0m[37m           at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[0m[37m           at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[0m[91m    Shipping.V3.ShippingRateTests.LargeParcelUsesPerKilo [FAIL]
+[0m[37m      Assert.Equal() Failure: Values differ
+[0m[37m      Expected: 30.00
+[0m[37m      Actual:   29.50
+[0m[90m      Stack Trace:
+[0m[37m        ShippingTests.cs(18,0): at Shipping.V3.ShippingRateTests.LargeParcelUsesPerKilo()
+[0m[37m           at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[0m[37m           at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[0m[93m    Shipping.V3.ShippingRateTests.InternationalSurcharge [SKIP]
+[0m[37m      pending the international rate table
+[0m[37m  Finished:    Shipping.V3 (ID = '0cacc164fdbcb19346c5afe11a05737d91a76c7267a205910c16307686f26cad')
+[0m[37m=== TEST EXECUTION SUMMARY ===
+[0m[37m   Shipping.V3  Total: 8, Errors: 0, Failed: 2, Skipped: 1, Not Run: 0, Time: 0.075s
+[0m[0m

@@ -1,0 +1,7 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/pass
+plugins: anyio-4.13.0
+collected 5 items / 5 deselected / 0 selected
+
+============================ 5 deselected in 0.01s =============================

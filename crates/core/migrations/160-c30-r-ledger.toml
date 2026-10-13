@@ -1,0 +1,62 @@
+task = "C30-R-LEDGER"
+order = 160
+built_on_commit = "74b060794d5949994e6d1587590553408523f6e3"
+pinned_schema_digest = "schema_sha256_c4a93038ac02f0152719db97c72c73d394677c7fe6596d3e3739fe54c0b2ab22"
+migration_test = "crates/core/tests/r_ledger_migration.rs"
+note = """
+What a person did, as record (C30 R-LEDGER, C34 rulings Q1-Q17): notes (and the
+note kept with an approval), second approvals, messages copied for the agent,
+objections to a statement, Inbox hides, and pauses and path exclusions on their
+own hash chain (scope `capture_hold`). Nothing here is a result: no row moves a
+verdict, a coverage count, readiness or which approval stands.
+
+Built on `74b06079`, the head of `hq-next/ui` after the merge of
+`decisions/engine`, so it sits after the Decisions tables (orders 150 and 151)
+and the founder upgrades once for all three.
+
+Six tables, six indexes, eighteen append-only triggers, no ALTER of anything
+already there. Cost (A193): nothing of its own; the bill is the existing
+full-schema path's, for which `upgrade::estimate_phrase` gives "about 35 seconds" on
+the 2.01 M-event corpus, and `thruline upgrade` is still the only thing that
+may pay it. `thruline upgrade` now also counts every table before and after and
+says whether rows before = rows after (C34 Q14).
+"""
+
+tables = [
+  "change_notes",
+  "statement_objections",
+  "change_decision_seconds",
+  "change_agent_messages",
+  "capture_holds",
+  "inbox_hides",
+]
+
+indexes = [
+  "idx_change_notes_change",
+  "idx_statement_objections_event",
+  "idx_change_decision_seconds_decision",
+  "idx_change_agent_messages_thread",
+  "idx_capture_holds_folder",
+  "idx_inbox_hides_thread",
+]
+
+triggers = [
+  "change_notes_no_replace",
+  "change_notes_no_update",
+  "change_notes_no_delete",
+  "statement_objections_no_replace",
+  "statement_objections_no_update",
+  "statement_objections_no_delete",
+  "change_decision_seconds_no_replace",
+  "change_decision_seconds_no_update",
+  "change_decision_seconds_no_delete",
+  "change_agent_messages_no_replace",
+  "change_agent_messages_no_update",
+  "change_agent_messages_no_delete",
+  "capture_holds_no_replace",
+  "capture_holds_no_update",
+  "capture_holds_no_delete",
+  "inbox_hides_no_replace",
+  "inbox_hides_no_update",
+  "inbox_hides_no_delete",
+]

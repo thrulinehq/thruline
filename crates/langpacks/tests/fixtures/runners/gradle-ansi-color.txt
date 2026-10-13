@@ -1,0 +1,75 @@
+
+
+[1A[1m> Connecting to Daemon[m[22D[1B[1A> IDLE[0K[6D[1B[2A[1m[[0;1m...............] 0% INITIALIZING [12ms][m[40D[2B[2A[1m[[0;1m...............] 0% INITIALIZING [107ms][m[41D[2B[2A[1m[[0;1m...............] 0% INITIALIZING [1s][m[0K[38D[2B[2A[1m[[0;1m...............] 0% INITIALIZING [2s][m[38D[1B[1m> Evaluating settings[m[21D[1B[2A[1m[[0;1m...............] 0% CONFIGURING [2s][m[0K[37D[1B[1m> root project[m[0K[14D[1B[2A[1m[[0;1m...............] 0% CONFIGURING [3s][m[37D[2B[2A[1m[[0;1m...............] 0% CONFIGURING [4s][m[37D[2B[2A[1m[[0;1m...............] 0% CONFIGURING [5s][m[37D[2B[2A[1m[[0;32;1m###############[0;39;1m] 100% CONFIGURING [5s][m[39D[1B[1m> Building task graph of root build[m[35D[1B[1A> IDLE[0K[6D[1B[2A[1m[[0;1m...............] 0% EXECUTING [5s][m[0K[35D[2B[2A[1m[[0;1m...............] 0% EXECUTING [6s][m[35D[2B[1A[1m> :compileJava[m[14D[1B[2A[1m[[0;32;1m##[0;39;1m.............] 14% EXECUTING [6s][m[36D[1B> IDLE[0K[6D[1B[1A[1m> :processResources[m[19D[1B[2A[1m[[0;32;1m######[0;39;1m.........] 42% EXECUTING [7s][m[36D[1B> IDLE[0K[6D[1B[1A[1m> :compileTestJava[m[18D[1B[1A[1m> :compileTestJava > Resolve dependencies of :testCompileClasspath[m[66D[1B[2A[1m[[0;32;1m##########[0;39;1m.....] 71% EXECUTING [7s][m[36D[1B> IDLE[0K[6D[1B[2A[1m[[0;32;1m##########[0;39;1m.....] 71% EXECUTING [8s][m[36D[2B[1A[1m> :testClasses[m[14D[1B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [8s][m[36D[1B[1m> :test[m[0K[7D[1B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [9s][m[36D[2B[1A[1m> :test > 0 tests completed[m[27D[1B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [10s][m[37D[2B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [11s][m[37D[2B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [12s][m[37D[2B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [13s][m[37D[2B[2A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [14s][m[37D[2B
+[1A[1m> :test > Executing test demo.CalculatorTest[m[44D[1B[3A[0K
+[1m> Task :test[m[0K
+[0K
+[0K
+[0K
+[0K
+[3A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [15s][m[37D[1B[1m> :test > 0 tests completed[m[27D[1B[1m> :test > Executing test demo.CalculatorTest[m[44D[1B[3ACalculatorTest > comparesGreaterThan() [32mPASSED[39m[0K
+[2B[0K
+[3A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [15s][m[37D[1B[1m> :test > 1 test completed[m[0K[26D[1B[1m> :test > Executing test demo.CalculatorTest[m[44D[1B[3A[0K
+CalculatorTest > addsTwoNumbers() [32mPASSED[39m[0K
+[0K
+CalculatorTest > multipliesTwoNumbers() [32mPASSED[39m
+
+OrderServiceTest > totalsAnEmptyOrder() [32mPASSED[39m
+[0K
+[0K
+[0K
+[3A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [15s][m[37D[1B[1m> :test > 4 tests completed[m[27D[1B[1m> :test > Executing test demo.OrderServiceTest[m[46D[1B[3A[0K
+OrderServiceTest > looksUpAMissingCustomer() [31mFAILED[39m[0K
+    java.lang.NullPointerException: Cannot invoke "String.trim()" because "customer" is null[0K
+        at demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+[0K
+[0K
+[0K
+[3A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [15s][m[37D[1B[1m> :test > 5 tests completed, 1 failed[m[37D[1B[1m> :test > Executing test demo.OrderServiceTest[m[46D[1B[3A[0K
+OrderServiceTest > appliesDiscountToLargeOrders() [31mFAILED[39m[0K
+    org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>[0K
+        at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+        at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+        at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+        at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+        at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+        at app//demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+
+ShippingTest > computesInternationalRate() [33mSKIPPED[39m
+
+ShippingTest > computesExpressRate() [33mSKIPPED[39m
+
+ShippingTest > computesDomesticRate() [32mPASSED[39m
+[0K
+[0K
+[0K
+[3A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [15s][m[37D[1B[1m> :test > 9 tests completed, 2 failed, 2 skipped[m[48D[1B> IDLE[6D[1B[2A[1m> :test[m[0K[7D[2B[3A[1m[[0;32;1m############[0;39;1m...] 85% EXECUTING [16s][m[37D[3B[3A[0K
+[31;1m> Task :test[0;39m[31m FAILED[39m[0K
+[1B[0K
+[0K
+[3A[1m[[0;31;1m###############[0;39;1m] 100% EXECUTING [16s][m[38D[1B> IDLE[6D[1B> IDLE[6D[1B[3A[0K
+[Incubating] Problems report is available at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-mixed/build/reports/problems/problems-report.html[0K
+[0K
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+2 actionable tasks: 1 executed, 1 up-to-date
+[0K
+[0K
+[0K
+[3A[1m[[0;31;1m###############[0;39;1m] 100% EXECUTING [16s][m[38D[1B> IDLE[6D[1B> IDLE[6D[1B[3A[1m[[0;1m...............] 0% WAITING[m[0K[28D[3B
+9 tests completed, 2 failed, 2 skipped
+
+[31mFAILURE: [39m[31mBuild failed with an exception.[39m
+
+* What went wrong:
+Execution failed for task ':test'.
+[33m> [39mThere were failing tests. See the report at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-mixed/build/reports/tests/test/index.html
+
+* Try:
+[33m> [39mRun with [1m--scan[m to get full insights from a Build Scan (powered by Develocity).
+
+[31;1mBUILD FAILED[0;39m in 27s
+[3A[2K[1B[2K[1B[2K[1B[2K[3A

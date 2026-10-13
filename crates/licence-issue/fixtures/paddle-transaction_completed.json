@@ -1,0 +1,65 @@
+{
+  "_provenance": "SYNTHESISED FROM DOCUMENTATION, NOT RECORDED - unverified against a live account. Shape from https://developer.paddle.com/webhooks/transactions/transaction-completed and https://developer.paddle.com/api-reference/transactions/overview; every id, name and amount is invented. Signed at test time with a secret generated at test time.",
+  "event_id": "evt_01j8synthesised0000000001",
+  "event_type": "transaction.completed",
+  "occurred_at": "2026-09-24T10:00:05.000000Z",
+  "notification_id": "ntf_01j8synthesised0000000001",
+  "data": {
+    "id": "txn_01j8synthesised0000000001",
+    "status": "completed",
+    "customer_id": "ctm_01j8synthesised0000000001",
+    "address_id": "add_01j8synthesised0000000001",
+    "business_id": null,
+    "custom_data": null,
+    "origin": "web",
+    "collection_mode": "automatic",
+    "subscription_id": null,
+    "invoice_id": "inv_01j8synthesised0000000001",
+    "invoice_number": "1001",
+    "billing_details": null,
+    "billing_period": null,
+    "currency_code": "USD",
+    "discount_id": null,
+    "created_at": "2026-09-24T09:59:40.000000Z",
+    "updated_at": "2026-09-24T10:00:05.000000Z",
+    "billed_at": "2026-09-24T10:00:04.000000Z",
+    "items": [
+      {
+        "price": {
+          "id": "pri_01j8synthesisedteam000001",
+          "description": "ThruLine Team, one year",
+          "product_id": "pro_01j8synthesised0000000001",
+          "billing_cycle": null,
+          "trial_period": null,
+          "tax_mode": "account_setting",
+          "unit_price": { "amount": "29900", "currency_code": "USD" },
+          "quantity": { "minimum": 1, "maximum": 1 },
+          "status": "active"
+        },
+        "quantity": 1,
+        "proration": null
+      }
+    ],
+    "details": {
+      "totals": {
+        "subtotal": "29900",
+        "tax": "0",
+        "discount": "0",
+        "total": "29900",
+        "grand_total": "29900",
+        "currency_code": "USD"
+      }
+    },
+    "payments": [
+      {
+        "amount": "29900",
+        "status": "captured",
+        "error_code": null,
+        "method_details": { "type": "card", "card": { "type": "visa", "last4": "0000", "expiry_month": 1, "expiry_year": 2030 } },
+        "created_at": "2026-09-24T10:00:03.000000Z",
+        "captured_at": "2026-09-24T10:00:04.000000Z"
+      }
+    ],
+    "checkout": { "url": "https://example.invalid/checkout?_ptxn=txn_01j8synthesised0000000001" }
+  }
+}

@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__15-unverifiable-prose/store/ledger.db
+projects 1
+sessions 1
+lines    3 read · 0 already ingested
+events   3 new
+           assistant_text       2
+           user_msg             1
+unknown  none
+malformed none
+head     eval 5eb190001abf84f7c1be2301a04310dcc43f4df1590897272947b6a9a4eb7f8c
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

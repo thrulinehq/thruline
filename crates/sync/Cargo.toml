@@ -1,0 +1,34 @@
+[package]
+publish = false
+name = "thruline-sync"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+# **No HTTP client here either.** A sync crate that could open a socket is a
+# sync crate whose "the server never sees plaintext" claim depends on reading
+# every line of it. The transport is a trait; the only implementation in the
+# tree is an in-memory one used by tests, and `tests/nothing_leaks.rs` walks
+# every byte a transport is handed.
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+chacha20poly1305 = "0.10.1"
+argon2 = "0.5.3"
+base64 = "0.22.1"
+zeroize = { version = "1.8.2", features = ["derive"] }
+
+[dev-dependencies]
+# `tests/nothing_leaks.rs` re-derives the key the way an attacker with the
+# passphrase would, so it can look for those exact bytes in what a transport
+# was handed. Deriving it through this crate's own API would only prove the API
+# agrees with itself.
+argon2 = "0.5.3"
+base64 = "0.22.1"

@@ -1,0 +1,16 @@
+xUnit.net v3 In-Process Runner v4.0.0+8bf043c053 (64-bit .NET 9.0.19)
+  Discovering: Shipping.V3
+  Discovered:  Shipping.V3
+  Starting:    Shipping.V3
+    Shipping.V3.ShippingRateTests.OversizeRejectsHeavyParcel [FAIL]
+      Assert.True() Failure
+      Expected: True
+      Actual:   False
+      Stack Trace:
+        ShippingTests.cs(27,0): at Shipping.V3.ShippingRateTests.OversizeRejectsHeavyParcel()
+           at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+           at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Finished:    Shipping.V3 (ID = '0cacc164fdbcb19346c5afe11a05737d91a76c7267a205910c16307686f26cad')
+Cancelling due to test failure...
+=== TEST EXECUTION SUMMARY ===
+   Shipping.V3  Total: 1, Errors: 0, Failed: 1, Skipped: 0, Not Run: 0, Time: 0.063s

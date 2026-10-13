@@ -1,0 +1,13 @@
+=== RUN   TestRuns
+--- PASS: TestRuns (0.00s)
+=== RUN   TestShortSkip
+    skipped_test.go:16: skipping in -short mode
+--- SKIP: TestShortSkip (0.00s)
+=== RUN   TestEnvSkip
+    skipped_test.go:25: CAPTURE_INTEGRATION not set
+--- SKIP: TestEnvSkip (0.00s)
+=== RUN   TestSkipNow
+    skipped_test.go:30: about to SkipNow
+--- SKIP: TestSkipNow (0.00s)
+PASS
+ok  	example.com/capture/skipped	0.736s

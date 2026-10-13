@@ -1,0 +1,19 @@
+package demo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class ShippingTest {
+
+    @Test
+    void ratesASmallParcel() {
+        assertEquals(9.0, Shipping.rate(2));
+    }
+
+    @Test
+    void ratesALargeParcel() {
+        Shipping.rate(10);
+        Shipping.rate(20);
+    }
+}

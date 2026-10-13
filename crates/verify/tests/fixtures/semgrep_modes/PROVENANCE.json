@@ -1,0 +1,176 @@
+{
+  "schema": "thruline.semgrep-native-fixture-provenance.v1",
+  "public_snapshot_note": "The developer home directory in recorded capture paths is rewritten to /Users/dev for the public snapshot; every sha256 is that of the original capture and of the unmodified fixture beside this file.",
+  "native_image": "sha256:d79f8b45b81bf0467b0f2bccea35f500e1ce0083f87ea75107aa1959603b58a7",
+  "native_source_version": "1.176.0",
+  "cases": [
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/baseline-fixed/stdout.json",
+        "sha256": "f4dd24db529b6286bcf3f2dd04d219d68105967d87d0cfe18fd4f344e88e82ea",
+        "size": 17443
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/baseline-fixed.json",
+      "fixture_sha256": "f4dd24db529b6286bcf3f2dd04d219d68105967d87d0cfe18fd4f344e88e82ea"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/baseline-invalid/stdout.json",
+        "sha256": "46820637558d65ae4bdc0841b187e788fdbe4a8a2974f7f6dfe4cc10cfb11743",
+        "size": 3595
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/baseline-invalid.json",
+      "fixture_sha256": "46820637558d65ae4bdc0841b187e788fdbe4a8a2974f7f6dfe4cc10cfb11743"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/baseline-new/stdout.json",
+        "sha256": "b53d4bc78d959ed5a97015fb2821f08a34e43fa8cd0ff1c0fe087463c7bbb310",
+        "size": 19011
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/baseline-new.json",
+      "fixture_sha256": "b53d4bc78d959ed5a97015fb2821f08a34e43fa8cd0ff1c0fe087463c7bbb310"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/baseline-stale-objects/stdout.json",
+        "sha256": "f23a53b86ac87741c3c0979825dce8c299fe109fa23eceee0fe4362a8ce10908",
+        "size": 2731
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/baseline-stale-objects.json",
+      "fixture_sha256": "f23a53b86ac87741c3c0979825dce8c299fe109fa23eceee0fe4362a8ce10908"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-bad-fix/stdout.json",
+        "sha256": "176e1de7e86ca9118e699a034cbda701b0bfedd98b9b2695f8f1fcd9eddf2395",
+        "size": 3918
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-bad-fix.json",
+      "fixture_sha256": "176e1de7e86ca9118e699a034cbda701b0bfedd98b9b2695f8f1fcd9eddf2395"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-invalid/stdout.json",
+        "sha256": "dce78fc60149dfa0511f3ab8cddad9fd9a5ee53d2fe5467dbef242e3e200beea",
+        "size": 4699
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-invalid.json",
+      "fixture_sha256": "dce78fc60149dfa0511f3ab8cddad9fd9a5ee53d2fe5467dbef242e3e200beea"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-missing-fix/stdout.json",
+        "sha256": "7207608c500ebb89cf8c60fce9606f12744241189f65349131a23593e3935ac0",
+        "size": 3500
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-missing-fix.json",
+      "fixture_sha256": "7207608c500ebb89cf8c60fce9606f12744241189f65349131a23593e3935ac0"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-missing-test/stdout.json",
+        "sha256": "b88a74139de44ff4b2f2fd3660863d624334dec8c6606e7151f5bebf228249ad",
+        "size": 2421
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-missing-test.json",
+      "fixture_sha256": "b88a74139de44ff4b2f2fd3660863d624334dec8c6606e7151f5bebf228249ad"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-no-negative/stdout.json",
+        "sha256": "5ed13ac9a44e2ad086e7c5b8ff25d6c2f0f954f572954148271bed21b9440037",
+        "size": 3915
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-no-negative.json",
+      "fixture_sha256": "5ed13ac9a44e2ad086e7c5b8ff25d6c2f0f954f572954148271bed21b9440037"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-pass/stdout.json",
+        "sha256": "40a23e4f1c986c03a8679ec00518a3ab997579411859aabbcf2e2a4d67f46e77",
+        "size": 3916
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-pass.json",
+      "fixture_sha256": "40a23e4f1c986c03a8679ec00518a3ab997579411859aabbcf2e2a4d67f46e77"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-todo/stdout.json",
+        "sha256": "d3b0d5cc1980d4bbe5ecf3341e9f3a9fa88d0ef8048b6bc6a72cec89156c08ca",
+        "size": 3856
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-todo.json",
+      "fixture_sha256": "d3b0d5cc1980d4bbe5ecf3341e9f3a9fa88d0ef8048b6bc6a72cec89156c08ca"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/rule-wrong-annotation/stdout.json",
+        "sha256": "81dc6f53604810dc70d4e2783d068ac76811ecdaa348a5ce1d2b77a2c3b9c8a3",
+        "size": 3855
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/rule-wrong-annotation.json",
+      "fixture_sha256": "81dc6f53604810dc70d4e2783d068ac76811ecdaa348a5ce1d2b77a2c3b9c8a3"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/scope-full/stdout.json",
+        "sha256": "ba3c877395f0821e97462f3dd7ff30dafd2a78a4de985b6198d574c66412700a",
+        "size": 7826
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/scope-full.json",
+      "fixture_sha256": "ba3c877395f0821e97462f3dd7ff30dafd2a78a4de985b6198d574c66412700a"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/scope-ignored/stdout.json",
+        "sha256": "e130ae0666aeca3378c2eda3eb809899096af82f23b36b5b6d439b7c8caff158",
+        "size": 7086
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/scope-ignored.json",
+      "fixture_sha256": "e130ae0666aeca3378c2eda3eb809899096af82f23b36b5b6d439b7c8caff158"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/targeted-fixed/stdout.json",
+        "sha256": "23054f7de585144f7b078ca0f70a3ac7d227b043a1dd267306fcbbcc2caf420f",
+        "size": 6172
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/targeted-fixed.json",
+      "fixture_sha256": "23054f7de585144f7b078ca0f70a3ac7d227b043a1dd267306fcbbcc2caf420f"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/upstream-bad-fix/stdout.json",
+        "sha256": "2015986d3350d4ee7acccc9ea95fd6c10b8a97990920169c8e9408a552bb6247",
+        "size": 3987
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/upstream-bad-fix.json",
+      "fixture_sha256": "2015986d3350d4ee7acccc9ea95fd6c10b8a97990920169c8e9408a552bb6247"
+    },
+    {
+      "capture": {
+        "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/protocol01/upstream-pass/stdout.json",
+        "sha256": "a264c0e746eed7c9464846dd1b2500f9c907af5dd6d37d0152a0f5a5ef785801",
+        "size": 3985
+      },
+      "fixture": "crates/verify/tests/fixtures/semgrep_modes/upstream-pass.json",
+      "fixture_sha256": "a264c0e746eed7c9464846dd1b2500f9c907af5dd6d37d0152a0f5a5ef785801"
+    }
+  ],
+  "upstream_license": {
+    "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/frozen/upstream/LICENSE",
+    "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331",
+    "size": 26526
+  },
+  "source_configurations": {
+    "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/frozen/input-manifest.json",
+    "sha256": "ca3b7d6c51256e46217ef17e65c6063e6cd6152b86ae22cd8ab6685d5ed6a85f",
+    "size": 46920
+  },
+  "frozen_expectations": {
+    "path": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/semgrep-modes-proposal-v1/production-v1/frozen/checks-v1.json",
+    "sha256": "bc592bb9ef99b00ce6c1d3e2077901a9d721c04a727a7dd82797c5e8a638031f",
+    "size": 9708
+  }
+}

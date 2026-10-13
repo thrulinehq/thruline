@@ -1,0 +1,58 @@
+{
+  "payload": "<normalised: base64 of the payload, which carries a run-dependent value; see payload_decoded>",
+  "payloadType": "application/vnd.in-toto+json",
+  "payload_decoded": {
+    "_type": "https://in-toto.io/Statement/v1",
+    "predicate": {
+      "capture": {
+        "capture_degraded": true,
+        "degraded_causes": [
+          "imported from the pre-spec transcript ledger: these rows record what the agent said, not what the machine did — no exec, fs or snapshot evidence exists for this session"
+        ],
+        "git_env_digest": "sha256:2abecd1babd44fae28bb9f0b46b35ece284a795003a4223f9085ae7e116e0fbe",
+        "redactions_applied": 0,
+        "sources": [
+          "claude-code-hook",
+          "exec-recorder"
+        ]
+      },
+      "checks": [],
+      "claims": [],
+      "promises": {
+        "fulfilled": [],
+        "open": []
+      },
+      "session": {
+        "ended": "2026-01-20T00:04:00.000Z",
+        "event_chain_head": "<CHAIN_HEAD>",
+        "event_count": 4,
+        "harness": "claude-code",
+        "id": "20-analysis-prose-beside-unrelated-to",
+        "started": "2026-01-20T00:01:00.000Z"
+      },
+      "verdicts": [],
+      "verifier": {
+        "mode": "local",
+        "policy_hash": "sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad",
+        "thruline_version": "0.1.0"
+      }
+    },
+    "predicateType": "https://thrulinehq.com/attestation/execution-check/v0.1",
+    "subject": [
+      {
+        "digest": {
+          "gitCommit": "84ec0e1398b104136666b20fec11b422b3415a9c",
+          "gitTree": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c"
+        },
+        "name": "git+<WORK>/repo"
+      }
+    ]
+  },
+  "payload_normalised_sha256": "b81a168150c1e7a48b89c325d9bdde0714a92b320f87f87d1ee77ccd6dd99aa7",
+  "signatures": [
+    {
+      "keyid": "sha256:139e3940e64b5491722088d9a0d741628fc826e09475d341a780acde3c4b8070",
+      "sig": "<normalised: Ed25519 signature over a payload that carries a run-dependent value; verify-receipt reported it passing in-run>"
+    }
+  ]
+}

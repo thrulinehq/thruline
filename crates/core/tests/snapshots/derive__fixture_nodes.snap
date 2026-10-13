@@ -1,0 +1,7 @@
+---
+source: crates/core/tests/derive.rs
+expression: rendered
+---
+[
+    "00000000-0000-4000-8000-000000000000:4 | recorded | Read CLAUDE.md | ev=1 | abandoned=false",
+]

@@ -1,0 +1,14 @@
+=== RUN   TestLogPath
+    ansiraw_test.go:16: [36mvia t.Logf[0m
+--- PASS: TestLogPath (0.00s)
+=== RUN   TestPrintPath
+[35mvia fmt.Println to stdout[0m
+[33mvia fmt.Fprintln to stderr[0m
+--- PASS: TestPrintPath (0.00s)
+=== RUN   TestFailWithColour
+[31mraw red before the failure[0m
+    ansiraw_test.go:26: [31mcoloured failure message[0m
+--- FAIL: TestFailWithColour (0.00s)
+FAIL
+FAIL	example.com/capture/ansiraw	6.007s
+FAIL

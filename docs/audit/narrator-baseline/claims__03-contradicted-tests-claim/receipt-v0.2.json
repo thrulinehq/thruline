@@ -1,0 +1,103 @@
+{
+  "payload": "<normalised: base64 of the payload, which carries a run-dependent value; see payload_decoded>",
+  "payloadType": "application/vnd.in-toto+json",
+  "payload_decoded": {
+    "_type": "https://in-toto.io/Statement/v1",
+    "predicate": {
+      "capture": {
+        "capture_degraded": false,
+        "git_env_digest": "sha256:2abecd1babd44fae28bb9f0b46b35ece284a795003a4223f9085ae7e116e0fbe",
+        "redactions_applied": 0,
+        "sources": [
+          "claude-code-hook",
+          "exec-recorder",
+          "git"
+        ]
+      },
+      "checks": [
+        {
+          "argv_hash": "sha256:d0c551fbe3f1f0d205b37b8248b9dc65b8164c32954395e6e7f2ca88d2b17df5",
+          "category": "test",
+          "cwd_hash": "sha256:a86ba3dad1d203fa99421f1f1239eb817424b55dfd75c226b4711c6982a08676",
+          "env_hash": "sha256:fb1135bf5c58feed09a64a4e26275e520b12e39cafbf159ca87ca19b89e2584b",
+          "exit_code": 101,
+          "id": "chk_3607MZ1MQ6TC4MAWKEBD5HZ6DZ",
+          "input_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+          "parsed": {
+            "unverifiable": {
+              "hint": "cargo test writes one `test result:` line per test binary; without any, the run did not reach a result and its outcome is unknown, not clean",
+              "reason": "no `test result:` line found in the output"
+            }
+          },
+          "reexecuted": false,
+          "runner": "cargo test"
+        }
+      ],
+      "claim_origins": [
+        {
+          "claim_id": "clm_1S72BR9TPG20VZ79A3KK4PK8F4",
+          "extractor": "rules"
+        }
+      ],
+      "claims": [
+        {
+          "asserted_by": {
+            "harness": "claude-code"
+          },
+          "id": "clm_1S72BR9TPG20VZ79A3KK4PK8F4",
+          "kind": "tests_pass",
+          "text": "tests_pass claim clm_1S72BR9TPG20VZ79A3KK4PK8F4 (original text omitted)"
+        }
+      ],
+      "evidence_trust": "local",
+      "ground": "rules_unsupported",
+      "kind": "session_claims",
+      "promises": {
+        "fulfilled": [],
+        "open": []
+      },
+      "session": {
+        "ended": "2026-01-02T00:08:00Z",
+        "event_chain_head": "sha256:9371cda61b9482f5395b99f3f9552f51d3ccaf2279aff1c300fb49ac8abe690c",
+        "event_count": 11,
+        "harness": "claude-code",
+        "id": "cccccccc-0003-4000-8000-000000000000",
+        "started": "2026-01-02T00:01:00Z"
+      },
+      "verdicts": [
+        {
+          "claim_id": "clm_1S72BR9TPG20VZ79A3KK4PK8F4",
+          "evidence": [],
+          "reasons": [
+            "a captured test run failed: `cargo test` exited 101"
+          ],
+          "verdict": "unsupported",
+          "verifier": "tests_pass@1"
+        }
+      ],
+      "verifier": {
+        "mode": "local",
+        "policy_hash": "sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad",
+        "thruline_version": "0.1.0"
+      },
+      "version": 2
+    },
+    "predicateType": "https://thrulinehq.com/attestation/execution-check/v0.2",
+    "subject": [
+      {
+        "digest": {
+          "gitCommit": "84ec0e1398b104136666b20fec11b422b3415a9c",
+          "gitTree": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c"
+        },
+        "name": "git+<WORK>/repo"
+      }
+    ]
+  },
+  "payload_normalised_sha256": "c8884348df48acc741b861cea9f54e0cbc57b039d9262ff84afa046e06e74a5e",
+  "signatures": [
+    {
+      "keyid": "sha256:139e3940e64b5491722088d9a0d741628fc826e09475d341a780acde3c4b8070",
+      "sig": "<normalised: Ed25519 signature over a payload that carries a run-dependent value; verify-receipt reported it passing in-run>"
+    }
+  ]
+}

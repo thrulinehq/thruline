@@ -1,0 +1,10 @@
+=== RUN   TestAdd
+--- PASS: TestAdd (0.00s)
+=== RUN   TestMul
+--- PASS: TestMul (0.00s)
+=== RUN   TestAddZero
+--- PASS: TestAddZero (0.00s)
+=== RUN   TestMulZero
+--- PASS: TestMulZero (0.00s)
+PASS
+ok  	example.com/capture/allpass	0.211s

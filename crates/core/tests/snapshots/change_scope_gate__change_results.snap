@@ -1,0 +1,43 @@
+---
+source: crates/core/tests/change_scope_gate.rs
+expression: results
+---
+{
+  "schema_version": 1,
+  "change_id": "cccccccc-0000-4000-8000-00000000c001",
+  "sessions": [
+    {
+      "session_id": "cccccccc-0000-4000-8000-00000000s001",
+      "applicability": {
+        "outcome": "applies",
+        "scope_version": 1,
+        "in_scope_paths": [
+          "src/upload/retry.rs"
+        ]
+      },
+      "sentence_slug": "applies_in_scope",
+      "verdict_counts": {
+        "supported": 1
+      }
+    },
+    {
+      "session_id": "cccccccc-0000-4000-8000-00000000s002",
+      "applicability": {
+        "outcome": "not_applicable",
+        "reason_slug": "not_applicable_outside_scope",
+        "outside_paths": [
+          "docs/history.md"
+        ]
+      },
+      "sentence_slug": "not_applicable_outside_scope",
+      "verdict_counts": {}
+    }
+  ],
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

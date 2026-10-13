@@ -1,0 +1,43 @@
+Run options: --seed 18474
+
+# Running:
+
+SEF...FS
+
+Finished in 0.006187s, 1293.0338 runs/s, 808.1461 assertions/s.
+
+  1) Error:
+TestCalcMixed#test_propagates_the_underlying_type_error:
+NoMethodError: undefined method '/' for an instance of String
+    lib/calc.rb:11:in 'Calc.div'
+    test/test_calc_mixed.rb:28:in 'TestCalcMixed#test_propagates_the_underlying_type_error'
+
+  2) Failure:
+TestCalcMixed#test_rounds_toward_zero_not_away [test/test_calc_mixed.rb:21]:
+Expected: 4
+  Actual: 3
+
+  3) Failure:
+TestCalcMixed#test_returns_a_rational_for_inexact_division [test/test_calc_mixed.rb:32]:
+Expected 3 to be a kind of Rational, not Integer.
+
+8 runs, 5 assertions, 2 failures, 1 errors, 2 skips
+
+You have skipped tests. Run with --verbose for details.
+rake aborted!
+Command failed with status (1)
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/testtask.rb:130:in 'block (3 levels) in Rake::TestTask#define'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/testtask.rb:117:in 'block (2 levels) in Rake::TestTask#define'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/testtask.rb:111:in 'block in Rake::TestTask#define'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:188:in 'Rake::Application#invoke_task'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:138:in 'block (2 levels) in Rake::Application#top_level'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:138:in 'Array#each'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:138:in 'block in Rake::Application#top_level'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:147:in 'Rake::Application#run_with_threads'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:132:in 'Rake::Application#top_level'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:83:in 'block in Rake::Application#run'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:214:in 'Rake::Application#standard_exception_handling'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/lib/rake/application.rb:80:in 'Rake::Application#run'
+/opt/homebrew/lib/ruby/gems/4.0.0/gems/rake-13.3.1/exe/rake:27:in '<top (required)>'
+Tasks: TOP => test
+(See full trace by running task with --trace)

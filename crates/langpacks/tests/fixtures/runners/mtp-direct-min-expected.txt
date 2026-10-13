@@ -1,0 +1,7 @@
+
+Test run summary: Minimum expected tests policy violation, tests ran 1, minimum expected 8 - /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/bin/Debug/net9.0/Shipping.Mtp.dll (net9.0|arm64)
+  total: 1
+  failed: 0
+  succeeded: 1
+  skipped: 0
+  duration: 79ms

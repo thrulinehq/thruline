@@ -1,0 +1,124 @@
+{
+  "current_evidence_matches": false,
+  "reason": "The signature is valid, but this machine could not reproduce the same result from its current acceptance history and evidence.",
+  "schema_version": 2,
+  "shape": "thruline.verify-receipt.acceptance",
+  "signature_valid": true,
+  "signed_result": {
+    "acceptance_hash": "9ded2744ffe4fe30afba29ef9c4e289477b11655f127398237125a13fd07cc9c",
+    "accepted_at": "2026-09-07 01:40:28",
+    "contract": {
+      "checks": [
+        {
+          "argv": [
+            "python3",
+            "-m",
+            "pytest",
+            "-q"
+          ],
+          "artifacts": [],
+          "category": "test",
+          "cwd": ".",
+          "id": "pytest",
+          "mode": "captured",
+          "runner": "pytest",
+          "timeout_seconds": 120
+        }
+      ],
+      "criteria": [
+        {
+          "check_ids": [
+            "pytest"
+          ],
+          "description": "Declared criterion python-tests",
+          "human_acceptance_required": false,
+          "id": "python-tests"
+        }
+      ],
+      "id": "project-checks",
+      "objective": "Verify the explicitly declared checks",
+      "protected_paths": [
+        ".thruline/acceptance.json",
+        "pyproject.toml",
+        "tests"
+      ],
+      "revision": 1,
+      "version": 1
+    },
+    "contract_digest": "sha256:a77d28622af5c4acbaa11990af853e0d64650274a59c5d0b48e5fcadf09c290d",
+    "evaluation": {
+      "checks": [
+        {
+          "check_id": "pytest",
+          "reason": "declared check passed for these inputs",
+          "run_id": "acceptance-evt_01M1WRC89HSS5XM6J4R302Z3QD",
+          "state": "verified"
+        }
+      ],
+      "contract_digest": "sha256:a77d28622af5c4acbaa11990af853e0d64650274a59c5d0b48e5fcadf09c290d",
+      "criteria": [
+        {
+          "criterion_id": "python-tests",
+          "human_acceptance_required": false,
+          "state": "verified"
+        }
+      ],
+      "state": "verified",
+      "subject": "900ad6fa6e8a96db17eae3e2120d42f65d752afc"
+    },
+    "kind": "accepted_requirements",
+    "next_action": "The declared checks pass for the observed local inputs. Review the scope and local evidence limits before sharing.",
+    "origin": "local_capture",
+    "producer_binary_sha256": "0655f10ef05df654b88672604b3f60f42aaccaa42322851808fa7263528d6b4b",
+    "producer_version": "0.1.0",
+    "protected_changes": [],
+    "protected_input_error": null,
+    "protected_inputs_verified": true,
+    "runs": [
+      {
+        "admissible": true,
+        "artifacts": {},
+        "chain_head": "sha256:a2d1ecf0f906d3fc92d2c337180d4c04f83f6249fe7294e1807cbd17449493f8",
+        "check_digest": "sha256:e6504dfa65eb2b7c3d8cb09f2c059269880d99116c800100e4be9279df930531",
+        "check_id": "pytest",
+        "counts": {
+          "failed": 0,
+          "passed": 2,
+          "skipped": 0,
+          "total": 2,
+          "xfail": 0
+        },
+        "current": true,
+        "environment_boundary": "observed process environment, executable and Git tree; external services and installed dependencies are not a closed environment",
+        "executable_digest": "406d73d07e33e164d986326fde00b85c2b8f4ed2c33278142c8431588fe2df14",
+        "exit_code": 0,
+        "input_commit": null,
+        "input_tree": "900ad6fa6e8a96db17eae3e2120d42f65d752afc",
+        "outcome": "passed",
+        "outputs": [
+          {
+            "bytes": 98,
+            "complete": true,
+            "digest": "sha256:fcd476841e8af121ff907e81a92a59579b64c007b70cb79f9d096806f703fc7e",
+            "redactions": 0
+          },
+          {
+            "bytes": 0,
+            "complete": true,
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "redactions": 0
+          }
+        ],
+        "reasons": [],
+        "run_id": "acceptance-evt_01M1WRC89HSS5XM6J4R302Z3QD",
+        "runner_version": "not separately measured; resolved executable bytes are bound",
+        "trust": "local"
+      }
+    ],
+    "state": "verified",
+    "version": 2,
+    "workspace": "cc4d793bc3a37cba19a179b34573b9af2f9558b8dc60d3203262b73f14764332"
+  },
+  "state": "unverified",
+  "trust": "untrusted"
+}

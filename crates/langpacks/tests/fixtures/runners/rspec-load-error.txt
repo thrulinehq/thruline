@@ -1,0 +1,15 @@
+
+An error occurred while loading ./spec/calc_stats_spec.rb. - Did you mean?
+                    rspec ./spec/calc_add_spec.rb
+
+Failure/Error: require "calc/stats"
+
+LoadError:
+  cannot load such file -- calc/stats
+# ./spec/calc_stats_spec.rb:4:in 'Kernel#require'
+# ./spec/calc_stats_spec.rb:4:in '<top (required)>'
+
+
+Finished in 0.00002 seconds (files took 0.08538 seconds to load)
+0 examples, 0 failures, 1 error occurred outside of examples
+

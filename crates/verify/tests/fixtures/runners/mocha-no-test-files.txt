@@ -1,0 +1,1 @@
+Error: No test files found: "empty/*.js"

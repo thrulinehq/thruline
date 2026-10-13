@@ -1,0 +1,28 @@
+task = "T-3-6-F1"
+order = 80
+built_on_commit = ""
+pinned_schema_digest = ""
+migration_test = ""
+note = """
+How many tests one captured run counted, and what one failure line said. NO
+migration test of its own: its compatibility evidence is the `added` assertion
+in every later-ordered task's migration test, which now reads this file. No
+index on either table — the only reads are by primary key and a full scan of a
+table with at most one row per captured run.
+"""
+
+tables = [
+  "check_run_tallies",
+  "check_run_records",
+]
+
+indexes = []
+
+triggers = [
+  "check_run_tallies_no_replace",
+  "check_run_tallies_no_update",
+  "check_run_tallies_no_delete",
+  "check_run_records_no_replace",
+  "check_run_records_no_update",
+  "check_run_records_no_delete",
+]

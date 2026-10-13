@@ -1,0 +1,37 @@
+{
+  "checks": 1,
+  "claims": [
+    {
+      "binding": "ran_on_final_tree",
+      "evidence": [
+        "chk_5ZB26Q8MA49RVN56C2KR07AQ7Y"
+      ],
+      "extractor": "rules",
+      "findings": [],
+      "id": "clm_7CTD8YKPDWEYN1B3BE4DKWWHCD",
+      "kind": "tests_pass",
+      "reasons": [
+        "ran on the final tree",
+        "the runner's output could not be parsed, so the run's result is unknown — which is not the same as passing"
+      ],
+      "scope": "all",
+      "span": {
+        "event_id": "evt_1BM4HRD17W5WH2EYPC9FTSREYV",
+        "offset": [
+          32,
+          46
+        ]
+      },
+      "text": "All tests pass.",
+      "verdict": "unverifiable",
+      "verifier": "tests_pass@1",
+      "warnings": []
+    }
+  ],
+  "final_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "cccccccc-0004-4000-8000-000000000000",
+  "shape": "thruline.claims"
+}

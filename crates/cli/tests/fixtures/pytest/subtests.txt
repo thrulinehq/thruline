@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/subtests
+plugins: anyio-4.13.0
+collected 1 item
+
+test_sub.py uF                                                           [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_with_subtests (i=1) ___________________________
+
+subtests = <_pytest.subtests.Subtests object at 0x10ade2660>
+
+    def test_with_subtests(subtests):
+        for i in range(3):
+            with subtests.test(i=i):
+>               assert i != 1
+E               assert 1 != 1
+
+test_sub.py:4: AssertionError
+______________________________ test_with_subtests ______________________________
+contains 1 failed subtest
+=========================== short test summary info ============================
+SUBFAILED(i=1) test_sub.py::test_with_subtests - assert 1 != 1
+FAILED test_sub.py::test_with_subtests - contains 1 failed subtest
+============================== 2 failed in 0.01s ===============================

@@ -1,0 +1,46 @@
+{
+  "claims_vs_proof": [],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "language_tier_acceptance",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "user_prompt",
+      "seq": 1,
+      "text": ""
+    },
+    {
+      "kind": "note",
+      "seq": 2,
+      "text": "note"
+    },
+    {
+      "kind": "user_prompt",
+      "seq": 3,
+      "text": ""
+    },
+    {
+      "kind": "note",
+      "seq": 4,
+      "text": "note"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "no_stop_recorded",
+    "last_events": [
+      "note",
+      "",
+      "note"
+    ],
+    "summary": "no `stop` event is in the record: the session is still open, or the Stop hook never fired"
+  }
+}

@@ -1,0 +1,24 @@
+passed SmallParcelUsesFlatBase (1ms)
+passed BoundaryAtFiveKilos (0ms)
+failed LargeParcelUsesPerKilo (8ms)
+  Assert.AreEqual failed. Expected:<30.00>. Actual:<29.50>. 
+    at Shipping.MSTest.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/ShippingTests.cs:19
+    at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+    
+skipped InternationalSurcharge (0ms)
+failed OversizeRejectsHeavyParcel (0ms)
+  Assert.IsTrue failed. 
+    at Shipping.MSTest.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/ShippingTests.cs:26
+    at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+    
+passed OversizeThreshold (31,True) (0ms)
+passed OversizeThreshold (30,False) (0ms)
+
+Test run summary: Failed! - /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mtp-mstest/bin/Debug/net9.0/Shipping.Mtp.dll (net9.0|arm64)
+  total: 7
+  failed: 2
+  succeeded: 4
+  skipped: 1
+  duration: 85ms

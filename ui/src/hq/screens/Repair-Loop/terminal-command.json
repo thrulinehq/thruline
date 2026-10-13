@@ -1,0 +1,29 @@
+{
+  "about": "Examples of the command Repair-Loop copies for running the check from a terminal. terminal.js must produce each `copies` exactly (repair-loop-run.test.js); crates/cli/tests/repair_loop_terminal_command.rs runs each `copies`, with {change} replaced by a real Change id, through /bin/sh in a scratch repository holding src/upload/retry.rs, against a scratch store, and asserts it is recorded as a check run.",
+  "examples": [
+    {
+      "change": "{change}",
+      "runner": "test -f",
+      "scope": ["src/upload/retry.rs"],
+      "copies": "thruline check --for-change {change} -- test -f src/upload/retry.rs"
+    },
+    {
+      "change": "{change}",
+      "runner": "cd src && test -d upload",
+      "scope": [],
+      "copies": "thruline check --shell --for-change {change} -- 'cd src && test -d upload'"
+    },
+    {
+      "change": "{change}",
+      "runner": "test -n 'a b' && test -s src/upload/retry.rs",
+      "scope": [],
+      "copies": "thruline check --shell --for-change {change} -- 'test -n '\\''a b'\\'' && test -s src/upload/retry.rs'"
+    },
+    {
+      "change": null,
+      "runner": "test -d",
+      "scope": ["src/upload"],
+      "copies": "thruline check -- test -d src/upload"
+    }
+  ]
+}

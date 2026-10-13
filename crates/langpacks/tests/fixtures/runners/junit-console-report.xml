@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="9" skipped="2" failures="1" errors="1" time="0.061" hostname="Dev-MacBook-Pro.local" timestamp="2026-09-05T03:16:08">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+<property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+<property name="java.class.path" value="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/junit-platform-console-standalone-1.11.4.jar"/>
+<property name="java.class.version" value="61.0"/>
+<property name="java.home" value="/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home"/>
+<property name="java.io.tmpdir" value="/var/folders/c0/6c49zdk540bc65ynr75bc7yw0000gn/T/"/>
+<property name="java.library.path" value="/Users/dev/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="17.0.19+0"/>
+<property name="java.specification.maintenance.version" value="1"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="17"/>
+<property name="java.vendor" value="Homebrew"/>
+<property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+<property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+<property name="java.vendor.version" value="Homebrew"/>
+<property name="java.version" value="17.0.19"/>
+<property name="java.version.date" value="2026-04-21"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="17"/>
+<property name="java.vm.vendor" value="Homebrew"/>
+<property name="java.vm.version" value="17.0.19+0"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.11.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="aarch64"/>
+<property name="os.name" value="Mac OS X"/>
+<property name="os.version" value="26.1"/>
+<property name="path.separator" value=":"/>
+<property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+<property name="sun.java.command" value="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/junit-platform-console-standalone-1.11.4.jar execute --class-path /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-mixed/build/classes/java/test --scan-class-path --details=tree --disable-ansi-colors --reports-dir=reports"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.country" value="US"/>
+<property name="user.dir" value="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/junit-console"/>
+<property name="user.home" value="/Users/dev"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="dev"/>
+<property name="user.timezone" value="Asia/Kolkata"/>
+</properties>
+<testcase name="computesDomesticRate()" classname="demo.ShippingTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.ShippingTest]/[method:computesDomesticRate()]
+display-name: computesDomesticRate()
+]]></system-out>
+</testcase>
+<testcase name="addsTwoNumbers()" classname="demo.CalculatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.CalculatorTest]/[method:addsTwoNumbers()]
+display-name: addsTwoNumbers()
+]]></system-out>
+</testcase>
+<testcase name="comparesGreaterThan()" classname="demo.CalculatorTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.CalculatorTest]/[method:comparesGreaterThan()]
+display-name: comparesGreaterThan()
+]]></system-out>
+</testcase>
+<testcase name="computesInternationalRate()" classname="demo.ShippingTest" time="0">
+<skipped><![CDATA[flaky against the sandbox carrier API]]></skipped>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.ShippingTest]/[method:computesInternationalRate()]
+display-name: computesInternationalRate()
+]]></system-out>
+</testcase>
+<testcase name="totalsAnEmptyOrder()" classname="demo.OrderServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.OrderServiceTest]/[method:totalsAnEmptyOrder()]
+display-name: totalsAnEmptyOrder()
+]]></system-out>
+</testcase>
+<testcase name="looksUpAMissingCustomer()" classname="demo.OrderServiceTest" time="0.008">
+<error message="Cannot invoke &quot;String.trim()&quot; because &quot;customer&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot invoke "String.trim()" because "customer" is null
+	at demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.OrderServiceTest]/[method:looksUpAMissingCustomer()]
+display-name: looksUpAMissingCustomer()
+]]></system-out>
+</testcase>
+<testcase name="multipliesTwoNumbers()" classname="demo.CalculatorTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.CalculatorTest]/[method:multipliesTwoNumbers()]
+display-name: multipliesTwoNumbers()
+]]></system-out>
+</testcase>
+<testcase name="computesExpressRate()" classname="demo.ShippingTest" time="0">
+<skipped><![CDATA[org.opentest4j.TestAbortedException: Assumption failed: no CARRIER_TOKEN in the environment
+	at org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)
+	at org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)
+	at demo.ShippingTest.computesExpressRate(ShippingTest.java:23)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></skipped>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.ShippingTest]/[method:computesExpressRate()]
+display-name: computesExpressRate()
+]]></system-out>
+</testcase>
+<testcase name="appliesDiscountToLargeOrders()" classname="demo.OrderServiceTest" time="0.001">
+<failure message="discount should be 15% for large orders ==&gt; expected: &lt;85.0&gt; but was: &lt;90.0&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+	at demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:demo.OrderServiceTest]/[method:appliesDiscountToLargeOrders()]
+display-name: appliesDiscountToLargeOrders()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

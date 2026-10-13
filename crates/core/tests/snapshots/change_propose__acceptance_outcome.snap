@@ -1,0 +1,51 @@
+---
+source: crates/core/tests/change_propose.rs
+expression: outcome
+---
+{
+  "schema_version": 1,
+  "change_id": "cccccccc-0000-4000-8000-00000000c001",
+  "version": 2,
+  "criteria": [
+    {
+      "text": "When an upload fails, the queue keeps one entry for it.",
+      "attribution": "as_proposed",
+      "attribution_slug": "criterion_as_proposed",
+      "not_observable_slug": null
+    },
+    {
+      "text": "Two retry requests for the same delivery do not enqueue duplicate work.",
+      "attribution": "as_proposed",
+      "attribution_slug": "criterion_as_proposed",
+      "not_observable_slug": null
+    },
+    {
+      "text": "When a delivery fails three times, the record shows a single failure row.",
+      "attribution": "as_proposed",
+      "attribution_slug": "criterion_as_proposed",
+      "not_observable_slug": null
+    }
+  ],
+  "check_profile": [
+    "cargo-test",
+    "clippy",
+    "megalinter"
+  ],
+  "allowed_scope": [
+    "src/upload/**"
+  ],
+  "scope_attribution": "as_proposed",
+  "scope_attribution_slug": "criterion_as_proposed",
+  "actor": "sam",
+  "accepted_at": "2026-01-02T11:00:00Z",
+  "rationale": "this is what I want checked",
+  "sentence_slug": "accept_written",
+  "not_an_approval_slug": "accept_is_not_approval",
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

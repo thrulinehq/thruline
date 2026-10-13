@@ -1,0 +1,66 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Shipping.Tests -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll (.NETCoreApp,Version=v9.0)
+VSTest version 17.14.1 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/bin/Debug/net9.0/Shipping.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.19)
+[xUnit.net 00:00:00.37]   Discovering: Shipping.Tests
+[xUnit.net 00:00:00.66]   Discovered:  Shipping.Tests
+[xUnit.net 00:00:00.67]   Starting:    Shipping.Tests
+[xUnit.net 00:00:00.84]     Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel [FAIL]
+[xUnit.net 00:00:00.84]       Assert.True() Failure
+[xUnit.net 00:00:00.84]       Expected: True
+[xUnit.net 00:00:00.84]       Actual:   False
+[xUnit.net 00:00:00.84]       Stack Trace:
+[xUnit.net 00:00:00.84]         /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs(29,0): at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel()
+[xUnit.net 00:00:00.84]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.84]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.84]     Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [FAIL]
+[xUnit.net 00:00:00.84]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:00.84]       Expected: 30.00
+[xUnit.net 00:00:00.84]       Actual:   29.50
+[xUnit.net 00:00:00.84]       Stack Trace:
+[xUnit.net 00:00:00.84]         /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs(18,0): at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo()
+[xUnit.net 00:00:00.84]            at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+[xUnit.net 00:00:00.84]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.84]     Shipping.Tests.ShippingRateTests.InternationalSurcharge [SKIP]
+[xUnit.net 00:00:00.84]       pending the international rate table
+[xUnit.net 00:00:00.85]   Finished:    Shipping.Tests
+  Passed Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 30, expected: False) [17 ms]
+  Passed Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 31, expected: True) [< 1 ms]
+  Failed Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel [9 ms]
+  Error Message:
+   Assert.True() Failure
+Expected: True
+Actual:   False
+  Stack Trace:
+     at Shipping.Tests.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs:line 29
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase [2 ms]
+  Passed Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos [< 1 ms]
+  Passed Shipping.Tests.ShippingRateTests.ZeroWeightStillCostsBase [< 1 ms]
+  Failed Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [5 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 30.00
+Actual:   29.50
+  Stack Trace:
+     at Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/mixed/ShippingTests.cs:line 18
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Skipped Shipping.Tests.ShippingRateTests.InternationalSurcharge [1 ms]
+  Error Message:
+   pending the international rate table
+
+
+Test Run Failed.
+Total tests: 8
+     Passed: 5
+     Failed: 2
+    Skipped: 1
+ Total time: 6.5411 Seconds

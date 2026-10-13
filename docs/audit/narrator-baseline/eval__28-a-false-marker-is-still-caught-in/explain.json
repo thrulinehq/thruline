@@ -1,0 +1,231 @@
+{
+  "claims_vs_proof": [],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "28-a-false-marker-is-still-caught-in",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "user_prompt",
+      "seq": 1,
+      "text": ""
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -1\"}",
+      "kind": "tool_call",
+      "seq": 2,
+      "text": "Bash {\"command\":\"git log --oneline -1\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 3,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -2\"}",
+      "kind": "tool_call",
+      "seq": 4,
+      "text": "Bash {\"command\":\"git log --oneline -2\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 5,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -3\"}",
+      "kind": "tool_call",
+      "seq": 6,
+      "text": "Bash {\"command\":\"git log --oneline -3\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 7,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -4\"}",
+      "kind": "tool_call",
+      "seq": 8,
+      "text": "Bash {\"command\":\"git log --oneline -4\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 9,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -5\"}",
+      "kind": "tool_call",
+      "seq": 10,
+      "text": "Bash {\"command\":\"git log --oneline -5\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 11,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -6\"}",
+      "kind": "tool_call",
+      "seq": 12,
+      "text": "Bash {\"command\":\"git log --oneline -6\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 13,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -7\"}",
+      "kind": "tool_call",
+      "seq": 14,
+      "text": "Bash {\"command\":\"git log --oneline -7\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 15,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -8\"}",
+      "kind": "tool_call",
+      "seq": 16,
+      "text": "Bash {\"command\":\"git log --oneline -8\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 17,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -9\"}",
+      "kind": "tool_call",
+      "seq": 18,
+      "text": "Bash {\"command\":\"git log --oneline -9\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 19,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -10\"}",
+      "kind": "tool_call",
+      "seq": 20,
+      "text": "Bash {\"command\":\"git log --oneline -10\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 21,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -11\"}",
+      "kind": "tool_call",
+      "seq": 22,
+      "text": "Bash {\"command\":\"git log --oneline -11\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 23,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -12\"}",
+      "kind": "tool_call",
+      "seq": 24,
+      "text": "Bash {\"command\":\"git log --oneline -12\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 25,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -13\"}",
+      "kind": "tool_call",
+      "seq": 26,
+      "text": "Bash {\"command\":\"git log --oneline -13\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 27,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"git log --oneline -14\"}",
+      "kind": "tool_call",
+      "seq": 28,
+      "text": "Bash {\"command\":\"git log --oneline -14\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 29,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "input": "{\"command\":\"cargo test --all\"}",
+      "kind": "tool_call",
+      "seq": 30,
+      "text": "Bash {\"command\":\"cargo test --all\"}",
+      "tool": "Bash"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 31,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "kind": "note",
+      "seq": 32,
+      "text": "note"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "no_stop_recorded",
+    "last_events": [
+      "Bash {\"command\":\"cargo test --all\"}",
+      "unknown ok",
+      "note"
+    ],
+    "summary": "no `stop` event is in the record: the session is still open, or the Stop hook never fired"
+  }
+}

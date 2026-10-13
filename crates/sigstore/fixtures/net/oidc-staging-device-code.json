@@ -1,0 +1,8 @@
+{
+   "device_code": "hjwbtxpni4d5mckvph5oz2jpcimzfcy55c76twv6x3jknuft4ie",
+   "user_code": "PZNG-PNJS",
+   "verification_uri": "https://oauth2.sigstage.dev/auth/device",
+   "verification_uri_complete": "https://oauth2.sigstage.dev/auth/device?user_code=PZNG-PNJS",
+   "expires_in": 300,
+   "interval": 5
+}

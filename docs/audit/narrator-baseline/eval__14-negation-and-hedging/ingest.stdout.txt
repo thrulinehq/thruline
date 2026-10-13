@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__14-negation-and-hedging/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       3
+           user_msg             1
+unknown  none
+malformed none
+head     eval 3e73c373253f885704eac6f8a9720cb55fcdf272a1cbe608803f7972abdefdf6
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

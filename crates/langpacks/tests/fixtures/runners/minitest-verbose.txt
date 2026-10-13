@@ -1,0 +1,13 @@
+Run options: --seed 20260905 --verbose
+
+# Running:
+
+TestCalcAdd#test_adds_two_positive_integers = 0.00 s = .
+TestCalcAdd#test_subtracts = 0.00 s = .
+TestCalcAdd#test_adds_a_negative_integer = 0.00 s = .
+TestCalcDiv#test_divides_evenly = 0.00 s = .
+TestCalcDiv#test_raises_on_zero_denominator = 0.00 s = .
+
+Finished in 0.014530s, 344.1156 runs/s, 344.1156 assertions/s.
+
+5 runs, 5 assertions, 0 failures, 0 errors, 0 skips

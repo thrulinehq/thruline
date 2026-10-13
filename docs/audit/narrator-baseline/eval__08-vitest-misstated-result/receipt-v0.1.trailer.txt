@@ -1,0 +1,1 @@
+ThruLine-Receipt: <normalised: sha256 of the emitted envelope, recomputed in-run and equal>

@@ -1,0 +1,23 @@
+---
+source: crates/core/tests/a201_why.rs
+expression: out
+---
+a claim submitted as finished, checked against the record
+  "ship the retry logic"
+  verdict: no proof found in the record for test "cargo test"
+
+what happened
+  submitted by claude for project:-repo-app, accepted 2026-08-31T00:00:00Z
+  the claiming session: aaaaaaaa-1111-4222-8333-444444444444 (identified by the call's own argument hash in the capture record)
+  the manifest, entry by entry:
+    [unchecked] release: "not checkable"
+        not decidable by this tier: nothing this deterministic tier can check
+    [test] cargo test
+        no proof found in the record: looked for a passing test or build run; none in the session record
+  the search window: 1 tool event from the session's own capture record (capture seq 0–0)
+
+the receipt
+  claim call   aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa (mcp_calls, append-only)
+  verdict      cvrd_19762480d305284628dc72d62581406ac1af6b9c5f5002c499b9dde66f98f12a
+  recorded     2026-08-31T04:00:00.000Z
+  chain        scope claim_verdict, seq 0, hash b2a843b0a1fa6b9671aeaf5c95309e2d8a5311cf8ed9440b14592d41bf2b293b

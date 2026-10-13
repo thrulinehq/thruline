@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__31-the-later-work-that-defeats-case-3/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval f86c120d70b9ad0a51077a817e09294eb9c3e3cf7e9cea2933db80bacef755d7
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

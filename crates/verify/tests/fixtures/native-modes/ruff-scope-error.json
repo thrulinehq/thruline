@@ -1,0 +1,1 @@
+{"schema": "thruline.ruff-capture.v2", "version": "0.16.7", "capture_error": "notebook magics/shell escapes require a separately qualified adapter", "scan_exit": 2, "source_root": "/Users/dev/thruline/qualification/open-source-review/20260912-initial/native-modes-proposal-v1/native-ruff05/reports/notebook-magic", "complete": false}

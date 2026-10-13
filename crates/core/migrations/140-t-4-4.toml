@@ -1,0 +1,33 @@
+task = "T-4-4"
+order = 140
+built_on_commit = "55b80e99"
+pinned_schema_digest = "schema_sha256_653491075873d14e19f6859d7ec2b1d13381977a16393803cf1da1f40b6ab67e"
+migration_test = "crates/core/tests/attempt_budget_migration.rs"
+note = """
+How many repair attempts a person allowed one Change (T-4-4-ATTEMPT-BUDGET,
+R-2026-09-28-43; Q14 C8; founder ruling #22 (ii) a: one append-only table,
+DDL plus one upgrade, like waivers). One row per act of setting a budget; the
+last row appended is the budget that stands. Attempts are read off
+`change_run_executions` after the row `after_execution` names, so nothing here
+is a second counter, and nothing here is a result.
+
+Built on the integration `55b80e99`, after T-4-2. The DDL there is unchanged
+since `6008e9af`, so the pinned digest is the same one QUAL-F6's unmerged
+branch pinned; that branch's `change_repair_budgets` never landed.
+
+One table, one index, three append-only triggers, no ALTER of anything
+already there. Cost (A193): nothing of its own; the bill is the existing
+full-schema path's, for which `upgrade::estimate_phrase` gives "about 35 seconds" on
+the 2.01 M-event corpus, and `thruline upgrade` is still the only thing that
+may pay it.
+"""
+
+tables = ["change_attempt_budgets"]
+
+indexes = ["idx_change_attempt_budgets_change"]
+
+triggers = [
+  "change_attempt_budgets_no_replace",
+  "change_attempt_budgets_no_update",
+  "change_attempt_budgets_no_delete",
+]

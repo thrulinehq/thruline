@@ -1,0 +1,56 @@
+---
+source: crates/core/tests/change_suggest.rs
+expression: report
+---
+{
+  "schema_version": 1,
+  "change_id": "cccccccc-0000-4000-8000-00000000c001",
+  "change_window": {
+    "from": "2026-01-02T09:00:00Z",
+    "to": "2026-01-02T10:00:00Z"
+  },
+  "scope_version": 1,
+  "sessions_considered": 3,
+  "suggestions": [
+    {
+      "session_id": "cccccccc-0000-4000-8000-00000000s001",
+      "basis": "filename",
+      "overlap": null,
+      "intersecting_paths": [
+        "src/upload/queue.rs",
+        "src/upload/retry.rs"
+      ],
+      "sentence_slug": "suggestion_filename"
+    },
+    {
+      "session_id": "cccccccc-0000-4000-8000-00000000s001",
+      "basis": "timing",
+      "overlap": {
+        "from": "2026-01-02T09:31:00Z",
+        "to": "2026-01-02T09:34:00Z"
+      },
+      "intersecting_paths": [],
+      "sentence_slug": "suggestion_timing"
+    }
+  ],
+  "ties": [
+    "cccccccc-0000-4000-8000-00000000s001"
+  ],
+  "ties_slug": "suggestion_tie",
+  "undated_sessions": [
+    "cccccccc-0000-4000-8000-00000000s003"
+  ],
+  "undated_slug": "session_undated",
+  "undated_summary_slug": "session_undated_summary",
+  "unreadable_scope_patterns": [],
+  "unreadable_scope_slug": null,
+  "unreadable_scope_summary_slug": null,
+  "empty_slug": null,
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

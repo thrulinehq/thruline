@@ -1,0 +1,59 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< demo:mvn-flaky >---------------------------
+[INFO] Building mvn-flaky 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ mvn-flaky ---
+[INFO] skip non existing resourceDirectory /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/mvn-flaky/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ mvn-flaky ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ mvn-flaky ---
+[INFO] skip non existing resourceDirectory /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/mvn-flaky/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ mvn-flaky ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug target 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ mvn-flaky ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running demo.RetryTest
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.024 s <<< FAILURE! -- in demo.RetryTest
+[ERROR] demo.RetryTest.connectsToTheQueue -- Time elapsed: 0.005 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: the queue was not ready on attempt 1 ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at demo.RetryTest.connectsToTheQueue(RetryTest.java:16)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] Running demo.RetryTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in demo.RetryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Flakes: 
+[WARNING] demo.RetryTest.connectsToTheQueue
+[ERROR]   Run 1: RetryTest.connectsToTheQueue:16 the queue was not ready on attempt 1 ==> expected: <true> but was: <false>
+[INFO]   Run 2: PASS
+[INFO] 
+[INFO] 
+[WARNING] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Flakes: 1
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.560 s
+[INFO] Finished at: 2026-09-05T03:16:58+05:30
+[INFO] ------------------------------------------------------------------------

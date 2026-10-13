@@ -1,0 +1,30 @@
+node_modules
+# `dist` is COMMITTED as of RA1 and deliberately not ignored.
+#
+# `thruline ui` embeds it into the binary (crates/cli/build.rs), so a checkout
+# with no npm in it must still be able to build a working product. That is the
+# whole point of the command.
+#
+# It is safe to commit and the safety is structural: vite.config.js switches
+# publicDir off for `vite build` and copies only the `fonts` allowlist, so dist
+# carries no `fixtures/` and therefore no transcript content. Verified at RA1 by
+# scanning the tree for absolute home paths (none) — 236 KB, 10 files.
+#
+# THE OBLIGATION THAT COMES WITH IT: any session that changes `ui/src` must run
+# `cd ui && npm run build` and commit the result, or the binary ships a UI older
+# than the source and nothing will say so.
+.DS_Store
+public/fixtures/local.json
+public/fixtures/index.json
+public/fixtures/projects/
+public/fixtures/project.json
+
+# F01: `dist` is committed, `dist/fixtures/` never is.
+#
+# The safety above is structural — `vite build` copies only the `fonts`
+# allowlist — but the guarantee covers what the BUILD writes, not what a
+# process later drops into the tree. A 351 MB export of real transcript content
+# was once copied into `dist/fixtures/` after a build, untracked and unignored,
+# one `git add -A` away from being published. This line is the belt to that
+# structural brace: an export under `dist` is never committable.
+dist/fixtures/

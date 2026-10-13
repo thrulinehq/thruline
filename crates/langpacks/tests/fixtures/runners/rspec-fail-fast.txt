@@ -1,0 +1,20 @@
+.....F
+
+Failures:
+
+  1) Calc.div rounds toward zero, not away
+     Failure/Error: expect(Calc.div(7, 2)).to eq(4)
+
+       expected: 4
+            got: 3
+
+       (compared using ==)
+     # ./spec/calc_div_spec.rb:12:in 'block (3 levels) in <top (required)>'
+
+Finished in 0.02036 seconds (files took 0.07424 seconds to load)
+6 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/calc_div_spec.rb:11 # Calc.div rounds toward zero, not away
+

@@ -1,0 +1,22 @@
+task = "C47-REMOVE-RECORDS"
+order = 170
+built_on_commit = "0b463bc02f85da5eaf0489e38e58188958d0b4b7"
+pinned_schema_digest = "schema_sha256_cd760d4aee258c1a22deb71541ba85f67b53199bf8dc4cfbbbbccd8b39dc96e0"
+migration_test = "crates/core/tests/remove_records_migration.rs"
+note = """
+C47 adds the append-only receipt for a named person's per-project removal.
+The removal act writes a new store without the project's owned rows and with
+one receipt before swapping the proven file in. The schema addition is one
+table, one index and three append-only triggers; no old table is altered,
+backfilled or dropped. This ships in the founder's single upgrade with orders
+150, 151 and 160. The route and screen require the receipt and remain held
+until the rest of C47 is complete.
+"""
+
+tables = ["project_removals"]
+indexes = ["idx_project_removals_project"]
+triggers = [
+  "project_removals_no_replace",
+  "project_removals_no_update",
+  "project_removals_no_delete",
+]

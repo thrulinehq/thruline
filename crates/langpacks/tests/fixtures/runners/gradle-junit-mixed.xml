@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="demo.OrderServiceTest" tests="3" skipped="0" failures="2" errors="0" timestamp="2026-09-04T21:47:42.060Z" hostname="Dev-MacBook-Pro.local" time="0.007">
+  <properties/>
+  <testcase name="totalsAnEmptyOrder()" classname="demo.OrderServiceTest" time="0.0"/>
+  <testcase name="looksUpAMissingCustomer()" classname="demo.OrderServiceTest" time="0.005">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;String.trim()&quot; because &quot;customer&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;String.trim()&quot; because &quot;customer&quot; is null
+	at demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+</failure>
+  </testcase>
+  <testcase name="appliesDiscountToLargeOrders()" classname="demo.OrderServiceTest" time="0.002">
+    <failure message="org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==&gt; expected: &lt;85.0&gt; but was: &lt;90.0&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==&gt; expected: &lt;85.0&gt; but was: &lt;90.0&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+	at demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

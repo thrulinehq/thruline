@@ -1,0 +1,37 @@
+{
+  "outcomes": [
+    {
+      "scenario": "Baseline",
+      "summary": "Failure",
+      "log_path": "log/baseline.log",
+      "diff_path": null,
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.060262334,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "nextest",
+            "run",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    }
+  ],
+  "total_mutants": 0,
+  "missed": 0,
+  "caught": 0,
+  "timeout": 0,
+  "unviable": 0,
+  "success": 0,
+  "start_time": "2026-09-12T22:12:57.178081Z",
+  "end_time": "2026-09-12T22:12:57.241422Z",
+  "cargo_mutants_version": "27.1.0"
+}

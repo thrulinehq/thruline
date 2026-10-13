@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0eaab418-c9c0-4c3c-a9fa-da6428ebc2a0" name="@Dev-MacBook-Pro 2026-09-05 03:12:17" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-05T03:12:17.6360620+05:30" queuing="2026-09-05T03:12:17.6360620+05:30" start="2026-09-05T03:12:13.1403880+05:30" finish="2026-09-05T03:12:17.6459790+05:30" />
+  <TestSettings name="default" id="fb8ffcea-7543-4784-a0a7-f8b23962b11a">
+    <Deployment runDeploymentRoot="_Dev-MacBook-Pro_2026-09-05_03_12_17" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3395df68-c0d9-4ad8-a51f-c73202b8ff74" testId="ca979da0-ae02-8360-87b2-537e52b4d683" testName="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 30, expected: False)" computerName="Dev-MacBook-Pro" duration="00:00:00.0582471" startTime="2026-09-05T03:12:17.0460630+05:30" endTime="2026-09-05T03:12:17.0460710+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3395df68-c0d9-4ad8-a51f-c73202b8ff74" />
+    <UnitTestResult executionId="23f7adbe-fa92-4e1d-89cc-96ddee9db62a" testId="856bd0aa-9c55-7613-ffc6-6610eba66fd6" testName="Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase" computerName="Dev-MacBook-Pro" duration="00:00:00.0018534" startTime="2026-09-05T03:12:17.0508950+05:30" endTime="2026-09-05T03:12:17.0508950+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23f7adbe-fa92-4e1d-89cc-96ddee9db62a" />
+    <UnitTestResult executionId="f6c88b75-22d0-4a45-a9b5-94746858f0f2" testId="b4926a0a-c21d-f5b7-4d5e-5f96089cd1b9" testName="Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos" computerName="Dev-MacBook-Pro" duration="00:00:00.0000698" startTime="2026-09-05T03:12:17.0509510+05:30" endTime="2026-09-05T03:12:17.0509510+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6c88b75-22d0-4a45-a9b5-94746858f0f2" />
+    <UnitTestResult executionId="a26acded-8624-47dc-a875-3d6e41dd1d8d" testId="2943c076-9d0e-cd41-6457-b773b6b836fa" testName="Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo" computerName="Dev-MacBook-Pro" duration="00:00:00.0001023" startTime="2026-09-05T03:12:17.0564330+05:30" endTime="2026-09-05T03:12:17.0564330+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a26acded-8624-47dc-a875-3d6e41dd1d8d" />
+    <UnitTestResult executionId="bf4e8f67-0b15-4e5e-94dc-8c890daa71a8" testId="12f44333-44db-be2e-ba41-fe055827cb0c" testName="Shipping.Tests.ShippingRateTests.ZeroWeightStillCostsBase" computerName="Dev-MacBook-Pro" duration="00:00:00.0010904" startTime="2026-09-05T03:12:17.0563820+05:30" endTime="2026-09-05T03:12:17.0563820+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf4e8f67-0b15-4e5e-94dc-8c890daa71a8" />
+    <UnitTestResult executionId="3302f782-cb0e-4539-bbf5-8fff0b908167" testId="fd0c54bc-a68e-e19f-c71f-8a03e771a8e1" testName="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 31, expected: True)" computerName="Dev-MacBook-Pro" duration="00:00:00.0001577" startTime="2026-09-05T03:12:17.0483840+05:30" endTime="2026-09-05T03:12:17.0483840+05:30" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3302f782-cb0e-4539-bbf5-8fff0b908167" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.ZeroWeightStillCostsBase" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/debug/net9.0/shipping.tests.dll" id="12f44333-44db-be2e-ba41-fe055827cb0c">
+      <Execution id="bf4e8f67-0b15-4e5e-94dc-8c890daa71a8" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="ZeroWeightStillCostsBase" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 30, expected: False)" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/debug/net9.0/shipping.tests.dll" id="ca979da0-ae02-8360-87b2-537e52b4d683">
+      <Execution id="3395df68-c0d9-4ad8-a51f-c73202b8ff74" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="OversizeThreshold" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/debug/net9.0/shipping.tests.dll" id="2943c076-9d0e-cd41-6457-b773b6b836fa">
+      <Execution id="a26acded-8624-47dc-a875-3d6e41dd1d8d" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="LargeParcelUsesPerKilo" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.OversizeThreshold(kg: 31, expected: True)" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/debug/net9.0/shipping.tests.dll" id="fd0c54bc-a68e-e19f-c71f-8a03e771a8e1">
+      <Execution id="3302f782-cb0e-4539-bbf5-8fff0b908167" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="OversizeThreshold" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/debug/net9.0/shipping.tests.dll" id="856bd0aa-9c55-7613-ffc6-6610eba66fd6">
+      <Execution id="23f7adbe-fa92-4e1d-89cc-96ddee9db62a" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="SmallParcelUsesFlatBase" />
+    </UnitTest>
+    <UnitTest name="Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos" storage="/private/tmp/claude-501/-users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/debug/net9.0/shipping.tests.dll" id="b4926a0a-c21d-f5b7-4d5e-5f96089cd1b9">
+      <Execution id="f6c88b75-22d0-4a45-a9b5-94746858f0f2" />
+      <TestMethod codeBase="/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0/Shipping.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="Shipping.Tests.ShippingRateTests" name="BoundaryAtFiveKilos" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="ca979da0-ae02-8360-87b2-537e52b4d683" executionId="3395df68-c0d9-4ad8-a51f-c73202b8ff74" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="856bd0aa-9c55-7613-ffc6-6610eba66fd6" executionId="23f7adbe-fa92-4e1d-89cc-96ddee9db62a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4926a0a-c21d-f5b7-4d5e-5f96089cd1b9" executionId="f6c88b75-22d0-4a45-a9b5-94746858f0f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2943c076-9d0e-cd41-6457-b773b6b836fa" executionId="a26acded-8624-47dc-a875-3d6e41dd1d8d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12f44333-44db-be2e-ba41-fe055827cb0c" executionId="bf4e8f67-0b15-4e5e-94dc-8c890daa71a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fd0c54bc-a68e-e19f-c71f-8a03e771a8e1" executionId="3302f782-cb0e-4539-bbf5-8fff0b908167" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.19)
+[xUnit.net 00:00:00.40]   Discovering: Shipping.Tests
+[xUnit.net 00:00:00.89]   Discovered:  Shipping.Tests
+[xUnit.net 00:00:00.93]   Starting:    Shipping.Tests
+[xUnit.net 00:00:01.13]   Finished:    Shipping.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

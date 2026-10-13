@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/mixed
+plugins: anyio-4.13.0
+collected 8 items
+
+test_mixed.py ..FsxXE.                                                   [100%]
+
+==================================== ERRORS ====================================
+__________________________ ERROR at setup of test_err __________________________
+
+    @pytest.fixture
+>   def broken(): raise RuntimeError('fixture broke')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   RuntimeError: fixture broke
+
+test_mixed.py:12: RuntimeError
+=================================== FAILURES ===================================
+___________________________________ test_bad ___________________________________
+
+>   def test_bad(): assert 90 == 95
+                    ^^^^^^^^^^^^^^^
+E   assert 90 == 95
+
+test_mixed.py:4: AssertionError
+=============================== warnings summary ===============================
+test_mixed.py::test_warn
+  /work/samples/mixed/test_mixed.py:15: UserWarning: careful
+    warnings.warn('careful', UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED test_mixed.py::test_bad - assert 90 == 95
+ERROR test_mixed.py::test_err - RuntimeError: fixture broke
+= 1 failed, 3 passed, 1 skipped, 1 xfailed, 1 xpassed, 1 warning, 1 error in 0.01s =

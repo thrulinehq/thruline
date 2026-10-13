@@ -1,0 +1,73 @@
+---
+source: crates/core/tests/context_packet.rs
+assertion_line: 142
+expression: packet.render()
+---
+## TASK
+
+- close out the failing suite
+  [caller · evidence=n/a · currency=n/a · applicability=unknown · because: supplied by the caller; the model has no task object to derive one from]
+
+## NON-GOALS
+
+(nothing — no source object exists: `Currency::OutOfScope` exists as an axis value but no code path produces it)
+
+## CURRENT STATE
+
+- -Users-dev-packet: 2 node(s) — lifecycle 2 completed — evidence 1 contradicted · 1 observed — currency 2 current
+  [project:-Users-dev-packet · evidence=n/a · currency=n/a · applicability=unknown · because: composed counts across all three axes; never collapsed to one badge]
+- -Users-dev-packet: served from the in-memory derivation
+  [project:-Users-dev-packet · evidence=n/a · currency=n/a · applicability=unknown · because: which path produced this view; a fallback must never pose as the fast path]
+
+## WORKSPACE STATE
+
+(nothing — the source was queried and is empty: no workspace_identities row for any project in scope; run `thruline identity backfill`)
+
+## OWNERSHIP
+
+(nothing — no source object exists: no lease or per-agent ownership object exists; owner_key is a single constant)
+
+## OTHER ACTIVE WORK
+
+(nothing — no source object exists: no lease object exists; parallel-work coordination is M8)
+
+## VERIFIED AND CURRENT
+
+(nothing — the source was queried and is empty: 0 of 1 claim(s) are verified and current. This section is NOT filled from `supported`)
+
+## SUPPORTED, NOT VERIFIED
+
+(nothing — the source was queried and is empty: 0 of 2 node(s) carry evidence=supported + currency=current)
+
+## STALE OR CONFLICTING
+
+- all 12 tests pass
+  [node:-Users-dev-packet/aaaaaaaa-1111-4222-8333-444444444444:6 · evidence=contradicted · currency=current · applicability=unknown · because: conflicting or lapsed evidence; do not act on this without re-checking]
+
+## FAILED APPROACHES
+
+(nothing — no source object exists: no failed-approach object exists; `abandoned` is set with supersession and explicitly does not mean the work failed)
+
+## OPEN HUMAN DECISIONS
+
+- needs a human ruling: all 12 tests pass
+  [node:-Users-dev-packet/aaaaaaaa-1111-4222-8333-444444444444:6 · evidence=contradicted · currency=current · applicability=unknown · because: conflicting evidence with no acknowledgment on record]
+
+## REQUIRED COMPLETION EVIDENCE
+
+(nothing — the source was queried and is empty: no claim in scope reports an unreached evidence family)
+
+## RESUME
+
+(nothing — the source was queried and is empty: no session-generation lineage recorded for any project in scope)
+
+## SNAPSHOT BINDING
+
+- chain position 61f45e8bfbce7fad across 1 project(s)
+  [project:-Users-dev-packet · evidence=n/a · currency=n/a · applicability=unknown · because: recompiling at this chain position reproduces this packet byte for byte]
+- -Users-dev-packet @ ce7c75daa61be7cb (6 events)
+  [project:-Users-dev-packet · evidence=n/a · currency=n/a · applicability=unknown · because: per-project chain head; `thruline verify` re-checks it against the raw records]
+
+## EXCLUSIONS
+
+(nothing was excluded)

@@ -1,0 +1,1536 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thrulinehq.com/spec/execution-check/v0.2",
+  "title": "ThruLine v0.2 local evidence receipts",
+  "description": "Two explicitly discriminated predicates. This schema describes structure only; signature, custody, exact subject, required accounting, count sums, reference uniqueness, origin reproduction and ground consistency are verified by code. A conforming document is not a trusted or current result.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "_type",
+    "subject",
+    "predicateType",
+    "predicate"
+  ],
+  "properties": {
+    "_type": {
+      "const": "https://in-toto.io/Statement/v1"
+    },
+    "subject": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/subject"
+      }
+    },
+    "predicateType": {
+      "const": "https://thrulinehq.com/attestation/execution-check/v0.2"
+    },
+    "predicate": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/acceptedRequirements"
+        },
+        {
+          "$ref": "#/$defs/sessionClaims"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "subject": {
+      "type": "object",
+      "required": [
+        "name",
+        "digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "`git+<remote-or-path>`. The producer uses the local path, so it is not portable and is not verified against anything."
+        },
+        "digest": {
+          "type": "object",
+          "required": [
+            "gitTree"
+          ],
+          "description": "Open by design: in-toto permits further algorithms. `gitTree` is mandatory \u2014 a subject without one cannot be bound to a tree, and `Statement::validate` refuses it. `attest::verify` additionally REFUSES git's empty tree, which is byte-identical in every repository; that is a value check this schema cannot make without hardcoding a hash it would then have to keep true for both sha1 and sha256 repositories.",
+          "properties": {
+            "gitTree": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40,64}$"
+            },
+            "gitCommit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40,64}$"
+            }
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "id",
+        "harness",
+        "event_chain_head",
+        "event_count"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "harness": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Producing harness name from the local session metadata; not inferred from the current application."
+        },
+        "model": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ended": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_chain_head": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "The head of the session's hash-chained event log, RECOMPUTED by the producer from ledger rows rather than read from a cache. This is what makes the receipt checkable against a ledger instead of merely self-consistent. `Statement::validate` refuses an empty one."
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Part of the chain's identity, not decoration: a PREFIX of a session verifies as a chain in its own right, so a matching head with a different count is a truncated session and `attest::verify` fails it."
+        }
+      }
+    },
+    "claimEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "text",
+        "asserted_by"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "description": "`thruline_claims::ClaimKind`, re-derived by the conformance suite rather than transcribed.",
+          "enum": [
+            "behavior_unchanged",
+            "build_ok",
+            "dependency_added",
+            "did_x",
+            "docs_updated",
+            "file_changed",
+            "lint_ok",
+            "migration_added",
+            "secrets_absent",
+            "task_complete",
+            "tests_pass",
+            "typecheck_ok"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "description": "The agent's own words. UNTRUSTED CONTENT: it is the transcript, and \u00a70 principle 2 says the transcript is a hint. Never render it as if the product asserted it, and never let it reach a shell or a policy expression."
+        },
+        "asserted_by": {
+          "type": "object",
+          "required": [
+            "harness"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "checkEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "category",
+        "runner",
+        "argv_hash",
+        "env_hash",
+        "cwd_hash",
+        "input_tree_hash",
+        "exit_code",
+        "parsed",
+        "reexecuted"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reexecuted": {
+                "const": true
+              }
+            },
+            "required": [
+              "reexecuted"
+            ]
+          },
+          "then": {
+            "required": [
+              "container_image_digest"
+            ],
+            "description": "`attest::verify`: a bare boolean is a claim, not evidence. `reexecuted` is DERIVED from an exec event carrying the image digest inside the hash chain the receipt names, so it cannot be turned on after the fact without breaking the chain head."
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reexecuted": {
+                "const": false
+              }
+            },
+            "required": [
+              "reexecuted"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "container_image_digest"
+              ]
+            },
+            "description": "The inverse, or the digest is decorative: a check carrying an image digest and `reexecuted: false` is a record whose halves disagree about whether \u00a77 ran. `attest::verify` fails it."
+          }
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "build",
+            "lint",
+            "test",
+            "typecheck"
+          ],
+          "description": "The four `CATEGORY_*` constants in `crates/verify/src/check.rs`. They are separate consts rather than an enum, so the conformance suite censuses the declaration site as well as importing them."
+        },
+        "runner": {
+          "type": "string",
+          "minLength": 1,
+          "description": "DELIBERATELY NOT ENUMERATED. The value is either `Runner::as_str` (nine public variants) or a name from `check.rs`'s private TOOL_TABLE (fifteen more). Half of that domain cannot be read from outside the crate, so enumerating it here would be transcription \u2014 the exact failure that cost this program two withdrawn constants. Consumers must treat an unrecognised runner as unrecognised, not as absent."
+        },
+        "argv_hash": {
+          "type": "string",
+          "description": "THE EMPTY STRING IS MEANINGFUL AND VALID. `fold.rs` reads these off the exec payload with an empty-string default, so a malformed or partial capture yields an empty hash. Empty means 'not recorded' \u2014 it can never equal a real hash, which is how an unrecorded value is kept from matching one."
+        },
+        "env_hash": {
+          "type": "string",
+          "description": "See `argv_hash`: the empty string is valid and means not recorded."
+        },
+        "cwd_hash": {
+          "type": "string",
+          "description": "See `argv_hash`: the empty string is valid and means not recorded."
+        },
+        "input_tree_hash": {
+          "type": "string",
+          "description": "\u00a76.1's binding: the tree the check ran against. EMPTY WHEN NO SNAPSHOT COULD BE TAKEN, and that is a valid, honest record \u2014 an empty string can never equal a tree hash, so an unbound check can never be mistaken for a bound one. A schema that demanded a hash here would refuse the truthful record of a failed snapshot."
+        },
+        "exit_code": {
+          "type": "integer",
+          "description": "No minimum: `-1` is written when the capture layer could not read one."
+        },
+        "parsed": {
+          "type": "object",
+          "minProperties": 1,
+          "description": "\u00a73.3's parsed block. NEVER `{}` and never null: a defaulted parsed block reads as a clean run, which is the exact collapse the product exists to catch. Three shapes are produced today \u2014 a tally (`tests_total`/`passed`/`failed`/`skipped`/`xfail`/`test_ids`/`duration_ms`), `{\"unverifiable\": {\"reason\", \"hint\"}}` when no parser recognised the runner, and `{\"exit_only\": true, \"bypass\": \u2026}` for a \u00a76.4 build/lint/typecheck check whose only evidence is its exit code. A re-executed check additionally carries a `reexec` object. The interior is left open because it is a union that is still growing; a consumer MUST branch on which keys are present and must not read a missing `failed` as zero."
+        },
+        "reexecuted": {
+          "type": "boolean"
+        },
+        "container_image_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{32,}$",
+          "description": "Present exactly when `reexecuted` is true. The bound is `attest::verify`'s own: a `sha256:` prefix and at least 32 hex characters."
+        }
+      }
+    },
+    "verdictEntry": {
+      "type": "object",
+      "required": [
+        "claim_id",
+        "verdict",
+        "verifier",
+        "evidence",
+        "reasons"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "unsupported",
+            "unverifiable"
+          ],
+          "description": "`thruline_verify::Verdict`. REQUIRED, non-null, and closed \u2014 see `x-unverifiable-may-not-collapse` at the root. A consumer that encounters a value outside this set must refuse the receipt, never default it."
+        },
+        "verifier": {
+          "type": "string",
+          "minLength": 1,
+          "description": "`<name>@<version>`, e.g. `tests_pass@1` \u2014 which code produced this verdict."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Check ids and event ids. The schema cannot say they resolve to anything: see `x-cannot-be-expressed`."
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Omitted when empty. Absent and empty mean the same thing here, and only here."
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/finding"
+          },
+          "description": "Omitted when empty. \u00a76.7 / \u00a76.8 detector output."
+        }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "required": [
+        "severity",
+        "detector",
+        "detail"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warn",
+            "fail"
+          ],
+          "description": "`thruline_verify::Severity`."
+        },
+        "detector": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The stable name a report refers to: `narrowed_run`, `assertion_weakened`, `tests_ran_before_final_edit`. Open by design \u2014 detectors are added often \u2014 so a consumer must render an unknown detector rather than drop it."
+        },
+        "path": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        }
+      }
+    },
+    "promises": {
+      "type": "object",
+      "required": [
+        "open",
+        "fulfilled"
+      ],
+      "additionalProperties": false,
+      "description": "BOTH ARRAYS ARE EMPTY IN EVERY RECEIPT THIS BUILD EMITS. `receipt_cmd.rs` constructs this by `Default::default()` and never populates it, so \u00a710's promise reporting does not reach the receipt. The element type is `String` in the producer and is asserted by nothing.",
+      "properties": {
+        "open": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fulfilled": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verifierInfo": {
+      "type": "object",
+      "required": [
+        "thruline_version",
+        "mode",
+        "policy_hash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "thruline_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "local",
+            "clean-sandbox-reexec"
+          ],
+          "description": "Derived from the same lookup as `checks[].reexecuted`, so a receipt cannot say `clean-sandbox-reexec` with no re-executed check behind it."
+        },
+        "policy_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "REQUIRED, and the empty string is refused. The Rust type is an `Option<String>` that distinguishes three states, and `attest::verify` FAILS all but one: absent is a missing assertion (every session is judged under some policy, the shipped defaults included), empty is a producer that wrote a placeholder, and only a real digest is compared against the policy resolved on the verifying machine. 'No policy file' is itself a stated digest, never an empty string. This field being unbound is how a policy rewritten to its literal opposite once produced byte-identical `Verified.` output at exit 0."
+        }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "required": [
+        "sources",
+        "redactions_applied",
+        "capture_degraded"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "content_filters"
+            ]
+          },
+          "then": {
+            "properties": {
+              "capture_degraded": {
+                "const": true
+              }
+            },
+            "description": "`attest::verify`: a receipt that names content transforms and says capture was not degraded is a record disagreeing with itself about whether the tree hash names the bytes on disk."
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "degraded_causes"
+            ]
+          },
+          "then": {
+            "properties": {
+              "capture_degraded": {
+                "const": true
+              }
+            },
+            "description": "A stated cause with `capture_degraded: false` is a record disagreeing with itself."
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "capture_degraded": {
+                "const": true
+              }
+            },
+            "required": [
+              "capture_degraded"
+            ]
+          },
+          "then": {
+            "required": [
+              "degraded_causes"
+            ],
+            "description": "Degraded capture must say WHY. The defect this closes is a receipt that flips the flag and leaves a reader nothing to search for (Track Q's D18, Track R's F7)."
+          }
+        }
+      ],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Left open: the harness set grows, and \u00a78.1's example (`exec-shim`) already disagrees with the producer (`exec-recorder`). MAY BE EMPTY, and an empty list is not evidence that nothing captured \u2014 it is the producer saying nothing."
+        },
+        "transcript_hash": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Never produced by this build."
+        },
+        "redactions_applied": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Hardcoded to 0 by the producer today, so a 0 here means 'not counted' as often as it means 'none applied'."
+        },
+        "capture_degraded": {
+          "type": "boolean",
+          "description": "\u00a713. True when the session recorded degraded capture OR the subject tree was snapshotted under a content transform. \u00a78.1 calls this field `degraded` and pairs it with a `degraded_causes` list; the list now exists and is REQUIRED to be non-empty when this is true, so a `true` here always carries a stated cause. (It did not until 2026-09-06: a session whose Stop hook never fired reached a green receipt, and then a true flag with nothing to search for.)"
+        },
+        "content_filters": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The `.gitattributes` content transforms in scope when the subject tree was snapshotted. Present exactly when they degrade capture. A clean filter breaks \u00a70.3's tree binding at its root: git runs it on the way into the object database, so the tree names the FILTERED bytes while the working tree holds the originals."
+        },
+        "git_env_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "A digest of the git conditions the evidence was produced under, including settings that live OUTSIDE the tree and that no diff-based detector can reach. Absent only when git itself could not be run."
+        },
+        "degraded_causes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "description": "\u00a78.1's `degraded_causes`. Each entry is a machine-readable token, a colon, and a sentence \u2014 `hook_events_missing: \u2026`, `content_filters: \u2026`. The token is what a consumer matches on; the sentence is what a person reads. The token set is OPEN by design: a consumer that meets an unknown cause must report it, never drop it, because a cause it does not recognise is still a reason the capture was incomplete."
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "requiredCheck": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "test",
+            "build",
+            "lint",
+            "typecheck",
+            "artifact"
+          ]
+        },
+        "argv": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "cwd": {
+          "type": "string"
+        },
+        "runner": {
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "captured",
+            "isolated"
+          ]
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/nativeVerification"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "argv",
+        "cwd",
+        "runner",
+        "mode",
+        "timeout_seconds",
+        "artifacts"
+      ],
+      "additionalProperties": false
+    },
+    "criterion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "check_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_acceptance_required": {
+          "type": "boolean"
+        },
+        "evidence_kind": {
+          "enum": [
+            "behavior",
+            "tests",
+            "build",
+            "artifact",
+            "audit",
+            "architecture",
+            "resource"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "check_ids",
+        "human_acceptance_required"
+      ],
+      "additionalProperties": false
+    },
+    "contract": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "id": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "objective": {
+          "type": "string"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/criterion"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/requiredCheck"
+          },
+          "maxItems": 128
+        },
+        "protected_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "version",
+        "id",
+        "revision",
+        "objective",
+        "criteria",
+        "checks",
+        "protected_paths"
+      ],
+      "additionalProperties": false
+    },
+    "checkResult": {
+      "type": "object",
+      "properties": {
+        "check_id": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "verified",
+            "failed",
+            "unverified"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "check_id",
+        "state",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "criterionResult": {
+      "type": "object",
+      "properties": {
+        "criterion_id": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "verified",
+            "failed",
+            "unverified"
+          ]
+        },
+        "human_acceptance_required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "criterion_id",
+        "state",
+        "human_acceptance_required"
+      ],
+      "additionalProperties": false
+    },
+    "evaluation": {
+      "type": "object",
+      "properties": {
+        "contract_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "subject": {
+          "type": "string",
+          "pattern": "^([a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "state": {
+          "enum": [
+            "verified",
+            "failed",
+            "unverified"
+          ]
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/checkResult"
+          }
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/criterionResult"
+          }
+        }
+      },
+      "required": [
+        "contract_digest",
+        "subject",
+        "state",
+        "checks",
+        "criteria"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "xfail": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "total",
+        "passed",
+        "failed",
+        "skipped",
+        "xfail"
+      ],
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "redactions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "digest",
+        "bytes",
+        "redactions",
+        "complete"
+      ],
+      "additionalProperties": false
+    },
+    "run": {
+      "type": "object",
+      "properties": {
+        "check_id": {
+          "type": "string"
+        },
+        "check_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "chain_head": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "input_tree": {
+          "type": "string",
+          "pattern": "^([a-f0-9]{40}|[a-f0-9]{64})$"
+        },
+        "input_commit": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-f0-9]{40}|[a-f0-9]{64})$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "executable_digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "current": {
+          "type": "boolean"
+        },
+        "admissible": {
+          "type": "boolean"
+        },
+        "outcome": {
+          "enum": [
+            "passed",
+            "failed",
+            "not_run",
+            "unparsed",
+            "timed_out",
+            "interrupted"
+          ]
+        },
+        "trust": {
+          "const": "local"
+        },
+        "environment_boundary": {
+          "type": "string"
+        },
+        "runner_version": {
+          "type": "string"
+        },
+        "counts": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/counts"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outputs": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/output"
+              },
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifacts": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "current_inputs_identified": {
+          "type": "boolean"
+        },
+        "binding_changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "input": {
+                "type": "string"
+              },
+              "previous": true,
+              "current": true
+            },
+            "required": [
+              "input",
+              "previous",
+              "current"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "check_id",
+        "check_digest",
+        "run_id",
+        "chain_head",
+        "input_tree",
+        "executable_digest",
+        "current",
+        "admissible",
+        "outcome",
+        "trust",
+        "environment_boundary",
+        "runner_version",
+        "reasons"
+      ],
+      "additionalProperties": false
+    },
+    "acceptedRequirements": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 2
+        },
+        "kind": {
+          "const": "accepted_requirements"
+        },
+        "workspace": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "contract": {
+          "$ref": "#/$defs/contract"
+        },
+        "contract_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "acceptance_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "accepted_at": {
+          "type": "string"
+        },
+        "evaluation": {
+          "$ref": "#/$defs/evaluation"
+        },
+        "state": {
+          "enum": [
+            "verified",
+            "failed",
+            "unverified"
+          ]
+        },
+        "origin": {
+          "const": "local_capture"
+        },
+        "producer_version": {
+          "type": "string"
+        },
+        "producer_binary_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "protected_inputs_verified": {
+          "type": "boolean"
+        },
+        "protected_changes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "protected_input_error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/run"
+          }
+        },
+        "next_action": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "kind",
+        "workspace",
+        "contract",
+        "contract_digest",
+        "acceptance_hash",
+        "accepted_at",
+        "evaluation",
+        "state",
+        "origin",
+        "producer_version",
+        "producer_binary_sha256",
+        "protected_inputs_verified",
+        "runs",
+        "next_action"
+      ],
+      "additionalProperties": false
+    },
+    "sessionClaims": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/$defs/session"
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claimEntry"
+          }
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/checkEntry"
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/verdictEntry"
+          }
+        },
+        "promises": {
+          "$ref": "#/$defs/promises"
+        },
+        "verifier": {
+          "$ref": "#/$defs/verifierInfo"
+        },
+        "capture": {
+          "$ref": "#/$defs/capture"
+        },
+        "version": {
+          "const": 2
+        },
+        "kind": {
+          "const": "session_claims"
+        },
+        "claim_origins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim_id": {
+                "type": "string"
+              },
+              "extractor": {
+                "enum": [
+                  "rules",
+                  "local_model"
+                ]
+              }
+            },
+            "required": [
+              "claim_id",
+              "extractor"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "ground": {
+          "enum": [
+            "all_claims_proven",
+            "rules_unsupported",
+            "rules_unverifiable",
+            "model_advisory",
+            "capture_degraded",
+            "no_claims"
+          ]
+        },
+        "evidence_trust": {
+          "const": "local"
+        }
+      },
+      "required": [
+        "session",
+        "claims",
+        "checks",
+        "verdicts",
+        "promises",
+        "verifier",
+        "capture",
+        "version",
+        "kind",
+        "claim_origins",
+        "ground",
+        "evidence_trust"
+      ],
+      "additionalProperties": false
+    },
+    "nativeProbe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "input": true,
+        "expected": true,
+        "expected_exit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "input",
+        "expected",
+        "expected_exit"
+      ],
+      "additionalProperties": false
+    },
+    "nativeDependencyRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "from",
+        "to"
+      ],
+      "additionalProperties": false
+    },
+    "nativeCycleExemption": {
+      "type": "object",
+      "properties": {
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "modules",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "nativeArchitecturePolicy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "layers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "external_modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nativeDependencyRule"
+          }
+        },
+        "forbid_cycles": {
+          "type": "boolean"
+        },
+        "cycle_exemptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nativeCycleExemption"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "layers",
+        "external_modules",
+        "forbidden",
+        "forbid_cycles",
+        "cycle_exemptions"
+      ],
+      "additionalProperties": false
+    },
+    "nativeSuiteCounts": {
+      "type": "object",
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expected_failure": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "skipped",
+        "expected_failure"
+      ],
+      "additionalProperties": false
+    },
+    "nativePackPlan": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "architecture"
+            },
+            "root": {
+              "type": "string"
+            },
+            "check": {
+              "enum": [
+                "edges",
+                "cycles"
+              ]
+            },
+            "policy": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/nativeArchitecturePolicy"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "graph": {
+              "enum": [
+                "python_imports",
+                "rust_packages"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "root",
+            "check",
+            "policy"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "resource"
+            },
+            "module": {
+              "type": "string"
+            },
+            "workload": {
+              "type": "string"
+            },
+            "size": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "size_unit": {
+              "type": "string"
+            },
+            "warmup_cycles": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cycles": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "repetitions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "sampled_peak_budget_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "retained_growth_budget_bytes": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "kind",
+            "module",
+            "workload",
+            "size",
+            "size_unit",
+            "warmup_cycles",
+            "cycles",
+            "repetitions",
+            "sampled_peak_budget_bytes",
+            "retained_growth_budget_bytes"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "suite"
+            },
+            "directory": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "string"
+            },
+            "expected_tests": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "exclusions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "claimed_counts": {
+              "$ref": "#/$defs/nativeSuiteCounts"
+            }
+          },
+          "required": [
+            "kind",
+            "directory",
+            "pattern",
+            "expected_tests",
+            "exclusions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "completion"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "artifact"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "nativeVerification": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environment_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environment_closed": {
+          "type": "boolean"
+        },
+        "environment_description": {
+          "type": "string"
+        },
+        "cases": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/nativeProbe"
+          }
+        },
+        "pack": {
+          "$ref": "#/$defs/nativePackPlan"
+        }
+      },
+      "required": [
+        "scope",
+        "environment_files",
+        "environment_closed",
+        "environment_description",
+        "cases"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$comment": "Version 0.2, optional native-check and input-binding fields reconciled in unified qualification. Unknown fields remain rejected. Rust policy validation additionally enforces cross-field constraints; schema validity alone is not evidence admission."
+}

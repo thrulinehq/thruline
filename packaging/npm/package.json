@@ -1,0 +1,12 @@
+{
+  "name": "thruline",
+  "version": "0.0.0-placeholder",
+  "description": "Proves what an AI coding agent actually did, from the execution record.",
+  "license": "FSL-1.1-MIT",
+  "homepage": "https://thrulinehq.com",
+  "repository": { "type": "git", "url": "git+https://github.com/thrulinehq/thruline.git" },
+  "bin": { "thruline": "bin/thruline.js" },
+  "files": ["bin/", "install.js"],
+  "scripts": { "postinstall": "node install.js" },
+  "engines": { "node": ">=18" }
+}

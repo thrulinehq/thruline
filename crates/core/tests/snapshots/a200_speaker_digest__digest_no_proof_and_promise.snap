@@ -1,0 +1,8 @@
+---
+source: crates/core/tests/a200_speaker_digest.rs
+expression: rendered
+---
+THRULINE — what the previous session's own record shows (/home/dev/.claude/projects/-repo-app/aaaaaaaa-1111-4222-8333-444444444444.jsonl)
+- claimed, and no proof found in the record: "All 54 proxy tests pass." — looked for a passing test or build run; scanned 1 tool event in the session record (sensor seq 0–0) · receipt aaaaaaaa-1111-4222-8333-444444444444.jsonl:2 · why spkf_5961f95598be
+- claimed, and no proof found in the record: "I've added retry logic to `client.rs`." — looked for an edit touching what the claim names; scanned 1 tool event in the session record (sensor seq 0–0) · receipt aaaaaaaa-1111-4222-8333-444444444444.jsonl:2 · why spkf_9d01fa6cd9c0
+- left open when the session ended: "I'll wire the new panel into `layout.rs` next." · receipt aaaaaaaa-1111-4222-8333-444444444444.jsonl:2 · why spkp_91f368e86cec

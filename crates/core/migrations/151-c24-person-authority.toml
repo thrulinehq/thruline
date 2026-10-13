@@ -1,0 +1,23 @@
+task = "C24-PERSON-AUTHORITY"
+order = 151
+built_on_commit = "a51d0670"
+pinned_schema_digest = "schema_sha256_bedaa8ab11a700afb23d6b574e2a675fe571a3fbe8e2a6823a16706a47cf05ce"
+migration_test = "crates/core/tests/decision_person_authority_migration.rs"
+note = """
+C24 Decisions Phase 2. One append-only table links an accept, retire, or waive
+row to the exact recorded user confirmation, raw transcript line, and session
+chain. This is separate from the six Phase 1 Decisions tables at order 150.
+Existing populated stores require an explicit `thruline upgrade`; all other
+verbs exit 3 while pending. The full-schema upgrade adds no person receipt
+for historical acts, which remain inert until independently verified.
+"""
+
+tables = ["decision_person_acts"]
+
+indexes = ["idx_decision_person_acts_decision"]
+
+triggers = [
+  "decision_person_acts_no_replace",
+  "decision_person_acts_no_update",
+  "decision_person_acts_no_delete",
+]

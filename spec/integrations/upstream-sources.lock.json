@@ -1,0 +1,652 @@
+{
+  "schema": "thruline-upstream-source-lock/v1",
+  "acquired_at_utc": "2026-09-08T23:23:03Z",
+  "expected_projects": 21,
+  "projects": [
+    {
+      "id": "in-toto",
+      "repository": "in-toto/in-toto",
+      "url": "https://github.com/in-toto/in-toto.git",
+      "feature": "evidence",
+      "role": "design_reference",
+      "declared_main_license": "Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/in-toto",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "e352b43ad7cb8915d84c36d791aa61346152a0a3",
+      "tree": "86ad0c996e42dccfa4236810e5a4fc7d797b82a7",
+      "commit_url": "https://github.com/in-toto/in-toto/commit/e352b43ad7cb8915d84c36d791aa61346152a0a3",
+      "tracked_entries": 183,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "b5c26c8a2ad6dd7cac6646e470a32ee42d23c36124caac4e66c989b6545b2a44"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "salsa",
+      "repository": "salsa-rs/salsa",
+      "url": "https://github.com/salsa-rs/salsa.git",
+      "feature": "evidence",
+      "role": "design_reference",
+      "declared_main_license": "Apache-2.0 OR MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/salsa",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "e021c01d4939408c89c9325ad2426660117a8b32",
+      "tree": "a433b0650cc383131004fa13d1b21ba3893bca41",
+      "commit_url": "https://github.com/salsa-rs/salsa/commit/e021c01d4939408c89c9325ad2426660117a8b32",
+      "tracked_entries": 426,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "ast-grep",
+      "repository": "ast-grep/ast-grep",
+      "url": "https://github.com/ast-grep/ast-grep.git",
+      "feature": "architecture",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/ast-grep",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "fc2b1530db74de49131b725221de98036a552a9f",
+      "tree": "27161e7b1c4cf7754bbb254c5135f2a1d79915f5",
+      "commit_url": "https://github.com/ast-grep/ast-grep/commit/fc2b1530db74de49131b725221de98036a552a9f",
+      "tracked_entries": 320,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "81471889c77b2161a3e4dcdb1b2e6ca382e485766132d92d5fe1d7497e7dd2d9"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "dependency-cruiser",
+      "repository": "sverweij/dependency-cruiser",
+      "url": "https://github.com/sverweij/dependency-cruiser.git",
+      "feature": "architecture",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/dependency-cruiser",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "ee229c36bb25201610e06e07333df8cf2c0d7880",
+      "tree": "ba1c35c320481e98840d6cb0d13f49afffcff982",
+      "commit_url": "https://github.com/sverweij/dependency-cruiser/commit/ee229c36bb25201610e06e07333df8cf2c0d7880",
+      "tracked_entries": 1816,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "046799de79c54f5366624ef97e3d5518afbefcd784a23aa74ef58d8f8bfcb2be"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "knip",
+      "repository": "webpro-nl/knip",
+      "url": "https://github.com/webpro-nl/knip.git",
+      "feature": "architecture",
+      "role": "external_adapter",
+      "declared_main_license": "ISC",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/knip",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "c2d652c82802239139b1c0b48a071b729fa92251",
+      "tree": "3105470e5016bc36d613af48c9484ccac1fa9799",
+      "commit_url": "https://github.com/webpro-nl/knip/commit/c2d652c82802239139b1c0b48a071b729fa92251",
+      "tracked_entries": 6713,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "2f654153561e7d8b90fdbf448a7de09725f936533fc9c7b485190c036d089341"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "cargo-mutants",
+      "repository": "sourcefrog/cargo-mutants",
+      "url": "https://github.com/sourcefrog/cargo-mutants.git",
+      "feature": "test-integrity",
+      "role": "test_harness",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/cargo-mutants",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "fe82f1832778a591ab74248010fb40e699defafe",
+      "tree": "8ad83441f3fce915a9c378d23f3851bf8fcd3e32",
+      "commit_url": "https://github.com/sourcefrog/cargo-mutants/commit/fe82f1832778a591ab74248010fb40e699defafe",
+      "tracked_entries": 408,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "479cbeb2506157776cf80abe31df18065d0fe50b5816ff77bfd75d5deb04ab5c"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "proptest",
+      "repository": "proptest-rs/proptest",
+      "url": "https://github.com/proptest-rs/proptest.git",
+      "feature": "test-integrity",
+      "role": "existing_dependency",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/proptest",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "a6f033cf83adfd55557b86e6065e6f4df054ec70",
+      "tree": "8641ac961da588c0cbc5e7cbed53c48fc7c8bf59",
+      "commit_url": "https://github.com/proptest-rs/proptest/commit/a6f033cf83adfd55557b86e6065e6f4df054ec70",
+      "tracked_entries": 297,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "e32fbd428b915bc6bf2ed6a59c2ca56b25c0cdd7e05ec941127259e62485e3da"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "cargo-fuzz",
+      "repository": "rust-fuzz/cargo-fuzz",
+      "url": "https://github.com/rust-fuzz/cargo-fuzz.git",
+      "feature": "test-integrity",
+      "role": "test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/cargo-fuzz",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "bf2fc668dafda5295aa6fd01825ee67b885f0f2b",
+      "tree": "3c300e696252e31d916caaaa00d64c4b5aaffe52",
+      "commit_url": "https://github.com/rust-fuzz/cargo-fuzz/commit/bf2fc668dafda5295aa6fd01825ee67b885f0f2b",
+      "tracked_entries": 28,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "kani",
+      "repository": "model-checking/kani",
+      "url": "https://github.com/model-checking/kani.git",
+      "feature": "test-integrity",
+      "role": "test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/kani",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "b07abe8a72f8eb1ef1ea3521ca6b00a973d341bc",
+      "tree": "f680110e42c74771f1696e7a60481e65343754e0",
+      "commit_url": "https://github.com/model-checking/kani/commit/b07abe8a72f8eb1ef1ea3521ca6b00a973d341bc",
+      "tracked_entries": 3395,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "submodule_entries": [
+        "160000 commit b250680abd40ff1aaa07081d0497dc2755ed112e\tcharon",
+        "160000 commit cd36c699f3cb3d531289aadee26c45c1306edcfc\tfirecracker",
+        "160000 commit a33d369b98a50fd9290fd6586832c969035bdec0\ttests/perf/s2n-quic"
+      ],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "loom",
+      "repository": "tokio-rs/loom",
+      "url": "https://github.com/tokio-rs/loom.git",
+      "feature": "test-integrity",
+      "role": "test_harness",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/loom",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "948c8cc78b178ede6eeff3afc7d97f2f4ea08559",
+      "tree": "c9f0924cf1b6fbf4520fadcf46b67dfa01a7c6b0",
+      "commit_url": "https://github.com/tokio-rs/loom/commit/948c8cc78b178ede6eeff3afc7d97f2f4ea08559",
+      "tracked_entries": 74,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "8ce0830173fdac609dfb4ea603fdc002c2f4af0dc9b1a005653f5da9cf534b18"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "criterion",
+      "repository": "criterion-rs/criterion.rs",
+      "url": "https://github.com/criterion-rs/criterion.rs.git",
+      "feature": "performance",
+      "role": "test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/criterion",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "a663c1fc211bcc2aa7fff77d9d87964e52489ede",
+      "tree": "6b205816cb693005cb5f3b8172d59e9db1466c47",
+      "commit_url": "https://github.com/criterion-rs/criterion.rs/commit/a663c1fc211bcc2aa7fff77d9d87964e52489ede",
+      "tracked_entries": 352,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "4594f18866be94a3ce309ed8f94d92699f5b87739b76e1216addca75f5253fa7"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "dhat",
+      "repository": "nnethercote/dhat-rs",
+      "url": "https://github.com/nnethercote/dhat-rs.git",
+      "feature": "performance",
+      "role": "experimental_test_harness",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/dhat",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "30e041bbf5bc1d160366494a9489d0ca340db3a8",
+      "tree": "d637f6e11104f037ac46ce30760413467266fd71",
+      "commit_url": "https://github.com/nnethercote/dhat-rs/commit/30e041bbf5bc1d160366494a9489d0ca340db3a8",
+      "tracked_entries": 18,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "cargo-deny",
+      "repository": "EmbarkStudios/cargo-deny",
+      "url": "https://github.com/EmbarkStudios/cargo-deny.git",
+      "feature": "security",
+      "role": "external_adapter",
+      "declared_main_license": "MIT OR Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/cargo-deny",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "79d7f54dc1bfd8cc8105fac917d3dcc7675eb026",
+      "tree": "92d6f7e641520db892b77293fa9fe8f82a00ae66",
+      "commit_url": "https://github.com/EmbarkStudios/cargo-deny/commit/79d7f54dc1bfd8cc8105fac917d3dcc7675eb026",
+      "tracked_entries": 418,
+      "root_license_files": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "090a294a492ab2f41388252312a65cf2f0e423330b721a68c6665ac64766753b"
+        }
+      ],
+      "submodule_entries": [
+        "160000 commit ddccfe8aced779f7b54d27bbe7e122ecb1dda33a\ttests/advisory-db/advisory-db-3157b0e258782691",
+        "160000 commit 1f44d565d81692a44b8c7af8a80f587e19757f8c\ttests/advisory-db/test-advisory-db-c27873b782cceedc"
+      ],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "osv-scanner",
+      "repository": "google/osv-scanner",
+      "url": "https://github.com/google/osv-scanner.git",
+      "feature": "security",
+      "role": "external_adapter",
+      "declared_main_license": "Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/osv-scanner",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "6126a8e7111d6394d75c8ca1e13aa1bb3a07149a",
+      "tree": "5f114a635ce62f9d68b7c01ac3b02248f35e46d6",
+      "commit_url": "https://github.com/google/osv-scanner/commit/6126a8e7111d6394d75c8ca1e13aa1bb3a07149a",
+      "tracked_entries": 793,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "betterleaks",
+      "repository": "betterleaks/betterleaks",
+      "url": "https://github.com/betterleaks/betterleaks.git",
+      "feature": "security",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/betterleaks",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "95237cf8eb4d8e9f67409595b245e674832992cf",
+      "tree": "c8229444423b8193d68493ad84053e5c52d37b2d",
+      "commit_url": "https://github.com/betterleaks/betterleaks/commit/95237cf8eb4d8e9f67409595b245e674832992cf",
+      "tracked_entries": 705,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "caea114592a8f8e5e05a116d63a99e0ccd79a3ff74f4ddf270bcf4c929eb021e"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "semgrep",
+      "repository": "semgrep/semgrep",
+      "url": "https://github.com/semgrep/semgrep.git",
+      "feature": "security",
+      "role": "external_adapter",
+      "declared_main_license": "LGPL-2.1; file/rule terms must be checked",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/semgrep",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "ad20f09ece0b652f4e532803ce3bcf0e1586c618",
+      "tree": "888183b53ed1f703aad50d196aba07900465e164",
+      "commit_url": "https://github.com/semgrep/semgrep/commit/ad20f09ece0b652f4e532803ce3bcf0e1586c618",
+      "tracked_entries": 10078,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+        }
+      ],
+      "submodule_entries": [
+        "160000 commit c9a4e36f11b202061eb219a309580b903266c47c\tlanguages/bash/tree-sitter/semgrep-bash",
+        "160000 commit a8e2d5d5dcf8345735b15268b76b24377103a188\tlanguages/cairo/tree-sitter/semgrep-cairo",
+        "160000 commit 4e1e82bad56bccfe63e12cedd830b768789e239d\tlanguages/circom/tree-sitter/semgrep-circom",
+        "160000 commit 9186c38ddf4d16113209e344f1e5de3d1b30be83\tlanguages/cpp/tree-sitter/semgrep-cpp",
+        "160000 commit a20746f8fa5c155453f91d58d5bf3b736d1fbdb4\tlanguages/csharp/tree-sitter/semgrep-c-sharp",
+        "160000 commit 4a9be34e29ac6691d2050c10179e809e4f6bedf3\tlanguages/dart/tree-sitter/semgrep-dart",
+        "160000 commit 88b70c9520964c696f1c833b8e8fb9645d4233d6\tlanguages/dockerfile/tree-sitter/semgrep-dockerfile",
+        "160000 commit 05a4b6c58299a290ad11af178568490af63f1d37\tlanguages/fga/tree-sitter/semgrep-fga",
+        "160000 commit d2e55851fea0f5bd6705198e6282994d5bba4803\tlanguages/go/tree-sitter/semgrep-go",
+        "160000 commit 401a92b1ef61e526bad118f3c97119c714384519\tlanguages/hack/tree-sitter/semgrep-hack",
+        "160000 commit 2bde56bff950da7984ae729c656e10c05ede3ddf\tlanguages/html/tree-sitter/semgrep-html",
+        "160000 commit 75161f747b9342254c7a132bb0ca7458618cd0a7\tlanguages/java/tree-sitter/semgrep-java",
+        "160000 commit 90e1fbc65e25e1dbef85776777adb3cd53184ec5\tlanguages/jsonnet/tree-sitter/semgrep-jsonnet",
+        "160000 commit 3dabca267d6565b1a5f50db3f654e5f837a8ea29\tlanguages/julia/tree-sitter/semgrep-julia",
+        "160000 commit 1bddb22061147533add5a66bfe8530254ae81675\tlanguages/kotlin/tree-sitter/semgrep-kotlin",
+        "160000 commit f56ba7e347cb078a40551a5b2657b1351d086922\tlanguages/lisp/tree-sitter/semgrep-clojure",
+        "160000 commit 49a7ed0d0c4859cc91ad0c43b0cf92d7448d007e\tlanguages/lua/tree-sitter/semgrep-lua",
+        "160000 commit 667944faf4c1d81299cc34e4f09f5ab34330df09\tlanguages/move_on_aptos/tree-sitter/semgrep-move-on-aptos",
+        "160000 commit 4fe01c06c24ada6a9b0a99d49cc488964fa11046\tlanguages/move_on_sui/tree-sitter/semgrep-move-on-sui",
+        "160000 commit 62466992084e2b75c048ded706e3a9119f9ded2c\tlanguages/ocaml/tree-sitter/semgrep-ocaml",
+        "160000 commit 507f87c239d00f0dc501cd4c9105fb35aee4c10b\tlanguages/php/tree-sitter/semgrep-php",
+        "160000 commit 3436085e1638264516ce75c484adf45fc96382d1\tlanguages/promql/tree-sitter/semgrep-promql",
+        "160000 commit 6754f93b8c89e9e62b48821081300460648f534f\tlanguages/protobuf/tree-sitter/semgrep-proto",
+        "160000 commit 647a20f8207740b0a76541bb27e1eaaf111dca7e\tlanguages/python/tree-sitter/semgrep-python",
+        "160000 commit 55749f3c2124dfe1661453ab0790042035a16d41\tlanguages/ql/tree-sitter/semgrep-ql",
+        "160000 commit d8576644f8c813ea1ec4403866f661861e43969a\tlanguages/r/tree-sitter/semgrep-r",
+        "160000 commit 6cf62c7417a3f2961327ee97babf96454b734b19\tlanguages/ruby/tree-sitter/semgrep-ruby",
+        "160000 commit 64fe5d06dfafad9c2a9764524db036cd31820e3c\tlanguages/rust/tree-sitter/semgrep-rust",
+        "160000 commit b89a80db4bb076e74f9059eb67f5af7d6195b32d\tlanguages/scala/tree-sitter/semgrep-scala",
+        "160000 commit 2f369b589d29ae351bca32cd9d82f554748594ad\tlanguages/solidity/tree-sitter/semgrep-solidity",
+        "160000 commit f62f0c1dffa87b84dd1513374687513e6e091de1\tlanguages/swift/tree-sitter/semgrep-swift",
+        "160000 commit 51c3c26af2b5e23d879fbefa61639254140adc0a\tlanguages/terraform/tree-sitter/semgrep-hcl",
+        "160000 commit 6005de74ed9e2fb891785a3df8582dbb91e272bc\tlanguages/typescript/tree-sitter/semgrep-tsx",
+        "160000 commit 50fe6a5c46d3dee74d1d176b9767ffc520a1003e\tlanguages/typescript/tree-sitter/semgrep-typescript",
+        "160000 commit f4c892a3e7b1d7238562d864d6a9178d7b5c996d\tlibs/ocaml-tree-sitter-semgrep",
+        "160000 commit 947bf05744d4c95153173a24879f30b3ba1a65aa\ttests/semgrep-rules"
+      ],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "playwright",
+      "repository": "microsoft/playwright",
+      "url": "https://github.com/microsoft/playwright.git",
+      "feature": "product-behavior",
+      "role": "test_harness",
+      "declared_main_license": "Apache-2.0",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/playwright",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "6232bd76fcf9e54c2e0b57e79879b75e30c89b46",
+      "tree": "62d9e216d0e7ae2f628f7df6f6476115cfa5d39b",
+      "commit_url": "https://github.com/microsoft/playwright/commit/6232bd76fcf9e54c2e0b57e79879b75e30c89b46",
+      "tracked_entries": 3095,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb"
+        },
+        {
+          "path": "NOTICE",
+          "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "schemathesis",
+      "repository": "schemathesis/schemathesis",
+      "url": "https://github.com/schemathesis/schemathesis.git",
+      "feature": "product-behavior",
+      "role": "external_adapter",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/schemathesis",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "66b5c3ed71f429151aba46c68da856e6ec43f447",
+      "tree": "e92780aaa6733271db510ab767c341454bea1774",
+      "commit_url": "https://github.com/schemathesis/schemathesis/commit/66b5c3ed71f429151aba46c68da856e6ec43f447",
+      "tracked_entries": 2086,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "d957b827cbf98cc4005ab4fbaf59dfddb23c55f964deb65541e7e2176ce9c708"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "swe-bench",
+      "repository": "SWE-bench/SWE-bench",
+      "url": "https://github.com/SWE-bench/SWE-bench.git",
+      "feature": "evaluation",
+      "role": "evaluation_harness",
+      "declared_main_license": "MIT; task/data terms separate",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/swe-bench",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+      "tree": "3c53c27bd4ae6a14ddf58be94156965dcd00f6f3",
+      "commit_url": "https://github.com/SWE-bench/SWE-bench/commit/02e7a74ffd0b707aab73d203fe87bdc7c76afc8e",
+      "tracked_entries": 679,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "2bd2e08df7147f67a69b42c10efae09bd4bf119df397371036187d5dd1b02f57"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "inspect-ai",
+      "repository": "UKGovernmentBEIS/inspect_ai",
+      "url": "https://github.com/UKGovernmentBEIS/inspect_ai.git",
+      "feature": "evaluation",
+      "role": "evaluation_harness",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/inspect-ai",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "ec3bf0995fb6435f452f158f85ca423803aa0f98",
+      "tree": "b4283fdbd598bbcce713324704f02fa27f3bebc4",
+      "commit_url": "https://github.com/UKGovernmentBEIS/inspect_ai/commit/ec3bf0995fb6435f452f158f85ca423803aa0f98",
+      "tracked_entries": 2232,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "c593c2afc81388521eaeb03f0d1a4b01bc3e5147ed9cb16c1f129e5be353b6af"
+        }
+      ],
+      "submodule_entries": [
+        "160000 commit a383f9a9bdcbe3193b72b845d73e80135c737d00\tsrc/inspect_ai/_view/ts-mono"
+      ],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    },
+    {
+      "id": "promptfoo",
+      "repository": "promptfoo/promptfoo",
+      "url": "https://github.com/promptfoo/promptfoo.git",
+      "feature": "evaluation",
+      "role": "evaluation_harness",
+      "declared_main_license": "MIT",
+      "license_review": "inventory_only_not_distribution_clearance",
+      "checkout": "/workspace/scratch/0ef32b5efa98/upstream-sources/promptfoo",
+      "installed": false,
+      "integrated": false,
+      "status": "source_acquired",
+      "commit": "7cf65f33e5ac09d1edc93753430d83d35f7128cb",
+      "tree": "b130de0b2f00982a96f1981552667c5fd144ed57",
+      "commit_url": "https://github.com/promptfoo/promptfoo/commit/7cf65f33e5ac09d1edc93753430d83d35f7128cb",
+      "tracked_entries": 5503,
+      "root_license_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "bf813686553f451e1b833fbd827488aee49b60b189626915bf3108d10b754e44"
+        }
+      ],
+      "submodule_entries": [],
+      "lfs_pointer_paths": [],
+      "completeness": "top_level_git_tree; submodules_and_LFS_payloads_not_acquired",
+      "source_modified": false
+    }
+  ]
+}

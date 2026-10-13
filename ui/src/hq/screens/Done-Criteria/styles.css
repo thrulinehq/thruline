@@ -1,0 +1,17 @@
+body{margin:0;background:#000000}
+a{color:#FF7A29;text-decoration:none}a:hover{color:#FF8F4D}
+.tl-btn:hover{filter:brightness(1.12)}
+.tl-row:hover{background:#16161A}
+.tl-ghost:hover{background:#16161A;color:#EDEDEF}
+.tl-rec .tl-u{text-decoration-line:underline;text-decoration-color:#66666F;text-underline-offset:3px}.tl-rec:hover .tl-u{text-decoration-color:#FF7A29}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid #FF7A29;outline-offset:2px;box-shadow:0 0 0 1px #FFFFFF inset}
+textarea::placeholder{color:#82828C}
+@keyframes tl-pulse{0%{opacity:.35}50%{opacity:1}100%{opacity:.35}}
+@keyframes tl-flow{to{stroke-dashoffset:-24}}
+/* the top bar never wraps (polish): its controls keep their size on one line; the breadcrumb's title absorbs the squeeze with an ellipsis (full text in title=), the version note first */
+.tl-topbar>:not(nav){flex-shrink:0;white-space:nowrap}
+.tl-topbar>nav>*{flex-shrink:0}
+.tl-topbar>nav>.tl-crumb-title{flex:0 1 auto !important;min-width:0 !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-topbar>nav>.tl-crumb-meta{flex:0 100 auto !important;min-width:0 !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* focus (polish, DESIGN-SPEC §1.10): the ring appears on real keyboard focus only; the canvas's static ring is drawn in the gallery alone */
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid #FF7A29 !important;outline-offset:2px}

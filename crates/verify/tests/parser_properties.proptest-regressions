@@ -1,0 +1,9 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 5b170b3f3e761b3717c660f1d26aa372d4257358267edd5f7de6df8e74cca0d7 # shrinks to text = "test result:", pytest = false
+cc db6eae223247e86d86dd79fa3f5a370fd449192e349c0ae8686dd4d90af6a11d # shrinks to word = "pytest", before = "jest"
+cc 7f5d7f2e44a5bb0aec3c54604c336fbd33494e9ee75dec6895e01521c3fb6bc1 # shrinks to word = "pytest", before = "uvx"

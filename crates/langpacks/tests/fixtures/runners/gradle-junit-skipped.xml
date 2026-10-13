@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="demo.ShippingTest" tests="3" skipped="2" failures="0" errors="0" timestamp="2026-09-04T21:47:02.094Z" hostname="Dev-MacBook-Pro.local" time="0.019">
+  <properties/>
+  <testcase name="computesInternationalRate()" classname="demo.ShippingTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="computesExpressRate()" classname="demo.ShippingTest" time="0.008">
+    <skipped message="org.opentest4j.TestAbortedException: Assumption failed: no CARRIER_TOKEN in the environment" type="org.opentest4j.TestAbortedException">org.opentest4j.TestAbortedException: Assumption failed: no CARRIER_TOKEN in the environment
+	at org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)
+	at org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)
+	at demo.ShippingTest.computesExpressRate(ShippingTest.java:23)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+</skipped>
+  </testcase>
+  <testcase name="computesDomesticRate()" classname="demo.ShippingTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,4 @@
+=== RUN   TestAdd
+--- PASS: TestAdd (0.00s)
+PASS
+ok  	example.com/capture/allpass	0.199s

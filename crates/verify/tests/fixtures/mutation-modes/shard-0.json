@@ -1,0 +1,383 @@
+{
+  "outcomes": [
+    {
+      "scenario": "Baseline",
+      "summary": "Success",
+      "log_path": "log/baseline.log",
+      "diff_path": null,
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.158344625,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--package=secondary@0.1.0",
+            "--all-features"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.777774625,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--package=secondary@0.1.0",
+            "--all-features"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:1:35: replace positive -> bool with true",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "positive",
+            "return_type": "-> bool",
+            "span": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 1,
+              "column": 35
+            },
+            "end": {
+              "line": 1,
+              "column": 40
+            }
+          },
+          "replacement": "true",
+          "genre": "FnValue"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_1_col_35.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_1_col_35.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.108563583,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--all-features"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.440338875,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--all-features"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:1:37: replace > with == in positive",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "positive",
+            "return_type": "-> bool",
+            "span": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 1,
+              "column": 37
+            },
+            "end": {
+              "line": 1,
+              "column": 38
+            }
+          },
+          "replacement": "==",
+          "genre": "BinaryOperator"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_1_col_37.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_1_col_37.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.158906041,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--all-features"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.7071825,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--all-features"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:1:37: replace > with >= in positive",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "positive",
+            "return_type": "-> bool",
+            "span": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 1,
+              "column": 37
+            },
+            "end": {
+              "line": 1,
+              "column": 38
+            }
+          },
+          "replacement": ">=",
+          "genre": "BinaryOperator"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_1_col_37_001.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_1_col_37_001.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.112128125,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--all-features"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.554520542,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--all-features"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "secondary/src/lib.rs:1:45: replace secondary_positive -> bool with false",
+          "package": "secondary",
+          "file": "secondary/src/lib.rs",
+          "function": {
+            "function_name": "secondary_positive",
+            "return_type": "-> bool",
+            "span": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 52
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 1,
+              "column": 45
+            },
+            "end": {
+              "line": 1,
+              "column": 50
+            }
+          },
+          "replacement": "false",
+          "genre": "FnValue"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/secondary__src__lib.rs_line_1_col_45.log",
+      "diff_path": "diff/secondary__src__lib.rs_line_1_col_45.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.113035791,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=secondary@0.1.0",
+            "--all-features"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.606488583,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=secondary@0.1.0",
+            "--all-features"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "secondary/src/lib.rs:1:47: replace > with < in secondary_positive",
+          "package": "secondary",
+          "file": "secondary/src/lib.rs",
+          "function": {
+            "function_name": "secondary_positive",
+            "return_type": "-> bool",
+            "span": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 52
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 1,
+              "column": 47
+            },
+            "end": {
+              "line": 1,
+              "column": 48
+            }
+          },
+          "replacement": "<",
+          "genre": "BinaryOperator"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/secondary__src__lib.rs_line_1_col_47.log",
+      "diff_path": "diff/secondary__src__lib.rs_line_1_col_47.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.115448375,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=secondary@0.1.0",
+            "--all-features"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.605506,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=secondary@0.1.0",
+            "--all-features"
+          ]
+        }
+      ]
+    }
+  ],
+  "total_mutants": 5,
+  "missed": 0,
+  "caught": 5,
+  "timeout": 0,
+  "unviable": 0,
+  "success": 0,
+  "start_time": "2026-09-12T22:12:48.423081Z",
+  "end_time": "2026-09-12T22:12:51.303268Z",
+  "cargo_mutants_version": "27.1.0"
+}

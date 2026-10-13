@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thrulinehq.com/schema/capsule/v2",
+  "title": "ThruLine Recovery Capsule v2 (TLCAP_V2)",
+  "description": "The MANDATE-v4 §15 canonical Recovery Capsule. Canonical JSON is the authority; human-readable text is derived from it by one renderer and holds no independent fact. This document is CLOSED (unlike v1's open Law 4): every field is required, unknown fields refuse at parse, and every content field is hash-covered — `capsule_id` is the SHA-256 of the TLCAP_V2 canonical serialization (length-prefixed, documented on the reference encoder), computed over every field except `capsule_id` itself. The sealed document's byte digest (its content-address in the protected store) travels beside the capsule, never inside it. Changing any hashed field fails verification. A sealed capsule is immutable: later source-session output cannot change it — new state is a new capsule linked by `lineage`.\n\nThe five §15 categories — established facts, agent assertions, unknowns, open obligations, recommendations — are separate typed arrays end-to-end; no shared bucket exists for a renderer to blend. Capsule facts may not cite the capsule itself: receipts terminate only at the six §11 raw-evidence arms, and no capsule-id terminal exists. Negative findings are advisory (§5): a no-proof note is exactly 'claim observed; required supporting proof was not found within the stated search scope', never an authoritative fact. Secret masking runs before persistence; a masking failure quarantines the element, marks the capsule incomplete, and never emits the raw value.",
+  "type": "object",
+  "required": [
+    "capsule_version",
+    "format",
+    "capsule_id",
+    "generator",
+    "scope",
+    "source",
+    "repository",
+    "workspace",
+    "snapshot",
+    "cutoff",
+    "lineage",
+    "original_task",
+    "established_work",
+    "agent_assertions",
+    "unknowns",
+    "open_obligations",
+    "current_failures",
+    "incomplete_evidence",
+    "continuation_state",
+    "decisions_constraints",
+    "recommendations",
+    "category_empties",
+    "redaction",
+    "completeness",
+    "measurement"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "capsule_version": { "const": 2 },
+    "format": { "const": "TLCAP_V2" },
+    "capsule_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 (lowercase hex) of the TLCAP_V2 canonical serialization of every other field. Immutable; verification recomputes it."
+    },
+    "generator": {
+      "type": "object",
+      "required": ["name", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["project"] },
+        "id": { "type": "string" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "description": "Source agent and session (§15). For a project scope the session is the most recent recorded one; each line cites its own session in its receipt.",
+      "required": ["agent", "session"],
+      "additionalProperties": false,
+      "properties": {
+        "agent": { "type": "string" },
+        "session": { "type": "string" }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "description": "Repository identity. When the scope does not resolve, it says so — sibling roots are never guessed, and the §11 observation writers abstain rather than record against a guess.",
+      "required": ["resolves", "repo_id", "basis"],
+      "additionalProperties": false,
+      "properties": {
+        "resolves": { "type": "boolean" },
+        "repo_id": { "type": ["string", "null"] },
+        "basis": { "type": ["string", "null"] }
+      }
+    },
+    "workspace": {
+      "type": "object",
+      "description": "Workspace identity (§12 `wsid1:` string) where the caller observed one; the basis states why it is present or absent. Never guessed inside the compiler.",
+      "required": ["identity", "basis"],
+      "additionalProperties": false,
+      "properties": {
+        "identity": { "type": ["string", "null"] },
+        "basis": { "type": "string" }
+      }
+    },
+    "snapshot": {
+      "type": ["object", "null"],
+      "description": "Snapshot ID and digest (§15) with completeness attached. `doc_sha256` is the C2 snapshot document's content digest; `manifest_digest` is the TLSNAP_V1 byte-layer digest when the snapshot carries one. Null states that no snapshot was taken — never implied.",
+      "required": [
+        "snapshot_id",
+        "doc_sha256",
+        "manifest_digest",
+        "complete",
+        "head",
+        "branch",
+        "taken_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "snapshot_id": { "type": "string" },
+        "doc_sha256": { "type": "string" },
+        "manifest_digest": { "type": ["string", "null"] },
+        "complete": { "type": "boolean" },
+        "head": { "type": ["string", "null"] },
+        "branch": { "type": ["string", "null"] },
+        "taken_at": { "type": "string" }
+      }
+    },
+    "cutoff": {
+      "type": "object",
+      "description": "Creation cutoff (§15): the chain position and moment this capsule was sealed at. Later source-session output cannot change a sealed capsule.",
+      "required": ["chain_position", "event_total", "created_at", "statement"],
+      "additionalProperties": false,
+      "properties": {
+        "chain_position": { "type": "string" },
+        "event_total": { "type": "integer", "minimum": 0 },
+        "created_at": { "type": "string" },
+        "statement": { "type": "string" }
+      }
+    },
+    "lineage": {
+      "type": ["string", "null"],
+      "description": "The prior sealed capsule's `capsule_id` for this scope, when one exists. New state requires a new capsule and this link."
+    },
+    "original_task": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "established_work": {
+      "type": "array",
+      "description": "Category 1 — established facts: established completed work, receipted, §9-stated.",
+      "items": {
+        "type": "object",
+        "required": ["text", "state", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "state": {
+            "enum": ["RECORD_SUPPORTED", "CURRENT_STATE_CONFIRMED"],
+            "description": "Never ASSERTED — an assertion is category 2 by type."
+          },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "agent_assertions": {
+      "type": "array",
+      "description": "Category 2 — agent assertions not established. Always ASSERTED; the advisory note is §5's sentence verbatim and is never an authoritative fact.",
+      "items": {
+        "type": "object",
+        "required": ["text", "state", "advisory", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "state": { "const": "ASSERTED" },
+          "advisory": {
+            "type": ["string", "null"],
+            "description": "When present: 'claim observed; required supporting proof was not found within the stated search scope'."
+          },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "description": "Category 3 — known unknowns.",
+      "items": {
+        "type": "object",
+        "required": ["text", "state", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "state": { "enum": ["UNKNOWN", "INCOMPLETE_SEARCH"] },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "open_obligations": {
+      "type": "array",
+      "description": "Category 4 — open obligations. `item_id` is deterministic over SOURCE identity (TLOBL_V1: sha256 over lp(origin)+lp(kind)+lp(artifact_key), prefixed 'obl1:') — rewording-invariant, collision-tested. A successor acknowledges or rejects each id.",
+      "items": {
+        "type": "object",
+        "required": ["item_id", "kind", "origin", "artifact_key", "text", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "item_id": { "type": "string", "pattern": "^obl1:[0-9a-f]{64}$" },
+          "kind": { "type": "string" },
+          "origin": { "type": "string" },
+          "artifact_key": { "type": "string" },
+          "text": { "type": "string" },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "current_failures": {
+      "type": "array",
+      "description": "Never trimmed for size.",
+      "items": {
+        "type": "object",
+        "required": ["text", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "incomplete_evidence": {
+      "type": "array",
+      "description": "Incomplete-evidence markers (§15): overflowed tool results, source ceilings, masking-failure quarantines. Never trimmed.",
+      "items": {
+        "type": "object",
+        "required": ["marker", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "marker": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "continuation_state": {
+      "type": "array",
+      "description": "Dirty and untracked work needed for continuation — snapshot-cited, never inlined bytes. Never trimmed.",
+      "items": {
+        "type": "object",
+        "required": ["text", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "decisions_constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text", "receipt"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "receipt": { "$ref": "#/$defs/receipt" }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "description": "Category 5 — recommendations, labelled as recommendations. Not factual lines: each carries the compiler rule that produced it.",
+      "items": {
+        "type": "object",
+        "required": ["text", "label", "basis"],
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string" },
+          "label": { "const": "recommendation" },
+          "basis": { "type": "string" }
+        }
+      }
+    },
+    "category_empties": {
+      "type": "array",
+      "description": "Why an empty category is empty — a measured zero and a structural gap are different facts (v1's Law 2, carried forward).",
+      "items": {
+        "type": "object",
+        "required": ["category", "kind", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "category": { "type": "string" },
+          "kind": {
+            "enum": ["no_source_object", "source_queried_and_empty", "withheld"]
+          },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "description": "The treatment RECEIVED, never a property held — v1's SecretsPolicy stance. Masking runs before persistence; the treatment object is the detector's own record.",
+      "required": ["treatment", "statement", "structural_exclusions"],
+      "additionalProperties": false,
+      "properties": {
+        "treatment": {
+          "type": "object",
+          "description": "thruline redact::Treatment: {state: 'ran', detector, masked, patterns, statement} or {state: 'no_detector_ran', statement}."
+        },
+        "statement": { "type": "string" },
+        "structural_exclusions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "completeness": {
+      "type": "object",
+      "required": ["state", "reasons"],
+      "additionalProperties": false,
+      "properties": {
+        "state": { "enum": ["complete", "incomplete"] },
+        "reasons": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "description": "Token/size measurement (§15). Trimming discloses what it withheld; correctness-critical categories are never trimmed to meet the target.",
+      "required": ["token_estimate", "budget", "trimmed"],
+      "additionalProperties": false,
+      "properties": {
+        "token_estimate": { "type": "integer", "minimum": 0 },
+        "budget": { "type": "integer", "minimum": 0 },
+        "trimmed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["category", "items_withheld", "tokens_withheld"],
+            "additionalProperties": false,
+            "properties": {
+              "category": { "type": "string" },
+              "items_withheld": { "type": "integer", "minimum": 0 },
+              "tokens_withheld": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "receipt": {
+      "type": "object",
+      "description": "An observation-model source receipt (§11): a mandatory raw-evidence terminal plus optional derived-row context. The six terminal kinds are the ONLY receipt endings — no capsule-id terminal exists, so self-citation is structurally impossible.",
+      "required": ["terminal"],
+      "additionalProperties": true,
+      "properties": {
+        "terminal": {
+          "type": "object",
+          "required": ["kind"],
+          "properties": {
+            "kind": {
+              "enum": [
+                "transcript",
+                "filesystem",
+                "process_execution",
+                "snapshot_manifest",
+                "provider_response",
+                "human_adjudication"
+              ]
+            }
+          }
+        },
+        "derived_refs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["table", "id"],
+            "properties": {
+              "table": { "type": "string" },
+              "id": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

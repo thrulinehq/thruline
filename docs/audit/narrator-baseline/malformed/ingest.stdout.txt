@@ -1,0 +1,17 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/malformed/store/ledger.db
+projects 1
+sessions 1
+lines    6 read · 0 already ingested
+events   3 new
+           meta                 1
+           user_msg             2
+unknown  1 type(s) mapped to meta
+           brand-new-unknown-kind     1
+malformed 3 line(s)
+           <SRC>/crates/core/tests/fixtures/malformed.jsonl:2 — invalid JSON: EOF while parsing a string at line 1 column 142
+           <SRC>/crates/core/tests/fixtures/malformed.jsonl:6 — invalid JSON: expected ident at line 1 column 2
+           <SRC>/crates/core/tests/fixtures/malformed.jsonl:8 — truncated final line (interrupted session)
+head     fixtures f6f17a2487d5102db8b2c61cd68dad8c4f5737c717c6c11485bf591fe2a6ee2f
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

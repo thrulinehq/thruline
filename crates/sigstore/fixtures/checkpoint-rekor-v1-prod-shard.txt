@@ -1,0 +1,5 @@
+rekor.sigstore.dev - 2605736670972794746
+117740831
+K5xXgHHhIKqEyYWHg9qmcVZeQWXzp9+hmarYGUApnY4=
+
+— rekor.sigstore.dev wNI9ajBEAiBp0fCFyxbDlQy4jnP2LVm2PvK4PB9rTPMTCZ0t8Fp2xAIgYTTCGrfS+W6Optv241lH7gR8bbHick5PILm9PxEwpkE=

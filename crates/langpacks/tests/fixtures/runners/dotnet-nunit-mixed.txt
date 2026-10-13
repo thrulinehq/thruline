@@ -1,0 +1,35 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Shipping.NUnit -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/nunit/bin/Debug/net9.0/Shipping.NUnit.dll
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/nunit/bin/Debug/net9.0/Shipping.NUnit.dll (.NETCoreApp,Version=v9.0)
+VSTest version 17.14.1 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+  Skipped InternationalSurcharge [< 1 ms]
+  Failed LargeParcelUsesPerKilo [17 ms]
+  Error Message:
+     Assert.That(Shipping.Rate(10), Is.EqualTo(30.00m))
+  Expected: 30m
+  But was:  29.5m
+
+  Stack Trace:
+     at Shipping.NUnit.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/nunit/ShippingTests.cs:line 19
+
+1)    at Shipping.NUnit.ShippingRateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/nunit/ShippingTests.cs:line 19
+
+
+  Failed OversizeRejectsHeavyParcel [1 ms]
+  Error Message:
+     Assert.That(Shipping.IsOversize(29), Is.True)
+  Expected: True
+  But was:  False
+
+  Stack Trace:
+     at Shipping.NUnit.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/nunit/ShippingTests.cs:line 26
+
+1)    at Shipping.NUnit.ShippingRateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/nunit/ShippingTests.cs:line 26
+
+
+
+Failed!  - Failed:     2, Passed:     4, Skipped:     1, Total:     7, Duration: 25 ms - Shipping.NUnit.dll (net9.0)

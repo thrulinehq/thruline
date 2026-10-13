@@ -1,0 +1,3 @@
+cwd: skiponly
+args: pytest 
+exit: 0

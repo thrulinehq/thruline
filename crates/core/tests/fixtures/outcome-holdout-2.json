@@ -1,0 +1,292 @@
+{
+ "note": "SEALED HOLDOUT-2 \u2014 M3.11.0. Grammars mined from market + thruline ambiguity shapes before M3.11 parser or matcher development. Synthetic content per A22: every name, number, path, and command is invented. Mechanically ignored until M3.11.5.",
+ "partition": "holdout-2",
+ "manifest": {
+  "_rule": "\u00a75h: counts are asserted against contents at seal time by tests/sealed_manifests.rs. A description disagreeing with this block is a seal failure.",
+  "added": "M3.12.0, retroactively \u2014 this partition predates \u00a75h",
+  "total_cases": 30,
+  "real_cases": 14,
+  "trap_cases": 16,
+  "real_by_family": {
+   "build": 2,
+   "test": 12
+  }
+ },
+ "sources": [
+  "-Users-dev-Developer-market",
+  "-Users-dev-thruline"
+ ],
+ "gate": "At opening: at least 70% of non-trap cases classified correctly; ZERO wrong families or counts. Abstention costs coverage, never correctness.",
+ "cases": [
+  {
+   "id": "h2-01",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "two cargo runs without final marker",
+   "text": "test result: FAILED. 18 passed; 1 failed; 0 ignored\ntest result: ok. 19 passed; 0 failed; 0 ignored"
+  },
+  {
+   "id": "h2-02",
+   "family": "test",
+   "passed": 42,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "cargo rerun resolved by final marker",
+   "text": "test result: FAILED. 41 passed; 1 failed\n=== FINAL SUMMARY ===\ntest result: ok. 42 passed; 0 failed"
+  },
+  {
+   "id": "h2-03",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "two node TAP runs without final marker",
+   "text": "# tests 6\n# pass 5\n# fail 1\n1..7\n# tests 7\n# pass 7\n# fail 0"
+  },
+  {
+   "id": "h2-04",
+   "family": "test",
+   "passed": 6,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "node TAP rerun resolved by final line",
+   "text": "# tests 6\n# pass 5\n# fail 1\nFINAL: 6 pass, 0 fail"
+  },
+  {
+   "id": "h2-05",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "two swift-testing summaries without final marker",
+   "text": "\u2718 Test run with 30 tests in 4 suites failed after 2.0 seconds with 1 issue.\n\u2714 Test run with 31 tests in 4 suites passed after 2.1 seconds."
+  },
+  {
+   "id": "h2-06",
+   "family": "test",
+   "passed": 31,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "swift rerun with explicit final count summary",
+   "text": "\u2718 Test run with 30 tests in 4 suites failed after 2.0 seconds with 1 issue.\nFINAL GATE: 31 pass, 0 fail"
+  },
+  {
+   "id": "h2-07",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "A41 multi-suite partial summaries",
+   "text": "UnitDeck: 61 pass, 0 fail\nModelDeck: 8 pass, 0 fail\nRevealDeck: 14 pass, 2 fail"
+  },
+  {
+   "id": "h2-08",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "identical repeated count pairs are still multiple runs",
+   "text": "=== run one: 12 pass, 0 fail ===\n=== run two: 12 pass, 0 fail ==="
+  },
+  {
+   "id": "h2-09",
+   "family": "test",
+   "passed": 83,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "multiple suites resolved by final aggregate",
+   "text": "UnitDeck: 61 pass, 0 fail\nModelDeck: 8 pass, 0 fail\nRevealDeck: 14 pass, 0 fail\n=== FINAL AGGREGATE: 83 pass, 0 fail ==="
+  },
+  {
+   "id": "h2-10",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "two conflicting final markers",
+   "text": "FINAL: 20 pass, 0 fail\nFINAL SUMMARY: 19 pass, 1 fail"
+  },
+  {
+   "id": "h2-11",
+   "family": "test",
+   "passed": 63,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "fresh cargo single run",
+   "text": "test result: ok. 63 passed; 0 failed; 2 ignored; finished in 0.8s"
+  },
+  {
+   "id": "h2-12",
+   "family": "test",
+   "passed": 15,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "fresh node TAP field-order mutation",
+   "text": "# fail 0\n# skipped 1\n# tests 15\n# pass 15"
+  },
+  {
+   "id": "h2-13",
+   "family": "test",
+   "passed": 2,
+   "failed": 1,
+   "must_abstain": false,
+   "grammar": "fresh prefix harness",
+   "text": "PASS: alpha is stable\nFAIL: beta leaks\nPASS: gamma retries"
+  },
+  {
+   "id": "h2-14",
+   "family": "test",
+   "passed": 4,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "fresh checkmark harness",
+   "text": "\u2713 cache opens\n\u2713 cache closes\n\u2713 replay holds\n\u2713 cleanup drains"
+  },
+  {
+   "id": "h2-15",
+   "family": "test",
+   "passed": 28,
+   "failed": 2,
+   "must_abstain": false,
+   "grammar": "fresh generic count pair mutation",
+   "text": "--- result :: 28 PASSED / 2 FAILED ---"
+  },
+  {
+   "id": "h2-16",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "must_abstain": false,
+   "grammar": "fresh exit-status success",
+   "text": "Exit status 0"
+  },
+  {
+   "id": "h2-17",
+   "family": "build",
+   "passed": null,
+   "failed": null,
+   "must_abstain": false,
+   "grammar": "fresh build failure",
+   "text": "** BUILD FAILED **"
+  },
+  {
+   "id": "h2-18",
+   "family": "test",
+   "passed": 47,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "fresh swift-testing success",
+   "text": "\u2714 Test run with 47 tests in 5 suites passed after 4.2 seconds."
+  },
+  {
+   "id": "h2-19",
+   "family": "test",
+   "passed": 9,
+   "failed": 0,
+   "must_abstain": false,
+   "grammar": "fresh ratio with explicit result word",
+   "text": "WidgetDeck: **9/9 PASS**."
+  },
+  {
+   "id": "h2-20",
+   "family": "test",
+   "passed": 24,
+   "failed": 3,
+   "must_abstain": false,
+   "grammar": "fresh custom final delimiter",
+   "text": "=== FINAL :: 24 pass | 3 fail ==="
+  },
+  {
+   "id": "h2-t01",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap date ratio",
+   "text": "Finished at 7/8/2026, 10:11:12 PM"
+  },
+  {
+   "id": "h2-t02",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap progress ratio",
+   "text": "[4/9] replay: waited 0.8s"
+  },
+  {
+   "id": "h2-t03",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap unchecked checklist",
+   "text": "- [ ] Final: all 24 tests pass"
+  },
+  {
+   "id": "h2-t04",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap numbered source listing",
+   "text": "88\tlet failed = results.filter { !$0.passed }.count"
+  },
+  {
+   "id": "h2-t05",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap shell source",
+   "text": "fail() { printf 'FAIL: %s\\n' \"$1\"; }"
+  },
+  {
+   "id": "h2-t06",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap git subject",
+   "text": "a1b2c3d final gate: all suites green"
+  },
+  {
+   "id": "h2-t07",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap Swift property",
+   "text": "public var passed: Bool { failures == 0 }"
+  },
+  {
+   "id": "h2-t08",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap future final plan",
+   "text": "Next: final run should show 32 pass, 0 fail."
+  },
+  {
+   "id": "h2-t09",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap prose history",
+   "text": "The earlier report mentioned 15 passed and 1 failed, but no run is attached."
+  },
+  {
+   "id": "h2-t10",
+   "family": "none",
+   "passed": null,
+   "failed": null,
+   "must_abstain": true,
+   "grammar": "trap command source",
+   "text": "printf 'FINAL: 50 pass, 0 fail\\n' > \"$report\""
+  }
+ ]
+}

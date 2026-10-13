@@ -1,0 +1,17 @@
+ok  	example.com/capture/allpass	1.077s	coverage: 100.0% of statements
+--- FAIL: TestDivByZero (0.00s)
+    mixed_test.go:14: Div(1,0) = 0, want 42
+--- FAIL: TestNameUpper (0.00s)
+    mixed_test.go:26: Name() = "mixed", want "MIXED"
+FAIL
+coverage: 100.0% of statements
+FAIL	example.com/capture/mixed	2.455s
+ok  	example.com/capture/skipped	1.957s	coverage: 100.0% of statements
+	example.com/capture/notests		--- FAIL: TestUpper (0.00s)
+    --- FAIL: TestUpper/q (0.00s)
+        subtests_test.go:15: Upper("q") = "Q", want "Q!"
+FAIL
+coverage: 100.0% of statements
+FAIL	example.com/capture/subtests	2.872s
+ok  	example.com/capture/benign	0.613s	coverage: 100.0% of statements
+FAIL

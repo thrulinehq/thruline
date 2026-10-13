@@ -1,0 +1,24 @@
+[package]
+publish = false
+name = "thruline-app-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+# **No HTTP or TLS crate, deliberately.** Everything in this crate is a pure
+# function of bytes that arrived from somewhere else, so the compiler is the
+# first control on where the App's decisions can come from — the same argument
+# `crates/attest` makes, and `tests/no_network.rs` here keeps it true.
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+hmac = "0.13.0"
+subtle = "2.6.1"
+thruline-policy = { version = "0.2.0", path = "../policy" }

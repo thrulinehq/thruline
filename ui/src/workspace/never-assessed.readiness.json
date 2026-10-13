@@ -1,0 +1,13 @@
+{
+  "ready": false,
+  "with_exceptions": false,
+  "headline_slug": "readiness_needs_evidence_one",
+  "target_version": "e71c5b0aaaa",
+  "missing": ["criterion:1"],
+  "rests_on": [],
+  "obligations": [
+    { "id": "candidate_identity", "criterion_index": null, "text": "", "outcome": "satisfied", "unsatisfied": null, "unsatisfied_slug": null },
+    { "id": "criterion:1", "criterion_index": 1, "text": "The service builds cleanly after a restart.", "outcome": "needs_evidence", "unsatisfied": "never_assessed", "unsatisfied_slug": "readiness_never_assessed" },
+    { "id": "criterion:2", "criterion_index": 2, "text": "The release build compiles.", "outcome": "satisfied", "unsatisfied": null, "unsatisfied_slug": null }
+  ]
+}

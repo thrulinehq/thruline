@@ -1,0 +1,41 @@
+[package]
+publish = false
+name = "thruline-attest"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "in-toto/DSSE/Sigstore receipts, commit trailers, TRACE/OTel export."
+
+[lints]
+workspace = true
+
+[dependencies]
+base64 = "0.22"
+ed25519-dalek = { version = "2.2.0", features = ["rand_core", "pkcs8", "pem"] }
+rand_core = { version = "0.6.4", features = ["getrandom"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+thruline-core = { workspace = true }
+# Track B's crate, as a workspace member (DECISIONS #130). `default-features =
+# false` is LOAD-BEARING and not tidiness: it keeps the transport out. B
+# measures the resulting graph at 108 transitive crates, zero forbidden
+# transports, one sha2/digest generation — and `tests/no_network.rs` is what
+# holds that, not this comment.
+#
+# The path is the VENDORED location, not B's sibling checkout. B's own manifest
+# said `../../../thruline-sigstore`, which resolves only on a machine where two
+# repositories sit in a particular arrangement; that is DECISIONS #66, and
+# vendoring is the exit the register chose.
+thruline-sigstore = { version = "0.1.0", path = "../sigstore", default-features = false }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+# Test-only, and only so the published JSON Schema's value domains can be
+# RE-DERIVED from the code that produces them instead of transcribed (A205).
+# Neither crate depends on `attest`, so this adds no cycle.
+thruline-claims = { version = "0.2.0", path = "../claims" }
+thruline-verify = { version = "0.2.0", path = "../verify" }

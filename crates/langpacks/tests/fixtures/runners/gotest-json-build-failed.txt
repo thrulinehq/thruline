@@ -1,0 +1,15 @@
+{"ImportPath":"example.com/broken/broken [example.com/broken/broken.test]","Action":"build-output","Output":"# example.com/broken/broken [example.com/broken/broken.test]\n"}
+{"ImportPath":"example.com/broken/broken [example.com/broken/broken.test]","Action":"build-output","Output":"broken/broken_test.go:12:16: undefined: undefinedHelper\n"}
+{"ImportPath":"example.com/broken/broken [example.com/broken/broken.test]","Action":"build-output","Output":"broken/broken_test.go:16:16: undefined: oops\n"}
+{"ImportPath":"example.com/broken/broken [example.com/broken/broken.test]","Action":"build-fail"}
+{"Time":"2026-09-05T03:08:16.372659+05:30","Action":"start","Package":"example.com/broken/broken"}
+{"Time":"2026-09-05T03:08:16.37296+05:30","Action":"output","Package":"example.com/broken/broken","Output":"FAIL\texample.com/broken/broken [build failed]\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:16.372989+05:30","Action":"fail","Package":"example.com/broken/broken","Elapsed":0,"FailedBuild":"example.com/broken/broken [example.com/broken/broken.test]"}
+{"Time":"2026-09-05T03:08:16.604073+05:30","Action":"start","Package":"example.com/broken/fine"}
+{"Time":"2026-09-05T03:08:16.806645+05:30","Action":"run","Package":"example.com/broken/fine","Test":"TestTwo"}
+{"Time":"2026-09-05T03:08:16.806773+05:30","Action":"output","Package":"example.com/broken/fine","Test":"TestTwo","Output":"=== RUN   TestTwo\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:16.806801+05:30","Action":"output","Package":"example.com/broken/fine","Test":"TestTwo","Output":"--- PASS: TestTwo (0.00s)\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:16.806815+05:30","Action":"pass","Package":"example.com/broken/fine","Test":"TestTwo","Elapsed":0}
+{"Time":"2026-09-05T03:08:16.80682+05:30","Action":"output","Package":"example.com/broken/fine","Output":"PASS\n","OutputType":"frame"}
+{"Time":"2026-09-05T03:08:16.80695+05:30","Action":"output","Package":"example.com/broken/fine","Output":"ok  \texample.com/broken/fine\t0.202s\n"}
+{"Time":"2026-09-05T03:08:16.806967+05:30","Action":"pass","Package":"example.com/broken/fine","Elapsed":0.203}

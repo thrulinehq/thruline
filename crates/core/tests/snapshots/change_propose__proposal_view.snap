@@ -1,0 +1,246 @@
+---
+source: crates/core/tests/change_propose.rs
+expression: view
+---
+{
+  "schema_version": 1,
+  "change_id": "cccccccc-0000-4000-8000-00000000c001",
+  "request": {
+    "title": "Retry failed uploads",
+    "purpose": "Uploads that fail once are lost. When an upload fails, the queue keeps one entry for it.",
+    "prompt_event_id": null,
+    "requester": "sam"
+  },
+  "confirmed_sessions": [
+    "cccccccc-0000-4000-8000-00000000s001"
+  ],
+  "criteria": [
+    {
+      "number": 1,
+      "text": "When an upload fails, the queue keeps one entry for it.",
+      "shape": {
+        "subject": "the queue",
+        "condition": "When an upload fails",
+        "outcome": "keeps one entry for it"
+      },
+      "subject_key": "queue",
+      "source": {
+        "ask_id": "req_ef9938c852086b78e8699b68",
+        "origin": "change_purpose",
+        "session_id": null,
+        "event_id": null,
+        "offset": 33,
+        "length": 54
+      },
+      "reasoning_slug": "proposal_reasoning"
+    },
+    {
+      "number": 2,
+      "text": "Two retry requests for the same delivery do not enqueue duplicate work.",
+      "shape": {
+        "subject": "Two retry requests",
+        "condition": "for the same delivery",
+        "outcome": "do not enqueue duplicate work"
+      },
+      "subject_key": "retry-requests",
+      "source": {
+        "ask_id": "req_da91dac0978c71535dc38624",
+        "origin": "session_opening",
+        "session_id": "cccccccc-0000-4000-8000-00000000s001",
+        "event_id": "cccccccc-ev-cccccccc-0000-4000-8000-00000000s001-1",
+        "offset": 36,
+        "length": 70
+      },
+      "reasoning_slug": "proposal_reasoning"
+    },
+    {
+      "number": 3,
+      "text": "When a delivery fails three times, the record shows a single failure row.",
+      "shape": {
+        "subject": "the record",
+        "condition": "When a delivery fails three times",
+        "outcome": "shows a single failure row"
+      },
+      "subject_key": "record",
+      "source": {
+        "ask_id": "req_da91dac0978c71535dc38624",
+        "origin": "session_opening",
+        "session_id": "cccccccc-0000-4000-8000-00000000s001",
+        "event_id": "cccccccc-ev-cccccccc-0000-4000-8000-00000000s001-1",
+        "offset": 108,
+        "length": 72
+      },
+      "reasoning_slug": "proposal_reasoning"
+    }
+  ],
+  "notes": [
+    {
+      "text": "Uploads that fail once are lost",
+      "source": {
+        "ask_id": "req_ef9938c852086b78e8699b68",
+        "origin": "change_purpose",
+        "session_id": null,
+        "event_id": null,
+        "offset": 0,
+        "length": 31
+      },
+      "refusal": "no_outcome",
+      "reason_slug": "note_no_outcome"
+    },
+    {
+      "text": "Retries are a total mess right now",
+      "source": {
+        "ask_id": "req_da91dac0978c71535dc38624",
+        "origin": "session_opening",
+        "session_id": "cccccccc-0000-4000-8000-00000000s001",
+        "event_id": "cccccccc-ev-cccccccc-0000-4000-8000-00000000s001-1",
+        "offset": 0,
+        "length": 34
+      },
+      "refusal": "no_outcome",
+      "reason_slug": "note_no_outcome"
+    },
+    {
+      "text": "Make retries reliable",
+      "source": {
+        "ask_id": "req_da91dac0978c71535dc38624",
+        "origin": "session_opening",
+        "session_id": "cccccccc-0000-4000-8000-00000000s001",
+        "event_id": "cccccccc-ev-cccccccc-0000-4000-8000-00000000s001-1",
+        "offset": 182,
+        "length": 21
+      },
+      "refusal": "no_outcome",
+      "reason_slug": "note_no_outcome"
+    },
+    {
+      "text": "Please also update the documentation at some point",
+      "source": {
+        "ask_id": "req_da91dac0978c71535dc38624",
+        "origin": "session_opening",
+        "session_id": "cccccccc-0000-4000-8000-00000000s001",
+        "event_id": "cccccccc-ev-cccccccc-0000-4000-8000-00000000s001-1",
+        "offset": 205,
+        "length": 50
+      },
+      "refusal": "no_outcome",
+      "reason_slug": "note_no_outcome"
+    }
+  ],
+  "profile": {
+    "change_types": [
+      "documentation",
+      "backend_behaviour"
+    ],
+    "change_type_slugs": [
+      "type_documentation",
+      "type_backend_behaviour"
+    ],
+    "paths_read": [
+      "docs/notes.md",
+      "src/upload/**",
+      "src/upload/queue.rs",
+      "src/upload/retry.rs"
+    ],
+    "checks": [
+      {
+        "id": "cargo-test",
+        "tool": "cargo",
+        "category": "tests",
+        "mandatory": true,
+        "for_types": [
+          "backend_behaviour"
+        ],
+        "availability": {
+          "state": "tool_absent",
+          "tool": "cargo"
+        },
+        "need_slug": "check_mandatory",
+        "availability_slug": "check_not_available_here",
+        "availability_name": "cargo"
+      },
+      {
+        "id": "clippy",
+        "tool": "cargo-clippy",
+        "category": "lint",
+        "mandatory": false,
+        "for_types": [
+          "backend_behaviour"
+        ],
+        "availability": {
+          "state": "tool_absent",
+          "tool": "cargo-clippy"
+        },
+        "need_slug": "check_advisory",
+        "availability_slug": "check_not_available_here",
+        "availability_name": "cargo-clippy"
+      },
+      {
+        "id": "megalinter",
+        "tool": "megalinter",
+        "category": "lint",
+        "mandatory": false,
+        "for_types": [
+          "documentation"
+        ],
+        "availability": {
+          "state": "tool_absent",
+          "tool": "megalinter"
+        },
+        "need_slug": "check_advisory",
+        "availability_slug": "check_not_available_here",
+        "availability_name": "megalinter"
+      }
+    ],
+    "not_evidence_slug": "profile_is_not_evidence",
+    "unknown_slug": null
+  },
+  "scope": {
+    "paths": [
+      "docs/**",
+      "src/upload/**"
+    ],
+    "from_files": 3,
+    "not_shown": 0,
+    "bound": 25,
+    "reason_slug": "scope_from_the_work",
+    "empty_slug": null,
+    "over_bound_slug": null
+  },
+  "accepted": {
+    "version": 1,
+    "criteria": [],
+    "check_profile": [],
+    "allowed_scope": [
+      "src/upload/**"
+    ],
+    "scope_attribution": "as_proposed",
+    "scope_attribution_slug": "criterion_as_proposed",
+    "acceptance": null,
+    "not_an_approval_slug": "accept_is_not_approval"
+  },
+  "diff": {
+    "accepted_version": 1,
+    "removed": [],
+    "weakened": [],
+    "restated": [],
+    "added": [
+      1,
+      2,
+      3
+    ],
+    "nothing_changed_slug": "reproposal_changes_nothing"
+  },
+  "versions_used": 1,
+  "versions_allowed": 20,
+  "versions_slug": "scope_versions_bounded",
+  "empty_slug": null,
+  "not_accepted_slug": "accepted_scope_none",
+  "masking": {
+    "state": "ran",
+    "detector": "v2",
+    "masked": 0,
+    "patterns": [],
+    "statement": "detector v2 · nothing matched a known secret shape · best-effort, not a guarantee: this artifact carries verbatim prose and command text, and a secret in a shape the detector does not know is still here"
+  }
+}

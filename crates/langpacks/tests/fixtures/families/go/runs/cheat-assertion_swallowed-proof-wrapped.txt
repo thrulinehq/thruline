@@ -1,0 +1,5 @@
+=== RUN   TestRateSmall
+    rate_test.go:11: recovered: shipping: weight must not be negative
+--- PASS: TestRateSmall (0.00s)
+PASS
+ok  	shipping	0.495s

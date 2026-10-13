@@ -1,0 +1,7 @@
+xUnit.net v3 In-Process Runner v4.0.0+8bf043c053 (64-bit .NET 9.0.19)
+  Discovering: Shipping.V3
+  Discovered:  Shipping.V3
+  Starting:    Shipping.V3
+  Finished:    Shipping.V3 (ID = '0cacc164fdbcb19346c5afe11a05737d91a76c7267a205910c16307686f26cad')
+=== TEST EXECUTION SUMMARY ===
+   Shipping.V3  Total: 0

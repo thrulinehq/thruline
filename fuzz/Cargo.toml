@@ -1,0 +1,18 @@
+[package]
+name = "thruline-integration-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+[package.metadata]
+cargo-fuzz = true
+[workspace]
+members = ["."]
+[dependencies]
+libfuzzer-sys = "0.4"
+thruline-verify = { path = "../crates/verify" }
+[[bin]]
+name = "external_reports"
+path = "fuzz_targets/external_reports.rs"
+test = false
+doc = false
+bench = false

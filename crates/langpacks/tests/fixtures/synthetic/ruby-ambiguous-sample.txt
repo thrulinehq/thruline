@@ -1,0 +1,15 @@
+# ruby — A SMALL INVENTED RESIDUE of assertions whose Strength changes when
+# string literals are stripped, written for this repository.
+#
+# Every line is made up for the public copy of ThruLine (invented identifiers,
+# invented paths, no third-party source). Each one carries a matcher word or
+# operator INSIDE a string literal, so reading the literal exposes a different
+# Strength than the stripped text does. `tests/corpus_ambiguity.rs` asserts every
+# record here is STILL ambiguous.
+#
+# Format: <path>:<line><TAB><stripped>-><exposed><TAB><assertion text, escaped>.
+ruby/sample_store/test/stack_test.rb:20	Truthy->Containment	assert response.cacheable?(key), "Key #{key} did not match stored values"
+ruby/sample_store/test/cart_test.rb:29	Truthy->Equality	assert_rendered_as('\\\\==', "<p>==</p>")
+ruby/sample_store/test/registry_test.rb:38	Truthy->Equality	assert_rendered_as('> \\\\==', "<blockquote>==</blockquote>")
+ruby/sample_store/test/cache_test.rb:47	Truthy->Containment	assert_select content, "img:match('src', ?)", %r"//cdn.example.test/.+/photo"
+ruby/sample_store/test/session_test.rb:56	Truthy->Containment	assert parser.accepts?(text), "text should include a heading"

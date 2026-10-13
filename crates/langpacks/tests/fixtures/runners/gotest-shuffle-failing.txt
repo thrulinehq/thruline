@@ -1,0 +1,8 @@
+-test.shuffle 1788587931578899000
+--- FAIL: TestDivByZero (0.00s)
+    mixed_test.go:14: Div(1,0) = 0, want 42
+--- FAIL: TestNameUpper (0.00s)
+    mixed_test.go:26: Name() = "mixed", want "MIXED"
+FAIL
+FAIL	example.com/capture/mixed	0.159s
+FAIL

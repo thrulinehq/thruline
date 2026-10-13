@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/strict
+plugins: anyio-4.13.0
+collected 2 items
+
+test_strict.py F.                                                        [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_strict_xpass _______________________________
+[XPASS(strict)] strict
+=========================== short test summary info ============================
+FAILED test_strict.py::test_strict_xpass - [XPASS(strict)] strict
+========================= 1 failed, 1 passed in 0.01s ==========================

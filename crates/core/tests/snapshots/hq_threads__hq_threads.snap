@@ -1,0 +1,129 @@
+---
+source: crates/core/tests/hq_threads.rs
+expression: shape(&view)
+---
+{
+  "project": {
+    "claims": 3,
+    "commands": {
+      "failed": 1,
+      "succeeded": 3,
+      "total": 4,
+      "unknown": 0
+    },
+    "conversation_prompts": 1,
+    "edits": 5,
+    "prompts": 4,
+    "sessions": 3,
+    "tests": {
+      "failed": 1,
+      "succeeded": 2,
+      "total": 3,
+      "unknown": 0
+    },
+    "threads": 3,
+    "whose_move": {
+      "agent": 0,
+      "done": 1,
+      "you": 2
+    }
+  },
+  "threads": [
+    {
+      "claims": 1,
+      "commands": {
+        "failed": 0,
+        "succeeded": 1,
+        "total": 1,
+        "unknown": 0
+      },
+      "commits": 0,
+      "conversation": 0,
+      "edited_after_last_pass": [],
+      "edits": 2,
+      "last_test": {
+        "command": "cargo test --lib",
+        "outcome": "succeeded"
+      },
+      "prompts": 1,
+      "sessions": 1,
+      "tests": {
+        "failed": 0,
+        "succeeded": 1,
+        "total": 1,
+        "unknown": 0
+      },
+      "title": "Rename the helper in util.rs to new_name.",
+      "title_basis": "work_sentence",
+      "top_files": [
+        "src/names.rs",
+        "src/util.rs"
+      ],
+      "whose_move": "done",
+      "whose_move_basis": "nothing_open"
+    },
+    {
+      "claims": 1,
+      "commands": {
+        "failed": 1,
+        "succeeded": 2,
+        "total": 3,
+        "unknown": 0
+      },
+      "commits": 1,
+      "conversation": 1,
+      "edited_after_last_pass": [
+        "src/auth.rs"
+      ],
+      "edits": 2,
+      "last_test": {
+        "command": "cargo test",
+        "outcome": "failed"
+      },
+      "prompts": 2,
+      "sessions": 2,
+      "tests": {
+        "failed": 1,
+        "succeeded": 1,
+        "total": 2,
+        "unknown": 0
+      },
+      "title": "Fix the login crash in `src/auth.rs`, it panics on empty input.",
+      "title_basis": "work_sentence",
+      "top_files": [
+        "src/auth.rs"
+      ],
+      "whose_move": "you",
+      "whose_move_basis": "last_test_failed"
+    },
+    {
+      "claims": 1,
+      "commands": {
+        "failed": 0,
+        "succeeded": 0,
+        "total": 0,
+        "unknown": 0
+      },
+      "commits": 0,
+      "conversation": 0,
+      "edited_after_last_pass": [],
+      "edits": 1,
+      "last_test": null,
+      "prompts": 1,
+      "sessions": 1,
+      "tests": {
+        "failed": 0,
+        "succeeded": 0,
+        "total": 0,
+        "unknown": 0
+      },
+      "title": "Now add a setup section to the README.",
+      "title_basis": "work_sentence",
+      "top_files": [
+        "README.md"
+      ],
+      "whose_move": "you",
+      "whose_move_basis": "claim_without_passing_test"
+    }
+  ]
+}

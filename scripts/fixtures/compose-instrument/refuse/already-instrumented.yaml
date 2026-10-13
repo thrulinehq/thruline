@@ -1,0 +1,16 @@
+services:
+  client:
+    build:
+      dockerfile: Dockerfile
+    image: ${T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME}
+    container_name: ${T_BENCH_TASK_DOCKER_CLIENT_CONTAINER_NAME}
+    command: ["sh", "-c", "printf 'export PATH=/thruline/bin:/thruline/shim:$$PATH:$$HOME/.local/bin\\n' > /etc/profile.d/00-thruline-shim.sh && mkdir -p /app && cd /app && git init -q . && git config user.email pilot@thruline.invalid && git config user.name thruline-pilot && git add -A && git commit -q --allow-empty -m thruline-baseline && git rev-parse 'HEAD^{tree}' > /thruline/baseline-tree.txt && thruline hook-install --harness codex --scope user > /thruline/hook-install.log 2>&1 && thruline shim install --dir /thruline/shim --harness codex --spool /thruline/spool/codex.jsonl --session ${THRULINE_SESSION} --repo /app > /thruline/shim-install.log 2>&1 && chmod +x /thruline/bin/codex && test -x /thruline/shim/pytest && test -x /thruline/shim/uv && test -x /thruline/bin/codex && test -s /root/.codex/hooks.json && test -s /thruline/baseline-tree.txt && echo instrumented > /thruline/READY && { sleep infinity; }"]
+    environment:
+      - TEST_DIR=${T_BENCH_TEST_DIR}
+      - PATH=/thruline/bin:/thruline/shim:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.local/bin
+      - THRULINE_HOME=/thruline/home
+    volumes:
+      - ${T_BENCH_TASK_LOGS_PATH}:${T_BENCH_CONTAINER_LOGS_PATH}
+      - ${THRULINE_BIN}:/usr/local/bin/thruline:ro
+      - ${THRULINE_MOUNT}:/thruline
+      - ${THRULINE_MOUNT}/codex-sessions:/root/.codex/sessions

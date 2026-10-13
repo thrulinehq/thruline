@@ -1,0 +1,3 @@
+cwd: collect_err
+args: pytest 
+exit: 2

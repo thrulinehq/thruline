@@ -1,0 +1,19 @@
+test6/test_calc_syntax.rb: --> test6/test_calc_syntax.rb
+
+Unmatched keyword, missing `end' ?
+
+>  6  class TestCalcSyntax < Minitest::Test
+>  7    def test_adds
+> 10  end
+
+test6/test_calc_syntax.rb:10: syntax errors found (SyntaxError)
+   4 | require "calc"
+   5 | 
+>  6 | class TestCalcSyntax < Minitest::Te ...
+     | ^~~~~ expected an `end` to close the `class` statement
+   7 |   def test_adds
+   8 |     assert_equal 2, Calc.add(1, 1)
+   9 |   # the `end` closing this method was lost in a bad merge
+> 10 | end
+     |    ^ unexpected end-of-input, assuming it is closing the parent top level context
+

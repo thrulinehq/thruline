@@ -1,0 +1,5 @@
+# example.com/vet/vetfail
+# [example.com/vet/vetfail]
+vetfail/vetfail_test.go:12:17: fmt.Printf format %d reads arg #2, but call has 1 arg
+FAIL	example.com/vet/vetfail [build failed]
+FAIL

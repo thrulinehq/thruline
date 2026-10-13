@@ -1,0 +1,59 @@
+> Task :compileJava NO-SOURCE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+
+> Task :test
+
+CalculatorTest > comparesGreaterThan() PASSED
+
+CalculatorTest > addsTwoNumbers() PASSED
+
+CalculatorTest > multipliesTwoNumbers() PASSED
+
+OrderServiceTest > totalsAnEmptyOrder() PASSED
+
+OrderServiceTest > looksUpAMissingCustomer() FAILED
+    java.lang.NullPointerException: Cannot invoke "String.trim()" because "customer" is null
+        at demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+
+OrderServiceTest > appliesDiscountToLargeOrders() FAILED
+    org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+        at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+        at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+        at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+        at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+        at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+        at app//demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+
+ShippingTest > computesInternationalRate() SKIPPED
+
+ShippingTest > computesExpressRate() SKIPPED
+
+ShippingTest > computesDomesticRate() PASSED
+
+9 tests completed, 2 failed, 2 skipped
+
+> Task :test FAILED
+
+[Incubating] Problems report is available at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-mixed/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-mixed/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 8s
+2 actionable tasks: 1 executed, 1 up-to-date

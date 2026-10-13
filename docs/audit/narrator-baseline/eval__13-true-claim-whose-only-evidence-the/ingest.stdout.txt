@@ -1,0 +1,15 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__13-true-claim-whose-only-evidence-the/store/ledger.db
+projects 1
+sessions 1
+lines    4 read · 0 already ingested
+events   4 new
+           assistant_text       1
+           tool_result          1
+           tool_use             1
+           user_msg             1
+unknown  none
+malformed none
+head     eval d8b80a07251c787dff4e1508d081a366033ff0437b1237cb8d3ddac80d8591c0
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

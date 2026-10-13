@@ -1,0 +1,35 @@
+.....F.FF
+
+Failures:
+
+  1) Calc.div rounds toward zero, not away
+     Failure/Error: expect(Calc.div(7, 2)).to eq(4)
+
+       expected: 4
+            got: 3
+
+       (compared using ==)
+     # ./spec/calc_div_spec.rb:12:in 'block (3 levels) in <top (required)>'
+
+  2) Calc.div returns a Rational for inexact division
+     Failure/Error: expect(Calc.div(7, 2)).to be_a(Rational)
+       expected 3 to be a kind of Rational
+     # ./spec/calc_div_spec.rb:20:in 'block (3 levels) in <top (required)>'
+
+  3) Calc.div propagates the underlying TypeError
+     Failure/Error: a / b
+
+     NoMethodError:
+       undefined method '/' for an instance of String
+     # ./lib/calc.rb:11:in 'Calc.div'
+     # ./spec/calc_div_spec.rb:24:in 'block (3 levels) in <top (required)>'
+
+Finished in 0.00797 seconds (files took 0.05615 seconds to load)
+9 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/calc_div_spec.rb:11 # Calc.div rounds toward zero, not away
+rspec ./spec/calc_div_spec.rb:19 # Calc.div returns a Rational for inexact division
+rspec ./spec/calc_div_spec.rb:23 # Calc.div propagates the underlying TypeError
+

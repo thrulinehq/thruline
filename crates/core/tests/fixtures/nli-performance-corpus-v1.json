@@ -1,0 +1,73 @@
+{
+  "schema": "thruline-nli-performance-corpus-v1",
+  "profile": "synthetic-production-shape-v1",
+  "repetitions": 8,
+  "pairs": [
+    {
+      "premise": "The command cargo test completed successfully. Its output ended with: 128 tests passed; 0 failed.",
+      "hypothesis": "All 128 tests passed."
+    },
+    {
+      "premise": "The command cargo test completed with an error. Its output ended with: 127 tests passed; 1 failed.",
+      "hypothesis": "Every test passed."
+    },
+    {
+      "premise": "The file receipt says the parser now rejects an unknown top-level field and the focused regression passed.",
+      "hypothesis": "Unknown top-level fields are rejected."
+    },
+    {
+      "premise": "The build command completed successfully. Its output ended with: finished release profile in 18.4 seconds.",
+      "hypothesis": "The release build completed."
+    },
+    {
+      "premise": "The formatter check completed with an error and listed one source file with changes.",
+      "hypothesis": "The formatter check was clean."
+    },
+    {
+      "premise": "The local verifier counted 26 work clusters and 17 recorded boundaries in the exported run.",
+      "hypothesis": "The exported run contains 17 recorded boundaries."
+    },
+    {
+      "premise": "The source audit found no network client, redirect setting, proxy setting, or model management command in the measured path.",
+      "hypothesis": "The measured path performs no model download."
+    },
+    {
+      "premise": "The receipt states that the model directory contains exactly config.json, tokenizer.json, and model_quantized.onnx.",
+      "hypothesis": "The verified model receipt has three files."
+    },
+    {
+      "premise": "The export validator reported 228 ordinary nodes, 228 receipts, and zero missing receipt records.",
+      "hypothesis": "Every ordinary node has a receipt record."
+    },
+    {
+      "premise": "The UI test completed successfully and reported 168 passed, 0 failed, and 0 skipped.",
+      "hypothesis": "The UI test had no failures."
+    },
+    {
+      "premise": "The status command refused the candidate because tokenizer.json did not match the published SHA-256 receipt.",
+      "hypothesis": "The candidate model receipt was verified."
+    },
+    {
+      "premise": "The import preview verified the source and made no filesystem change because apply was not requested.",
+      "hypothesis": "The preview did not install the model."
+    },
+    {
+      "premise": "The graph labels the connector Recorded order and explicitly says it is not causality.",
+      "hypothesis": "The connector is presented as causal proof."
+    },
+    {
+      "premise": "The local interpretation response is stamped at export and includes a source content digest.",
+      "hypothesis": "The interpretation claims to inspect the current filesystem."
+    },
+    {
+      "premise": "The model-backed scorer processed the premise as evidence and the claim as the hypothesis.",
+      "hypothesis": "The scorer orientation is premise equals evidence."
+    }
+  ],
+  "stress_pair": {
+    "premise_prefix": "The bounded synthetic receipt contains a deliberately long evidence tail for the truncation counter: ",
+    "repeated_token": "bounded-evidence-token ",
+    "repeat_count": 700,
+    "hypothesis": "The evidence tail is deliberately long."
+  }
+}

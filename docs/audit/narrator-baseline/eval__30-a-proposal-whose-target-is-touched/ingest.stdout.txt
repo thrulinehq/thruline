@@ -1,0 +1,13 @@
+sealed   1 new generation(s) · 0 already preserved · 0 rejected
+ledger   <WORK>/sessions/eval__30-a-proposal-whose-target-is-touched/store/ledger.db
+projects 1
+sessions 1
+lines    2 read · 0 already ingested
+events   2 new
+           assistant_text       1
+           user_msg             1
+unknown  none
+malformed none
+head     eval e0b45f226becdc0193ac24672c47a3920d371c5a69861d04bcbba80ff22b7395
+elapsed  <elapsed> ms
+projections    1 refreshed to the current chain position

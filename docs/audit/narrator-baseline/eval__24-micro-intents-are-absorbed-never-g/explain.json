@@ -1,0 +1,67 @@
+{
+  "claims_vs_proof": [],
+  "narrative": null,
+  "promises": [],
+  "risk_flags": [],
+  "schema_version": 1,
+  "session": "24-micro-intents-are-absorbed-never-g",
+  "shape": "thruline.explain",
+  "what_happened": [
+    {
+      "kind": "user_prompt",
+      "seq": 1,
+      "text": ""
+    },
+    {
+      "kind": "note",
+      "seq": 2,
+      "text": "note"
+    },
+    {
+      "input": "{\"file_path\":\"/repo/dist/bundle.js\"}",
+      "kind": "tool_call",
+      "seq": 3,
+      "text": "Read {\"file_path\":\"/repo/dist/bundle.js\"}",
+      "tool": "Read"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 4,
+      "text": "unknown ok",
+      "tool": "unknown"
+    },
+    {
+      "kind": "note",
+      "seq": 5,
+      "text": "note"
+    },
+    {
+      "input": "{\"file_path\":\"/repo/dist/bundle.js\"}",
+      "kind": "tool_call",
+      "seq": 6,
+      "text": "Read {\"file_path\":\"/repo/dist/bundle.js\"}",
+      "tool": "Read"
+    },
+    {
+      "kind": "tool_result",
+      "seq": 7,
+      "text": "unknown ok",
+      "tool": "unknown"
+    }
+  ],
+  "what_it_forgot": {
+    "compactions": 0,
+    "lost": [],
+    "unmeasurable": null
+  },
+  "why_it_stopped": {
+    "background_tasks": [],
+    "kind": "no_stop_recorded",
+    "last_events": [
+      "note",
+      "Read {\"file_path\":\"/repo/dist/bundle.js\"}",
+      "unknown ok"
+    ],
+    "summary": "no `stop` event is in the record: the session is still open, or the Stop hook never fired"
+  }
+}

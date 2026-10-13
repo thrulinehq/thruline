@@ -1,0 +1,21 @@
+=== RUN   TestRateSmall
+--- FAIL: TestRateSmall (0.00s)
+panic: shipping: weight must not be negative [recovered, repanicked]
+
+goroutine 7 [running]:
+testing.tRunner.func1.2({0x104ffe410, 0x10505cd10})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2123 +0x1a0
+testing.tRunner.func1()
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2126 +0x2c8
+panic({0x104ffe410?, 0x10505cd10?})
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/runtime/panic.go:859 +0x120
+shipping.MustRate(...)
+	/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/gofam/cheat-assertion_swallowed-proof-unwrapped/rate.go:36
+shipping.TestRateSmall(0x4145cc7e0248?)
+	/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/gofam/cheat-assertion_swallowed-proof-unwrapped/rate_test.go:9 +0x80
+testing.tRunner(0x4145cc7e0248, 0x1050433e8)
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2193 +0xc4
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.27.1/libexec/src/testing/testing.go:2258 +0x3b8
+FAIL	shipping	0.511s
+FAIL

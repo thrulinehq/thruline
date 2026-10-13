@@ -1,0 +1,379 @@
+{
+  "outcomes": [
+    {
+      "scenario": "Baseline",
+      "summary": "Success",
+      "log_path": "log/baseline.log",
+      "diff_path": null,
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.165364708,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.441148792,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:2:34: replace identity -> i32 with 0",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "identity",
+            "return_type": "-> i32",
+            "span": {
+              "start": {
+                "line": 2,
+                "column": 1
+              },
+              "end": {
+                "line": 2,
+                "column": 41
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 2,
+              "column": 34
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          },
+          "replacement": "0",
+          "genre": "FnValue"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_2_col_34.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_2_col_34.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.106481042,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.402269292,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:2:34: replace identity -> i32 with 1",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "identity",
+            "return_type": "-> i32",
+            "span": {
+              "start": {
+                "line": 2,
+                "column": 1
+              },
+              "end": {
+                "line": 2,
+                "column": 41
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 2,
+              "column": 34
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          },
+          "replacement": "1",
+          "genre": "FnValue"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_2_col_34_001.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_2_col_34_001.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.163313375,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.69262675,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:2:34: replace identity -> i32 with -1",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "identity",
+            "return_type": "-> i32",
+            "span": {
+              "start": {
+                "line": 2,
+                "column": 1
+              },
+              "end": {
+                "line": 2,
+                "column": 41
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 2,
+              "column": 34
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          },
+          "replacement": "-1",
+          "genre": "FnValue"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_2_col_34_002.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_2_col_34_002.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.177042416,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.555807208,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:2:36: replace + with - in identity",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "identity",
+            "return_type": "-> i32",
+            "span": {
+              "start": {
+                "line": 2,
+                "column": 1
+              },
+              "end": {
+                "line": 2,
+                "column": 41
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 2,
+              "column": 36
+            },
+            "end": {
+              "line": 2,
+              "column": 37
+            }
+          },
+          "replacement": "-",
+          "genre": "BinaryOperator"
+        }
+      },
+      "summary": "MissedMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_2_col_36.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_2_col_36.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.170398667,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.611433333,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": {
+        "Mutant": {
+          "name": "arithmetic/src/lib.rs:2:36: replace + with * in identity",
+          "package": "arithmetic",
+          "file": "arithmetic/src/lib.rs",
+          "function": {
+            "function_name": "identity",
+            "return_type": "-> i32",
+            "span": {
+              "start": {
+                "line": 2,
+                "column": 1
+              },
+              "end": {
+                "line": 2,
+                "column": 41
+              }
+            }
+          },
+          "span": {
+            "start": {
+              "line": 2,
+              "column": 36
+            },
+            "end": {
+              "line": 2,
+              "column": 37
+            }
+          },
+          "replacement": "*",
+          "genre": "BinaryOperator"
+        }
+      },
+      "summary": "CaughtMutant",
+      "log_path": "log/arithmetic__src__lib.rs_line_2_col_36_001.log",
+      "diff_path": "diff/arithmetic__src__lib.rs_line_2_col_36_001.diff",
+      "phase_results": [
+        {
+          "phase": "Build",
+          "duration": 0.117019583,
+          "process_status": "Success",
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        },
+        {
+          "phase": "Test",
+          "duration": 0.607881917,
+          "process_status": {
+            "Failure": 101
+          },
+          "argv": [
+            "/Users/dev/.rustup/toolchains/1.97.1-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=arithmetic@0.1.0",
+            "--features=strong"
+          ]
+        }
+      ]
+    }
+  ],
+  "total_mutants": 5,
+  "missed": 1,
+  "caught": 4,
+  "timeout": 0,
+  "unviable": 0,
+  "success": 0,
+  "start_time": "2026-09-12T22:12:54.382775Z",
+  "end_time": "2026-09-12T22:12:56.964559Z",
+  "cargo_mutants_version": "27.1.0"
+}

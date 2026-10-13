@@ -1,0 +1,30 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Alpha.Tests -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/bin/Debug/net9.0/Alpha.Tests.dll
+  Beta.Tests -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Beta.Tests/bin/Debug/net9.0/Beta.Tests.dll
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/bin/Debug/net9.0/Alpha.Tests.dll (.NETCoreApp,Version=v9.0)
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Beta.Tests/bin/Debug/net9.0/Beta.Tests.dll (.NETCoreApp,Version=v9.0)
+A total of 1 test files matched the specified pattern.
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.19]     Alpha.Tests.RateTests.OversizeRejectsHeavyParcel [FAIL]
+[xUnit.net 00:00:00.20]     Alpha.Tests.RateTests.LargeParcelUsesPerKilo [FAIL]
+  Failed Alpha.Tests.RateTests.OversizeRejectsHeavyParcel [4 ms]
+  Error Message:
+   29 kg is not oversize
+  Stack Trace:
+     at Alpha.Tests.RateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/AlphaTests.cs:line 12
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed Alpha.Tests.RateTests.LargeParcelUsesPerKilo [2 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 29.50
+Actual:   30.00
+  Stack Trace:
+     at Alpha.Tests.RateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/AlphaTests.cs:line 9
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+Failed!  - Failed:     2, Passed:     1, Skipped:     0, Total:     3, Duration: 8 ms - Alpha.Tests.dll (net9.0)
+
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 9 ms - Beta.Tests.dll (net9.0)

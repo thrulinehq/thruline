@@ -1,0 +1,35 @@
+[1m============================= test session starts ==============================[0m
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/mixed
+plugins: anyio-4.13.0
+collected 8 items
+
+test_mixed.py [32m.[0m[32m.[0m[31mF[0m[33ms[0m[33mx[0m[33mX[0m[31mE[0m[32m.[0m[31m                                                   [100%][0m
+
+==================================== ERRORS ====================================
+[31m[1m__________________________ ERROR at setup of test_err __________________________[0m
+
+    [0m[37m@pytest[39;49;00m.fixture[90m[39;49;00m
+>   [94mdef[39;49;00m[90m [39;49;00m[92mbroken[39;49;00m(): [94mraise[39;49;00m [96mRuntimeError[39;49;00m([33m'[39;49;00m[33mfixture broke[39;49;00m[33m'[39;49;00m)[90m[39;49;00m
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   RuntimeError: fixture broke[0m
+
+[1m[31mtest_mixed.py[0m:12: RuntimeError
+=================================== FAILURES ===================================
+[31m[1m___________________________________ test_bad ___________________________________[0m
+
+>   [0m[94mdef[39;49;00m[90m [39;49;00m[92mtest_bad[39;49;00m(): [94massert[39;49;00m [94m90[39;49;00m == [94m95[39;49;00m[90m[39;49;00m
+                    ^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mE   assert 90 == 95[0m
+
+[1m[31mtest_mixed.py[0m:4: AssertionError
+[33m=============================== warnings summary ===============================[0m
+test_mixed.py::test_warn
+  /work/samples/mixed/test_mixed.py:15: UserWarning: careful
+    warnings.warn('careful', UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m test_mixed.py::[1mtest_bad[0m - assert 90 == 95
+[31mERROR[0m test_mixed.py::[1mtest_err[0m - RuntimeError: fixture broke
+[31m= [31m[1m1 failed[0m, [32m3 passed[0m, [33m1 skipped[0m, [33m1 xfailed[0m, [33m1 xpassed[0m, [33m1 warning[0m, [31m[1m1 error[0m[31m in 0.03s[0m[31m =[0m

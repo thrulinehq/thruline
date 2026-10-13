@@ -1,0 +1,6 @@
+=== RUN   TestRateSmall
+--- PASS: TestRateSmall (0.00s)
+=== RUN   TestRateLarge
+--- PASS: TestRateLarge (0.00s)
+PASS
+ok  	shipping	0.564s

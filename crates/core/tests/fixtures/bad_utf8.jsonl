@@ -1,0 +1,3 @@
+{"type":"user","uuid":"00000000-0000-4000-8000-00000000a001","sessionId":"bbbbbbbb-0000-4000-8000-000000000001","timestamp":"2026-07-29T00:00:00.000Z","parentUuid":null,"isSidechain":false,"message":{"role":"user","content":"clean line"}}
+{"type":"user","message":{"role":"user","content":"ÿþ€"}}
+{"type":"user","uuid":"00000000-0000-4000-8000-00000000a002","sessionId":"bbbbbbbb-0000-4000-8000-000000000001","timestamp":"2026-07-29T00:00:01.000Z","parentUuid":"00000000-0000-4000-8000-00000000a001","isSidechain":false,"message":{"role":"user","content":"clean line after bad bytes"}}

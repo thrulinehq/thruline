@@ -1,0 +1,33 @@
+
+ Exception during run: Error: Cannot find module './does-not-exist'
+Require stack:
+- /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/test/broken.test.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)
+    at require (node:internal/modules/helpers:147:16)
+    at Object.<anonymous> (/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/test/broken.test.js:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at cjsLoader (node:internal/modules/esm/translators:268:5)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:202:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:651:26)
+    at async formattedImport (/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/node_modules/mocha/lib/nodejs/esm-utils.cjs:11:14)
+    at async Object.requireModule [as requireOrImport] (/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/node_modules/mocha/lib/nodejs/esm-utils.cjs:106:30)
+    at async exports.loadFilesAsync (/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/node_modules/mocha/lib/nodejs/esm-utils.cjs:175:20)
+    at async singleRun (/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/node_modules/mocha/lib/cli/run-helpers.cjs:174:3)
+    at async exports.handler (/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/node_modules/mocha/lib/cli/run.cjs:143:5) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a2/scratchpad/jsfix/test/broken.test.js'
+  ]
+}

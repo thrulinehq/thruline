@@ -1,0 +1,6 @@
+/opt/homebrew/Cellar/ruby/4.0.6_1/bin/ruby -I/opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-support-3.13.7/lib:/opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/lib /opt/homebrew/lib/ruby/gems/4.0.0/gems/rspec-core-3.13.6/exe/rspec --pattern specgreen/\*\*/\*_spec.rb --no-color -Ispecgreen
+....
+
+Finished in 0.0072 seconds (files took 0.06494 seconds to load)
+4 examples, 0 failures
+

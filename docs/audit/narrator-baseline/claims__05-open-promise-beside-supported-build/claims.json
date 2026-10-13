@@ -1,0 +1,45 @@
+{
+  "checks": 1,
+  "claims": [
+    {
+      "binding": "ran_on_final_tree",
+      "evidence": [
+        "chk_521E7PDAX0NDR8AZN9GN507VXN"
+      ],
+      "extractor": "rules",
+      "findings": [],
+      "id": "clm_3TGK6593M3E9SXNPXSXX5XEW12",
+      "kind": "build_ok",
+      "reasons": [
+        "ran on the final tree",
+        "`cargo build` exited 0"
+      ],
+      "scope": "all",
+      "span": {
+        "event_id": "evt_4DV6REV8FSTMWEZFNNZRMV4Y6G",
+        "offset": [
+          32,
+          50
+        ]
+      },
+      "text": "The build succeeds.",
+      "verdict": "supported",
+      "verifier": "build_ok@1",
+      "warnings": []
+    }
+  ],
+  "final_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+  "negated": [],
+  "promises": [
+    {
+      "id": "prm_0MY1FPGXZ5MC7SZ3YC8DFMMF8T",
+      "kind": "follow_up",
+      "opened_event_id": "evt_4DV6REV8FSTMWEZFNNZRMV4Y6G",
+      "status": "open",
+      "text": "I'll update the changelog in a follow-up."
+    }
+  ],
+  "schema_version": 1,
+  "session": "cccccccc-0005-4000-8000-000000000000",
+  "shape": "thruline.claims"
+}

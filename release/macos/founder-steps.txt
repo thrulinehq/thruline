@@ -1,0 +1,46 @@
+# release/macos/founder-steps.txt: the steps release.sh prints when it exits 3.
+#
+# The one source for that text (T-DIST-1-F1 a). It carries docs/loop/dist/BLOCKED.md
+# B-1, and release-selftest.sh fails if a fenced command in B-1 is missing
+# here, or if this file prints a command B-1 does not have.
+#
+# Layout rule the self-test reads: a command line is indented by exactly
+# 7 spaces; prose is indented by 3 spaces at most. Lines starting with `#` are
+# not printed.
+This is blocked on you, not broken. What to do, in order:
+
+1. Only the Account Holder of your Apple Developer team can create a
+   Developer ID certificate. Check your role at https://developer.apple.com/account,
+   under Membership details.
+2. Create and install the certificate. The simplest way:
+   Xcode -> Settings... -> Accounts -> select your Apple ID -> select the team ->
+   Manage Certificates... -> + -> Developer ID Application.
+   Xcode makes the private key in your login keychain and installs the certificate.
+   Without Xcode, the web way: Keychain Access -> Certificate Assistant ->
+   Request a Certificate From a Certificate Authority... -> Saved to disk. Then open
+   https://developer.apple.com/account/resources/certificates/add -> Developer ID
+   Application -> G2 Sub-CA -> upload the request -> download -> double-click the .cer.
+3. Check it:
+       security find-identity -v -p codesigning
+   Expected: a line containing "Developer ID Application: <your name> (<TEAMID>)".
+   Your Team ID is the 10-character code in the brackets at the end of that line.
+   It is also shown at https://developer.apple.com/account under Membership details
+   -> Team ID.
+4. Make an app-specific password at https://account.apple.com -> Sign-In and Security ->
+   App-Specific Passwords. Store it for notarytool under the name this script expects.
+   It prompts for the password; never type it on the command line:
+       xcrun notarytool store-credentials thruline-notary --apple-id <your Apple ID email> --team-id <TEAMID>
+   Expected: "Credentials saved to Keychain."
+   Check it:
+       xcrun notarytool history --keychain-profile thruline-notary
+   Expected: a (possibly empty) history, and no authentication error.
+5. Make the release. From a clean checkout of the commit you are releasing, tag it
+   and run the one command:
+       git tag v<version>
+       release/macos/release.sh <version>
+   Expected: the last lines name a stapled .dmg under target/release-dist/<version>/,
+   with stapler validate and spctl both accepting it.
+6. Upload the dmg to an HTTPS URL, which is a publishing act and yours alone. Then
+   open that URL in a browser on a second macOS user account, open the dmg, and run
+   the binary. No Gatekeeper warning should appear. Keep a screenshot. When the
+   script finishes, it prints this check in full.

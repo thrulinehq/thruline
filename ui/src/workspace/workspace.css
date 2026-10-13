@@ -1,0 +1,1514 @@
+/* ThruLine workspace — the ONLY stylesheet this port writes.
+ *
+ * The design ships zero `class=`, zero `id=` and one 12-line base sheet
+ * (spec-template §E.0, §I.5); everything else is an inline style. This file is
+ * that base sheet plus the single hover rule that replaces 73 `style-hover`
+ * attributes. Every colour, size, radius and shadow lives in `./tokens.js`.
+ *
+ * P6-6 (design record §4): this sheet writes NO colour literal. Every colour,
+ * type size, motion duration and focus width below is a `var(--ws-*)` read from
+ * the one `@tokens` block, which `tokens.js`'s `cssVarBlock()` prints and
+ * `visual-system.test.js` holds byte-equal to it. The block is declared on
+ * `body` and on the three screen roots (`.ws-root` the workspace, `.ws-change`
+ * the Change screen and the packet, `.ws-inbox` the Inbox and first use), so
+ * every rule here resolves the same value wherever it is mounted.
+ *
+ * SCOPE RULE: `.ws-*` only. This file must not restyle `.os-*`, `.tl-*`,
+ * `.wm-*` or `.df-*`, and must not touch either `:root` block — `os.css:7-21`
+ * and `macos.css:11-58` are pinned verbatim by `lib/shell.test.js:291-293` and
+ * `:262`. It must be imported AFTER `./macos.css` (which is where `--sans` and
+ * `--mono` are defined) and after `./os.css`.
+ */
+
+/* @tokens:begin — generated from tokens.js by cssVarBlock(); do not edit by hand */
+body, .ws-root, .ws-change, .ws-inbox {
+  --ws-app: #000000;
+  --ws-panel: #0A0A0B;
+  --ws-raised: #111113;
+  --ws-hover: #16161A;
+  --ws-hairline: #1F1F23;
+  --ws-hairline-strong: #2A2A30;
+  --ws-text: #EDEDEF;
+  --ws-text-2: #A1A1AA;
+  --ws-text-3: #6B6B75;
+  --ws-amber: #F5A524;
+  --ws-green: #3DD68C;
+  --ws-coral: #FF6369;
+  --ws-yellow: #F2C94C;
+  --ws-blue: #52A8FF;
+  --ws-violet: #B78CFF;
+  --ws-cyan: #4CC9F0;
+  --ws-neutral: #6B6B75;
+  --ws-red: #E5484D;
+  --ws-amber-tint: color-mix(in srgb, var(--ws-amber) 10%, transparent);
+  --ws-green-tint: color-mix(in srgb, var(--ws-green) 10%, transparent);
+  --ws-coral-tint: color-mix(in srgb, var(--ws-coral) 10%, transparent);
+  --ws-yellow-tint: color-mix(in srgb, var(--ws-yellow) 10%, transparent);
+  --ws-blue-tint: color-mix(in srgb, var(--ws-blue) 10%, transparent);
+  --ws-violet-tint: color-mix(in srgb, var(--ws-violet) 10%, transparent);
+  --ws-cyan-tint: color-mix(in srgb, var(--ws-cyan) 10%, transparent);
+  --ws-neutral-tint: color-mix(in srgb, var(--ws-neutral) 10%, transparent);
+  --ws-red-tint: color-mix(in srgb, var(--ws-red) 10%, transparent);
+  --ws-focus: #52A8FF;
+  --ws-focus-width: 2px;
+  --ws-focus-offset: 2px;
+  --ws-glow-thread: 0 0 10px color-mix(in srgb, var(--ws-amber) 45%, transparent);
+  --ws-primary-hover: color-mix(in srgb, var(--ws-amber) 85%, var(--ws-text));
+  --ws-shadow: rgba(0,0,0,.6);
+  --ws-scrim: rgba(0,0,0,.65);
+  --ws-font-sans: 'IBM Plex Sans', var(--sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  --ws-font-mono: 'IBM Plex Mono', var(--mono, ui-monospace, monospace);
+  --ws-fs-micro: 9px;
+  --ws-fs-meta: 10px;
+  --ws-fs-cap: 10.5px;
+  --ws-fs-sm: 11px;
+  --ws-fs-ctl: 11.5px;
+  --ws-fs-body: 12px;
+  --ws-fs-base: 14px;
+  --ws-fs-lg: 15px;
+  --ws-fs-title: 16px;
+  --ws-fs-doc-title: 22px;
+  --ws-fs-plain: 14px;
+  --ws-fs-plain-body: 15px;
+  --ws-fs-plain-heading: 17px;
+  --ws-fs-plain-lead: 18px;
+  --ws-fs-headline: 26px;
+  --ws-fs-headline-narrow: 22px;
+  --ws-motion-quick: 240ms;
+  --ws-motion-slow: 320ms;
+  --ws-ease: ease-out;
+}
+/* @tokens:end */
+
+/* ── Base sheet (spec-template §E.0, re-based on §4 true black by P6-6) ── */
+.ws-root {
+  --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--ws-app);
+  color: var(--ws-text);
+  /* IBM Plex Sans, self-hosted from /fonts (index.html links plex.css), with
+     the shipped system stack behind it. Scoped to .ws-root: os.css:23-31
+     re-bases the whole `.os-root` subtree on var(--sans), so mounting the
+     shipped shell inside the workspace does not change its type. */
+  font-family: 'IBM Plex Sans', var(--sans);
+  font-size: var(--ws-fs-base);
+  -webkit-font-smoothing: antialiased;
+}
+.ws-root a { color: var(--ws-blue); }
+.ws-root a:hover { color: var(--ws-text); }
+.ws-root button { font-family: inherit; }
+.ws-root input { font-family: inherit; }
+/* The focus ring: visible on black on every interactive element of all three
+ * screen roots. Blue passes 3:1 on #000000 (8.40) and #111113 (7.55). */
+.ws-root *:focus-visible, .ws-change *:focus-visible, .ws-inbox *:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+/* T-6-4 · FOCUS THAT MOVES WITH SELECTION. A canvas card and an Outline row
+ * take focus from script when J, K, F, an arrow or Esc moves the selection,
+ * and an off control's reason takes it when `.` finds the primary off; a
+ * browser may not count a script's focus as "visible". The ring is drawn on
+ * `:focus` for these three, so wherever focus is moved to, it shows. */
+.ws-root [role="button"][data-id]:focus, .ws-trace-outline-item:focus, .ws-change-blocked-why:focus { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+/* A tab sits flush in its strip and a segmented button inside a clipped
+ * group, where a ring drawn outside would be cut off; theirs is drawn inside
+ * the control, on its own ground (blue on #111113 7.55, on #2A2A30 5.71). */
+.ws-root [role="tab"]:focus-visible, .ws-change [role="tab"]:focus-visible, .ws-shell-seg-btn:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: calc(0px - var(--ws-focus-width)); }
+.ws-root ::-webkit-scrollbar { width: 9px; height: 9px; }
+.ws-root ::-webkit-scrollbar-thumb { background: var(--ws-hairline-strong); border-radius: 2px; }
+.ws-root ::-webkit-scrollbar-track { background: transparent; }
+.ws-root ::selection { background: var(--ws-hairline-strong); }
+
+/* ── Buttons (§4) ─────────────────────────────────────────────────────────
+ * One filled amber button per view. A meaning-coloured button is an outline
+ * in its hue with a 10 % tint on hover (set `--ws-btn-hue` to the hue of what
+ * it acts on). Destructive is a red outline. No gradient, glass or glow. The
+ * existing screens' primaries (`.ws-change-primary`, `.ws-inbox-primary`,
+ * `.ws-wayin-primary`, `.ws-checks-primary`, `.ws-verdict-primary`) paint the
+ * same three values; the inline-style primaries read `BTN` in tokens.js. */
+.ws-btn-primary { background: var(--ws-amber); color: var(--ws-app); border: 1px solid var(--ws-amber); font-weight: 600; cursor: pointer; }
+.ws-btn-primary:hover:not([disabled]), .ws-change-primary:hover:not([disabled]), .ws-wayin-primary:hover:not([disabled]), .ws-inbox-list > li:first-child .ws-inbox-primary:hover:not([disabled]) { background: var(--ws-primary-hover); border-color: var(--ws-primary-hover); }
+.ws-btn-outline { --ws-btn-hue: var(--ws-text); background: transparent; color: var(--ws-btn-hue); border: 1px solid var(--ws-btn-hue); cursor: pointer; }
+.ws-btn-outline:hover { background: color-mix(in srgb, var(--ws-btn-hue) 10%, transparent); }
+.ws-btn-destructive { background: transparent; color: var(--ws-red); border: 1px solid var(--ws-red); cursor: pointer; }
+.ws-btn-destructive:hover { background: var(--ws-red-tint); color: var(--ws-text); } /* red on its tint over #111113 is 4.40:1 */
+.ws-btn-secondary { background: transparent; color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); cursor: pointer; }
+.ws-btn-secondary:hover:not([disabled]), .ws-change-secondary:hover:not([disabled]), .ws-first-secondary:hover:not([disabled]) { background: var(--ws-hover); }
+
+/* ── MOTION (§4, P6-6) ─────────────────────────────────────────────────
+ * One job: causality and arrival. Every duration in this sheet is
+ * `--ws-motion-quick` (240ms) or `--ws-motion-slow` (320ms), every easing is
+ * `--ws-ease` (ease-out), every animation plays once, and nothing loops, idles
+ * or celebrates. The refresh spinner, the checks spinner, the checking-row
+ * spinner, the progress shimmer and the skeleton pulse all used to loop; they
+ * are now still shapes beside the word that says what is happening
+ * ("Refreshing…", "running"), which is the part that was ever true.
+ * `visual-system.test.js` holds all of this. */
+
+/* ── THE SKELETON BAR ──────────────────────────────────────────────────
+ * The third motion rule, and it is opacity only: nothing moves, nothing
+ * travels, nothing shimmers across the pane. A bar is a SHAPE — it carries no
+ * digit, no word and no row, so it cannot be misread as data (spec-matrix §0).
+ *
+ * Declared under `no-preference` so a reader who has asked for less motion is
+ * never given any; the `reduce` block below then kills it a second time, which
+ * is belt and braces on purpose — this is the one animation a reader is most
+ * likely to be looking at while they wait.
+ */
+.ws-root .ws-skel { opacity: .5; }
+
+/* ── THE HOVER RULE ────────────────────────────────────────────────────
+ * One rule covers all 73 `style-hover` sites across their 12 distinct values,
+ * because each element carries its own values as custom properties via
+ * `tokens.hv()`. This preserves every value byte-for-byte and avoids 73 hover
+ * subscriptions on a canvas that renders hundreds of nodes (spec-template §D).
+ */
+.ws-hv:hover {
+  background: var(--hv-bg, inherit);
+  color: var(--hv-fg, inherit);
+  border-color: var(--hv-bd, inherit);
+}
+
+/* Reduced motion: every animation and transition under all three screen roots,
+ * including the inline `transition` on a graph node (`MOTION.quick`), collapses
+ * to none. The per-screen blocks further down say the same thing again for the
+ * screens that carry no motion at all, so a later rule has to meet them. */
+@media (prefers-reduced-motion: reduce) {
+  .ws-root *,
+  .ws-root *::before,
+  .ws-root *::after,
+  .ws-change *,
+  .ws-change *::before,
+  .ws-change *::after,
+  .ws-inbox *,
+  .ws-inbox *::before,
+  .ws-inbox *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ── THE INBOX MOUNT ───────────────────────────────────────────────────
+ * `os.css:23-26` sets `.os-root { position: fixed; inset: 0 }`, which is right
+ * for the shipped shell when it IS the page and wrong when it is one pane of
+ * this workspace: mounted as a flex sibling it painted over every rail button
+ * and the title bar, and the only way back was a reload.
+ *
+ * This is the one place `.ws-*` reaches an `.os-*` selector, and it is a
+ * CONTAINMENT rule, not a restyle: it is scoped to the `.ws-inbox` wrapper
+ * (which supplies the containing block), it changes nothing about the shell
+ * mounted at the top level, and it touches no token and no `:root`.
+ */
+.ws-inbox { position: relative; contain: layout paint; }
+.ws-inbox > .os-root { position: absolute; inset: 0; }
+
+/* ── TABLE HEADER CELLS (R4) ───────────────────────────────────────────
+ * A grid column with a `1fr` track can be squeezed to nothing in a narrow
+ * dock. When that happened the header label kept painting at its natural
+ * width, on top of the header beside it and the first row beneath it. A
+ * squeezed label must truncate, and truncation needs a child selector, which
+ * an inline style cannot express — hence the one class.
+ */
+.ws-root .ws-head-cell {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ws-compare-empty { max-width: 640px; padding: 45px 30px; font-size: 16px; line-height: 1.6; color: var(--ws-text); }
+.ws-compare-empty h2 { font-size: 25px; color: var(--ws-text); font-weight: 500; }
+.ws-compare-empty button { padding: 11px 16px; background: var(--ws-hover); border: 1px solid var(--ws-text-3); border-radius: 5px; color: var(--ws-text); cursor: pointer; font-size: 14px; }
+
+/* The evidence graph remains the primary workspace. Analysis occupies the
+   existing resizable right dock, with the full inspector one tab away. */
+.ws-evidence-strip { min-height: 31px; display: flex; align-items: center; flex: 0 0 auto; gap: 12px; padding: 3px 12px; border-bottom: 1px solid var(--ws-hairline-strong); background: var(--ws-raised); box-sizing: border-box; font-size: 11px; }
+.ws-evidence-strip strong { color: var(--ws-text); font-size: 12px; font-weight: 500; white-space: nowrap; }
+.ws-evidence-strip > span { color: var(--ws-text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ws-evidence-strip button { margin-left: auto; flex-shrink: 0; color: var(--ws-amber); background: transparent; border: 0; font-size: 11px; padding: 4px 0; cursor: pointer; }
+.ws-evidence-panel { flex-shrink: 0; min-width: 0; max-width: calc(100vw - 52px); min-height: 0; display: flex; flex-direction: column; background: var(--ws-panel); border-left: 1px solid var(--ws-hairline-strong); right: 0; top: 0; bottom: 0; z-index: 12; box-sizing: border-box; }
+.ws-evidence-panel-head { flex: 0 0 37px; padding: 0 13px; display: flex; gap: 10px; align-items: center; border-bottom: 1px solid var(--ws-hairline-strong); background: var(--ws-raised); }
+.ws-evidence-panel-head strong { font-size: 13px; font-weight: 600; color: var(--ws-amber); }
+.ws-evidence-panel-head span { color: var(--ws-text-2); font-size: 10px; margin-left: auto; }
+.ws-evidence-panel-head button { border: 0; background: none; color: var(--ws-text); cursor: pointer; font-size: 18px; padding: 0 3px; }
+.ws-evidence-tabs { display: flex; padding: 0 12px; gap: 18px; border-bottom: 1px solid var(--ws-hairline-strong); flex-shrink: 0; }
+.ws-evidence-tabs button { padding: 10px 2px 8px; background: transparent; border: 0; border-bottom: 2px solid transparent; font-size: 12px; color: var(--ws-text); cursor: pointer; }
+.ws-evidence-tabs button[aria-pressed=true] { color: var(--ws-text); border-bottom-color: var(--ws-text-2); }
+.ws-evidence-panel > aside { flex: 1; min-height: 0; border-left: 0 !important; }
+.ws-analysis-body { overflow-y: auto; overflow-x: hidden; flex: 1; min-height: 0; font-size: 13px; line-height: 1.55; color: var(--ws-text); }
+.ws-analysis-body > section, .ws-analysis-limits { padding: 18px; border-bottom: 1px solid var(--ws-hairline-strong); }
+.ws-analysis-body h2 { font-size: 19px; line-height: 1.3; font-weight: 550; letter-spacing: -.02em; color: var(--ws-text); margin: 6px 0 9px; }
+.ws-analysis-body h3 { font-size: 15px; color: var(--ws-text); font-weight: 550; line-height: 1.4; margin: 0 0 10px; }
+.ws-analysis-body h4 { font-size: 12px; font-weight: 600; color: var(--ws-text); margin: 17px 0 6px; }
+.ws-analysis-body p { margin: 0 0 10px; overflow-wrap: anywhere; }
+.ws-analysis-kicker { color: var(--ws-text-2); font-size: 10px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; }
+.ws-analysis-coverage-line { color: var(--ws-text); font-size: 11px; font-variant-numeric: tabular-nums; margin-top: 12px; }
+.ws-analysis-coverage-line span { margin: 0 3px; color: var(--ws-text-2); }
+.ws-analysis-body button { cursor: pointer; background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-text-3); border-radius: 3px; padding: 6px 9px; font-size: 12px; text-align: left; line-height: 1.4; }
+.ws-analysis-body button:hover { background: var(--ws-hover); border-color: var(--ws-text-3); }
+.ws-analysis-selection { background: var(--ws-raised); }
+.ws-analysis-selection > strong { display: block; margin: 7px 0; color: var(--ws-text); font-size: 13px; overflow-wrap: anywhere; max-height: 80px; overflow: auto; }
+.ws-analysis-selection p { font-size: 11px; }
+.ws-analysis-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+.ws-analysis-section-head h3 { margin: 0; }
+.ws-analysis-section-head > span { color: var(--ws-text-2); font-size: 11px; }
+.ws-analysis-body .ws-analysis-item { width: 100%; display: flex; gap: 10px; align-items: flex-start; padding: 12px 0; border: 0; border-bottom: 1px solid var(--ws-hairline-strong); background: transparent; border-radius: 0; color: var(--ws-text); }
+.ws-analysis-item > span:nth-child(2) { flex: 1; min-width: 0; }
+.ws-analysis-item strong { display: block; font-weight: 500; font-size: 13px; }
+.ws-analysis-item em { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-style: normal; color: var(--ws-text); font-size: 11px; margin-top: 5px; }
+.ws-analysis-item small { display: block; font-size: 10px; margin-top: 5px; color: var(--ws-text-2); }
+.ws-analysis-body .ws-analysis-item[aria-expanded=true] { color: var(--ws-text); }
+.ws-analysis-body .ws-analysis-item:hover { background: var(--ws-raised); }
+.ws-analysis-marker { color: var(--ws-blue); font-size: 17px; line-height: 1.15; }
+.ws-analysis-marker-warn { color: var(--ws-yellow); }
+.ws-analysis-detail { border-left: 2px solid var(--ws-amber); background: var(--ws-raised); }
+.ws-analysis-detail > h3 { margin-top: 6px; }
+.ws-analysis-source { margin-top: 12px; }
+.ws-analysis-source blockquote { border-left: 2px solid var(--ws-text-3); margin: 0 0 12px; padding: 8px 12px; color: var(--ws-text); background: var(--ws-panel); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ws-analysis-source blockquote > span { display: block; color: var(--ws-text-2); font-size: 10px; margin-bottom: 7px; }
+.ws-analysis-body details { margin: 9px 0; }
+.ws-analysis-body summary { cursor: pointer; font-size: 12px; color: var(--ws-text); }
+.ws-analysis-body pre, .ws-analysis-body code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 10px; line-height: 1.6; color: var(--ws-text); }
+.ws-analysis-body ul, .ws-analysis-body ol { padding-left: 19px; }
+.ws-analysis-body li { margin: 7px 0; }
+.ws-analysis-source ol button { display: block; width: 100%; }
+.ws-analysis-source ol button span { display: block; font-size: 11px; margin-top: 4px; overflow-wrap: anywhere; }
+.ws-analysis-source button[aria-current=true], .ws-analysis-source button[aria-pressed=true] { border-color: var(--ws-text-2); background: var(--ws-raised); }
+.ws-analysis-event-links { display: flex; flex-direction: column; gap: 5px; margin-top: 9px; }
+.ws-analysis-next { padding: 12px; margin: 15px 0; background: var(--ws-raised); border: 1px solid var(--ws-hairline-strong); border-radius: 3px; }
+.ws-analysis-next h4 { margin-top: 0; color: var(--ws-amber); }
+.ws-analysis-next p { color: var(--ws-text); }
+.ws-analysis-body .ws-analysis-method { font-size: 10px; color: var(--ws-text-2); margin: 12px 0 0; }
+.ws-analysis-start p { font-size: 11px; margin: 10px 0 0; }
+.ws-analysis-body .ws-analysis-limits { margin: 0; font-size: 11px; }
+.ws-analysis-review input { width: 100%; box-sizing: border-box; border: 1px solid var(--ws-text-3); background: var(--ws-panel); color: var(--ws-text); padding: 7px; margin: 8px 0; font-size: 12px; }
+@media (max-width: 800px) { .ws-evidence-strip > span { display: none; } .ws-evidence-strip { gap: 8px; padding: 3px 8px; } .ws-evidence-strip strong { font-size: 10px; } }
+
+/* Live Trace handover: same dark evidence workspace, four HQ modes, compact
+   connection surface. These additions do not import the superseded OS shell. */
+html, body, #root { margin: 0; min-height: 100%; }
+body { background: var(--ws-app); }
+.ws-hq-tabs { display: flex; flex: 0 0 auto; gap: 4px; padding: 7px 10px; border-bottom: 1px solid var(--ws-hairline-strong); background: var(--ws-raised); }
+.ws-hq-tabs button { flex: 1; padding: 7px 2px; color: var(--ws-text); background: var(--ws-raised); border: 1px solid transparent; border-radius: 3px; cursor: pointer; font-size: 12px; }
+.ws-hq-tabs button[aria-selected=true] { background: var(--ws-hover); border-color: var(--ws-text-3); color: var(--ws-text); }
+.ws-hq-content { min-height: 0; flex: 1; overflow: auto; color: var(--ws-text); font-size: 13px; line-height: 1.6; }
+.ws-hq-content > aside { min-height: 450px; height: auto; }
+.ws-hq-section, .ws-check-catalog, .ws-check-detail { padding: 20px 18px; }
+.ws-hq-section { border-bottom: 1px solid var(--ws-hairline-strong); }
+.ws-hq-kicker { color: var(--ws-text-2); font-size: 10px; letter-spacing: .085em; text-transform: uppercase; margin-bottom: 8px; }
+.ws-hq-content h2 { font-size: 21px; font-weight: 550; line-height: 1.25; letter-spacing: -.025em; color: var(--ws-text); margin: 5px 0 16px; }
+.ws-hq-content h3 { font-size: 13px; font-weight: 600; color: var(--ws-text); margin: 20px 0 6px; }
+.ws-hq-content h4 { font-size: 12px; color: var(--ws-text); margin: 15px 0 6px; }
+.ws-hq-content p { margin: 0 0 12px; overflow-wrap: anywhere; }
+.ws-hq-content ul { padding-left: 18px; margin: 8px 0 16px; }
+.ws-hq-content li { margin: 7px 0; }
+.ws-hq-content button, .ws-connections button, .ws-connect-button { background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-text-3); padding: 6px 9px; border-radius: 3px; cursor: pointer; font-size: 12px; line-height: 1.4; }
+.ws-hq-content button:hover, .ws-connections button:hover, .ws-connect-button:hover { background: var(--ws-hover); border-color: var(--ws-text-3); }
+.ws-root button:disabled { cursor: not-allowed; opacity: .5; }
+.ws-hq-content .ws-text-button { padding: 8px 0; background: transparent; border: 0; color: var(--ws-blue); text-align: left; }
+.ws-hq-content .ws-hq-muted, .ws-connections .ws-hq-muted { color: var(--ws-text-2); font-size: 11px; line-height: 1.5; margin: 12px 0; }
+.ws-hq-next { background: var(--ws-raised); border: 1px solid var(--ws-hairline-strong); border-left: 2px solid var(--ws-amber); border-radius: 3px; padding: 12px; margin: 18px 0; }
+.ws-hq-next h3, .ws-hq-next h4 { margin-top: 0; color: var(--ws-amber); }
+.ws-hq-next p { margin-bottom: 0; }
+.ws-hq-content details { margin: 12px 0; }
+.ws-hq-content summary { color: var(--ws-text); cursor: pointer; font-size: 12px; }
+.ws-hq-content pre, .ws-hq-content code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; font-family: var(--mono); color: var(--ws-text); line-height: 1.55; }
+.ws-hq-content pre { background: var(--ws-panel); padding: 12px; border: 1px solid var(--ws-hairline-strong); border-radius: 3px; max-height: 350px; overflow: auto; }
+.ws-hq-content blockquote { border-left: 2px solid var(--ws-text-2); padding-left: 12px; margin: 12px 0; }
+.ws-hq-content label { display: block; font-size: 12px; margin: 13px 0 6px; color: var(--ws-text); }
+.ws-hq-content input, .ws-hq-content textarea, .ws-hq-content select { box-sizing: border-box; min-width: 0; width: 100%; color: var(--ws-text); background: var(--ws-panel); border: 1px solid var(--ws-text-3); border-radius: 3px; padding: 9px; font: inherit; font-size: 12px; }
+.ws-hq-content textarea { resize: vertical; line-height: 1.6; min-height: 180px; }
+.ws-hq-query { display: flex; gap: 7px; }
+.ws-hq-inline-actions, .ws-hq-presets { display: flex; gap: 7px; flex-wrap: wrap; }
+.ws-hq-presets button { font-size: 11px; text-align: left; }
+.ws-hq-answer { border-top: 1px solid var(--ws-hairline-strong); margin-top: 20px; padding-top: 1px; }
+.ws-hq-content .ws-source-link { display: block; text-align: left; width: 100%; margin: 7px 0; padding: 9px; }
+.ws-source-link small { display: block; font-size: 10px; color: var(--ws-text); margin-top: 4px; }
+.ws-hq-route, .ws-hq-pending { padding: 12px; border: 1px solid var(--ws-hairline-strong); background: var(--ws-raised); margin: 15px 0; border-radius: 3px; }
+.ws-hq-route strong, .ws-hq-pending strong { color: var(--ws-yellow); font-size: 12px; }
+.ws-hq-route p, .ws-hq-pending p { margin: 7px 0 0; font-size: 12px; }
+.ws-hq-actions { border-top: 1px solid var(--ws-hairline-strong); padding: 10px; display: flex; gap: 5px; flex-wrap: wrap; background: var(--ws-raised); flex: 0 0 auto; }
+.ws-hq-actions button { background: var(--ws-raised); border: 1px solid var(--ws-text-3); border-radius: 3px; padding: 5px 7px; color: var(--ws-text); font-size: 11px; cursor: pointer; }
+.ws-hq-actions button:first-child { background: var(--ws-hover); color: var(--ws-text); border-color: var(--ws-text-3); }
+.ws-catalog-counts { display: flex; flex-wrap: wrap; gap: 5px; font-size: 12px; padding: 10px 0 16px; }
+.ws-catalog-counts strong { color: var(--ws-amber); }
+.ws-catalog-filters { display: flex; gap: 6px; margin-top: 8px; }
+.ws-catalog-filters select { width: 50%; font-size: 11px; padding: 7px; }
+.ws-catalog-list { display: grid; gap: 5px; margin: 12px 0; }
+.ws-catalog-list button { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 11px; background: var(--ws-raised); }
+.ws-catalog-list strong { color: var(--ws-text); font-size: 13px; font-weight: 500; }
+.ws-catalog-list span, .ws-catalog-list small { color: var(--ws-text-2); font-size: 11px; }
+.ws-catalog-list .ws-catalog-id { color: var(--ws-amber); font-family: var(--mono); font-size: 10px; }
+.ws-result { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--ws-text-3); padding: 2px 7px; border-radius: 3px; color: var(--ws-text); font-size: 11px; }
+.ws-result-pass { color: var(--ws-green); border-color: var(--ws-green); }
+.ws-result-fail { color: var(--ws-coral); border-color: var(--ws-coral); }
+.ws-result-stale, .ws-result-blocked, .ws-result-waived { color: var(--ws-yellow); border-color: var(--ws-yellow); }
+.ws-hq-subtabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--ws-hairline-strong); padding-bottom: 10px; margin: 16px 0; }
+.ws-hq-subtabs button { padding: 5px 7px; font-size: 11px; }
+.ws-hq-subtabs button[aria-pressed=true] { border-color: var(--ws-text-2); color: var(--ws-text); }
+.ws-hq-content dl { margin: 14px 0; }
+.ws-hq-content dt { color: var(--ws-text-2); font-size: 11px; margin-top: 12px; }
+.ws-hq-content dd { margin: 3px 0 10px; padding-bottom: 10px; border-bottom: 1px solid var(--ws-hairline-strong); overflow-wrap: anywhere; }
+.ws-binding-list details { border-bottom: 1px solid var(--ws-hairline-strong); padding: 8px 0; margin: 0; }
+.ws-binding-list summary { display: flex; justify-content: space-between; gap: 10px; }
+.ws-binding-list summary span:last-child { color: var(--ws-text-2); font-size: 10px; }
+.ws-source-row { margin: 10px 0; }
+.ws-source-row code { display: block; margin-top: 5px; }
+.ws-history-entry { border-left: 2px solid var(--ws-text-3); padding: 12px; margin: 10px 0; background: var(--ws-raised); }
+.ws-trace-controls { gap: 8px; height: 32px; min-height: 32px; padding: 3px 8px; white-space: nowrap; overflow: hidden; }
+.ws-trace-controls > div { display: flex; gap: 3px; }
+.ws-trace-controls button { margin: 0; border: 1px solid var(--ws-hairline-strong); border-radius: 3px; background: var(--ws-raised); color: var(--ws-text); padding: 3px 7px; }
+.ws-trace-controls button[aria-pressed=true] { border-color: var(--ws-text-2); color: var(--ws-text); background: var(--ws-raised); }
+.ws-trace-controls select { min-width: 80px; max-width: 235px; background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-text-3); font-size: 11px; padding: 4px; }
+.ws-trace-controls .ws-hq-open { margin-left: auto; }
+.ws-appbar > * { flex-shrink: 0; }
+.ws-appbar > [role=search] { flex: 1 1 200px !important; min-width: 120px !important; max-width: 420px !important; }
+.ws-appbar > button:nth-of-type(2) { flex: 0 1 auto !important; min-width: 80px; overflow: hidden; }
+.ws-appbar > button:nth-of-type(2) > span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; max-width: 230px; }
+.ws-connect-button { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; height: 29px; }
+.ws-provider-mono { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: var(--ws-hover); color: var(--ws-text); border-radius: 3px; font: 10px var(--mono); flex-shrink: 0; }
+.ws-connections-backdrop { position: fixed; inset: 0; z-index: 120; background: var(--ws-scrim); display: flex; align-items: flex-start; justify-content: center; padding: 70px 24px 24px; }
+.ws-connections { width: min(880px, 100%); max-height: calc(100vh - 100px); overflow: auto; padding: 22px; background: var(--ws-raised); border: 1px solid var(--ws-text-3); border-radius: 5px; box-shadow: 0 22px 70px var(--ws-shadow); color: var(--ws-text); font-size: 13px; line-height: 1.5; }
+.ws-connections header { display: flex; align-items: start; justify-content: space-between; margin-bottom: 20px; }
+.ws-connections h2 { font-size: 21px; font-weight: 500; margin: 0 0 6px; color: var(--ws-text); }
+.ws-connections p { margin: 5px 0; }
+.ws-cap-row { display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 7px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--ws-hairline-strong); }
+.ws-cap-row > span { color: var(--ws-text); font-size: 12px; }
+.ws-cap-row button { font-size: 11px; }
+.ws-cap-row button[aria-pressed=true] { border-color: var(--ws-text-2); color: var(--ws-text); }
+.ws-cap-detail { border: 1px solid var(--ws-text-3); background: var(--ws-raised); padding: 13px; margin: 15px 0 20px; }
+.ws-cap-detail strong { color: var(--ws-amber); }
+.ws-provider-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ws-provider-cards article { background: var(--ws-raised); padding: 14px; border: 1px solid var(--ws-text-3); border-radius: 3px; }
+.ws-provider-cards h3 { font-size: 14px; color: var(--ws-text); margin: 10px 0; }
+.ws-provider-cards p { font-size: 12px; color: var(--ws-text); min-height: 95px; }
+/* LEGACY BREAKPOINT, not a §6 one: the app bar starts shedding labels at
+ * 1250px because below it the full bar overflows. It stays until P6-1 rebuilds
+ * the top bar; `visual-system.test.js` names it as the one exception above
+ * BP.sheet. */
+@media (max-width: 1250px) {
+  .ws-appbar > [role=search] { flex: 0 0 30px !important; min-width: 30px !important; max-width: 30px !important; cursor: pointer; }
+  .ws-appbar > [role=search] > span, .ws-appbar > [role=search] > kbd { display: none; }
+  .ws-appbar > button:nth-of-type(1) > span:first-child, .ws-appbar > button:nth-of-type(2) > span:first-child { display: none; }
+  .ws-appbar > button:nth-of-type(2) > span:nth-child(2) { max-width: 110px; }
+  .ws-appbar > button:nth-of-type(2) > .ws-state-word { display: none; }
+  .ws-connect-button > span:nth-child(2) { display: none; }
+}
+/* BP.narrow (§6, tokens.js): was 760px; moving it to 800px only hides the
+ * same things at a slightly wider window, so nothing new can overflow. */
+@media (max-width: 800px) {
+  .ws-appbar { gap: 4px !important; padding: 0 5px !important; }
+  .ws-appbar > div:first-child > span:nth-child(2) { display: none; }
+  .ws-appbar > button { padding: 0 5px !important; font-size: 11px !important; }
+  .ws-appbar > button:nth-of-type(2) { max-width: 125px; }
+  .ws-trace-controls > span { display: none; }
+  .ws-provider-cards { grid-template-columns: 1fr; }
+  .ws-provider-cards p { min-height: 0; }
+  .ws-connections-backdrop { padding: 45px 8px 8px; }
+  .ws-connections { padding: 14px; }
+  .ws-capabilities { overflow-x: auto; }
+  .ws-cap-row { min-width: 540px; }
+}
+
+.ws-basis-chip { border:1px solid var(--ws-hairline-strong); border-radius:3px; padding:2px 5px; font-size:10px; }
+
+/* Seven verification areas share the existing HQ panel; the trace keeps its space. */
+.ws-verify-switch{display:flex;gap:4px;border-bottom:1px solid var(--ws-hairline-strong);padding:8px 0;margin-bottom:14px}
+.ws-verify-switch button{flex:1;padding:7px 9px}.ws-verify-switch button[aria-pressed=true]{border-color:var(--ws-text-2);color:var(--ws-text);background:var(--ws-raised)}
+.ws-integration-workspace{padding:0 14px 20px;line-height:1.55;overflow-wrap:anywhere}.ws-integration-workspace h2{font-size:19px;line-height:1.3;margin:8px 0 12px}.ws-integration-workspace h3{font-size:16px;margin:16px 0 8px}.ws-integration-workspace h4{font-size:14px;margin:12px 0 6px}.ws-integration-workspace p{margin:8px 0}
+.ws-integration-workspace details{margin:10px 0;border-top:1px solid var(--ws-hairline-strong);padding-top:9px}.ws-integration-workspace summary{cursor:pointer;font-weight:600}.ws-integration-workspace summary small{float:right;color:var(--ws-text-2);font-weight:400}.ws-integration-workspace pre{max-height:320px;overflow:auto;white-space:pre-wrap;font-size:11px}.ws-integration-workspace code{font-size:11px}.ws-integration-workspace dl{display:grid;grid-template-columns:minmax(80px,35%) minmax(0,1fr);gap:7px 12px;font-size:12px}.ws-integration-workspace dt{color:var(--ws-text-2)}.ws-integration-workspace dd{margin:0}.ws-integration-workspace blockquote{border-left:2px solid var(--ws-text-3);margin:12px 0;padding:4px 12px;font-size:12px}.ws-integration-workspace ol{padding-left:21px}.ws-integration-workspace li{margin-bottom:8px}
+.ws-integration-search{display:grid;gap:7px;margin:16px 0;font-size:12px}.ws-integration-search input{width:100%;box-sizing:border-box;padding:9px}.ws-integration-pack{width:100%;display:grid;gap:5px;text-align:left;padding:11px!important;margin:6px 0;background:var(--ws-raised)!important;border:1px solid var(--ws-hairline-strong)!important;border-radius:4px}.ws-integration-pack span{font-size:12px;line-height:1.5;font-weight:400}.ws-integration-pack small{color:var(--ws-text-2);font-size:11px}.ws-integration-pack[aria-pressed=true]{border-color:var(--ws-text-2)!important}.ws-integration-detail{padding:4px 0 14px;border-bottom:1px solid var(--ws-hairline-strong)}.ws-integration-error{padding:10px;border:1px solid var(--ws-coral);background:var(--ws-coral-tint);color:var(--ws-coral)}.ws-integration-result{border:1px solid var(--ws-hairline-strong);padding:12px;margin:12px 0;border-radius:4px}.ws-integration-result .ws-result{font-size:12px}.ws-integration-result .ws-hq-next p{font-size:12px}
+
+/* Guided checks stay within HQ; the graph keeps its existing geometry. */
+.ws-guided-checks { border:1px solid var(--ws-hairline-strong); padding:12px; margin:14px 0; }
+.ws-guided-checks details { border-top:1px solid var(--ws-hairline-strong); padding:9px 0; }
+.ws-guided-checks summary { cursor:pointer; font-weight:600; }
+.ws-guided-checks summary small { display:block; font-weight:400; margin:4px 0 0 14px; color:var(--ws-text-2); }
+.ws-guided-checks pre { overflow:auto; max-height:280px; font-size:11px; }
+
+/* Local verification extends the existing HQ; the evidence canvas keeps its area. */
+.ws-local-check { border: 1px solid var(--ws-hairline-strong); border-radius: 4px; padding: 12px; margin: 12px 0; }
+.ws-local-check h3 { margin: 0 0 8px; overflow-wrap: anywhere; }
+.ws-local-verification pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 420px; overflow: auto; }
+.ws-local-verification code, .ws-local-verification dd { overflow-wrap: anywhere; }
+.ws-local-verification details { margin: 10px 0; }
+.ws-local-verification summary { cursor: pointer; }
+.ws-result-not_run { color: var(--ws-text); }
+.ws-local-verification small { display: block; color: var(--ws-text-2); overflow-wrap: anywhere; }
+.ws-scope-file { padding: 8px 0; border-bottom: 1px solid var(--ws-hairline-strong); }
+.ws-scope-file code { display: block; }
+.ws-review-note { border-left: 2px solid var(--ws-amber); padding-left: 9px; }
+
+.ws-observation { position: relative; display: flex; flex: 0 0 auto; gap: 10px; align-items: center; min-height: 28px; padding: 3px 10px; border-bottom: 1px solid var(--ws-hairline-strong); background: var(--ws-raised); color: var(--ws-text); font-size: 12px; }
+.ws-observation > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.ws-observation a { color: var(--ws-blue); }
+.ws-observation-details { position: absolute; top: 100%; right: 8px; z-index: 100; background: var(--ws-raised); border: 1px solid var(--ws-text-3); padding: 12px; width: min(560px, 90vw); box-shadow: 0 6px 24px var(--ws-shadow); overflow-wrap: anywhere; }
+
+/* Supplied ThruLine Checks design, confined to the HQ panel. */
+.ws-checks-panel { min-height: 0; flex: 1; display: flex; flex-direction: column; background: var(--ws-panel); color: var(--ws-text); font-size: 12.5px; line-height: 1.5; }
+.ws-checks-panel[hidden] { display: none; }
+.ws-checks-scroll { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.ws-checks-panel *, .ws-checks-dialog * { box-sizing: border-box; }
+.ws-checks-panel p { margin: 6px 0; overflow-wrap: anywhere; }
+.ws-checks-panel button, .ws-checks-dialog > header button, .ws-checks-dialog > footer button, .ws-checks-return button { padding: 5px 10px; border: 1px solid var(--ws-hairline-strong); border-radius: 3px; background: var(--ws-raised); color: var(--ws-text); font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
+.ws-checks-panel button:hover, .ws-checks-dialog button:hover, .ws-checks-return button:hover { background: var(--ws-hover); }
+.ws-checks-panel button:disabled, .ws-checks-dialog button:disabled { opacity: .5; cursor: not-allowed; }
+.ws-checks-panel button.ws-checks-primary { background: var(--ws-amber); border-color: var(--ws-amber); color: var(--ws-app); font-weight: 600; }
+.ws-checks-panel button.ws-checks-primary:hover { background: var(--ws-primary-hover); border-color: var(--ws-primary-hover); }
+.ws-checks-panel code, .ws-checks-panel pre, .ws-checks-dialog code { font-family: var(--mono); font-size: 11px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ws-checks-panel pre { padding: 9px; background: var(--ws-panel); border: 1px solid var(--ws-hairline-strong); max-height: 240px; overflow: auto; }
+.ws-checks-panel summary { cursor: pointer; }
+.ws-checks-panel h2, .ws-checks-panel h3, .ws-checks-panel h4 { margin: 0; color: var(--ws-text); }
+.ws-checks-hero { padding: 13px 14px 12px; border-bottom: 1px solid var(--ws-hairline); }
+.ws-checks-eyebrow { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ws-text-2); margin-bottom: 8px; }
+.ws-checks-hero-grid { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 14px; align-items: start; }
+.ws-checks-dial { position: relative; width: 74px; height: 74px; border-radius: 50%; }
+.ws-checks-dial > div { position: absolute; inset: 8px; border-radius: 50%; background: var(--ws-panel); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+.ws-checks-dial strong { font: 600 21px/1 var(--mono); }
+.ws-checks-dial span { font-size: 8.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ws-text-2); }
+.ws-checks-hero h2 { font-size: 19px; font-weight: 600; line-height: 1.25; text-wrap: pretty; }
+.ws-checks-hero-grid p { color: var(--ws-text); font-size: 12.5px; line-height: 1.5; }
+.ws-checks-tallies { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+.ws-checks-tallies button { display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border-radius: 11px; background: var(--ws-hover); font-size: 11px; }
+.ws-checks-tallies button[aria-pressed=true] { border-color: currentColor; }
+.ws-checks-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.ws-checks-project { color: var(--ws-text-2); font: 10.5px var(--mono); padding-top: 4px; }
+.ws-checks-empty { padding: 12px 14px 14px; border-bottom: 1px solid var(--ws-hairline); }
+.ws-checks-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.ws-checks-stats > div { display: flex; flex-direction: column; border: 1px solid var(--ws-hairline-strong); border-left: 2px solid var(--ws-cyan); border-radius: 3px; background: var(--ws-panel); padding: 9px 11px; }
+.ws-checks-stats > div + div { border-left-color: var(--ws-amber); }
+.ws-checks-stats strong { color: var(--ws-text); font: 600 20px var(--mono); }
+.ws-checks-stats > div + div strong { color: var(--ws-amber); }
+.ws-checks-stats small { font-size: 11px; color: var(--ws-text-2); margin-top: 4px; line-height: 1.45; }
+.ws-checks-empty details { margin-top: 11px; color: var(--ws-text); }
+.ws-checks-muted { color: var(--ws-text-2); font-size: 11.5px; line-height: 1.5; }
+.ws-checks-panel .ws-checks-alert, .ws-checks-panel .ws-checks-message { margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--ws-hairline-strong); background: var(--ws-panel); color: var(--ws-text); }
+.ws-checks-panel .ws-checks-message { background: var(--ws-panel); border-color: var(--ws-hairline-strong); color: var(--ws-text); }
+.ws-checks-plan { padding: 11px 14px 14px; border-bottom: 1px solid var(--ws-hairline); }
+.ws-checks-plan h3 { font-size: 14px; }
+.ws-checks-plan > p { color: var(--ws-text); }
+.ws-checks-plan-row { border-bottom: 1px solid var(--ws-hairline-strong); padding: 8px 0; }
+.ws-checks-plan-row label { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 9px; align-items: start; cursor: pointer; }
+.ws-checks-plan-row input { margin: 3px 0; accent-color: var(--ws-blue); }
+.ws-checks-plan-row label > span { display: flex; flex-direction: column; }
+.ws-checks-plan-row label > code { color: var(--ws-text-2); font-size: 10px; }
+.ws-checks-plan-row details { margin: 5px 0 0 25px; font-size: 11px; color: var(--ws-text-2); }
+.ws-checks-process { position: relative; overflow: hidden; padding: 10px 14px 11px; background: var(--ws-panel); border-bottom: 1px solid var(--ws-hairline-strong); }
+.ws-checks-process > strong { display: flex; align-items: center; gap: 8px; color: var(--ws-text); overflow-wrap: anywhere; }
+.ws-checks-process > code { display: block; color: var(--ws-text); }
+.ws-checks-process small { color: var(--ws-text-2); font-size: 10.5px; }
+.ws-checks-progress { position: relative; height: 3px; background: var(--ws-raised); border-radius: 2px; overflow: hidden; margin: 8px 0 7px; }
+/* No fill: without the shimmer a fixed 45 % bar would read as a measured fraction, and nothing measured it. */
+.ws-checks-progress::after { content: ''; display: block; width: 100%; height: 100%; background: var(--ws-blue-tint); }
+.ws-checks-spinner { display: inline-block; flex: 0 0 13px; width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--ws-text-3); border-top-color: var(--ws-blue); }
+.ws-checks-audit { border-bottom: 1px solid var(--ws-hairline); }
+.ws-checks-audit > summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px; padding: 9px 12px; background: var(--ws-raised); font-size: 12.5px; font-weight: 600; color: var(--ws-text); }
+.ws-checks-audit > summary::before { content: '▸'; color: var(--ws-text-2); }
+.ws-checks-audit[open] > summary::before { content: '▾'; }
+.ws-checks-audit > summary > span { font-size: 11px; font-weight: 400; color: var(--ws-amber); margin-left: auto; }
+.ws-checks-audit > p { padding: 0 12px; }
+.ws-checks-audit-row { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 9px; padding: 8px 12px; border-top: 1px solid var(--ws-hairline); }
+.ws-checks-audit-row strong { color: var(--ws-text); font-weight: 500; }
+.ws-checks-audit-row p, .ws-checks-audit-row code { color: var(--ws-text-2); font-size: 11.5px; }
+.ws-checks-audit-row button { margin-top: 5px; }
+.ws-checks-filters { display: flex; gap: 8px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--ws-hairline); }
+.ws-checks-filters label { flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--ws-text-2); font-size: 11px; }
+.ws-checks-filters select { min-width: 0; width: 100%; max-width: 200px; padding: 5px 6px; font: inherit; color: var(--ws-text); background: var(--ws-raised); border: 1px solid var(--ws-hairline-strong); border-radius: 3px; }
+.ws-checks-group > h3 { display: flex; align-items: baseline; gap: 8px; padding: 11px 12px 7px; background: var(--ws-panel); border-bottom: 1px solid var(--ws-hairline); font-size: 13px; font-weight: 600; text-wrap: pretty; }
+.ws-checks-group > h3 > span { color: var(--ws-text-2); margin-left: auto; white-space: nowrap; font: 10.5px var(--mono); }
+.ws-checks-row { position: relative; overflow: hidden; border-bottom: 1px solid var(--ws-hairline); }
+.ws-checks-row-running { background: var(--ws-panel); }
+.ws-checks-panel .ws-checks-row-toggle { position: relative; width: 100%; display: grid; grid-template-columns: 20px minmax(0,1fr) auto; gap: 10px; align-items: start; padding: 10px 12px; border: 0; border-radius: 0; background: transparent; text-align: left; }
+.ws-checks-panel .ws-checks-row-toggle:hover { background: var(--ws-hover); }
+.ws-checks-glyph, .ws-checks-row-toggle > .ws-checks-spinner { margin-top: 3px; justify-self: center; }
+.ws-checks-glyph { font-size: 16px; line-height: 18px; }
+.ws-checks-row-copy { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ws-checks-row-copy strong { color: var(--ws-text); font-size: 13px; font-weight: 500; line-height: 1.35; text-wrap: pretty; }
+.ws-checks-row-copy > span { color: var(--ws-text-2); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.ws-checks-row-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 11px; max-width: 118px; }
+.ws-checks-row-meta code { font-size: 10px; color: var(--ws-text-2); }
+.ws-checks-row-detail { padding: 2px 12px 13px 42px; position: relative; }
+.ws-checks-row-detail h4 { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ws-text-2); font-weight: 400; margin-top: 10px; }
+.ws-checks-row-detail p { font-size: 12px; line-height: 1.55; }
+.ws-checks-table-wrap { margin-top: 10px; border: 1px solid var(--ws-hairline-strong); border-radius: 3px; overflow: auto; }
+.ws-checks-table-wrap table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+.ws-checks-table-wrap th { padding: 5px 9px; background: var(--ws-raised); color: var(--ws-text-2); font-size: 9.5px; text-transform: uppercase; font-weight: 400; text-align: left; }
+.ws-checks-table-wrap td { padding: 6px 9px; border-top: 1px solid var(--ws-hairline); font-size: 11.5px; overflow-wrap: anywhere; vertical-align: top; }
+.ws-checks-table-wrap .ws-checks-mismatch { color: var(--ws-coral); background: var(--ws-coral-tint); }
+.ws-checks-reference { display: block; margin-top: 8px; color: var(--ws-text-2); }
+.ws-checks-unconfigured { padding: 12px; border-bottom: 1px solid var(--ws-hairline-strong); color: var(--ws-text-2); }
+.ws-checks-unconfigured summary { color: var(--ws-text); }
+.ws-checks-unconfigured h4 { margin: 12px 0 5px; font-size: 12px; font-weight: 500; }
+.ws-checks-unconfigured > div > div { display: flex; gap: 10px; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--ws-hairline); font-size: 12px; }
+.ws-checks-unconfigured code { white-space: nowrap; }
+.ws-checks-tool-note { padding: 8px 12px; }
+.ws-checks-foot { padding: 9px 12px 11px; background: var(--ws-panel); border-top: 1px solid var(--ws-hairline-strong); color: var(--ws-text-2); font-size: 11px; }
+.ws-checks-foot p + p { font: 10px/1.5 var(--mono); }
+.ws-checks-navigation, .ws-checks-return { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 5px; padding: 8px 10px; background: var(--ws-raised); border-top: 1px solid var(--ws-hairline-strong); }
+.ws-checks-navigation button { flex: 1; white-space: nowrap; font-size: 11px; }
+.ws-checks-dialog { width: min(600px, calc(100vw - 32px)); max-height: 86vh; padding: 0; margin: auto; background: var(--ws-panel); color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); border-radius: 4px; box-shadow: 0 20px 60px var(--ws-shadow); font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+.ws-checks-dialog::backdrop { background: var(--ws-scrim); }
+.ws-checks-dialog > header { display: flex; align-items: center; gap: 9px; padding: 9px 11px; background: var(--ws-raised); border-bottom: 1px solid var(--ws-hairline-strong); position: sticky; top: 0; z-index: 1; }
+.ws-checks-dialog > header > strong { color: var(--ws-text); font-size: 11px; text-transform: uppercase; white-space: nowrap; }
+.ws-checks-dialog > header > code { flex: 1; color: var(--ws-text-2); min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ws-checks-dialog > header > button { font-size: 18px; padding: 0 5px; background: transparent; border: 0; }
+.ws-checks-dialog-content { overflow: visible; padding: 0 12px; }
+.ws-checks-dialog > footer { display: flex; gap: 6px; padding: 10px 12px; border-top: 1px solid var(--ws-hairline-strong); }
+.ws-checks-badge { display: inline-flex; align-items: center; gap: 6px; }
+@keyframes ws-checks-reveal { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .ws-checks-row-detail, .ws-checks-glyph { animation: ws-checks-reveal var(--ws-motion-quick) var(--ws-ease) 1; }
+}
+/* LEGACY BREAKPOINT: the checks panel's own narrow layout (the panel, not the
+ * window, is what is 450px wide). Named in `visual-system.test.js`. */
+@media (max-width: 450px) {
+  .ws-checks-hero-grid { grid-template-columns: 60px minmax(0,1fr); gap: 10px; }
+  .ws-checks-dial { width: 60px; height: 60px; }
+  .ws-checks-dial > div { inset: 6px; }
+  .ws-checks-hero h2 { font-size: 17px; }
+  .ws-checks-row-meta { max-width: 86px; }
+  .ws-checks-plan-row label { grid-template-columns: 16px minmax(0,1fr); }
+  .ws-checks-plan-row label > code { grid-column: 2; }
+}
+
+/* Simple check outcomes; full evidence remains available within each result. */
+.ws-checks-next { margin-top: 12px; padding: 9px 11px; border-left: 2px solid var(--ws-amber); border-radius: 3px; background: var(--ws-raised); }
+.ws-checks-next > strong { color: var(--ws-amber); font-size: 12px; }
+.ws-checks-next > p { color: var(--ws-text); }
+.ws-checks-results > h3 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--ws-hairline-strong); }
+.ws-checks-results > h3 > span { color: var(--ws-text-2); font-size: 11px; font-weight: 400; }
+.ws-checks-result { margin: 10px 12px; padding: 11px 12px 0; border: 1px solid var(--ws-hairline-strong); border-radius: 4px; background: var(--ws-raised); }
+.ws-checks-result.ws-checks-row-running { background: var(--ws-blue-tint); border-color: var(--ws-text-3); }
+.ws-checks-result > header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.ws-checks-result > header > h3 { font-size: 14px; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.ws-checks-result > header .ws-checks-badge { flex-shrink: 0; font-size: 11px; font-weight: 500; }
+.ws-checks-result-glyph { font-size: 15px; }
+.ws-checks-result .ws-checks-result-explanation { color: var(--ws-text); margin-top: 7px; }
+.ws-checks-result > .ws-checks-actions { margin-top: 8px; }
+.ws-checks-result > .ws-checks-actions:empty { display: none; }
+.ws-checks-result-details { margin-top: 10px; border-top: 1px solid var(--ws-hairline-strong); }
+.ws-checks-result-details > summary { padding: 8px 0; color: var(--ws-blue); font-size: 11.5px; }
+.ws-checks-result-details[open] { padding-bottom: 11px; }
+.ws-checks-result-details h4 { margin-top: 10px; font-size: 11px; color: var(--ws-text-2); font-weight: 500; }
+.ws-checks-result-details p { font-size: 12px; }
+.ws-checks-technical { margin: 14px -12px 0; border-top: 1px solid var(--ws-hairline-strong); background: var(--ws-panel); }
+.ws-checks-technical > h4, .ws-checks-technical > p { margin-left: 12px; margin-right: 12px; }
+.ws-checks-technical .ws-checks-row-toggle { grid-template-columns: 15px minmax(0,1fr) auto; gap: 7px; }
+.ws-checks-technical .ws-checks-row-copy strong { font-size: 12px; }
+.ws-checks-technical .ws-checks-row-meta { font-size: 10px; max-width: 85px; }
+.ws-checks-recorded { border-top: 1px solid var(--ws-hairline-strong); padding-top: 12px; }
+.ws-checks-recorded > h3, .ws-checks-recorded > p { padding: 0 14px; }
+.ws-checks-recorded > h3 { font-size: 13px; }
+.ws-checks-audit-row blockquote { margin: 8px 0; padding: 2px 0 2px 9px; border-left: 2px solid var(--ws-hairline-strong); color: var(--ws-text); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 140px; overflow: auto; }
+.ws-checks-audit-row details { margin-top: 5px; font-size: 11px; color: var(--ws-text-2); }
+.ws-checks-audit-row details code { display: block; margin: 5px 0; }
+.ws-checks-process details { margin-top: 7px; font-size: 11px; color: var(--ws-text-2); }
+.ws-checks-panel :is(button, summary, select):focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+@media (prefers-reduced-motion: no-preference) {
+  .ws-checks-result-glyph { animation: ws-checks-reveal var(--ws-motion-quick) var(--ws-ease) 1; }
+}
+
+/* ── THE VERDICT TAB (docs/HQ-VERDICT-PANEL-PLAN.md Step 2) ────────────────
+ * Dark palette matching the proposed render: red dot for Not proven, green
+ * for Proven, amber for Recorded / Loose thread, grey-yellow for Fog.
+ * Motion: none. The reduced-motion block above already covers the workspace. */
+.ws-verdict { display: flex; flex-direction: column; min-height: 100%; background: var(--ws-panel); color: var(--ws-text); font-size: 13px; line-height: 1.55; }
+.ws-verdict-head { position: sticky; top: 0; z-index: 2; padding: 14px 18px 12px; background: var(--ws-panel); border-bottom: 1px solid var(--ws-hairline); }
+.ws-verdict-toggle { display: inline-flex; margin-bottom: 10px; border: 1px solid var(--ws-hairline-strong); border-radius: 4px; overflow: hidden; }
+.ws-hq-content .ws-verdict-toggle button { border: 0; border-radius: 0; padding: 4px 11px; font-size: 12px; background: var(--ws-panel); color: var(--ws-text-2); }
+.ws-hq-content .ws-verdict-toggle button[aria-pressed=true] { background: var(--ws-hover); color: var(--ws-text); }
+.ws-verdict-state { display: flex; align-items: center; gap: 9px; }
+.ws-verdict-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--ws-text); flex: 0 0 auto; }
+.ws-verdict-dot-not_proven { background: var(--ws-coral); }
+.ws-verdict-dot-proven { background: var(--ws-green); }
+.ws-verdict-dot-couldnt, .ws-verdict-dot-loose { background: var(--ws-yellow); }
+.ws-verdict-dot-fog { background: var(--ws-neutral); }
+.ws-hq-content .ws-verdict-word { margin: 0; font-size: 26px; font-weight: 650; letter-spacing: -.02em; color: var(--ws-text); flex: 1; }
+.ws-hq-content .ws-verdict-recheck { padding: 5px 10px; font-size: 12px; background: var(--ws-panel); border: 1px solid var(--ws-hairline-strong); color: var(--ws-text); border-radius: 4px; }
+.ws-hq-content .ws-verdict-headline { margin: 10px 0 12px; font-size: 15px; line-height: 1.5; color: var(--ws-text); }
+.ws-verdict-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.ws-verdict-pill { padding: 3px 10px; border-radius: 999px; font-size: 12px; background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); }
+.ws-verdict-pill-proven { background: var(--ws-green-tint); color: var(--ws-green); border-color: var(--ws-green); }
+.ws-verdict-pill-not_proven { background: var(--ws-coral-tint); color: var(--ws-coral); border-color: var(--ws-coral); }
+.ws-verdict-pill-couldnt { background: var(--ws-yellow-tint); color: var(--ws-yellow); border-color: var(--ws-yellow); }
+.ws-verdict-pill-fog { background: var(--ws-neutral-tint); color: var(--ws-text-2); border-color: var(--ws-hairline-strong); }
+.ws-hq-content .ws-verdict-checked { margin: 0; font-size: 11px; color: var(--ws-text-2); }
+.ws-verdict-checked-units { font-family: var(--mono); }
+.ws-verdict-checked-derived { font-family: var(--mono); }
+.ws-hq-content .ws-verdict-checked-link { padding: 0; font-size: 11px; color: var(--ws-amber); }
+/* No phase log: the reason in the Checked: line's place (verdict-panel.jsx CheckedSlot). */
+.ws-hq-content .ws-verdict-log-failed { margin: 0; font-size: 12px; color: var(--ws-coral); }
+.ws-hq-content .ws-verdict-log-loading { margin: 0; font-size: 11px; color: var(--ws-text-2); }
+.ws-hq-content .ws-verdict-record-changed { margin: 6px 0 0; font-size: 11px; color: var(--ws-text-2); }
+.ws-hq-content .ws-verdict-record-changed-check { padding: 0; font-size: 11px; color: var(--ws-amber); }
+.ws-verdict-more-refs { margin-left: 2px; font-family: var(--mono); font-size: 10.5px; color: var(--ws-text-2); }
+/* Reduced motion: the static, all-ticked list sits above the verdict. */
+.ws-verdict-reduced .ws-verdict-static-checks { border-bottom: 1px solid var(--ws-hairline); }
+.ws-verdict-reduced .ws-verdict-static-checks[hidden] { display: none; }
+.ws-verdict-findings, .ws-verdict-questions, .ws-verdict-clicked { padding: 14px 18px; border-bottom: 1px solid var(--ws-hairline); }
+.ws-verdict-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.ws-hq-content .ws-verdict-section-head h3 { margin: 0; font-size: 15px; font-weight: 650; color: var(--ws-text); }
+.ws-verdict-section-head span { font-size: 11px; color: var(--ws-text-2); }
+.ws-verdict-card { border: 1px solid var(--ws-hairline); border-radius: 6px; padding: 12px 14px; margin: 0 0 10px; background: var(--ws-panel); }
+.ws-verdict-card-head { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+.ws-verdict-chip { padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--ws-hover); color: var(--ws-text); }
+.ws-verdict-chip-not_proven { background: var(--ws-coral-tint); color: var(--ws-coral); }
+.ws-verdict-chip-proven { background: var(--ws-green-tint); color: var(--ws-green); }
+.ws-verdict-chip-couldnt, .ws-verdict-chip-loose { background: var(--ws-yellow-tint); color: var(--ws-yellow); }
+.ws-verdict-chip-fog { background: var(--ws-neutral-tint); color: var(--ws-text-2); }
+.ws-verdict-kind { font-size: 13px; color: var(--ws-text); }
+.ws-verdict-row { display: grid; grid-template-columns: 58px 1fr; gap: 8px; margin: 6px 0; }
+.ws-verdict-rowlabel { color: var(--ws-text-2); font-size: 13px; }
+.ws-verdict-sentence { color: var(--ws-text); overflow-wrap: anywhere; }
+.ws-verdict-sentence q { quotes: '“' '”'; }
+/* A quotation is someone's recorded words, not the panel's sentence, and is marked by more than a colour: a tinted ground
+ * and a bar before it. Upright even inside an inference line, so never the inference style; no amber and no monospace,
+ * so never a receipt chip. Each line of a wrapped quotation keeps its ground and bar. */
+.ws-verdict-sentence q.ws-verdict-quote { font-style: normal; color: var(--ws-violet); background: var(--ws-violet-tint); border-left: 2px solid var(--ws-violet); padding: 0 4px; border-radius: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.ws-verdict-when { color: var(--ws-text-2); }
+.ws-verdict-inference { color: var(--ws-text); font-style: italic; }
+.ws-hq-content .ws-verdict-chip-ref { display: inline-block; margin: 0 2px; padding: 1px 6px; font-family: var(--mono); font-size: 10.5px; line-height: 1.5; background: var(--ws-raised); color: var(--ws-amber); border: 1px solid var(--ws-hairline-strong); border-radius: 3px; vertical-align: baseline; }
+.ws-hq-content .ws-verdict-chip-ref:hover { background: var(--ws-hover); border-color: var(--ws-text-3); }
+.ws-verdict-card-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; }
+.ws-hq-content .ws-verdict-primary { padding: 8px 14px; font-size: var(--ws-fs-base); font-weight: 650; background: var(--ws-amber); color: var(--ws-app); border: 1px solid var(--ws-amber); border-radius: 5px; }
+.ws-hq-content .ws-verdict-primary:hover { background: var(--ws-primary-hover); border-color: var(--ws-primary-hover); }
+.ws-hq-content .ws-verdict-secondary { padding: 8px 14px; font-size: var(--ws-fs-base); background: transparent; color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); border-radius: 5px; }
+.ws-hq-content .ws-verdict-proof { padding: 6px 0; color: var(--ws-amber); font-size: 13px; }
+.ws-verdict-dispute { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 6px; font-size: 11px; color: var(--ws-text-2); }
+.ws-hq-content .ws-verdict-dispute button { padding: 1px 6px; font-size: 11px; background: transparent; border: 1px solid transparent; color: var(--ws-text); }
+.ws-hq-content .ws-verdict-dispute button[aria-pressed=true] { border-color: var(--ws-hairline-strong); color: var(--ws-text); }
+.ws-hq-content .ws-verdict-holds { margin: 12px 18px; border: 1px solid var(--ws-hairline); border-radius: 6px; padding: 10px 14px; }
+.ws-hq-content .ws-verdict-holds summary { display: flex; align-items: center; gap: 8px; color: var(--ws-text); font-size: 13px; }
+.ws-verdict-holds-line { margin: 8px 0 0; padding-left: 18px; color: var(--ws-text); }
+.ws-hq-content .ws-verdict-questions dl { margin: 0; border: 1px solid var(--ws-hairline); border-radius: 6px; }
+.ws-verdict-question { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--ws-hairline); }
+.ws-verdict-question:last-child { border-bottom: 0; }
+.ws-hq-content .ws-verdict-question dt { margin: 0; font-size: 13px; color: var(--ws-text); }
+.ws-hq-content .ws-verdict-question dd { margin: 0; padding: 0; border: 0; font-size: 12px; color: var(--ws-amber); text-align: right; flex: 0 0 auto; }
+.ws-hq-content .ws-verdict-question dd.ws-verdict-inference { color: var(--ws-text); }
+.ws-verdict-footer { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 18px 6px; }
+.ws-hq-content .ws-verdict-footer button { padding: 11px; font-size: 13px; background: var(--ws-panel); border: 1px solid var(--ws-hairline-strong); border-radius: 6px; color: var(--ws-text); }
+.ws-hq-content .ws-verdict-foot { margin: 6px 18px 16px; text-align: center; font-family: var(--mono); font-size: 10.5px; color: var(--ws-text-2); }
+.ws-hq-content .ws-verdict-show-all { width: 100%; padding: 8px; background: var(--ws-panel); border: 1px solid var(--ws-hairline-strong); }
+
+/* ── HQ Verdict Panel — the checking sequence and the landing (Step 3) ──
+ * Rows are the engine's phases; their timing lives in checking-sequence.jsx
+ * (schedule()), never here. Motion is opt-in under no-preference only, and
+ * the reduced-motion block above kills it a second time. The landing is one
+ * translateY + fade of `--ws-motion-slow` (320ms), played once; the dot's
+ * pulse was removed by P6-6 (a glow). Never a streak, never a celebration. */
+.ws-checking { padding: 22px 18px 16px; color: var(--ws-text); }
+.ws-hq-content .ws-checking-title { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 18px; font-weight: 650; letter-spacing: -.01em; color: var(--ws-text); }
+.ws-checking-spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--ws-hairline-strong); flex: 0 0 auto; }
+.ws-hq-content .ws-checking-sub { margin: 6px 0 0; font-family: var(--mono); font-size: 12px; color: var(--ws-text-2); }
+.ws-hq-content .ws-checking-reason { margin: 10px 0 0; font-size: 12px; color: var(--ws-amber); }
+.ws-checking-rows { list-style: none; margin: 16px 0 0; padding: 0; }
+.ws-checking-row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 0 12px; align-items: center; padding: 8px 0; border-top: 1px solid var(--ws-hairline); font-size: 13.5px; color: var(--ws-text-2); }
+.ws-checking-row:first-child { border-top: 0; }
+.ws-checking-ic { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--ws-hairline-strong); display: grid; place-items: center; font-size: 10px; line-height: 1; color: var(--ws-green); }
+.ws-checking-count { font-size: 12px; color: var(--ws-text-2); }
+.ws-checking-detail { grid-column: 2 / 4; font-size: 12px; color: var(--ws-text-2); display: none; overflow-wrap: anywhere; }
+.ws-checking-active { color: var(--ws-text); }
+.ws-checking-active .ws-checking-ic { border-color: var(--ws-blue); border-top-color: transparent; }
+.ws-checking-done { color: var(--ws-text); }
+.ws-checking-done .ws-checking-ic { border-color: var(--ws-green); background: var(--ws-green-tint); }
+.ws-checking-done .ws-checking-count { color: var(--ws-text-2); }
+.ws-checking-active .ws-checking-detail, .ws-checking-done .ws-checking-detail { display: block; }
+.ws-checking-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; color: var(--ws-text-2); }
+.ws-hq-content .ws-checking-skip { padding: 0; font-size: 12px; color: var(--ws-text-2); }
+.ws-checking-static .ws-checking-spinner { display: none; }
+.ws-verdict-detector { margin-left: auto; padding: 1px 6px; font-family: var(--mono); font-size: 10.5px; background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); border-radius: 3px; }
+.ws-checking-verifier { padding: 1px 6px; font-family: var(--mono); font-size: 10.5px; background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); border-radius: 3px; }
+/* The spinners are still: a ring with its top open, beside the word. The
+ * dot's pulse was a glow, and §4 allows glow only on the lit thread. */
+.ws-checking-spinning { border-top-color: var(--ws-blue); }
+@keyframes ws-verdict-land { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .ws-verdict-landing { animation: ws-verdict-land var(--ws-motion-slow) var(--ws-ease) 1 both; }
+}
+
+/* ── The Trace, turned up (P6-3; design record §3.3) ─────────────────────
+ * A thread line draws ONCE, from its cause end to its effect end, through a
+ * mask (`canvas.jsx`), so its kind's own dash pattern is kept. The resting
+ * state is whole: with reduced motion (the reduce block above) or with no
+ * animation at all, the line is simply there. Nothing loops. */
+.ws-trace-draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
+@keyframes ws-trace-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .ws-trace-draw { animation: ws-trace-draw var(--ws-motion-slow) var(--ws-ease) 1; }
+}
+
+/* Explore's two thread tools and the scrubber, in the slim toolbar. */
+.ws-trace-tool { font: inherit; font-size: var(--ws-fs-ctl); color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 4px; padding: 0.15rem 0.55rem; cursor: pointer; white-space: nowrap; }
+.ws-trace-tool:hover { border-color: var(--ws-amber); background: var(--ws-amber-tint); }
+.ws-trace-scrub { display: inline-flex; align-items: center; gap: 0.4rem; min-width: 0; font-size: var(--ws-fs-ctl); color: var(--ws-text-2); }
+.ws-trace-scrub input[type="range"] { width: 9rem; accent-color: var(--ws-amber); }
+.ws-trace-scrub-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 16rem; }
+
+/* The Outline twin: the Trace as a list, no canvas. */
+.ws-trace-outline { flex: 1 1 0; min-height: 0; overflow: auto; padding: 1rem 1.25rem 2rem; color: var(--ws-text); font-size: var(--ws-fs-plain); background: var(--ws-app); }
+.ws-trace-outline h2 { font-size: var(--ws-fs-plain-heading); margin: 0 0 0.25rem; }
+.ws-trace-outline h3 { font-size: var(--ws-fs-plain); margin: 1.25rem 0 0.5rem; color: var(--ws-text-2); text-transform: uppercase; letter-spacing: 0.04em; }
+.ws-trace-outline-intro { margin: 0 0 0.25rem; color: var(--ws-text-2); }
+.ws-trace-outline ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.ws-trace-outline li { margin: 0; }
+.ws-trace-outline-item { display: grid; gap: 0.15rem; width: 100%; text-align: left; font: inherit; color: var(--ws-text); background: var(--ws-panel); border: 1px solid var(--ws-hairline); border-radius: 4px; padding: 0.45rem 0.65rem; cursor: pointer; }
+.ws-trace-outline-item:hover { background: var(--ws-hover); }
+.ws-trace-outline-item[aria-current="true"] { border-color: var(--ws-amber); }
+.ws-trace-outline-item[data-lit="yes"] { border-left: 3px solid var(--ws-amber); }
+.ws-trace-outline-meta { color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-trace-outline-title { font-weight: 600; overflow-wrap: anywhere; }
+.ws-trace-outline-links { color: var(--ws-text-2); font-size: var(--ws-fs-plain); overflow-wrap: anywhere; }
+.ws-trace-outline-missing { color: var(--ws-text-2); margin: 0.25rem 0 0; }
+.ws-trace-outline-lanes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; color: var(--ws-text-2); }
+.ws-trace-outline-status { margin: 0 0 0.35rem; color: var(--ws-text-2); }
+.ws-trace-outline-status:empty { display: none; }
+.ws-trace-outline .ws-trace-outline-folded { margin: 0.35rem 0 0 1.25rem; padding-left: 0.6rem; border-left: 2px solid var(--ws-hairline-strong); }
+.ws-trace-outline-back { font: inherit; color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 4px; padding: 0.2rem 0.6rem; cursor: pointer; }
+
+/* ── the Change workspace (T-2-4) ──────────────────────────────────────────
+ *
+ * One screen, one reading order: title, one sentence, one named version, the
+ * six stages, the open stage. Nothing here carries meaning by colour alone —
+ * every state on this screen is a word, and there is no green: the strongest
+ * thing this product says is a sentence, and a sentence is not a colour.
+ * `prefers-reduced-motion` has nothing to turn off because there is no motion
+ * on this screen at all; the block is written anyway so a later transition
+ * cannot be added without meeting it. */
+
+.ws-change {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 2.5rem 1.5rem 4rem;
+  background: var(--ws-app);
+  color: var(--ws-text);
+  font: var(--ws-fs-plain-body)/1.6 var(--ws-font-sans);
+}
+.ws-change-inner { max-width: 62rem; margin: 0 auto; }
+/* T-S-5 — the top bar: the kicker on the left, the way to the whole story on
+ * the right. It wraps rather than scrolling sideways at narrow widths. */
+.ws-change-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.ws-change-packet-door { text-decoration: none; }
+.ws-change-kicker {
+  margin: 0 0 0.25rem;
+  font-size: var(--ws-fs-plain);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ws-text-2);
+}
+.ws-change-title { margin: 0 0 0.75rem; font-size: var(--ws-fs-headline); line-height: 1.25; font-weight: 650; }
+.ws-change-conclusion { margin: 0 0 0.4rem; font-size: var(--ws-fs-plain-lead); line-height: 1.5; }
+.ws-change-version { margin: 0 0 1.75rem; color: var(--ws-text-2); }
+
+.ws-change-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--ws-hairline);
+  padding-bottom: 0.75rem;
+}
+.ws-change-stage {
+  flex: 1 1 8rem;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  border: 1px solid var(--ws-hairline);
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+  display: grid;
+  gap: 0.15rem;
+}
+.ws-change-stage-name { font-weight: 600; }
+.ws-change-stage-question { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+/* The open stage is marked by weight and a rule, not by hue: the strip has to
+ * read the same to somebody who sees no colour at all. */
+.ws-change-stage-on { border-color: currentColor; box-shadow: inset 0 -3px 0 currentColor; }
+.ws-change-stage-thin .ws-change-stage-name { font-weight: 500; }
+.ws-change-stage:focus-visible, .ws-change-panel:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+
+.ws-change-views-only { margin: 0.5rem 0 1.25rem; font-size: var(--ws-fs-plain); }
+.ws-change-muted { color: var(--ws-text-2); }
+.ws-change-panel { padding: 0.25rem 0 1.5rem; }
+.ws-change-panel h2 { font-size: var(--ws-fs-plain-heading); margin: 0 0 0.5rem; }
+.ws-change-panel h3 { font-size: var(--ws-fs-plain-body); margin: 1.25rem 0 0.4rem; }
+.ws-change-request { margin: 0 0 0.5rem; }
+.ws-change-criteria { margin: 0.25rem 0 0.75rem 1.2rem; display: grid; gap: 0.3rem; }
+.ws-change-empty { margin: 0.75rem 0; padding: 0.75rem 0.9rem; border: 1px dashed var(--ws-hairline-strong); border-radius: 6px; }
+.ws-change-facts dt { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-change-facts dd { margin: 0 0 0.6rem; }
+.ws-change-cards { display: grid; gap: 0.75rem; }
+.ws-change-focus { margin: 0.5rem 0 0.75rem 1.2rem; display: grid; gap: 0.2rem; }
+.ws-change-trace { border-top: 1px solid var(--ws-hairline); padding-top: 1.25rem; }
+.ws-change-notes { margin: 1rem 0 0 1.2rem; color: var(--ws-text-2); }
+.ws-change-technical { margin-top: 1.5rem; }
+.ws-change-technical summary { cursor: pointer; }
+.ws-change-technical dt { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-change-technical dd { margin: 0 0 0.6rem; overflow-wrap: anywhere; }
+
+/* P6-6 — the base control on the Plain screens. A button with no class of its
+ * own (a finding card's "Yes" / "No", reused from the HQ panel) used to render
+ * as the browser's light-grey default on black. `:where()` keeps this at the
+ * lowest specificity, so every classed control below still wins. */
+:where(.ws-change, .ws-inbox) button { font: inherit; color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 6px; padding: 0.3rem 0.7rem; cursor: pointer; }
+:where(.ws-change, .ws-inbox) button:hover:not([disabled]) { background: var(--ws-hover); }
+/* The finding card is the HQ panel's (a dense Technical dock); on a Plain screen
+ * it reads at the Plain floor. */
+.ws-change .ws-verdict-chip, .ws-change .ws-verdict-rowlabel, .ws-change .ws-verdict-dispute, .ws-change .ws-verdict-kind, .ws-change .ws-verdict-sentence { font-size: var(--ws-fs-plain); }
+.ws-change .ws-verdict-primary { background: transparent; color: var(--ws-amber); border: 1px solid var(--ws-amber); border-radius: 6px; padding: 0.3rem 0.7rem; font-weight: 600; }
+.ws-change .ws-verdict-primary:hover { background: var(--ws-amber-tint); }
+
+/* One primary per view: filled. Everything else is an outline or plain text,
+ * so the eye finds the one next action without reading a word. */
+.ws-change-primary {
+  background: var(--ws-amber);
+  color: var(--ws-app);
+  border: 1px solid var(--ws-amber);
+  border-radius: 6px;
+  padding: 0.5rem 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ws-change-primary[disabled], .ws-change-secondary[disabled] { opacity: 0.55; cursor: not-allowed; }
+.ws-change-secondary {
+  background: transparent;
+  color: inherit;
+  border: 1px solid var(--ws-hairline-strong);
+  border-radius: 6px;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.ws-change-blocked { margin-top: 1rem; }
+.ws-change-blocked-why { margin: 0.4rem 0 0; font-size: var(--ws-fs-plain); color: var(--ws-text-2); max-width: 46rem; }
+
+/* There is no motion on this screen to reduce. The block is written anyway,
+ * naming this screen's own controls rather than every descendant: a universal
+ * descendant selector here would also reach the quotation inside a reused
+ * finding card, and `verdict-panel.test.js`'s CSS reader is right to pin every
+ * rule that can. A control added to this screen later joins this list. */
+@media (prefers-reduced-motion: reduce) {
+  .ws-change-stage, .ws-change-primary, .ws-change-secondary, .ws-change-technical summary {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── BP.narrow (§6) on the Plain screens ──────────────────────────────────
+ * At 800px and below nothing on the Change screen, the packet or the Inbox
+ * scrolls sideways: long paths, commands and hashes wrap instead of widening
+ * the page, the side padding narrows, and the headline steps down to the
+ * bottom of the §4 headline range. (The inspector-as-bottom-sheet rule at
+ * BP.sheet has no target on these screens — they have no inspector — and the
+ * workspace shell's inspector is sized by JavaScript; that is P6-1's.) */
+@media (max-width: 800px) {
+  .ws-change, .ws-inbox { padding: 1.5rem 1rem 3rem; overflow-wrap: anywhere; }
+  .ws-change-title, .ws-inbox-heading { font-size: var(--ws-fs-headline-narrow); }
+  .ws-change pre, .ws-change code, .ws-inbox pre, .ws-inbox code { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .ws-change table, .ws-change img, .ws-change textarea, .ws-inbox table, .ws-inbox img, .ws-inbox textarea { max-width: 100%; }
+  .ws-wayin-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── the whole story on one page (T-2-5) ────────────────────────────────
+ * It reuses the Change screen's shell — same background, same measure, same
+ * type — because it is the same Change read a different way, and a page that
+ * looked like a different product would read as a different product's claim.
+ * Nothing here carries meaning by colour: every section has a heading in
+ * words, every empty section has a sentence, every state word is a word, and
+ * there is no green and no tick anywhere in this block. */
+.ws-packet-lead { margin: 0 0 1.5rem; max-width: 46rem; }
+.ws-packet-needs {
+  margin: 0 0 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--ws-hairline-strong);
+  border-radius: 8px;
+}
+.ws-packet-needs h2 { margin: 0 0 0.5rem; font-size: var(--ws-fs-plain-heading); }
+.ws-packet-needs-list { margin: 0.4rem 0 0 1.2rem; display: grid; gap: 0.35rem; }
+.ws-packet-needs h3 { margin: 1.1rem 0 0.3rem; font-size: var(--ws-fs-plain-body); }
+.ws-packet-wrong { margin: 0; }
+.ws-packet-section { border-top: 1px solid var(--ws-hairline); padding: 1.25rem 0; }
+.ws-packet-section h2 { margin: 0 0 0.6rem; font-size: var(--ws-fs-plain-heading); }
+.ws-packet-section h3 { margin: 1.1rem 0 0.35rem; font-size: var(--ws-fs-plain-body); }
+.ws-packet-quote { font-style: normal; }
+.ws-packet-mapping { margin: 0.5rem 0 0.75rem 1.2rem; display: grid; gap: 0.9rem; }
+.ws-packet-criterion { margin: 0 0 0.25rem; font-weight: 600; }
+.ws-packet-nothing { margin: 0; color: var(--ws-text-2); }
+.ws-packet-item { margin: 0.5rem 0 0; }
+.ws-packet-summary { margin: 0 0 0.2rem; }
+.ws-packet-state { margin: 0 0 0.2rem; }
+.ws-packet-provenance { margin: 0.35rem 0 0; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-packet-provenance-label { text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--ws-fs-plain); }
+.ws-packet-record { color: inherit; }
+.ws-packet-refused { margin: 0.6rem 0 0; max-width: 46rem; }
+.ws-packet-footer { border-top: 1px solid var(--ws-hairline); padding-top: 1rem; margin-top: 0.5rem; }
+.ws-packet-footer p { margin: 0 0 0.3rem; max-width: 46rem; }
+.ws-packet-actions { margin: 1.25rem 0 0; }
+.ws-packet-back { display: inline-block; text-decoration: none; }
+
+/* T-S-5 — the §3.6 record: one row per thing, what sits under it indented. */
+.ws-packet-covers { margin: 0 0 1rem; }
+.ws-packet-rows { margin: 0; padding-left: 1.1rem; }
+.ws-packet-rows > li { margin: 0 0 0.6rem; max-width: 46rem; }
+.ws-packet-row-lines { margin: 0.2rem 0 0; padding-left: 1rem; list-style: none; }
+.ws-packet-row-lines > li { color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+
+/* T-S-5 — take this away. The fallback textarea is shown only when the
+ * clipboard is unreachable, and it is the text itself, not a summary of it. */
+.ws-packet-copy { margin: 1rem 0 0; }
+.ws-packet-copy p { margin: 0.4rem 0 0; max-width: 46rem; }
+.ws-packet-copied { color: var(--ws-text); }
+.ws-packet-copy-text {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+  padding: 0.6rem;
+  background: var(--ws-app);
+  color: var(--ws-text);
+  border: 1px solid var(--ws-hairline);
+  border-radius: 4px;
+  font: var(--ws-fs-plain)/1.5 var(--ws-font-mono);
+}
+.ws-decision-packet { margin: 0.5rem 0 0; }
+.ws-decision-packet a { text-decoration: none; }
+
+/* Same rule as the Change screen: there is no motion here to reduce, and the
+ * block is written anyway so a transition cannot be added without meeting it. */
+@media (prefers-reduced-motion: reduce) {
+  .ws-packet-section, .ws-packet-back, .ws-packet-record {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── the way in, at the top of the landing (T-2-4 fix round 1) ──────────
+ * It sits above the workspace chrome because it is the one thing a person
+ * came for. Nothing here carries meaning by colour: the row is a link with a
+ * border, the open-word is a word, and there is no badge and no green. */
+.ws-wayin {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--ws-hairline);
+  background: var(--ws-hover);
+}
+.ws-wayin-heading { margin: 0 0 0.35rem; font-size: var(--ws-fs-title); font-weight: 650; }
+.ws-wayin-muted { margin: 0 0 0.4rem; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-wayin-empty { margin: 0 0 0.4rem; max-width: 52rem; }
+.ws-wayin-command { margin: 0 0 0.5rem; overflow-wrap: anywhere; }
+.ws-wayin-command code { font: var(--ws-fs-plain)/1.5 var(--ws-font-mono); }
+.ws-wayin-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.ws-wayin-row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 18rem) 1fr auto;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--ws-hairline-strong);
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+.ws-wayin-title { font-weight: 600; }
+.ws-wayin-conclusion { color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-wayin-open { text-decoration: underline; }
+.ws-wayin-row:focus-visible, .ws-wayin-primary:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+/* T-6-6: the empty strip's primary is a link to the pick screen; inside the
+ * workspace root every link is painted blue, so this one says what it is. */
+.ws-root a.ws-wayin-primary, a.ws-wayin-primary { display: inline-block; margin: 0.15rem 0 0.6rem; color: var(--ws-app); text-decoration: none; }
+.ws-wayin-primary {
+  background: var(--ws-amber);
+  color: var(--ws-app);
+  border: 1px solid var(--ws-amber);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* No motion here either, and the same reason it is written down anyway. */
+@media (prefers-reduced-motion: reduce) {
+  .ws-wayin-row, .ws-wayin-primary {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── the Inbox: the app's landing (T-2-6) ────────────────────────────────
+ *
+ * One item per Change that needs something. Nothing here carries meaning by
+ * colour: the reason is a sentence, the one next action is the only filled
+ * control in the item, and there is no badge, no dot and no green. The item's
+ * order on the page IS the priority — the highest reason first — so nothing
+ * needs a rank number beside it. */
+.ws-inbox {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 2.5rem 1.5rem 4rem;
+  background: var(--ws-app);
+  color: var(--ws-text);
+  font: var(--ws-fs-plain-body)/1.6 var(--ws-font-sans);
+}
+.ws-inbox-inner { max-width: 62rem; margin: 0 auto; }
+.ws-inbox-heading { margin: 0 0 0.5rem; font-size: var(--ws-fs-headline); line-height: 1.25; font-weight: 650; }
+.ws-inbox-count { margin: 0 0 1.5rem; color: var(--ws-text-2); }
+.ws-inbox-muted { margin: 0.4rem 0; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-inbox-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+.ws-inbox-item {
+  border: 1px solid var(--ws-hairline-strong);
+  border-radius: 8px;
+  padding: 1rem 1.1rem 1.1rem;
+}
+.ws-inbox-title { margin: 0 0 0.35rem; font-size: var(--ws-fs-plain-lead); font-weight: 650; }
+.ws-inbox-reason { margin: 0 0 0.35rem; font-size: var(--ws-fs-title); }
+.ws-inbox-scope { margin: 0 0 0.75rem; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+/* A3-F2: the Change-level count, a plain sentence in the muted ink — no colour carries it. */
+.ws-inbox-attention { margin: 0 0 0.35rem; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-inbox-code-moved { margin: 0 0 0.35rem; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-inbox-also-label { margin: 0 0 0.2rem; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-inbox-also { margin: 0 0 0.85rem 1.2rem; display: grid; gap: 0.2rem; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-inbox-suggested { margin: 0.6rem 0 0; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-inbox-empty {
+  border: 1px dashed var(--ws-hairline-strong);
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem;
+  max-width: 52rem;
+}
+.ws-inbox-empty-heading { margin: 0 0 0.4rem; font-size: var(--ws-fs-plain-lead); font-weight: 650; }
+.ws-inbox-empty-body { margin: 0 0 0.6rem; }
+.ws-inbox-command { margin: 0 0 0.7rem; overflow-wrap: anywhere; }
+.ws-inbox-command code { font: var(--ws-fs-plain)/1.5 var(--ws-font-mono); }
+.ws-inbox-storage { margin-top: 2rem; border-top: 1px solid var(--ws-hairline); padding-top: 1rem; }
+.ws-inbox-storage-line { margin: 0; }
+.ws-inbox-technical { margin-top: 0.6rem; }
+.ws-inbox-technical summary { cursor: pointer; }
+.ws-inbox-technical dt { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-inbox-technical dd { margin: 0 0 0.6rem; overflow-wrap: anywhere; }
+/* BUILD-14 — the card's own technical layer: the repository identity and the
+ * folder, one click down from the project's name. Its own class, so the
+ * storage disclosure's selectors stay the storage disclosure's. */
+.ws-inbox-where-technical { margin: -0.5rem 0 0.75rem; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-inbox-where-technical summary { cursor: pointer; }
+.ws-inbox-where-technical dt { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-inbox-where-technical dd { margin: 0 0 0.6rem; overflow-wrap: anywhere; }
+.ws-inbox-notes { margin: 1rem 0 0 1.2rem; color: var(--ws-text-2); }
+/* SEAM-INBOX-READ-VERIFY item 7 — Read it again. A button, so it takes the
+ * page's type; filled (`.ws-inbox-primary`) only when nothing else needs
+ * attention, otherwise the shared secondary outline. */
+.ws-inbox-retry { font: inherit; font-weight: 600; border-radius: 6px; padding: 0.5rem 0.95rem; margin-top: 0.9rem; }
+
+/* One primary per item: filled, and the only filled thing in it. */
+.ws-inbox-primary {
+  background: var(--ws-amber);
+  color: var(--ws-app);
+  border: 1px solid var(--ws-amber);
+  border-radius: 6px;
+  padding: 0.5rem 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+/* §4: one filled amber button per view. The Inbox lists one item per Change,
+ * each with its own next action, so only the FIRST item's (the highest reason,
+ * because order is priority) is filled; every later one is the amber outline. */
+.ws-inbox-list > li:not(:first-child) .ws-inbox-primary { background: transparent; color: var(--ws-amber); }
+.ws-inbox-list > li:not(:first-child) .ws-inbox-primary:hover { background: var(--ws-amber-tint); }
+/* A3-F14 — the Inbox by whose turn it is. One filled primary on the screen
+ * still: in every section with items after the first, the first item's
+ * action is secondary too. Sections are plain headings and counts; no colour
+ * carries whose turn it is. A section the record cannot fill yet is muted and
+ * states its reason and enabler. */
+.ws-inbox-section { margin: 0 0 1.4rem; }
+.ws-inbox-section-heading { margin: 0 0 0.2rem; font-size: var(--ws-fs-title); font-weight: 650; }
+.ws-inbox-section-count { margin: 0 0 0.6rem; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-inbox-section-off .ws-inbox-section-heading { color: var(--ws-text-2); }
+.ws-inbox-section-reason, .ws-inbox-section-enabler { margin: 0.2rem 0; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-inbox-section-nothing > summary { cursor: pointer; }
+.ws-inbox-section-nothing > summary .ws-inbox-section-heading { display: inline; }
+.ws-inbox-section-items ~ .ws-inbox-section-items .ws-inbox-list > li .ws-inbox-primary { background: transparent; color: var(--ws-amber); }
+.ws-inbox-section-items ~ .ws-inbox-section-items .ws-inbox-list > li .ws-inbox-primary:hover:not([disabled]) { background: var(--ws-amber-tint); border-color: var(--ws-amber); }
+.ws-inbox-primary:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+
+/* No motion on this screen either, and the block is written anyway so a later
+ * transition cannot be added without meeting it. */
+@media (prefers-reduced-motion: reduce) {
+  .ws-inbox-primary, .ws-inbox-technical summary {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── the first-use path (T-2-7) ──────────────────────────────────────────
+ *
+ * The same surface the Inbox uses, because it is the same screen a minute
+ * earlier: one column, one primary control, no colour that carries meaning and
+ * no motion. The list of repositories is radio buttons rather than a row of
+ * buttons for one reason: a row of equally weighted "Use this" controls is a
+ * screen with no primary action, and rule 7 says there is exactly one. */
+.ws-first-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.5rem; }
+.ws-first-candidate {
+  border: 1px solid var(--ws-hairline-strong);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+}
+.ws-first-pick { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.7rem; align-items: baseline; cursor: pointer; }
+.ws-first-pick input { margin: 0; align-self: center; }
+.ws-first-label { font-weight: 600; overflow-wrap: anywhere; }
+.ws-first-facts { grid-column: 2; color: var(--ws-text-2); font-size: var(--ws-fs-plain); display: flex; flex-wrap: wrap; gap: 0.15rem 0.6rem; }
+.ws-first-fact + .ws-first-fact::before { content: '· '; }
+.ws-first-checks { margin-top: 1.5rem; }
+.ws-first-check-list { list-style: none; margin: 0.4rem 0 0.6rem; padding: 0; display: grid; gap: 0.25rem; }
+.ws-first-check-tool { font: var(--ws-fs-plain)/1.5 var(--ws-font-mono); }
+/* An absent tool reads as a fact about this machine, in the same ink as every
+   other fact. Nothing on this screen is red. */
+.ws-first-absent { color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-first-criteria { margin-top: 2rem; border-top: 1px solid var(--ws-hairline); padding-top: 1rem; }
+/* The second, separate act: offered, and visibly not the primary one. */
+.ws-first-secondary {
+  background: transparent;
+  color: var(--ws-text);
+  border: 1px solid var(--ws-text-3);
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.ws-first-secondary:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+.ws-inbox-primary[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-first-secondary, .ws-first-pick {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── criterion ↔ evidence (T-3-1) ──────────────────────────────────────────
+   NOTHING HERE CARRIES MEANING BY COLOUR. Every state on this list has a
+   sentence beside it, and the four states share one ink: a line with nothing
+   behind it is not a failure, and a line with something behind it is not a
+   pass. The only visual difference between them is indentation. */
+.ws-cov { margin-top: 1.5rem; }
+.ws-cov-actor { display: grid; gap: 0.3rem; margin: 0.6rem 0 1rem; max-width: 24rem; }
+.ws-cov-actor input {
+  background: transparent;
+  color: var(--ws-text);
+  border: 1px solid var(--ws-text-3);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font: inherit;
+}
+.ws-cov-actor input:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+.ws-cov-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.4rem; }
+/* PATH-UI-2-R3 — the row a door brought a person to. It is first in the list,
+ * directly under the name box, and says so in words (`.ws-cov-row-landed`); the
+ * rule beside it is an emphasis, never the only signal, so nothing here relies
+ * on colour or on forced-colors keeping one. `scroll-margin-top` leaves a
+ * little of the page above the name box when a door places it at the top. */
+.ws-cov > .ws-cov-actor { scroll-margin-top: 1rem; }
+.ws-cov-row-current { border-left: 3px solid var(--ws-text-2); padding-left: 0.75rem; }
+.ws-cov-row-landed { margin: 0 0 0.25rem; color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-cov-criterion { margin: 0 0 0.25rem; font-weight: 600; }
+.ws-cov-state { margin: 0 0 0.5rem; }
+.ws-cov-items, .ws-cov-candidates { list-style: none; margin: 0 0 0.5rem; padding: 0 0 0 1rem; display: grid; gap: 0.6rem; border-left: 1px solid var(--ws-hairline); }
+.ws-cov-item p { margin: 0 0 0.15rem; }
+.ws-cov-item-name { font: var(--ws-fs-plain)/1.5 var(--ws-font-mono); overflow-wrap: anywhere; }
+.ws-cov-item-why, .ws-cov-item-note, .ws-cov-item-state { color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-cov-removed { margin: 0.3rem 0 0.6rem; color: var(--ws-text-2); }
+.ws-packet-why, .ws-packet-note, .ws-packet-removed { color: var(--ws-text-2); font-size: var(--ws-fs-plain); margin: 0.15rem 0; }
+
+/* T-3-2 — what will be examined, and which version a result came from.
+ *
+ * NO COLOUR CARRIES MEANING HERE. `ws-cov-item-elsewhere` is the same muted
+ * grey as every other secondary line: a result from another version is not a
+ * failure and must not be styled as one. The sentence says what it is. */
+.ws-prepare-lines { list-style: none; margin: 0 0 12px; padding: 0; }
+.ws-prepare-lines li { margin: 0 0 6px; }
+.ws-prepare-technical { margin: 12px 0; }
+.ws-prepare-technical dd { word-break: break-all; }
+.ws-cov-item-applies, .ws-packet-applies { margin: 2px 0; color: var(--ws-text-2); }
+.ws-cov-item-elsewhere { font-style: italic; }
+
+/* T-S-4 — the decision. The headline sits in the same text block as the title,
+   the sentence and the version, so "is this approved, and is it still the
+   thing I approved?" reads in the same glance. Nothing here is green: the
+   emphasis is weight, not colour, because a colour carrying meaning on its own
+   is the thing this product refuses. */
+.ws-decision-headline {
+  font-weight: 600;
+  margin: 0.35rem 0 0.15rem;
+}
+.ws-decision-not-an-action {
+  margin: 0 0 0.6rem;
+  opacity: 0.8;
+}
+/* A3-F8a — the confirming sheet's two acts, side by side. */
+.ws-decision-sheet-acts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.ws-decision .ws-cov-actor { display: block; margin: 0.5rem 0; }
+.ws-decision-moved { margin-top: 0.75rem; }
+.ws-decision-moved-line { margin: 0.2rem 0; }
+.ws-decision-moved-files { margin: 0.3rem 0 0.3rem 1.1rem; }
+.ws-decision-history { margin-top: 0.75rem; }
+
+/* ── P6-1 — the shell: top bar, sidebar, altitudes (design record §3.1, §6) ──
+   One top bar and one labelled sidebar around both the Change screen and the
+   workspace. The pressed altitude and wording are marked by weight and a
+   strong ground, never by hue, and never filled amber: the one filled amber
+   control in any view is that view's primary. Nothing here moves. */
+.ws-shell { min-height: 100vh; display: flex; flex-direction: column; background: var(--ws-app); color: var(--ws-text); }
+/* Named by element, not by `*`: the Change screen's own root rule already
+   reaches everything inside `.ws-change`, and a universal rule here would also
+   reach the agent's quotation in a reused finding card. */
+.ws-shell button:focus-visible, .ws-shell a:focus-visible, .ws-shell summary:focus-visible, .ws-shell [tabindex]:focus-visible, .ws-shell input:focus-visible { outline: var(--ws-focus-width) solid var(--ws-focus); outline-offset: var(--ws-focus-offset); }
+.ws-shell-body { flex: 1 1 auto; display: flex; min-width: 0; }
+.ws-shell-body > .ws-change { flex: 1 1 auto; min-width: 0; min-height: 0; }
+.ws-shell-top {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--ws-panel);
+  border-bottom: 1px solid var(--ws-hairline);
+  font: var(--ws-fs-plain)/1.4 var(--ws-font-sans);
+  color: var(--ws-text);
+  position: relative;
+  min-width: 0;
+}
+.ws-shell-crumbs { flex: 1 1 16rem; min-width: 0; }
+.ws-shell-crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; min-width: 0; }
+.ws-shell-crumb { display: inline-flex; align-items: center; gap: 0.25rem; min-width: 0; overflow-wrap: anywhere; color: var(--ws-text-2); }
+.ws-shell-crumb-work { color: var(--ws-text); font-weight: 600; }
+.ws-shell-crumb-sep { color: var(--ws-text-2); }
+.ws-shell-crumb-btn { font: inherit; color: inherit; background: transparent; border: 0; padding: 0.15rem 0.25rem; cursor: pointer; text-decoration: none; text-align: left; overflow-wrap: anywhere; }
+.ws-shell-crumb-btn:hover { background: var(--ws-hover); }
+.ws-shell-seg { display: inline-flex; border: 1px solid var(--ws-hairline-strong); border-radius: 6px; overflow: hidden; }
+.ws-shell-seg-btn { font: inherit; color: var(--ws-text-2); background: transparent; border: 0; border-left: 1px solid var(--ws-hairline-strong); padding: 0.25rem 0.7rem; cursor: pointer; }
+.ws-shell-seg-btn:first-child { border-left: 0; }
+.ws-shell-seg-btn:hover { background: var(--ws-hover); }
+.ws-shell-seg-btn[aria-pressed="true"] { color: var(--ws-text); background: var(--ws-hairline-strong); font-weight: 600; box-shadow: inset 0 -2px 0 var(--ws-text-2); }
+/* T-6-4: the pressed state is not told by the ground alone. #2A2A30 against
+ * the bar's #0A0A0B is 1.39:1, below the 3:1 a state needs (SC 1.4.11); the
+ * underline in text-2 is 7.72:1 against the bar and 5.57:1 on the ground. */
+.ws-shell-slot { display: inline-flex; align-items: baseline; gap: 0.35rem; }
+.ws-shell-slot-btn { font: inherit; color: var(--ws-text-2); background: transparent; border: 1px dashed var(--ws-text-3); border-radius: 6px; padding: 0.2rem 0.6rem; cursor: help; }
+.ws-shell-slot-tag { color: var(--ws-text-2); font-size: var(--ws-fs-plain); }
+.ws-shell-why { display: block; color: var(--ws-text-2); font-size: var(--ws-fs-plain); margin: 0.2rem 0 0; }
+.ws-shell-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ws-shell-read { margin: 0; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; color: var(--ws-text-2); }
+.ws-shell-refresh { font: inherit; color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 6px; padding: 0.2rem 0.6rem; cursor: pointer; }
+.ws-shell-refresh:hover:not([disabled]) { background: var(--ws-hover); }
+.ws-shell-refresh[disabled] { opacity: 0.55; cursor: not-allowed; }
+.ws-shell-note { flex: 1 0 100%; margin: 0; color: var(--ws-text-2); }
+.ws-shell-note:empty { display: none; }
+.ws-shell-muted { color: var(--ws-text-2); }
+.ws-shell-single-hint { display: block; margin-top: 0.25rem; }
+
+.ws-shell-side {
+  flex: 0 0 13.5rem;
+  box-sizing: border-box;
+  padding: 1rem 0.75rem;
+  background: var(--ws-panel);
+  border-right: 1px solid var(--ws-hairline);
+  font: var(--ws-fs-plain)/1.45 var(--ws-font-sans);
+  color: var(--ws-text);
+  overflow: auto;
+  min-width: 0;
+}
+.ws-shell-side > ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.ws-shell-side-item { font: inherit; font-weight: 600; color: var(--ws-text); background: transparent; border: 0; padding: 0.2rem 0; cursor: pointer; text-align: left; }
+.ws-shell-side-item:hover { text-decoration: underline; }
+.ws-shell-side-item[aria-pressed="true"] { box-shadow: inset 2px 0 0 var(--ws-text); padding-left: 0.5rem; }
+.ws-shell-side .ws-shell-slot { display: grid; justify-items: start; gap: 0.1rem; }
+.ws-shell-side-hint { display: block; font-size: var(--ws-fs-plain); }
+.ws-shell-side-current { display: block; margin-top: 0.35rem; padding-left: 0.5rem; border-left: 2px solid var(--ws-text-2); overflow-wrap: anywhere; }
+.ws-shell-saved summary { list-style: none; }
+.ws-shell-saved-list { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.2rem; }
+.ws-shell-side-view { font: inherit; color: var(--ws-text); background: transparent; border: 0; border-left: 2px solid transparent; padding: 0.15rem 0.4rem; cursor: pointer; text-align: left; overflow-wrap: anywhere; }
+.ws-shell-side-view:hover { background: var(--ws-hover); }
+.ws-shell-side-view[aria-pressed="true"] { border-left-color: var(--ws-text); font-weight: 600; }
+.ws-shell-story-toggle { font: inherit; color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 6px; padding: 0.15rem 0.6rem; cursor: pointer; }
+.ws-shell-story-toggle[aria-pressed="true"] { background: var(--ws-hairline-strong); box-shadow: inset 0 -2px 0 var(--ws-text-2); }
+
+/* Workspace Brief: the story of the work, centred, readable, nothing beside it. */
+.ws-shell-story { flex: 1 1 auto; min-width: 0; overflow: auto; padding: 1.5rem; box-sizing: border-box; font-size: var(--ws-fs-plain); }
+.ws-shell-story-inner { max-width: 52rem; margin: 0 auto; }
+
+/* Below BP.sheet the workspace inspector is a sheet across the bottom. */
+.ws-shell-sheet { z-index: 30; overflow: auto; border-top: 1px solid var(--ws-hairline-strong); border-radius: 10px 10px 0 0; }
+
+.ws-shell-sheet-scrim { position: fixed; inset: 0; z-index: 60; background: var(--ws-scrim); display: flex; align-items: flex-start; justify-content: center; padding: 10vh 1rem 1rem; }
+.ws-shell-dialog { max-width: 34rem; width: 100%; box-sizing: border-box; background: var(--ws-raised); color: var(--ws-text); border: 1px solid var(--ws-hairline-strong); border-radius: 10px; padding: 1.25rem 1.5rem; font: var(--ws-fs-plain-body)/1.55 var(--ws-font-sans); max-height: 80vh; overflow: auto; }
+.ws-shell-dialog h2 { margin: 0 0 0.5rem; font-size: var(--ws-fs-plain-heading); }
+.ws-shell-dialog h3 { margin: 1rem 0 0.25rem; font-size: var(--ws-fs-plain-body); }
+.ws-shell-keys { margin: 0.5rem 0; display: grid; gap: 0.35rem; }
+.ws-shell-keys > div { display: grid; grid-template-columns: 6rem 1fr; gap: 0.75rem; }
+.ws-shell-keys dt { margin: 0; }
+.ws-shell-keys dd { margin: 0; }
+.ws-shell-keys kbd { font: var(--ws-fs-plain) var(--ws-font-mono); border: 1px solid var(--ws-hairline-strong); border-radius: 4px; padding: 0 0.35rem; margin-right: 0.25rem; }
+
+/* Change Brief: the story on the left, the Inspector beside it from BP.sheet up. */
+.ws-brief .ws-brief-grid { max-width: 76rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); gap: 2rem; align-items: start; }
+.ws-brief-state { margin: 0.25rem 0 0.75rem; }
+.ws-brief-chip { display: inline-block; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 999px; border: 1px solid var(--ws-text-2); color: var(--ws-text); }
+.ws-brief-chip[data-state="proven"] { border-color: var(--ws-green); color: var(--ws-green); }
+.ws-brief-chip[data-state="not_proven"] { border-color: var(--ws-coral); color: var(--ws-coral); }
+.ws-brief-chip[data-state="needs_recheck"] { border-color: var(--ws-yellow); color: var(--ws-yellow); }
+.ws-brief-chip[data-state="in_progress"] { border-color: var(--ws-blue); color: var(--ws-blue); }
+.ws-brief-chip[data-state="recorded"] { border-style: dashed; border-color: var(--ws-neutral); color: var(--ws-text-2); }
+.ws-brief-scope { margin: 0 0 1rem; color: var(--ws-text-2); overflow-wrap: anywhere; }
+.ws-brief-runs { margin: 0.75rem 0; }
+.ws-brief-inspector .ws-change-inspector { margin: 0; }
+/* A3-F4 — the Inspector's action block is its sticky footer: the one primary
+ * stays on the first screen however many finding cards are above it. The page
+ * keeps a focused item clear of it by the footer's own height (WCAG 2.4.11),
+ * which `Inspector` writes to --inspector-footer-h. */
+.ws-inspector-footer { position: sticky; bottom: 0; background: var(--ws-panel); border-top: 1px solid var(--ws-hairline-strong); padding: 0.75rem 0 0.5rem; max-height: 60vh; overflow-y: auto; }
+.ws-inspector-numbers { margin: 0.5rem 0 0; font-size: var(--ws-fs-plain); }
+html:has(.ws-inspector-footer) { scroll-padding-bottom: var(--inspector-footer-h, 0px); }
+/* A3-F12 — what the Inspector folds: one line that says how many, opened in place. */
+.ws-inspector-fold { margin-top: 0.75rem; }
+.ws-inspector-fold > summary { cursor: pointer; color: var(--ws-text-2); }
+.ws-inspector-fold > .ws-change-cards, .ws-inspector-fold > .ws-inspector-items { margin-top: 0.75rem; }
+
+@media (max-width: 1100px) {
+  .ws-brief .ws-brief-grid { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  /* A3-F4: in one column the Inspector starts below the story, where a sticky
+   * footer cannot rise above it; so on Brief the footer is held to the bottom
+   * of the window, and the page leaves room for it at its end. */
+  .ws-brief .ws-inspector-footer { position: fixed; left: 0; right: 0; bottom: 0; padding: 0.75rem 1rem 0.5rem; max-height: 50vh; }
+  .ws-brief { padding-bottom: var(--inspector-footer-h, 0px); }
+  .ws-brief-inspector { border-top: 1px solid var(--ws-hairline-strong); border-radius: 10px 10px 0 0; background: var(--ws-panel); padding: 1rem; }
+}
+@media (max-width: 800px) {
+  .ws-shell-body { flex-direction: column; }
+  .ws-shell-body .ws-shell-side { flex: 0 0 auto; border-right: 0; border-bottom: 1px solid var(--ws-hairline); padding: 0.5rem 0.75rem; }
+  .ws-shell-body .ws-shell-side > ul { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .ws-middle > .ws-shell-side { flex: 0 0 8.5rem; padding: 0.75rem 0.5rem; }
+  .ws-shell-side-hint, .ws-shell-side-current { display: none; }
+  .ws-shell-crumb-project, .ws-shell-crumb-version { display: none; }
+  .ws-shell-crumb-work .ws-shell-crumb-sep { display: none; }
+  .ws-shell-top { overflow-wrap: anywhere; }
+}
+
+
+/* Ask - the scoped command bar inside the shell's one sheet (P6-4, S3.5).
+ *
+ * No colour carries meaning here: the permanent line, the chip, the questions
+ * and the answer are the shell's own two text weights on the raised surface,
+ * and every state word inside an answer arrives as a WORD from the model.
+ * Nothing animates: an answer is a pure function over the model the screen
+ * already holds, so there is nothing to wait for and nothing to pretend to
+ * wait for. */
+.ws-ask { display: grid; gap: 0.75rem; }
+.ws-ask-permanent { margin: 0; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-ask-scope { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem; }
+.ws-ask-scope-h { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-ask-chip { display: inline-flex; align-items: baseline; gap: 0.5rem; border: 1px solid var(--ws-hairline-strong); border-radius: 999px; padding: 0.15rem 0.7rem; font-size: var(--ws-fs-plain); }
+.ws-ask-chip-x { font: inherit; font-size: var(--ws-fs-plain); color: var(--ws-text-2); background: transparent; border: 0; border-left: 1px solid var(--ws-hairline-strong); padding: 0 0 0 0.5rem; cursor: pointer; }
+.ws-ask-suggest-h { margin: 0.25rem 0 0; font-size: var(--ws-fs-plain-body); }
+.ws-ask-suggest { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.ws-ask-suggest-btn { width: 100%; text-align: left; }
+.ws-ask-form { display: grid; gap: 0.35rem; }
+.ws-ask-label { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-ask-box { font: var(--ws-fs-plain-body)/1.4 var(--ws-font-sans); color: var(--ws-text); background: var(--ws-panel); border: 1px solid var(--ws-hairline-strong); border-radius: 6px; padding: 0.4rem 0.6rem; }
+.ws-ask-answer, .ws-ask-cannot { border-top: 1px solid var(--ws-hairline); padding-top: 0.75rem; }
+.ws-ask-answer-q { margin: 0 0 0.35rem; font-size: var(--ws-fs-plain-body); }
+.ws-ask-answer-lead { margin: 0 0 0.35rem; }
+.ws-ask-answer-line { margin: 0 0 0.25rem; color: var(--ws-text-2); }
+.ws-ask-evidence-h, .ws-ask-action-h { margin: 0.75rem 0 0.25rem; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-ask-evidence { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.ws-ask-evidence li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem; }
+.ws-ask-evidence-kind { font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-ask-cannot-h { margin: 0 0 0.35rem; font-size: var(--ws-fs-plain-body); }
+.ws-ask-cannot-parts { margin: 0; display: grid; gap: 0.5rem; }
+.ws-ask-cannot-parts dt { margin: 0; font-size: var(--ws-fs-plain); color: var(--ws-text-2); }
+.ws-ask-cannot-parts dd { margin: 0; }
+.ws-ask-none { margin: 0; }
+.ws-shell-ask-btn { font: inherit; color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 6px; padding: 0.2rem 0.6rem; cursor: pointer; }
+
+/* ── the Read (P6-2; design record §3.2) ─────────────────────────────────
+ * The rail beside the record while it opens. Every step carries a word and a
+ * mark of its own shape; the hue is never the only difference. Nothing here
+ * animates: the spinner is a still ring with one coloured quarter, drawn only
+ * while the engine's answer is on its way and never under reduced motion. */
+.ws-read-rail { flex: 0 0 300px; max-width: 34vw; min-width: 0; box-sizing: border-box; padding: 18px 16px; overflow: auto; background: var(--ws-panel); border-right: 1px solid var(--ws-hairline); color: var(--ws-text); font-size: 14px; }
+.ws-read-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.ws-read-title { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 16px; font-weight: 650; }
+.ws-read-spinner { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ws-hairline-strong); border-top-color: var(--ws-blue); flex: 0 0 auto; }
+.ws-read-skip { flex: 0 0 auto; padding: 2px 10px; font: inherit; font-size: 14px; color: var(--ws-text); background: transparent; border: 1px solid var(--ws-hairline-strong); border-radius: 4px; cursor: pointer; }
+.ws-read-lead { margin: 10px 0 0; font-size: 14px; color: var(--ws-text); }
+.ws-read-live, .ws-read-waiting, .ws-read-covered { margin: 8px 0 0; font-size: 14px; color: var(--ws-text-2); }
+.ws-read-rows { list-style: none; margin: 14px 0 0; padding: 0; }
+.ws-read-row { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 2px 10px; padding: 8px 0; border-top: 1px solid var(--ws-hairline); font-size: 14px; }
+.ws-read-row:first-child { border-top: 0; }
+.ws-read-mark { grid-row: 1 / span 3; width: 10px; height: 10px; margin-top: 4px; box-sizing: border-box; border: 1.5px solid var(--ws-neutral); }
+.ws-read-label { grid-column: 2; color: var(--ws-text); }
+.ws-read-count, .ws-read-time, .ws-read-note { grid-column: 2; font-size: 14px; color: var(--ws-text-2); }
+.ws-read-done .ws-read-mark { border-radius: 50%; border-color: var(--ws-text-2); background: var(--ws-text-2); }
+.ws-read-failed .ws-read-mark { border-radius: 0; border-color: var(--ws-yellow); background: var(--ws-yellow-tint); transform: rotate(45deg); }
+.ws-read-failed .ws-read-note { color: var(--ws-text); }
+.ws-read-unmeasured .ws-read-mark { border-radius: 50%; border-color: var(--ws-yellow); }
+.ws-read-withheld .ws-read-mark, .ws-read-not_run .ws-read-mark, .ws-read-unknown .ws-read-mark { border-radius: 50%; border-style: dashed; }
+.ws-read-technical { margin-top: 14px; font-size: 14px; color: var(--ws-text-2); }
+.ws-read-technical dl { margin: 8px 0 0; }
+.ws-read-technical dt { margin-top: 8px; font-size: 14px; color: var(--ws-text-2); }
+.ws-read-technical dd { margin: 2px 0 0; font-family: var(--ws-font-mono); font-size: 14px; color: var(--ws-text); overflow-wrap: anywhere; }
+
+/* N13-FORCED-COLOURS, part A — the forced-colours layer (Windows High
+ * Contrast and every other forced palette). Forced colours drop grounds,
+ * background images and box-shadows, and the workspace tells a selected
+ * card, a lit thread and a pressed toggle by exactly those. Here each is
+ * redrawn as an outline or a border in a system colour, so the Trace reads
+ * the same as it does in colour. `!important` is used only where an inline
+ * style would otherwise win, and only inside this block. State glyphs are
+ * text, so their shape survives the forced palette without
+ * `forced-color-adjust: none`, and they are left to the system colours.
+ * Part B (hatching as an SVG pattern, dashed Fog) waits on N2-PALETTE. */
+@media (forced-colors: active) {
+  /* The focus ring is an outline already, and every ring rule draws it in
+   * var(--ws-focus); under the forced palette that token is the system
+   * highlight, so every ring on every root takes it. (A token, not a
+   * `*:focus-visible` rule: verdict-panel.test.js pins every rule that could
+   * reach a quotation, and this one cannot.) */
+  .ws-root, .ws-change, .ws-inbox, .ws-shell, .ws-shell-sheet-scrim { --ws-focus: Highlight; }
+  /* Every control keeps an edge when its ground is taken away. */
+  .ws-root button, .ws-root input, .ws-root select, .ws-root textarea, .ws-root summary,
+  .ws-change button, .ws-change input, .ws-change select, .ws-change textarea, .ws-change summary,
+  .ws-inbox button, .ws-inbox input, .ws-inbox select, .ws-inbox textarea, .ws-inbox summary,
+  .ws-shell button, .ws-shell input, .ws-shell select, .ws-shell textarea, .ws-shell summary,
+  .ws-shell-dialog button, .ws-shell-dialog input, .ws-shell-dialog select, .ws-shell-dialog textarea, .ws-shell-dialog summary { border: 1px solid ButtonText !important; }
+  /* A pressed toggle: a highlighted edge and an underline, never a ground alone. */
+  .ws-root [aria-pressed="true"]:not([data-id]), .ws-change [aria-pressed="true"]:not([data-id]),
+  .ws-inbox [aria-pressed="true"]:not([data-id]), .ws-shell [aria-pressed="true"]:not([data-id]),
+  .ws-shell-dialog [aria-pressed="true"]:not([data-id]) { border: 2px solid Highlight !important; text-decoration: underline; }
+  /* A selected tab. */
+  .ws-root [role="tab"][aria-selected="true"], .ws-change [role="tab"][aria-selected="true"], .ws-shell [role="tab"][aria-selected="true"] { border-bottom: 2px solid Highlight !important; }
+  /* The selected card: an outline, where the normal palette uses an amber shadow. */
+  .ws-root [role="button"][data-id][aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: 2px; }
+  /* A card on the lit thread: a dashed highlighted border, where the normal palette uses a glow. */
+  .ws-root [role="button"][data-id][data-lit="yes"] { border: 2px dashed Highlight !important; }
+}
+
+/* T5 — the message for the agent: shown in full, wrapped, never cut. */
+.ws-tell { margin: 1rem 0; padding: 0.75rem 1rem; border: 1px solid var(--ws-hairline); border-radius: 6px; background: var(--ws-panel); }
+.ws-tell-heading { margin: 0 0 0.5rem; }
+.ws-tell-draft { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; margin: 0.5rem 0; padding: 0.5rem 0.75rem; border-left: 2px solid var(--ws-hairline-strong); }
+
+/* T6 — after it was raised: a ladder of sentences, no colour carrying the kind. */
+.ws-repairs { margin: 1rem 0; }
+.ws-repairs-ladder { margin: 0.5rem 0; padding-left: 1.25rem; }
+.ws-repairs-rung { margin: 0.35rem 0; overflow-wrap: anywhere; }
+.ws-repairs-rung-name { font-weight: 600; }
+.ws-repairs-rung-off .ws-repairs-rung-name { color: var(--ws-text-2); }
+.ws-repairs-rows { margin: 0.25rem 0; padding-left: 1rem; }
+.ws-repairs-what { font-weight: 500; }

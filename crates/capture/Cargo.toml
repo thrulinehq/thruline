@@ -1,0 +1,42 @@
+[package]
+publish = false
+name = "thruline-capture"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Harness adapters, generic exec recorder, and the pre-hash redaction pass."
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+thruline-core = { workspace = true }
+thruline-ledger = { version = "0.2.0", path = "../ledger" }
+thruline-verify = { version = "0.2.0", path = "../verify" }
+sha2 = { workspace = true }
+tracing = { workspace = true }
+
+# §4.4's pseudoterminal. A SAFE binding to `openpty`: this workspace forbids
+# `unsafe`, and the alternative was a `pre_exec` closure. Unix only, because §2
+# puts Windows at tier 2 (build must pass, capture may be reduced) and the
+# fallback there records `pipe` rather than claiming a shape it cannot produce.
+#
+# EXACT pin, deliberately. BUILD-SPEC §4.4.3 permits a PTY only through "a
+# dependency safe at ThruLine's boundary" and grounds that permission in an
+# AUDIT OF ONE VERSION: 0.2.0, four `unsafe` sites, of which our single call
+# site (`src/pty.rs`, `openpty`) reaches exactly one — the
+# `unsafe { libc::openpty(..) }` at `src/lib.rs:94`, on non-Linux targets, i.e.
+# on macOS. `"0.2.0"` is caret `^0.2.0` and would silently accept 0.2.1, whose
+# unsafe surface nobody has read; that would leave the spec asserting a pin the
+# manifest does not make. `=0.2.0` is the pin. Bumping it is a re-audit, not a
+# version bump: re-derive the unsafe site list before changing this line.
+[target.'cfg(unix)'.dependencies]
+rustix-openpty = "=0.2.0"
+
+[dev-dependencies]
+tempfile = { workspace = true }

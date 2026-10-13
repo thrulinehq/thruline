@@ -1,0 +1,37 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/AlphaTests.cs(12,49): warning xUnit2020: Do not use Assert.True(false, message) to fail a test. Use Assert.Fail(message) instead. (https://xunit.net/xunit.analyzers/rules/xUnit2020) [/private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/Alpha.Tests.csproj]
+  Beta.Tests -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Beta.Tests/bin/Debug/net9.0/Beta.Tests.dll
+  Alpha.Tests -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/bin/Debug/net9.0/Alpha.Tests.dll
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Beta.Tests/bin/Debug/net9.0/Beta.Tests.dll (.NETCoreApp,Version=v9.0)
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/bin/Debug/net9.0/Alpha.Tests.dll (.NETCoreApp,Version=v9.0)
+VSTest version 17.14.1 (arm64)
+
+VSTest version 17.14.1 (arm64)
+
+Starting test execution, please wait...
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.97]     Alpha.Tests.RateTests.OversizeRejectsHeavyParcel [FAIL]
+[xUnit.net 00:00:01.03]     Alpha.Tests.RateTests.LargeParcelUsesPerKilo [FAIL]
+
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 288 ms - Beta.Tests.dll (net9.0)
+  Failed Alpha.Tests.RateTests.OversizeRejectsHeavyParcel [263 ms]
+  Error Message:
+   29 kg is not oversize
+  Stack Trace:
+     at Alpha.Tests.RateTests.OversizeRejectsHeavyParcel() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/AlphaTests.cs:line 12
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed Alpha.Tests.RateTests.LargeParcelUsesPerKilo [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: 29.50
+Actual:   30.00
+  Stack Trace:
+     at Alpha.Tests.RateTests.LargeParcelUsesPerKilo() in /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/multi/Alpha.Tests/AlphaTests.cs:line 9
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+Failed!  - Failed:     2, Passed:     1, Skipped:     0, Total:     3, Duration: 322 ms - Alpha.Tests.dll (net9.0)

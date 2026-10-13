@@ -1,0 +1,96 @@
+{
+  "checks": [
+    {
+      "detail": "signature 0 verifies over the DSSE PAE",
+      "name": "signature",
+      "outcome": "pass"
+    },
+    {
+      "detail": "application/vnd.in-toto+json",
+      "name": "payload_type",
+      "outcome": "pass"
+    },
+    {
+      "detail": "in-toto Statement v1, ThruLine predicate",
+      "name": "statement_schema",
+      "outcome": "pass"
+    },
+    {
+      "detail": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c is a tree in this repository",
+      "name": "subject_tree",
+      "outcome": "pass"
+    },
+    {
+      "detail": "84ec0e1398b104136666b20fec11b422b3415a9c is present locally",
+      "name": "subject_commit",
+      "outcome": "pass"
+    },
+    {
+      "detail": "sha256:9c4090d7381887d98c46bc1d09abb51d7b2b7a205c4fe6341a05ec672f53a55c recomputed from 11 ledger rows",
+      "name": "chain_head",
+      "outcome": "pass"
+    },
+    {
+      "detail": "no check claims to have been re-executed",
+      "name": "reexecution",
+      "outcome": "pass"
+    },
+    {
+      "detail": "the policy this receipt was judged under is the policy here (sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad)",
+      "name": "policy_hash",
+      "outcome": "pass"
+    },
+    {
+      "detail": "capture was not degraded, and no content transform is in scope here",
+      "name": "capture_fidelity",
+      "outcome": "pass"
+    },
+    {
+      "detail": "1 verdict(s), none left `unverifiable` (0 `unsupported`, which is the gate's business and not this command's)",
+      "name": "verdicts",
+      "outcome": "pass"
+    },
+    {
+      "detail": "1 `supported` verdict(s) re-derived from the checks cited beside them, and each ran on a tree this receipt is about",
+      "name": "verdict_derivation",
+      "outcome": "pass"
+    },
+    {
+      "detail": "1 check(s) in this receipt are the ledger's own rows",
+      "name": "check_provenance",
+      "outcome": "pass"
+    },
+    {
+      "detail": "the tree in this working directory IS the tree this receipt is about, so what is being reviewed here is what the checks ran on — no commit needed",
+      "name": "head_binding",
+      "outcome": "pass"
+    }
+  ],
+  "claims": {
+    "all_supported": true,
+    "other": 0,
+    "other_verdicts": [],
+    "supported": 1,
+    "total": 1,
+    "unsupported": 0,
+    "unsupported_claim_ids": [],
+    "unverifiable": 0,
+    "unverifiable_claim_ids": []
+  },
+  "conclusion": "success",
+  "exit": 0,
+  "integrity": {
+    "exit": 0,
+    "note": "the axis `verify` itself decides, and the axis `exit` reports. `unsupported` claims never move it (ruling 1) — gate on `conclusion`, never on `exit`.",
+    "status": "verified"
+  },
+  "policy": {
+    "conclusion": null,
+    "evaluated": false,
+    "note": "no policy was evaluated, so no `failure` can come from one"
+  },
+  "schema_version": 1,
+  "shape": "thruline.verify-receipt",
+  "status": "verified",
+  "verified": true
+}

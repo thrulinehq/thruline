@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ThruLine</title>
+    <!-- IBM Plex Sans + IBM Plex Mono, the two families the Advanced Trace
+         design specifies. Self-hosted from /fonts, which vite.config.js's
+         SHIPPABLE_PUBLIC_DIRS allowlist copies into dist and build.rs embeds
+         into the binary. Loopback only: no CDN, no font URL, no egress. The
+         families are scoped to the workspace by tokens.js FONT and
+         workspace.css .ws-root; every other surface keeps macos.css:56-57. -->
+    <link rel="stylesheet" href="/fonts/plex.css" />
+    <!-- Geist + Geist Mono, the HQ Next canvas's families, exactly as the canvas
+         loaded them, self-hosted (ui/public/fonts/geist/gf/geist.css). -->
+    <link rel="stylesheet" href="/fonts/geist/gf/geist.css" />
+    <script type="module" crossorigin src="/assets/index-C5ECHunL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B0wOIUQs.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

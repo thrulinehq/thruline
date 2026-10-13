@@ -1,0 +1,5 @@
+---
+source: crates/core/tests/derive.rs
+expression: edges
+---
+[]

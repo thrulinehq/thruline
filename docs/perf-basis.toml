@@ -1,0 +1,780 @@
+# ThruLine — the stamped-basis registry (P2b).
+#
+# Every performance figure the project quotes lives here, and every figure names
+# the basis it was measured under. Nothing in this file says whether a figure is
+# current: currency is DERIVED AT READ by `thruline perf`, which measures the
+# conditions now and compares them axis by axis. That is the E2 ruling, and the
+# reason it exists is that three sessions in a row (A186, A189, A190) were sent
+# chasing a cost quoted from a figure whose measuring conditions had moved.
+#
+# Comparison axes (crates/core/src/perf_basis.rs :: AXES), all observable:
+#
+#   projects          SELECT COUNT(DISTINCT project_id) FROM events
+#   events            SELECT COUNT(*) FROM events
+#   sessions          SELECT COUNT(*) FROM sessions
+#   nodes             SELECT COUNT(*) FROM nodes
+#   project_heads     SELECT COUNT(*) FROM project_heads
+#   node_projections  SELECT COUNT(*) FROM node_projection_heads
+#   code_digest       build-time digest over crates/*/src, the manifests, Cargo.lock
+#   profile           debug | release, from cfg!(debug_assertions)
+#
+# Everything else recorded on a basis — ledger_bytes, projects_table, commit,
+# machine — is DESCRIPTIVE. It is here so a future session can reconstruct the
+# conditions; it never decides currency. `ledger_bytes` in particular moves by
+# hundreds of megabytes on a VACUUM without one corpus row changing.
+#
+# `recoverable = false` means the conditions were never written down completely
+# enough to compare against. Such a basis can never match, so its figures are
+# permanently re-measure-only. That is the truthful state of every figure this
+# project took before this file existed, and recording it is the point (A190).
+#
+# To add a basis: run `scripts/perf-budget-suite.sh <ledger.db> <runs>` and paste
+# the `[[basis]]` block it prints. The script emits it in exactly this shape.
+
+version = 1
+
+# ---------------------------------------------------------------------------
+# Bases
+# ---------------------------------------------------------------------------
+
+[[basis]]
+id = "B-2026-08-06"
+recorded = "2026-08-06"
+recoverable = false
+note = """
+The original launch-receipt run. What is known: 44 projects, roughly 777k events, \
+a ~1.4 GB ledger, release build, and — discovered only at A189 — a clone on which \
+`rebuild --all` had already been run, a precondition the table did not state. The \
+commit is not recorded, the session/node/head counts are not recorded, and the \
+code state is unrecoverable. Its figures cannot be compared against anything; \
+they can only be re-measured. This basis is A190's specimen: a figure whose basis \
+can't be recovered can't be compared against, only re-measured.\
+"""
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+
+[[basis]]
+id = "B-A189"
+recorded = "2026-08-15"
+recoverable = false
+note = """
+The A189 re-measurement, by docs/recon/c_a189_perf_probe.sh. Known: 90 projects, \
+2,012,204 events, 76,179 sessions, a ~6.5 GB ledger, release build, live ledger \
+opened before, `rebuild --all` never run. Not recorded: node and head counts, and \
+any identification of the code under measurement. It also declared one deviation \
+from the suite's own rule — it measured the real ledger rather than a clone, \
+because 6.5 GiB did not fit in 5.4 GiB free. Unrecoverable on the code axis, so \
+re-measure-only.\
+"""
+projects = 90
+events = 2012204
+sessions = 76179
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+
+[[basis]]
+id = "B-A191"
+recorded = "2026-08-15"
+recoverable = false
+note = """
+The A191 index measurement — the one that cleared both standing reds. Stamped \
+more completely than anything before it (90 projects · 2,012,204 events · 76,179 \
+sessions · 87,132 nodes · 6,522 MiB · commit 1047205 · release · live ledger \
+opened before · rebuild --all never run · 20 runs · p95 nearest rank), and still \
+unrecoverable here, for one reason worth stating plainly: the commit it names is \
+the commit BEFORE the index was added, the head counts are absent, and no digest \
+identifies the built binary. A commit sha alone does not establish that the \
+binary which produced a number was built from it. This basis is the best the \
+project managed before the machinery existed, and it is still not enough.\
+"""
+projects = 90
+events = 2012204
+sessions = 76179
+nodes = 87132
+commit = "1047205"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+
+[[basis]]
+id = "B-A186"
+recorded = "2026-08-15"
+recoverable = false
+note = """
+The A186 cold-export run — the one CLAUDE.md quotes. Known: 91 projects (the \
+projects-table count, not the distinct-project_id count), release build, real \
+corpus, cold, no cache involved. Not recorded: event/session/node/head counts at \
+the time of the run, the commit, or any digest of the built binary. The figure it \
+produced replaced a claim that had been false for three days, which is exactly \
+why it should never have been recorded without a comparable basis.\
+"""
+projects_table = 91
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+
+[[basis]]
+id = "B-A192"
+recorded = "2026-08-15"
+recoverable = true
+projects = 90
+events = 2012204
+sessions = 76179
+nodes = 87132
+project_heads = 91
+node_projections = 90
+code_digest = "sha256:b9ba03eda0b69685"
+profile = "release"
+projects_table = 91
+ledger_bytes = 6850777088
+commit = "d6ff63e"
+harness = "scripts/perf-budget-suite.sh sha256:13e504f342e468f8"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+The first recoverable basis this project has ever had, and the first measurement \
+run against a clone made correctly. Load average 2.92/2.97/3.20 at the start and \
+3.52/3.27/3.12 at the end — the machine was not idle; it never is, and asserting \
+"quiet machine" without a reading is a hope rather than a precondition. Clone made \
+with `sqlite3 .backup`, not `cp`: the ledger is in WAL mode and a `cp` clone failed \
+as "database disk image is malformed" during this very session. `recorded` is the \
+UTC date the harness stamps; the work is dated 2026-08-16 in local time everywhere \
+else, and the one-day gap is the timezone, not a second run.\
+"""
+
+[[basis]]
+id = "B-A195"
+recorded = "2026-08-15"
+recoverable = true
+projects = 90
+events = 2012204
+sessions = 76179
+nodes = 87132
+project_heads = 91
+node_projections = 90
+code_digest = "sha256:feea60636dca59b6"
+profile = "release"
+projects_table = 91
+ledger_bytes = 6853849088
+commit = "07c2a22"
+harness = "scripts/perf-budget-suite.sh sha256:13e504f342e468f8"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+The hardening-sweep re-measurement, taken after A193 and A194 changed engine \
+source and correctly rendered every B-A192 figure stale on the code axis. Same \
+corpus, same harness, same method; the only axis that moved was the code, which \
+is the machinery earning its keep rather than a regression. Load average \
+5.56/4.70/4.43 at the start and 3.37/3.30/3.53 at the end — elevated at the \
+start by this session's own preceding work, and recorded rather than waited out. \
+Clone via `sqlite3 .backup`. `recorded` is the UTC date the harness stamps; the \
+work is dated 2026-08-16 locally.\
+"""
+
+[[basis]]
+id = "B-A196"
+recorded = "2026-08-24"
+recoverable = true
+projects = 90
+events = 2012204
+sessions = 76180
+nodes = 87132
+project_heads = 92
+node_projections = 90
+code_digest = "sha256:7663831a7f19c651"
+profile = "release"
+projects_table = 92
+ledger_bytes = 7018082304
+commit = "9d9dc74"
+harness = "scripts/perf-budget-suite.sh sha256:13e504f342e468f8"
+note = "Load average 3.62 3.20 3.86 at the start, 3.40 3.33 3.62 at the end (1/5/15 min). The machine was not idle; it never is."
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+
+[[basis]]
+id = "B-P0-M3F-2026-08-26"
+recorded = "2026-08-26"
+recoverable = false
+code_digest = "sha256:544a9a4d7f03569c"
+profile = "release"
+commit = "60aa7255ed87a5af613e56f03b1400bfca04f518"
+harness = "scripts/measure-provisioned-nli.sh sha256:4f4ecc7abdd60a1ac1348214aac2c9f0bcb90a72076492d729c2ae9aaa7472cb"
+machine = "Apple M4 Pro, 14 logical CPUs, 24 GiB, Darwin 25.1.0, aarch64"
+note = """
+Bounded synthetic production-shape NLI receipt, not a ledger/full-corpus or sustained-throughput run. \
+The committed 128-pair corpus (sha256:6408b5d3607fbd268d416f863dd5d7f05cf5098fdb74c980646a8f60ac8be30a) \
+used the descriptor-verified A18 model content \
+(sha256:530faffa2fc879ab9cf6cfc0616b792a11fa89e41c240988d7bdeafcfe9061c5), \
+release profile, and the checkpointed zero-network harness. Result: 128 pairs, \
+8 expected truncations, 71.736 pairs/s, and 616,710,144 bytes peak process RSS \
+(588.14 MiB), passing the inclusive 1,073,741,824-byte ceiling with 435.86 MiB \
+headroom. The ignored aggregate receipt is \
+.codex/evidence/nli-performance-receipt-v1.json. This basis is marked unrecoverable \
+only because the existing `thruline perf` currency comparator observes ledger axes, \
+not the model/corpus axes stamped by this separate receipt; do not render it as a \
+current ledger figure or generalize it beyond this bounded corpus and machine.\
+"""
+
+# ---------------------------------------------------------------------------
+# Figures
+# ---------------------------------------------------------------------------
+#
+# Two figures may share a measurement id only if they sit on two DIFFERENT named
+# bases — that is the "never assert two figures without named bases" clause, and
+# `Registry::validate` enforces it. `verify` below is the specimen: 21.9 s and
+# "> 600 s" are both true readings, of two different corpora, and the registry
+# holds both as two stamped rows rather than as one contradiction.
+
+[[figure]]
+id = "now-single"
+label = "now (single project)"
+basis = "B-A196"
+p50_ms = 21
+p95_ms = 21
+budget_ms = 100
+
+[[figure]]
+id = "now-all"
+label = "now --all"
+basis = "B-A196"
+p50_ms = 35
+p95_ms = 38
+budget_ms = 100
+
+[[figure]]
+id = "packet-one"
+label = "packet (single project)"
+basis = "B-A196"
+p50_ms = 24
+p95_ms = 26
+budget_ms = 150
+
+[[figure]]
+id = "packet-repo"
+label = "packet (repo-scoped)"
+basis = "B-A196"
+p50_ms = 34
+p95_ms = 44
+budget_ms = 150
+
+[[figure]]
+id = "projects-agg"
+label = "projects (full aggregation, NOT a bare open)"
+basis = "B-A196"
+p50_ms = 8545
+p95_ms = 9534
+note = """
+Roughly double B-A195's 4,453/4,678 ms on the same event count. Not diagnosed \
+here: the ledger grew 164 MB of A196 index pages and one project/session row, \
+and the volume sat at 97 % full during the run. An attribution row moved and \
+the movement is recorded, not explained away.\
+"""
+
+[[figure]]
+id = "verify"
+label = "verify (whole ledger)"
+basis = "B-A196"
+p50_ms = 205314
+note = """
+One run, no discarded warm-up, under a 900 s ceiling it did not hit. Not a warm \
+number. The first COMPLETED whole-ledger verify this registry has ever held — \
+every prior row is a bound or a 44-project corpus. A196's generation_id indexes \
+are the difference; Q-A189.2's premise has moved accordingly.\
+"""
+
+[[figure]]
+id = "peak-rss"
+label = "peak RSS (packet, largest project)"
+basis = "B-A196"
+note = "15 MiB against a 1024 MiB full-process budget. One run."
+
+[[figure]]
+id = "now-single"
+label = "now (single project, largest)"
+basis = "B-A195"
+p50_ms = 23
+p95_ms = 24
+budget_ms = 100
+
+[[figure]]
+id = "now-all"
+label = "now --all"
+basis = "B-A195"
+p50_ms = 36
+p95_ms = 37
+budget_ms = 100
+
+[[figure]]
+id = "packet-one"
+label = "packet (single project, largest)"
+basis = "B-A195"
+p50_ms = 26
+p95_ms = 27
+budget_ms = 150
+
+[[figure]]
+id = "packet-repo"
+label = "packet (repo-scoped)"
+basis = "B-A195"
+p50_ms = 35
+p95_ms = 48
+budget_ms = 150
+
+[[figure]]
+id = "projects-agg"
+label = "projects (full aggregation, NOT a bare open)"
+basis = "B-A195"
+p50_ms = 4453
+p95_ms = 4678
+
+[[figure]]
+id = "verify"
+label = "verify (whole ledger)"
+basis = "B-A195"
+note = """
+Exceeded the suite's 900 s ceiling on one run and was aborted — a bound, not a \
+number. Q-A189.2 remains open.\
+"""
+
+[[figure]]
+id = "peak-rss"
+label = "peak RSS (packet, largest project)"
+basis = "B-A195"
+note = "15 MiB against a 1024 MiB full-process budget. One run."
+
+[[figure]]
+id = "now-single"
+label = "now (single project, largest)"
+basis = "B-A192"
+p50_ms = 23
+p95_ms = 25
+budget_ms = 100
+
+[[figure]]
+id = "now-all"
+label = "now --all"
+basis = "B-A192"
+p50_ms = 36
+p95_ms = 37
+budget_ms = 100
+
+[[figure]]
+id = "packet-one"
+label = "packet (single project, largest)"
+basis = "B-A192"
+p50_ms = 25
+p95_ms = 27
+budget_ms = 150
+
+[[figure]]
+id = "packet-repo"
+label = "packet (repo-scoped)"
+basis = "B-A192"
+p50_ms = 34
+p95_ms = 38
+budget_ms = 150
+
+[[figure]]
+id = "projects-agg"
+label = "projects (full aggregation, NOT a bare open)"
+basis = "B-A192"
+p50_ms = 4652
+p95_ms = 5780
+
+[[figure]]
+id = "verify"
+label = "verify (whole ledger)"
+basis = "B-A192"
+note = """
+Exceeded the suite's 900 s ceiling on one run and was aborted — a bound, not a \
+number. An unbounded run of the same command was still going at 43 minutes \
+earlier the same evening. Whether this row belongs in the standing suite at all \
+is Q-A189.2.\
+"""
+
+[[figure]]
+id = "peak-rss"
+label = "peak RSS (packet, largest project)"
+basis = "B-A192"
+note = "15 MiB against a 1024 MiB full-process budget. One run."
+
+[[figure]]
+id = "now-all"
+label = "now --all"
+basis = "B-A191"
+p50_ms = 39
+p95_ms = 41
+budget_ms = 100
+
+[[figure]]
+id = "packet-repo"
+label = "packet (repo-scoped)"
+basis = "B-A191"
+p50_ms = 38
+p95_ms = 40
+budget_ms = 150
+
+[[figure]]
+id = "export-cold"
+label = "export --all, cold"
+basis = "B-A186"
+p50_ms = 474300
+note = """
+One run, 346 MB across 91 projects, largest document 66 MB. The number CLAUDE.md \
+quotes. RA1's ~60 s cold bar remains open debt at 7.9x over.\
+"""
+
+[[figure]]
+id = "verify"
+label = "verify (whole ledger)"
+basis = "B-2026-08-06"
+p50_ms = 21900
+note = "One run. 44 projects, ~1.4 GB."
+
+[[figure]]
+id = "verify"
+label = "verify (whole ledger)"
+basis = "B-A189"
+note = "One run, bounded: exceeded 600 s and was not run to completion 20 times."
+
+[[figure]]
+id = "peak-rss"
+label = "peak RSS (packet, largest project)"
+basis = "B-2026-08-06"
+note = "15 MiB against a 1024 MiB full-process budget. Not re-measured since."
+
+[[figure]]
+id = "chain-position-head"
+label = "chain-position head read (A117)"
+basis = "B-2026-08-06"
+note = """
+2.2 µs on the largest project, flat across project size — the shape, not the \
+number, is the evidence it is O(1). Verified equal to the uncached fold before \
+being printed, by the measurement itself.\
+"""
+
+# ---------------------------------------------------------------------------
+# G2's schema change (2026-09-06)
+# ---------------------------------------------------------------------------
+#
+# A basis of its own, because this figure is about `exec.db` — the BUILD-SPEC
+# §11 store — and every other basis in this file describes `ledger.db`, the
+# core's legacy store. The comparison axes above read `ledger.db`'s tables, so
+# they cannot judge this figure's currency and `recoverable = false` says so
+# rather than letting a mismatched axis imply a comparison that was never made.
+
+[[basis]]
+id = "B-G2-exec-db"
+recorded = "2026-09-06"
+recoverable = false
+note = """
+`~/.thruline/exec.db` copied to /tmp and measured there, so the live store was \
+never opened by the probe: 639,311,872 bytes, 203,399 events, 44,075 sessions, \
+schema v1 on entry. Debug build, commit is this session's head. Measured with \
+`cargo run -p thruline-ledger --example migration_probe -- <copy>`, which is \
+committed so the figure can be re-derived rather than trusted. Not recoverable \
+against this file's axes: those count `ledger.db`'s rows and this is a \
+different store.\
+"""
+
+[[figure]]
+id = "exec-db-migrate-v1-to-v2"
+label = "exec.db migration, v1 -> v2 (the gate's block ledger)"
+basis = "B-G2-exec-db"
+p50_ms = 2
+note = """
+2.2 ms to open and migrate 610 MB / 203,399 events / 44,075 sessions; 1.3 ms to \
+open the same store once already migrated. The migration is a CREATE TABLE, an \
+index and two triggers on a table that did not exist, so it rewrites no rows — \
+the cost is independent of corpus size, which is why the two numbers are one \
+millisecond apart.
+
+**This is NOT an A193 migration and does not cost what one costs.** A193 governs \
+`ledger.db` (7.4 GB here), where a DDL change costs a full pass, is charged to \
+whichever process opens the ledger first, and makes every other command refuse \
+until `thruline upgrade` runs. `exec.db` migrates automatically inside \
+`Ledger::open` and refuses nothing. The two were conflated when this change was \
+authorised, and the difference is recorded here because the authorisation was \
+given against the larger cost.\
+"""
+
+# The ledger-count axes cannot establish currency for this parser microbenchmark.
+# Its own complete workload/source basis and raw measurements are retained below.
+[[basis]]
+id = "B-integration-decoder-2026-09-09"
+recorded = "2026-09-09"
+recoverable = false
+note = "Report decoder microbenchmark, not ledger ingest. Release Rust 1.97.1 on Darwin arm64; Criterion 20 samples and DHAT 1000 findings x 20 decodes. The ledger axes do not describe this workload. See docs/integrations/validation/measurements.json and retained baseline source for comparison and rerun instructions."
+
+[[figure]]
+id = "integration-decoder-measurements"
+label = "External report decoder timing, heap and separate process RSS"
+basis = "B-integration-decoder-2026-09-09"
+note = "The versioned measurement artifact docs/integrations/validation/measurements.json contains the before/after values and variance. These are bounded microbenchmark observations; do not reuse as current application latency, field precision or whole-product memory savings. Re-run the named Criterion and DHAT harnesses after relevant code, toolchain or workload changes."
+
+# ---------------------------------------------------------------------------
+# C27 — the HQ load (POST /api/hq/projects/<id>/load), before and after.
+# Scratch stores built from the founder's real transcripts read in place; the
+# real store was never written. Not recoverable against the ledger axes above:
+# the subject is the load of one plan into a scratch store, not a corpus read.
+# ---------------------------------------------------------------------------
+
+[[basis]]
+id = "B-C27-before"
+recorded = "2026-10-07"
+recoverable = false
+commit = "7de1b8c5"
+profile = "release"
+harness = "crates/core/tests/hq_load_speed_probe.rs (load_the_plan_file_by_file) + scripts/hq/perf-check.mjs --register"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+Code before C27 (load = one ingest/ingest_codex call per file). Probe plan: \
+root ~/thruline, Claude Code folders under ~/.claude/projects (115 files) \
+plus Codex day folders 2026/10/05-07 (127 files), 242 files, 826,569,731 bytes, into an \
+empty scratch store, then a no-change reload of the same store. The full plan (569 files, \
+3,165,995,082 bytes) did not fit: free disk was at the 15 GiB floor. HTTP figures: \
+thruline 7de1b8c5 release, fake HOME whose ~/.claude/projects is the real folder and \
+whose Codex roots are day folders 2026/10/06 and 2026/10/07 (186 files, 703 MB), store \
+built by first-use register (25 newest files) then one load. 1-minute load average \
+5-20 during these runs (other lanes building).\
+"""
+
+[[basis]]
+id = "B-C27-after"
+recorded = "2026-10-07"
+recoverable = false
+profile = "release"
+harness = "crates/core/tests/hq_load_speed_probe.rs (load_the_plan_file_by_file) + scripts/hq/perf-check.mjs --register"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+Code after C27 (uncommitted working tree on hq-next/ui over 7de1b8c5, including other \
+lanes' uncommitted edits). The plans, scratch layout and fake HOME are exactly \
+B-C27-before's. Probe plan 243 files / 827,177,766 bytes (one Claude Code transcript \
+appeared between the runs).\
+"""
+
+[[figure]]
+id = "hq-load-noop-reload"
+label = "HQ load, no-change reload of an already-loaded plan (probe, 242 files)"
+basis = "B-C27-before"
+budget_ms = 5000
+note = "26.76 s for 242 files (9.0 files/s), 0 rows added. Phases: setup (per-file orphan walk) 7.77 s, seal 8.44 s, codex_prepare 3.81 s (one live rollout re-mapped and refused), seal_accept 1.91 s, parse 1.24 s, ledger 0.57 s."
+
+[[figure]]
+id = "hq-load-noop-reload"
+label = "HQ load, no-change reload of an already-loaded plan (probe, 243 files)"
+basis = "B-C27-after"
+p50_ms = 20
+budget_ms = 5000
+note = "0.02 s and 0.01 s (two runs): 243 files skipped unopened, mirror not walked, nothing sealed or parsed."
+
+[[figure]]
+id = "hq-load-first"
+label = "HQ load, first load into an empty store (probe, 242 files, 826 MB)"
+basis = "B-C27-before"
+note = "77.51 s (3.1 files/s). Phases: ledger 24.86 s, codex_prepare 23.61 s, seal_accept 11.13 s, seal 8.32 s, setup 6.61 s, parse 1.18 s."
+
+[[figure]]
+id = "hq-load-first"
+label = "HQ load, first load into an empty store (probe, 243 files, 827 MB)"
+basis = "B-C27-after"
+note = "48.08 s with 4 worker threads (first thread visible to HQ after 1.21 s); 64.37 s with workers=0 (first thread after 0.49 s). The writer's ledger phase (~28-30 s) is the floor parallel reading cannot lower."
+
+[[figure]]
+id = "hq-http-noop-reload"
+label = "perf-check (b): POST load + poll until done, no change (186 files)"
+basis = "B-C27-before"
+p50_ms = 66373
+budget_ms = 5000
+
+[[figure]]
+id = "hq-http-noop-reload"
+label = "perf-check (b): POST load + poll until done, no change (186 files)"
+basis = "B-C27-after"
+p50_ms = 54
+budget_ms = 5000
+
+[[figure]]
+id = "hq-http-first-load"
+label = "brand-new user: register (25 newest) then one full load (186 files, 703 MB)"
+basis = "B-C27-before"
+note = "first threads visible 21.6 s after the first-use read (register 20.7 s); full load 165.2 s."
+
+[[figure]]
+id = "hq-http-first-load"
+label = "brand-new user: register (25 newest) then one full load (186 files, 703 MB)"
+basis = "B-C27-after"
+note = "first threads visible 4.8 s after the first-use read (register 4.5 s); full load 35.1 s (161 files read, the 25 registered ones skipped unopened). Register runs ingest(), whose code C27 changed only by restructuring; part of its difference may be machine load or other lanes' edits, and is not claimed by C27."
+
+[[figure]]
+id = "hq-http-inbox-after-start"
+label = "perf-check (a): server start → first GET /api/hq/projects/<id> answered"
+basis = "B-C27-before"
+p50_ms = 3052
+budget_ms = 2000
+
+[[figure]]
+id = "hq-http-inbox-after-start"
+label = "perf-check (a): server start → first GET /api/hq/projects/<id> answered"
+basis = "B-C27-after"
+p50_ms = 531
+budget_ms = 2000
+
+[[figure]]
+id = "hq-http-switch"
+label = "perf-check (c): a Change screen's reads together, warm, slowest of 5 threads"
+basis = "B-C27-before"
+p50_ms = 6287
+budget_ms = 300
+
+[[figure]]
+id = "hq-http-switch"
+label = "perf-check (c): a Change screen's reads together, warm, slowest of 5 threads"
+basis = "B-C27-after"
+p50_ms = 612
+budget_ms = 300
+note = "FAIL. 52-59 ms for threads whose view is 0.2-0.5 MB; 519 and 612 ms for two threads whose thread view is 7.3 and 8.1 MB of JSON. The cost is the thread route's size (view code), not the load; not changed by C27."
+
+# ---------------------------------------------------------------------------
+# C27 on the founder's REAL store (~/.thruline; its ledger.db is 11.6 GB, and
+# ~/.thruline in total is 26.0-26.3 GB, the figure the HQ status bar and
+# Settings show; corrected in place under the C29 ruling, which found the two
+# figures run together here; project thruline:
+# 578 recordings, 162 threads), measured with scripts/hq/perf-check.mjs
+# --start (it starts and stops its own server). (a) and (c) only read; (b)
+# POSTs a load, which appends what the recordings hold that the store does
+# not. Every hook and agent on the machine kept writing during these runs:
+# Claude Code sessions, and Codex rollouts of 10-51 MB growing every few
+# seconds. A reload on this store is a true no-change reload only when no
+# recording grew in between.
+# ---------------------------------------------------------------------------
+
+[[basis]]
+id = "B-C27-real-4fd53282"
+recorded = "2026-10-07"
+recoverable = false
+commit = "4fd53282"
+profile = "release"
+harness = "scripts/hq/perf-check.mjs --start <thruline> --db ~/.thruline/ledger.db --project <thruline> --threads 5"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+The founder's real store, three runs back to back (09:28-09:31Z), 1-minute load \
+average 5.8, 3.6, 3.4. Run 1's reload caught up 9,865 events recorded since the \
+previous load (61.4 s); runs 2 and 3 found 1 recording to read and added 0 rows. \
+Storage, two figures: ledger.db 11.6 GB; ~/.thruline in total 26.0-26.3 GB (what the \
+status bar and Settings show).\
+"""
+
+[[basis]]
+id = "B-C27-real-df9a73f2"
+recorded = "2026-10-07"
+recoverable = false
+commit = "df9a73f2"
+profile = "release"
+harness = "scripts/hq/perf-check.mjs --start <thruline> --db ~/.thruline/ledger.db --project <thruline> --threads 5"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+The founder's real store, three runs back to back (10:32-10:35Z), 1-minute load \
+average 6.5, 5.5, 5.3 (other lanes building). Two Codex rollouts were being written \
+live throughout, so every reload found work: 3,396, 406 and 58 rows added. \
+Storage, two figures: ledger.db 11.6 GB; ~/.thruline in total 26.0-26.3 GB (what the \
+status bar and Settings show).\
+"""
+
+[[figure]]
+id = "hq-real-noop-reload"
+label = "perf-check (b) on the real store: POST load + poll until done, nothing new to read"
+basis = "B-C27-real-4fd53282"
+p50_ms = 3017
+budget_ms = 5000
+note = "3.54 s and 3.02 s (runs 2 and 3): 577 of 578 recordings found unchanged, 1 read (a fork whose refusal stands), 0 rows added."
+
+[[figure]]
+id = "hq-real-live-reload"
+label = "perf-check (b) on the real store while agents write: POST load + poll until done"
+basis = "B-C27-real-df9a73f2"
+p50_ms = 9913
+note = "No time budget (C29 R2): reload while agents write is a separate figure from the no-change reload, recorded with its basis, and its budget is that it never blocks any screen. That budget is pinned by crates/cli/tests/hq_routes.rs a_load_that_is_still_writing_never_blocks_a_screen: while a load is running and has added rows, the project list, the project and a thread each answer 200 within 2 s. The 5000 ms budget this row first carried was removed under C29, and the word FAIL with it. Measured: 19.97 s (3,396 rows added), 9.91 s (406), 8.52 s (58). The same live conditions cost 15.0-17.5 s with 0 rows added at 40b37b0e, before an acceptance folded the project head from session rows; each live candidate then re-read all 601,272 events of the Codex project before its final check refused it."
+
+[[figure]]
+id = "hq-real-inbox-after-start"
+label = "perf-check (a) on the real store: server start -> first GET /api/hq/projects/<id> answered"
+basis = "B-C27-real-df9a73f2"
+p50_ms = 2269
+budget_ms = 2000
+note = "FAIL: 3.30 s, 2.27 s, 2.08 s at load average 5.3-6.5. The same read path (40b37b0e, 16 read-only connections) gave 1.48 s and 1.79 s at load average 2.8-3.2, and 3.4-4.5 s from a cold page cache. Under 2 s cold needs a persisted derived index, which C26 rules out for v0.2."
+
+[[figure]]
+id = "hq-real-switch"
+label = "perf-check (c) on the real store: a Change screen's reads together, warm, slowest of 9 threads"
+basis = "B-C27-real-df9a73f2"
+p50_ms = 273
+budget_ms = 300
+note = "273 ms, 584 ms, 134 ms (slowest of 9 threads, 0.3-20 MB views, per run). Thread and project views are served from byte caches. The 584 ms run is not explained; it came right after a reload that added 406 rows, which is a candidate cause, not a measured one."
+
+# ---------------------------------------------------------------------------
+# C29: the screen switch as p50 and p95 over 20 switches on the founder's real
+# store (the ruling: "report p50 and p95 over 20 switches on the real store.
+# The budget is p95 < 300 ms"). Measured through ThruLine's own server only,
+# GET requests only (--reads-only): nothing was POSTed and no load ran.
+# ---------------------------------------------------------------------------
+
+[[basis]]
+id = "B-C29-real-switch20-df9a73f2"
+recorded = "2026-10-07"
+recoverable = false
+commit = "df9a73f2"
+profile = "release"
+harness = "scripts/hq/perf-check.mjs (sha256 562aa258fbe104ffc58a7b07c8b955ecb07945bba2fe785fcc18e7193b09daab) --start <thruline df9a73f2> --db ~/.thruline/ledger.db --project dfbfd6089e4bb388 --port 7801 --reads-only --switches 20"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+The founder's real store, three runs back to back (12:47:00-12:47:47Z), each a fresh \
+server start. 1-minute load average before each run 6.78, 7.69, 7.57 (other lanes \
+building; the 15-minute average was 16.4-16.7). Storage, two figures: ledger.db \
+11.7 GB (11,700,535,296 bytes after the runs); ~/.thruline in total 26.0-26.3 GB by \
+the C29 ruling, 26.6 GB by du -sk about 30 minutes before the runs. Project thruline: 162 threads. The sample \
+is the 5 newest threads and the 5 with the most edits, 8 distinct; each was opened \
+once (not timed), then 20 switches cycled through the 8 in order. A switch is the \
+five reads an HQ Change screen makes when it opens (GET /api/hq/projects, the \
+project, the thread, /api/changes, /api/lanes), together; the batch carried \
+0.39-20.24 MB. Every read answered 200. perf-check (a) in the same runs: 3,228 ms, \
+1,601 ms, 1,340 ms from server start to the first project read.\
+"""
+
+[[figure]]
+id = "hq-real-switch"
+label = "perf-check (c) on the real store: a Change screen's reads together, warm, p50 / p95 over 20 switches x 3 runs (8 threads)"
+basis = "B-C29-real-switch20-df9a73f2"
+p50_ms = 65
+p95_ms = 101
+budget_ms = 300
+note = "p50 and p95 are nearest-rank over all 60 switches of the three runs; max 171 ms. Per run (p50 / p95 / max): run 1, load 6.78: 76 / 103 / 171 ms; run 2, load 7.69: 61 / 89 / 99 ms; run 3, load 7.57: 63 / 93 / 101 ms. Budget p95 < 300 ms (C29). The 584 ms of B-C27-real-df9a73f2 did not recur: no reload ran before or during these runs, so its candidate cause (a reload that had just added rows) was absent and is still not measured."
+
+# The same measurement on the branch head b5653371, after a machine reboot
+# (which also removed the df9a73f2 binary and the run JSONs above). Release
+# binary built from the committed b5653371 in a detached worktree, so the code
+# measured is committed code (Rule 13).
+
+[[basis]]
+id = "B-C29-real-switch20-b5653371"
+recorded = "2026-10-07"
+recoverable = false
+commit = "b5653371"
+profile = "release"
+harness = "scripts/hq/perf-check.mjs (sha256 562aa258fbe104ffc58a7b07c8b955ecb07945bba2fe785fcc18e7193b09daab) --start <thruline b5653371, sha256 21fbc6c23a2f5b85241be6757e7832c3de9ef1c6aac129de0732d85304a04351> --db ~/.thruline/ledger.db --project dfbfd6089e4bb388 --port 7801 --reads-only --switches 20"
+machine = "Apple M4 Pro, 14 cores, 24 GiB, Darwin 25.1.0"
+note = """
+The founder's real store, three runs back to back (15:32:59-15:34:16Z), each a fresh \
+server start, about 70 minutes after a reboot. 1-minute load average before each run \
+11.96, 11.94, 12.10 (5- and 15-minute averages 11.1-11.6; other lanes building). \
+Through ThruLine's own server only, GET requests only (--reads-only): nothing was \
+POSTed and no load ran. Storage, two figures: ledger.db 11.7 GB (11,706,703,872 bytes \
+after the runs); ~/.thruline in total 26.0-26.3 GB by the C29 ruling, 26.6 GB by du -sk \
+right after the runs. Project thruline: 162 threads; the sample is the 5 newest and \
+the 5 with the most edits, 8 distinct, each opened once (not timed), then 20 switches \
+cycled through the 8 in order. A switch is the five reads an HQ Change screen makes \
+when it opens (GET /api/hq/projects, the project, the thread, /api/changes, \
+/api/lanes), together; the batch carried 0.39-20.24 MB. Every read answered 200. \
+perf-check (a) in the same runs: 3,654 ms, 2,794 ms, 2,478 ms from server start to the \
+first project read (over its 2,000 ms budget at this load).\
+"""
+
+[[figure]]
+id = "hq-real-switch"
+label = "perf-check (c) on the real store: a Change screen's reads together, warm, p50 / p95 over 20 switches x 3 runs (8 threads)"
+basis = "B-C29-real-switch20-b5653371"
+p50_ms = 65
+p95_ms = 106
+budget_ms = 300
+note = "p50 and p95 are nearest-rank over all 60 switches of the three runs; max 114 ms. Per run (p50 / p95 / max), with the 1-minute load average before it: run 1, load 11.96: 72 / 110 / 114 ms; run 2, load 11.94: 62 / 102 / 111 ms; run 3, load 12.10: 65 / 105 / 106 ms. Budget p95 < 300 ms (C29)."

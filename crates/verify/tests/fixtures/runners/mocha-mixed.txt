@@ -1,0 +1,30 @@
+
+
+  shipping
+    ✔ rates a small parcel
+    ✔ rates a large parcel
+    - handles zero weight
+    1) fails on purpose
+
+
+  2 passing (3ms)
+  1 pending
+  1 failing
+
+  1) shipping
+       fails on purpose:
+
+      AssertionError [ERR_ASSERTION]: rate mismatch
+
+1 !== 2
+
+      + expected - actual
+
+      -1
+      +2
+      
+      at Context.<anonymous> (test/mixed.test.js:6:47)
+      at process.processImmediate (node:internal/timers:485:21)
+
+
+

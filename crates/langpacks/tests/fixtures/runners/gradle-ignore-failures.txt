@@ -1,0 +1,38 @@
+> Task :compileJava NO-SOURCE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+
+> Task :test
+
+OrderServiceTest > totalsAnEmptyOrder() PASSED
+
+OrderServiceTest > looksUpAMissingCustomer() FAILED
+    java.lang.NullPointerException: Cannot invoke "String.trim()" because "customer" is null
+        at demo.OrderServiceTest.looksUpAMissingCustomer(OrderServiceTest.java:25)
+
+OrderServiceTest > appliesDiscountToLargeOrders() FAILED
+    org.opentest4j.AssertionFailedError: discount should be 15% for large orders ==> expected: <85.0> but was: <90.0>
+        at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+        at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+        at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+        at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:70)
+        at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:929)
+        at app//demo.OrderServiceTest.appliesDiscountToLargeOrders(OrderServiceTest.java:18)
+
+3 tests completed, 2 failed
+There were failing tests. See the report at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-ignore-failures/build/reports/tests/test/index.html
+
+[Incubating] Problems report is available at: file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/java/gradle-ignore-failures/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 20s
+2 actionable tasks: 2 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.7.1/userguide/configuration_cache_enabling.html

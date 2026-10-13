@@ -1,0 +1,42 @@
+receipt-real.json — a receipt this product actually emitted.
+
+HOW TO REGENERATE (the fixture is a capture, never hand-edited):
+
+  repo=$(mktemp -d); home=$(mktemp -d)
+  git -C "$repo" init -q -b main
+  git -C "$repo" config user.email a@e.invalid; git -C "$repo" config user.name A
+  printf 'def rate(w):\n    return 2.5 * w\n' > "$repo/app.py"
+  printf 'from app import rate\n\ndef test_rate():\n    assert rate(2) == 5.0\n' > "$repo/test_app.py"
+  git -C "$repo" add -A; git -C "$repo" commit -qm first
+  S=spec-conformance-fixture
+  printf '{"hook_event_name":"SessionStart","session_id":"'$S'","transcript_path":"/t","cwd":"'$repo'","source":"startup"}' \
+    | THRULINE_HOME=$home thruline hook claude-code
+  printf '{"hook_event_name":"Stop","session_id":"'$S'","transcript_path":"/t","cwd":"'$repo'","last_assistant_message":"All tests pass. I added the rate function and updated the docs.","stop_hook_active":false}' \
+    | THRULINE_HOME=$home thruline hook claude-code
+  (cd "$repo" && THRULINE_HOME=$home thruline fold >/dev/null)
+  (cd "$repo" && THRULINE_HOME=$home thruline receipt --out .../fixtures/receipt-real.json)
+
+WHAT IT EXERCISES that a constructed document does not: the harness/sources
+values the CLI actually writes, a real recomputed `event_chain_head` and
+`event_count`, a real `policy_hash` (the well-known "no policy file" digest, not
+an empty string), a real `git_env_digest`, and both an `unverifiable` and an
+`unsupported` verdict from the real verifier — the two the §6 rule is about.
+
+WHAT IT DOES NOT COVER: no `checks` (the session ran no wrapped command), so
+`reexecuted`, `container_image_digest` and the `parsed` union are exercised only
+by the constructed maximal/minimal documents in spec_conformance.rs. Said here
+rather than left to be discovered.
+
+STALENESS: the conformance suite asserts this fixture's `predicateType` equals
+`statement::PREDICATE_TYPE` and that it still deserialises into `Statement`. If
+either fails, REGENERATE — do not edit the JSON. A hand-patched capture is not a
+capture.
+
+Captured 2026-09-05 on branch codex/build-spec-v1, against the predicate domain
+ruled in docs/DECISIONS-PENDING.md D4.
+
+Re-captured 2026-10-13 for the public snapshot, by exactly the steps above, so
+that the payload carries no developer home path: the repository was created
+under /tmp (subject name `git+/private/tmp/thruline-fixture/repo`) and the
+envelope was signed by a throwaway key made for that one run. The shape is
+unchanged; `verifier.thruline_version` now reads 0.2.0.

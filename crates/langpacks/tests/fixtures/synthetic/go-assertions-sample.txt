@@ -1,0 +1,43 @@
+# go — a SMALL INVENTED SAMPLE of assertions, written for this repository.
+#
+# Every line below is made up for the public copy of ThruLine: invented
+# identifiers, invented file paths, no third-party source. It has the shapes a
+# go test suite uses, so `tests/corpus_ambiguity.rs` can check on any machine
+# that the classifier does not flag ordinary assertions as ambiguous. It is a
+# sample of nothing and proves no corpus figure; the recorded corpus
+# measurements live in `MEASUREMENTS.toml` and `tests/measured_constants.rs`.
+#
+# Format: <path>:<line><TAB><assertion text, with \\ \n \r \t escaped>.
+# Lines beginning with '#' are comments.
+go/samplestore/stack_test.go:10	if got := stack.Len(); got != 3 {\n\t\tt.Errorf("Len() = %d, want 3", got)\n\t}
+go/samplestore/cart_test.go:17	if err != nil {\n\t\tt.Fatalf("unexpected error: %v", err)\n\t}
+go/samplestore/registry_test.go:24	if !queue.IsEmpty() {\n\t\tt.Error("queue should be empty")\n\t}
+go/samplestore/cache_test.go:31	if registry.Has("beta") {\n\t\tt.Error("beta should be absent")\n\t}
+go/samplestore/session_test.go:38	if v, ok := cache.Get("missing"); ok {\n\t\tt.Errorf("found %v", v)\n\t}
+go/samplestore/parser_test.go:45	if token == "" {\n\t\tt.Fatal("empty token")\n\t}
+go/samplestore/handler_test.go:52	if name := cart.First().Name; name != "alpha" {\n\t\tt.Errorf("name = %q", name)\n\t}
+go/samplestore/counter_test.go:59	if !reflect.DeepEqual(values, []int{1, 2, 3}) {\n\t\tt.Errorf("values = %v", values)\n\t}
+go/samplestore/limiter_test.go:66	if status != StatusReady {\n\t\tt.Errorf("status = %v", status)\n\t}
+go/samplestore/buffer_test.go:73	if len(errs) != 0 {\n\t\tt.Errorf("errors: %v", errs)\n\t}
+go/samplestore/stack_test.go:80	if _, err := os.Stat(path); err != nil {\n\t\tt.Fatal(err)\n\t}
+go/samplestore/cart_test.go:87	if math.Abs(price-2.5) > 0.001 {\n\t\tt.Errorf("price = %v", price)\n\t}
+go/samplestore/registry_test.go:94	if out != "ok" {\n\t\tt.Errorf("out = %q, want ok", out)\n\t}
+go/samplestore/cache_test.go:101	if counter.Value() != 0 {\n\t\tt.Errorf("counter = %d", counter.Value())\n\t}
+go/samplestore/session_test.go:108	if validator.Valid("") {\n\t\tt.Error("empty string accepted")\n\t}
+go/samplestore/parser_test.go:115	if copy == original {\n\t\tt.Error("copy aliases original")\n\t}
+go/samplestore/handler_test.go:122	if actual != expected {\n\t\tt.Errorf("got %v, want %v", actual, expected)\n\t}
+go/samplestore/counter_test.go:129	if !limiter.Allow() {\n\t\tt.Error("first call refused")\n\t}
+go/samplestore/limiter_test.go:136	if got := pad("z", 2); got != "zz" {\n\t\tt.Errorf("pad = %q", got)\n\t}
+go/samplestore/buffer_test.go:143	if !strings.HasPrefix(key, "id-") {\n\t\tt.Errorf("key = %q", key)\n\t}
+go/samplestore/stack_test.go:150	if buf.Cap() != 10 {\n\t\tt.Errorf("cap = %d", buf.Cap())\n\t}
+go/samplestore/cart_test.go:157	if answer != 42 {\n\t\tt.Errorf("answer = %d", answer)\n\t}
+go/samplestore/registry_test.go:164	if diff := cmp.Diff(want, got); diff != "" {\n\t\tt.Errorf("mismatch (-want +got):\\n%s", diff)\n\t}
+go/samplestore/cache_test.go:171	if node.Next != nil {\n\t\tt.Error("next should be nil")\n\t}
+go/samplestore/session_test.go:178	if elapsed <= 0 {\n\t\tt.Errorf("elapsed = %v", elapsed)\n\t}
+go/samplestore/parser_test.go:185	if !errors.Is(err, ErrClosed) {\n\t\tt.Errorf("err = %v", err)\n\t}
+go/samplestore/handler_test.go:192	if cfg.Mode != "fast" {\n\t\tt.Errorf("mode = %q", cfg.Mode)\n\t}
+go/samplestore/counter_test.go:199	if n := len(lines); n != 4 {\n\t\tt.Errorf("lines = %d", n)\n\t}
+go/samplestore/limiter_test.go:206	if r := recover(); r == nil {\n\t\tt.Error("expected panic")\n\t}
+go/samplestore/buffer_test.go:213	if !found {\n\t\tt.Fatal("entry not found")\n\t}
+go/samplestore/stack_test.go:220	if hits != 1 {\n\t\tt.Errorf("hits = %d", hits)\n\t}
+go/samplestore/cart_test.go:227	if res.Code != http.StatusOK {\n\t\tt.Errorf("code = %d", res.Code)\n\t}

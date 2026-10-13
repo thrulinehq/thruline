@@ -1,0 +1,19 @@
+---
+source: crates/core/tests/a201_why.rs
+expression: out
+---
+claimed, and no proof found in the record
+  "All 12 tests pass."
+  the claim may be entirely true — the record simply does not show it
+
+what happened
+  the record was searched for a passing test or build run
+  the search window: the session's capture record holds no tool events
+  nothing in that window matched
+  this line is cached for the next brief; the stop audit is what records it
+
+the receipt
+  claim        /home/dev/.claude/projects/-repo-app/aaaaaaaa-1111-4222-8333-444444444444.jsonl:2
+  session      aaaaaaaa-1111-4222-8333-444444444444
+  digest       -repo-app.json (written 2026-08-31T02:02:00.000Z, session-end hook)
+  id           spkf_3a082c15f3e822558f707477def995f83227a1652929936bbc9700deab0dd735

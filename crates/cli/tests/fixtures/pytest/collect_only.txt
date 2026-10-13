@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.7, pytest-9.0.1, pluggy-1.6.0
+rootdir: /work/samples/pass
+plugins: anyio-4.13.0
+collected 5 items
+
+<Dir pass>
+  <Module test_pass.py>
+    <Function test_a>
+    <Function test_b>
+    <Function test_c>
+    <Function test_d>
+    <Function test_e>
+
+========================== 5 tests collected in 0.01s ==========================

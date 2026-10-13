@@ -1,0 +1,16 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Shipping.Tests -> /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/allskipped/bin/Debug/net9.0/Shipping.Tests.dll
+Test run for /private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/allskipped/bin/Debug/net9.0/Shipping.Tests.dll (.NETCoreApp,Version=v9.0)
+VSTest version 17.14.1 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.41]     Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase [SKIP]
+[xUnit.net 00:00:00.42]     Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos [SKIP]
+[xUnit.net 00:00:00.42]     Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [SKIP]
+  Skipped Shipping.Tests.ShippingRateTests.SmallParcelUsesFlatBase [1 ms]
+  Skipped Shipping.Tests.ShippingRateTests.BoundaryAtFiveKilos [1 ms]
+  Skipped Shipping.Tests.ShippingRateTests.LargeParcelUsesPerKilo [1 ms]
+
+Skipped! - Failed:     0, Passed:     0, Skipped:     3, Total:     3, Duration: 3 ms - Shipping.Tests.dll (net9.0)

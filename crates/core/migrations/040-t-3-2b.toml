@@ -1,0 +1,16 @@
+task = "T-3-2b"
+order = 40
+built_on_commit = "7911a160"
+pinned_schema_digest = "schema_sha256_5889a734dc4f7cfe77c4f4e75d075883e5c70652f4e84db1a649bb6cbbce097f"
+migration_test = "crates/core/tests/change_check_session_migration.rs"
+note = "The session one captured execution is recorded under."
+
+tables = ["change_check_sessions"]
+
+indexes = ["idx_check_sessions_change"]
+
+triggers = [
+  "check_sessions_no_replace",
+  "check_sessions_no_update",
+  "check_sessions_no_delete",
+]

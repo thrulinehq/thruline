@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+_______________________ ERROR collecting test_import.py ________________________
+ImportError while importing test module '/work/samples/collect_err/test_import.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_import.py:1: in <module>
+    import no_such_module_here
+E   ModuleNotFoundError: No module named 'no_such_module_here'
+=========================== short test summary info ============================
+ERROR test_import.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.04s

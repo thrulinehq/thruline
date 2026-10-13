@@ -1,0 +1,85 @@
+^D[?1h=[?25l[1F
+[?25h[?25l[1F
+[?25h[?25l[1F
+[?25h[?25l[1F
+[?25h[?25l[1F
+[?25h[?25l[1F
+  csproj [120G[7D (0.0s)
+[?25h[?25l[2F
+[120G[6D(0.1s)
+[?25h[?25l[2F
+[120G[6D(0.1s)
+[?25h[?25l[2F
+[120G[6D(0.1s)
+[?25h[?25l[2F
+[120G[6D(0.2s)
+[?25h[?25l[2F
+[120G[6D(0.2s)
+[?25h[2F
+[JRestore complete (0.2s)
+[?25l[1F
+  csproj [120G[7D (0.2s)
+[?25h[?25l[2F
+[120G[6D(0.2s)
+[?25h[?25l[2F
+[120G[6D(0.2s)
+[?25h[?25l[2F
+[J[?25h[?25l[1F
+  Shipping.Tests [120G[32DResolveAssemblyReferences (0.1s)
+[?25h[?25l[2F
+[K  Shipping.Tests [120G[18DCoreCompile (0.1s)
+[?25h[2F
+[J  Shipping.Tests [32;1msucceeded[m (0.1s) → ]8;;file:///private/tmp/claude-501/-Users-dev-thruline/00000000-0000-4000-8000-0000000000a1/scratchpad/capture/csharp/pass/bin/Debug/net9.0\bin/Debug/net9.0/Shipping.Tests.dll]8;;\
+[?25l[1F
+[?25h[?25l[1F
+  Shipping.Tests [120G[14DTesting (0.0s)
+[?25h[?25l[2F
+[120G[6D(0.0s)
+[?25h[?25l[2F
+[120G[6D(0.1s)
+[?25h[?25l[2F
+[120G[6D(0.1s)
+[?25h[?25l[2F
+[120G[6D(0.1s)
+[?25h[?25l[2F
+[120G[6D(0.2s)
+[?25h[?25l[2F
+[120G[6D(0.2s)
+[?25h[?25l[2F
+[120G[6D(0.3s)
+[?25h[?25l[2F
+[120G[6D(0.3s)
+[?25h[?25l[2F
+[120G[6D(0.3s)
+[?25h[?25l[2F
+[120G[6D(0.4s)
+[?25h[?25l[2F
+[120G[6D(0.4s)
+[?25h[?25l[2F
+[120G[6D(0.4s)
+[?25h[?25l[2F
+[120G[6D(0.5s)
+[?25h[?25l[2F
+[120G[6D(0.5s)
+[?25h[?1h=[2F
+[J[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 9.0.19)
+[?25l[1F
+  Shipping.Tests [120G[14DTesting (0.5s)
+[?25h[2F
+[J[xUnit.net 00:00:00.03]   Discovering: Shipping.Tests
+[?25l[1F
+  Shipping.Tests [120G[14DTesting (0.6s)
+[?25h[2F
+[J[xUnit.net 00:00:00.05]   Discovered:  Shipping.Tests
+[xUnit.net 00:00:00.05]   Starting:    Shipping.Tests
+[xUnit.net 00:00:00.07]   Finished:    Shipping.Tests
+[?25l[1F
+  Shipping.Tests [120G[14DTesting (0.6s)
+[?25h[?1h=[?25l[2F
+[120G[6D(0.6s)
+[?25h[?1h=[2F
+[J  Shipping.Tests test [32;1msucceeded[m (0.7s)
+[?25l[1F
+[?25h
+Test summary: total: 6, failed: 0, [32;1msucceeded: 6[m, skipped: 0, duration: 0.7s
+Build [32;1msucceeded[m in 1.2s

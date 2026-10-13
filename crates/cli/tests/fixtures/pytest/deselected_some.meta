@@ -1,0 +1,3 @@
+cwd: pass
+args: pytest -k test_a or test_b
+exit: 0

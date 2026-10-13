@@ -1,0 +1,120 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "git+/tmp/demo/repo",
+      "digest": {
+        "gitCommit": "c2dac1e2ed75b897d8bcfb99a86b0048bead7a45",
+        "gitTree": "c324df66d87ae811b42f2f3e395988361be76959"
+      }
+    }
+  ],
+  "predicateType": "https://thrulinehq.com/attestation/execution-check/v0.1",
+  "predicate": {
+    "session": {
+      "id": "d3m0d3m0-0000-4000-8000-000000000001",
+      "harness": "claude-code",
+      "started": "2026-09-06T08:23:44Z",
+      "ended": "2026-09-06T08:23:45Z",
+      "event_chain_head": "sha256:a2075644391b14ad3e3c83666a2f2c870bb5626b2ae959204dd6592c25390f94",
+      "event_count": 16
+    },
+    "claims": [
+      {
+        "id": "clm_3957JNEM04KCP2NAC0B2E1MWFW",
+        "kind": "tests_pass",
+        "text": "All tests pass.",
+        "asserted_by": {
+          "harness": "claude-code"
+        }
+      }
+    ],
+    "checks": [
+      {
+        "id": "chk_3E6AFW7VHZ4JCXA94XGHPWJR6J",
+        "category": "test",
+        "runner": "pytest",
+        "argv_hash": "sha256:568669b0700f7fd297cfa98990a699279a612c4d0f1923e0526316dbaba97a94",
+        "env_hash": "sha256:c5bb81ba27d0e3841e0f8c0736196888a26a30be09da3ebf579c40a0e06ad9d3",
+        "cwd_hash": "sha256:ce08311861404b607960f9b24a504741a407bce14ed28add5bc42fceba78d4e7",
+        "input_tree_hash": "c324df66d87ae811b42f2f3e395988361be76959",
+        "exit_code": 0,
+        "parsed": {
+          "duration_ms": 0,
+          "failed": 0,
+          "passed": 1,
+          "skipped": 1,
+          "test_ids": [],
+          "tests_total": 2,
+          "xfail": 0
+        },
+        "reexecuted": false
+      }
+    ],
+    "verdicts": [
+      {
+        "claim_id": "clm_3957JNEM04KCP2NAC0B2E1MWFW",
+        "verdict": "unsupported",
+        "verifier": "tests_pass@1",
+        "evidence": [
+          "chk_3E6AFW7VHZ4JCXA94XGHPWJR6J"
+        ],
+        "reasons": [
+          "ran on the final tree",
+          "1/2 passed"
+        ],
+        "warnings": [
+          "1 skipped and 0 xfailed of 2 \u2014 they were not run",
+          "`test_rate_small`'s strongest assertion went from Equality to Containment"
+        ],
+        "findings": [
+          {
+            "detail": "`pytest -q -k test_rate_small` narrows the run with `-k`, so it exercised a subset of the suite",
+            "detector": "narrowed_run",
+            "severity": "fail"
+          },
+          {
+            "detail": "1 skipped and 0 xfailed of 2 \u2014 they were not run",
+            "detector": "skipped_tests",
+            "severity": "warn"
+          },
+          {
+            "detail": "changed-line coverage was not measured: no coverage artifact was found (looked for lcov.info, coverage.xml, cobertura.xml)",
+            "detector": "coverage_not_measured",
+            "severity": "info"
+          },
+          {
+            "detail": "`test_rate_large` had 1 assertion(s) at the base tree and 0 at the final tree",
+            "detector": "assertion_removed",
+            "path": "test_shipping.py",
+            "severity": "fail"
+          },
+          {
+            "detail": "`test_rate_small`'s strongest assertion went from Equality to Containment",
+            "detector": "assertion_weakened",
+            "path": "test_shipping.py",
+            "severity": "warn"
+          }
+        ]
+      }
+    ],
+    "promises": {
+      "open": [],
+      "fulfilled": []
+    },
+    "verifier": {
+      "thruline_version": "0.1.0",
+      "mode": "local",
+      "policy_hash": "sha256:cfbdf195a01ee22251ddcbc3c0bd23c88bff89a265080934cb00099d329d62ad"
+    },
+    "capture": {
+      "sources": [
+        "claude-code-hook",
+        "exec-recorder"
+      ],
+      "redactions_applied": 0,
+      "capture_degraded": false,
+      "git_env_digest": "sha256:769c04406a41b5c73b12c5df017c18f75529ffbe9da22f05e9c38f849fc4b62c"
+    }
+  }
+}

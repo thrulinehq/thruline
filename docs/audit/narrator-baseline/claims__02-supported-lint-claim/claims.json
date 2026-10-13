@@ -1,0 +1,37 @@
+{
+  "checks": 1,
+  "claims": [
+    {
+      "binding": "ran_on_final_tree",
+      "evidence": [
+        "chk_5FQQ963SC081C2DPGAWHNSDRCB"
+      ],
+      "extractor": "rules",
+      "findings": [],
+      "id": "clm_6YE4Q17W0J6N6ZGTTSHWYTNXE4",
+      "kind": "lint_ok",
+      "reasons": [
+        "ran on the final tree",
+        "`cargo clippy --all-targets` exited 0"
+      ],
+      "scope": "all",
+      "span": {
+        "event_id": "evt_4MKQPEKBQJDVR0WNPBJAM73H1K",
+        "offset": [
+          49,
+          64
+        ]
+      },
+      "text": "Clippy is clean.",
+      "verdict": "supported",
+      "verifier": "lint_ok@1",
+      "warnings": []
+    }
+  ],
+  "final_tree_hash": "c4eeb65ef9132009ad33aeb19abd8785cad50d8c",
+  "negated": [],
+  "promises": [],
+  "schema_version": 1,
+  "session": "cccccccc-0002-4000-8000-000000000000",
+  "shape": "thruline.claims"
+}

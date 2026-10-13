@@ -1,0 +1,9 @@
+Run options: --seed 20260905 -n /divides/
+
+# Running:
+
+.
+
+Finished in 0.001617s, 618.4292 runs/s, 618.4292 assertions/s.
+
+1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
