@@ -33,7 +33,23 @@ fn git(dir: &Path, args: &[&str]) {
     );
 }
 
+/// Git reads the machine's system and global configuration as well as the
+/// repository's, and `git_env` records what it reads. A machine with Git LFS
+/// installed has `filter.lfs.*` there, which is a content transform, so the
+/// "an ordinary repository carries none" assertion would depend on the machine
+/// running it (it failed on a CI runner with LFS installed). Every test here is
+/// about the repository's own configuration, so they all run with neither
+/// ambient file. Set once, before the first git process of this binary.
+fn hermetic_git_config() {
+    static ONCE: std::sync::Once = std::sync::Once::new();
+    ONCE.call_once(|| {
+        std::env::set_var("GIT_CONFIG_NOSYSTEM", "1");
+        std::env::set_var("GIT_CONFIG_GLOBAL", "/dev/null");
+    });
+}
+
 fn repo() -> tempfile::TempDir {
+    hermetic_git_config();
     let dir = tempfile::tempdir().expect("tempdir");
     git(dir.path(), &["init", "-q", "-b", "main"]);
     git(dir.path(), &["config", "user.name", "t"]);

@@ -91,7 +91,7 @@ PYTEST_IMAGE="${THRULINE_TEST_PYTEST_IMAGE:-thruline-acceptance-pytest:local}"
 # `crates/reexec/tests/docker_sandbox.rs` — which deliberately REFUSES to pull,
 # so they have to be present before the tests run.
 BASE_IMAGE="python:3.13.7-slim-bookworm"
-OTHER_IMAGE="python:3-slim"
+OTHER_IMAGE="python:3.14-slim"
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$REPO_ROOT"

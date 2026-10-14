@@ -32,7 +32,9 @@ use thruline_reexec::{PrepareRequest, RunRequest, Sandbox, SandboxError};
 /// Two images that are both present on a machine that has run this project, and
 /// that differ in a way a human can see instantly.
 const DECLARED: &str = "python:3.13.7-slim-bookworm";
-const OTHER: &str = "python:3-slim";
+// Pinned to a minor line, not `python:3-slim`: the floating tag moved to 3.15
+// when it was released, and the test asserts this image reports 3.14.
+const OTHER: &str = "python:3.14-slim";
 
 fn docker_available() -> bool {
     Command::new("docker")

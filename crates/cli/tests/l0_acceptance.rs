@@ -67,8 +67,9 @@ impl Fixture {
         let output = self.command(action, extra);
         assert!(
             output.status.success(),
-            "{action}: {}",
-            String::from_utf8_lossy(&output.stderr)
+            "{action}: stderr: {} | stdout: {}",
+            String::from_utf8_lossy(&output.stderr),
+            String::from_utf8_lossy(&output.stdout)
         );
         let value: Value = serde_json::from_slice(&output.stdout).unwrap();
         assert_eq!(value["schema_version"], 1);

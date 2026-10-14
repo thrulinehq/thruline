@@ -116,6 +116,40 @@ jobs:
           site="$("$RUNNER_TEMP/bench-venv/bin/python" -c 'import sysconfig; print(sysconfig.get_path("purelib"))')"
           echo "PYTHONPATH=$site" >> "$GITHUB_ENV"
           "$RUNNER_TEMP/bench-venv/bin/python" -c "import ruamel.yaml, yaml, pytest"
+      # Two facts about the macOS runner that the tests, correctly, refuse:
+      #   * TMPDIR is /var/folders/..., behind the /var -> /private/var symlink.
+      #     The tests build fixtures there and the product (rightly) will not
+      #     treat a source reached through a symlink as a stable regular file,
+      #     so every recorded-prefix / capture-hold fixture reads UNVERIFIABLE.
+      #     A canonical, runner-owned TMPDIR removes the symlink.
+      #   * the first `rustup` on PATH is Homebrew's, whose `cargo` beside it is
+      #     a different file, not rustup's proxy (the run-route guard and the
+      #     offline-build tests insist on the proxy layout). Install standard
+      #     rustup into ~/.cargo/bin and put it first, as a developer's Mac has.
+      - name: Canonical TMPDIR and standard rustup
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/tmp"
+          echo "TMPDIR=$(cd "$RUNNER_TEMP/tmp" && pwd -P)" >> "$GITHUB_ENV"
+          # Pinned rustup-init 1.29.1 (aarch64-apple-darwin), checked against its
+          # sha256 before it runs. Skipped when ~/.cargo/bin already holds a
+          # rustup that `cargo` there resolves to.
+          if [ ! -x "$HOME/.cargo/bin/rustup" ] || [ ! -L "$HOME/.cargo/bin/cargo" ] || [ ! "$HOME/.cargo/bin/cargo" -ef "$HOME/.cargo/bin/rustup" ]; then
+            curl --proto '=https' --tlsv1.2 -sSfo "$RUNNER_TEMP/rustup-init" \
+              https://static.rust-lang.org/rustup/archive/1.29.1/aarch64-apple-darwin/rustup-init
+            echo "ec1b9233e7f72990ecd8e62063fa7f6c3dfc2bec8e97f88bff165f9100ac696a  $RUNNER_TEMP/rustup-init" |
+              shasum -a 256 -c -
+            chmod +x "$RUNNER_TEMP/rustup-init"
+            "$RUNNER_TEMP/rustup-init" -y --no-modify-path --default-toolchain none --profile minimal
+          fi
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      # Node 22.19.0, not the image's Node (24.x on macos-26): from Node 23 on,
+      # `node --test` prints the spec reporter instead of TAP, and the check
+      # parser behind l0_acceptance's q05 test (verify's parse_node_test) only
+      # reads the TAP footer, so the check reads unverified. Same pin as the ui job.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.19.0
       # --no-fail-fast: one red test binary must not hide every binary after it.
       # CARGO_TARGET_DIR is set because crates/cli/tests/offline_build_outcome.rs
       # forwards the caller's target directory to the cargo it runs and panics
@@ -187,7 +221,13 @@ jobs:
           # Node 22, not 20: `npm test` runs `node --test "src/**/*.test.js"`
           # and only Node >= 21 expands that glob itself. On Node 20 it looks
           # for a file literally named `src/**/*.test.js` and fails.
-          node-version: 22
+          # Exactly 22.19.0, not "22": review-model.test.js compares the screen's
+          # \p{L}\p{N}\p{P}\p{S} regex with the engine's Unicode 16 table
+          # (finding_standing/legible.rs) for every code point. Node 22.23.x
+          # ships Unicode 17 (ICU 78), assigns new code points, and the test
+          # fails on them (88f, c5c, a7ce, fbc3 ...); 22.19.0 ships Unicode 16.
+          # Move this pin only together with the engine's table.
+          node-version: 22.19.0
       - run: npm ci
       - run: npm test
       - run: npm run build
