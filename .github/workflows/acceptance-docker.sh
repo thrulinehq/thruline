@@ -183,7 +183,17 @@ section "inventory: the #[ignore]d tests in those binaries"
 listed=0
 for which in cli reexec; do
   if [ "$which" = cli ]; then set -- "${CARGO_CLI[@]}"; else set -- "${CARGO_REEXEC[@]}"; fi
-  out="$("$@" -- --ignored --list 2>/dev/null)" || die "listing failed for: $*"
+  # stdout is parsed below; stderr (cargo's compile errors and warnings) goes to
+  # a file and is printed if the listing fails, so a red here is readable.
+  errfile="$(mktemp)"
+  if ! out="$("$@" -- --ignored --list 2>"$errfile")"; then
+    echo "--- stderr of the failed listing ---" >&2
+    cat "$errfile" >&2
+    echo "--- end stderr ---" >&2
+    rm -f "$errfile"
+    die "listing failed for: $*"
+  fi
+  rm -f "$errfile"
   echo "$out" | sed -n 's/^\(.*\): test$/  \1/p'
   listed=$((listed + $(echo "$out" | grep -c ': test$' || true)))
 done

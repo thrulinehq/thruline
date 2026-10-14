@@ -875,9 +875,9 @@ pub fn confirm_terminal(
     #[cfg(not(target_os = "macos"))]
     {
         let _ = (ledger, action, act_row_id);
-        return Err(CoreError::Config(
+        Err(CoreError::Config(
             "terminal confirmation requires macOS LocalAuthentication".into(),
-        ));
+        ))
     }
     #[cfg(target_os = "macos")]
     {
@@ -894,9 +894,9 @@ pub fn confirm_terminal_supersession(
     #[cfg(not(target_os = "macos"))]
     {
         let _ = (ledger, acceptance_id, selection);
-        return Err(CoreError::Config(
+        Err(CoreError::Config(
             "terminal confirmation requires macOS LocalAuthentication".into(),
-        ));
+        ))
     }
     #[cfg(target_os = "macos")]
     {

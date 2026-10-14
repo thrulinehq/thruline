@@ -99,7 +99,15 @@ jobs:
       - name: Tools the harness needs
         run: |
           set -euo pipefail
-          python3 -m pip install --quiet --disable-pip-version-check pyyaml pytest
+          # A venv, not `pip install` into the runner's python3: Homebrew's
+          # refuses that (PEP 668, externally-managed-environment). The venv's
+          # bin goes first on PATH so the later steps' `python3` and `pytest`
+          # resolve to it.
+          python3 -m venv "$RUNNER_TEMP/harness-venv"
+          "$RUNNER_TEMP/harness-venv/bin/python" -m pip install --quiet --disable-pip-version-check \
+            PyYAML==6.0.3 pytest==9.1.1
+          echo "$RUNNER_TEMP/harness-venv/bin" >> "$GITHUB_PATH"
+          export PATH="$RUNNER_TEMP/harness-venv/bin:$PATH"
           # pytest is not optional decoration: without a real runner the
           # cheating-session scenario cannot run, and selftest.py reports that
           # as a FAILURE rather than a skip — the §9 gate would otherwise be

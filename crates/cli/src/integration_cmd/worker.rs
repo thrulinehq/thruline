@@ -601,7 +601,11 @@ pub fn exec_limited(
     #[cfg(unix)]
     {
         use rustix::process::{setrlimit, Resource, Rlimit};
+        #[cfg(target_os = "macos")]
         use std::os::unix::process::CommandExt;
+        // Only the macOS sandbox profile reads these three.
+        #[cfg(not(target_os = "macos"))]
+        let _ = (local_model_port, read_paths, write_paths);
         setrlimit(
             Resource::Cpu,
             Rlimit {

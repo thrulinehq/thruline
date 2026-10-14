@@ -3,6 +3,7 @@
 use anyhow::{Context, Result};
 use std::path::{Component, Path, PathBuf};
 
+#[cfg(target_os = "macos")]
 fn quoted(path: &Path) -> Result<String> {
     let text = path.to_str().context("sandbox path is not UTF-8")?;
     anyhow::ensure!(!text.contains(['\0', '\n', '\r']), "invalid sandbox path");
@@ -68,6 +69,7 @@ pub fn writable(path: &Path, protected: &[PathBuf]) -> Result<PathBuf> {
     Ok(path.canonicalize()?)
 }
 
+#[cfg(target_os = "macos")]
 pub fn profile(
     read_paths: &[PathBuf],
     write_paths: &[PathBuf],
