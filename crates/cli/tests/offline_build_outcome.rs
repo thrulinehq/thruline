@@ -69,7 +69,13 @@ fn trusted_path(cargo_home: &Path) -> std::ffi::OsString {
     else {
         return path;
     };
-    if cargo.file_stem() != Some(std::ffi::OsStr::new("rustup")) {
+    // Homebrew-style layouts resolve `cargo` to a file called `rustup-init`; it
+    // is installed below under the name `rustup`, which is what makes it the
+    // proxy rather than the installer.
+    if !matches!(
+        cargo.file_stem().and_then(std::ffi::OsStr::to_str),
+        Some("rustup" | "rustup-init")
+    ) {
         return path;
     }
     let bin = cargo_home.join("bin");

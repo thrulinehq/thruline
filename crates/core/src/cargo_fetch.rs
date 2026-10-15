@@ -391,6 +391,34 @@ fn native_tools(
     native_tools_for(program, path, cwd, root, neutral, roots, None)
 }
 
+/// Homebrew's rustup (and rustup's own installer layout) can leave
+/// `cargo`, `rustc` and `rustup` as links to ONE file called `rustup-init`.
+/// That file is the rustup proxy when it is reached through one of those three
+/// names; it is only accepted on a platform where it can be started under the
+/// name `rustup` (see [`name_as_rustup`]). Any other path to a file called
+/// `rustup-init` -- named directly, or reached through any other name -- is
+/// not accepted.
+fn is_rustup_init_proxy(selected: &Path, resolved: &Path) -> bool {
+    cfg!(unix)
+        && resolved.file_stem() == Some(OsStr::new("rustup-init"))
+        && ["cargo", "rustc", "rustup"]
+            .iter()
+            .any(|name| selected.file_stem() == Some(OsStr::new(name)))
+}
+
+/// Start the command with argv[0] `rustup`. rustup decides what it is from
+/// argv[0]: as `rustup-init` it installs rustup (and writes to the person's
+/// home); as `rustup` it answers `which`. Without this, asking a
+/// `rustup-init` file a question would run the installer.
+#[cfg(unix)]
+fn name_as_rustup(command: &mut Command) {
+    use std::os::unix::process::CommandExt;
+    command.arg0("rustup");
+}
+
+#[cfg(not(unix))]
+fn name_as_rustup(_command: &mut Command) {}
+
 /// `toolchain` is the toolchain the check itself is pinned to
 /// (`RUSTUP_TOOLCHAIN`, as the run route's guard checked it). A rustup proxy
 /// is asked for that toolchain's cargo and rustc, so the owned fetch never
@@ -410,7 +438,8 @@ fn native_tools_for(
     // A project tool refuses the check by any path (R1, R2), before the
     // allow-list is consulted — a skip never walks past one.
     let cargo = outside_project(&selected, root)?;
-    let is_rustup = cargo.file_stem() == Some(OsStr::new("rustup"));
+    let is_rustup =
+        cargo.file_stem() == Some(OsStr::new("rustup")) || is_rustup_init_proxy(&selected, &cargo);
     if !is_rustup && cargo.file_stem() != Some(OsStr::new("cargo")) {
         return Err(invalid("selected Cargo is not a native cargo executable").into());
     }
@@ -438,6 +467,10 @@ fn native_tools_for(
     // check is pinned to, when there is one, is named explicitly.
     let which = |rustup: &Path, name: &str| -> std::result::Result<PathBuf, Refusal> {
         let mut ask = native_command(rustup, path, neutral);
+        // rustup-init is the INSTALLER unless it is started under the name
+        // `rustup`; it is always started under that name here, whatever the
+        // file is called.
+        name_as_rustup(&mut ask);
         if let Some(toolchain) = toolchain {
             ask.env("RUSTUP_TOOLCHAIN", toolchain);
         }
@@ -1237,6 +1270,167 @@ mod tests {
             rustc,
             std::fs::canonicalize(toolchain_bin.join("rustc")).expect("rustc")
         );
+    }
+
+    /// A fake `rustup-init`, compiled so that it can see its own argv[0] (a
+    /// script cannot). Run under any name but `rustup` it is the INSTALLER:
+    /// it writes `INSTALLER_RAN` beside itself and exits 9. Run as `rustup` it
+    /// answers `which <tool>` with `<answer_dir>/<tool>` when that file exists,
+    /// and fails (exit 1) when it does not.
+    fn fake_rustup_init(at: &Path, answer_dir: &Path) {
+        let source = at.with_extension("rs");
+        std::fs::write(
+            &source,
+            format!(
+                r#"fn main() {{
+    let a: Vec<String> = std::env::args().collect();
+    let me = std::env::current_exe().expect("exe");
+    let name = std::path::Path::new(&a[0]).file_name().expect("name").to_str().expect("utf8").to_string();
+    if name != "rustup" {{
+        std::fs::write(me.parent().expect("dir").join("INSTALLER_RAN"), &name).expect("marker");
+        std::process::exit(9);
+    }}
+    if a.get(1).map(String::as_str) != Some("which") {{ std::process::exit(2); }}
+    let found = std::path::Path::new({answer:?}).join(&a[2]);
+    if !found.is_file() {{ std::process::exit(1); }}
+    println!("{{}}", found.display());
+}}
+"#,
+                answer = answer_dir.display().to_string()
+            ),
+        )
+        .expect("fake source");
+        let built = Command::new("rustc")
+            .arg("--edition=2021")
+            .arg(&source)
+            .arg("-o")
+            .arg(at)
+            .output()
+            .expect("rustc compiles the fake rustup-init");
+        assert!(built.status.success(), "{built:?}");
+    }
+
+    /// Homebrew-style layout: `cargo`, `rustc` and `rustup` in
+    /// `$CARGO_HOME/bin` are links to one `rustup-init`.
+    fn homebrew_layout(base: &Path, answer_dir: &Path) -> (ToolRoots, PathBuf, PathBuf) {
+        let (roots, cargo_bin, toolchain_bin) = fake_toolchain(base);
+        fake_rustup_init(&cargo_bin.join("rustup-init"), answer_dir);
+        for name in ["cargo", "rustc", "rustup"] {
+            std::os::unix::fs::symlink("rustup-init", cargo_bin.join(name)).expect("link");
+        }
+        (roots, cargo_bin, toolchain_bin)
+    }
+
+    fn put_real_tools(dir: &Path) {
+        std::fs::write(dir.join("cargo"), "toolchain cargo").expect("cargo");
+        std::fs::write(dir.join("rustc"), "toolchain rustc").expect("rustc");
+    }
+
+    #[test]
+    fn a_homebrew_style_rustup_init_proxy_is_accepted_and_never_runs_the_installer() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        let answer = directory
+            .path()
+            .join("rustup-home/toolchains/stable-test/bin");
+        let (roots, cargo_bin, toolchain_bin) = homebrew_layout(directory.path(), &answer);
+        assert_eq!(answer, toolchain_bin);
+        put_real_tools(&toolchain_bin);
+        let path = std::env::join_paths([&cargo_bin]).expect("path");
+        let (cargo, rustc) = native_tools("cargo", &path, &root, &root, directory.path(), &roots)
+            .expect("the proxy layout is accepted like rustup's own");
+        assert_eq!(
+            cargo,
+            std::fs::canonicalize(toolchain_bin.join("cargo")).expect("c")
+        );
+        assert_eq!(
+            rustc,
+            std::fs::canonicalize(toolchain_bin.join("rustc")).expect("r")
+        );
+        assert!(
+            !cargo_bin.join("INSTALLER_RAN").exists(),
+            "rustup-init ran as the installer"
+        );
+    }
+
+    #[test]
+    fn rustup_init_named_directly_or_through_another_name_is_refused_unrun() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        let (roots, cargo_bin, toolchain_bin) = homebrew_layout(
+            directory.path(),
+            &directory
+                .path()
+                .join("rustup-home/toolchains/stable-test/bin"),
+        );
+        put_real_tools(&toolchain_bin);
+        std::os::unix::fs::symlink("rustup-init", cargo_bin.join("tool")).expect("link");
+        let path = std::env::join_paths([&cargo_bin]).expect("path");
+        for program in ["rustup-init", "tool"] {
+            let refused = native_tools(program, &path, &root, &root, directory.path(), &roots);
+            assert!(
+                matches!(&refused, Err(Refusal::Refused(e)) if e.to_string().contains("not a native cargo executable")),
+                "{program}: {refused:?}"
+            );
+        }
+        assert!(!cargo_bin.join("INSTALLER_RAN").exists());
+    }
+
+    #[test]
+    fn a_rustup_init_proxy_inside_the_project_is_still_refused_by_any_path() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        let answer = directory
+            .path()
+            .join("rustup-home/toolchains/stable-test/bin");
+        let (roots, cargo_bin, toolchain_bin) = fake_toolchain(directory.path());
+        put_real_tools(&toolchain_bin);
+        fake_rustup_init(&root.join("rustup-init"), &answer);
+        // Directly in the project, and through a link from an allowed folder.
+        std::os::unix::fs::symlink("rustup-init", root.join("cargo")).expect("link");
+        std::os::unix::fs::symlink(root.join("rustup-init"), cargo_bin.join("cargo"))
+            .expect("link");
+        for dir in [&root, &cargo_bin] {
+            let path = std::env::join_paths([dir]).expect("path");
+            let refused = native_tools("cargo", &path, &root, &root, directory.path(), &roots);
+            assert!(
+                matches!(&refused, Err(Refusal::Refused(e)) if e.to_string().contains("outside the project")),
+                "{refused:?}"
+            );
+        }
+        assert!(!root.join("INSTALLER_RAN").exists());
+    }
+
+    #[test]
+    fn a_proxy_that_cannot_name_the_toolchain_or_names_one_outside_the_allow_list_skips() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        // (a) nothing to answer with: rustup cannot name the toolchain's cargo.
+        let (roots, cargo_bin, _) =
+            homebrew_layout(directory.path(), &directory.path().join("absent"));
+        let path = std::env::join_paths([&cargo_bin]).expect("path");
+        let skipped = native_tools("cargo", &path, &root, &root, directory.path(), &roots);
+        assert!(
+            matches!(&skipped, Err(Refusal::NotAdmitted(why)) if why.contains("could not name")),
+            "{skipped:?}"
+        );
+        // (b) it names a cargo, but outside every allowed root.
+        let elsewhere = directory.path().join("elsewhere");
+        std::fs::create_dir_all(&elsewhere).expect("elsewhere");
+        put_real_tools(&elsewhere);
+        let other = tempfile::tempdir().expect("temp");
+        let (roots, cargo_bin, _) = homebrew_layout(other.path(), &elsewhere);
+        let path = std::env::join_paths([&cargo_bin]).expect("path");
+        let skipped = native_tools("cargo", &path, &root, &root, directory.path(), &roots);
+        assert!(
+            matches!(&skipped, Err(Refusal::NotAdmitted(why)) if why.contains("would allow")),
+            "{skipped:?}"
+        );
+        assert!(!cargo_bin.join("INSTALLER_RAN").exists());
     }
 
     #[test]

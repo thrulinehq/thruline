@@ -143,6 +143,16 @@ jobs:
             "$RUNNER_TEMP/rustup-init" -y --no-modify-path --default-toolchain none --profile minimal
           fi
           echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      # Run #3 failed on 'selected Cargo is not a native cargo executable' and the
+      # log never showed what cargo resolved to. Print it, so a red run names the
+      # file the run guard saw. Read-only.
+      - name: Which cargo, rustc and rustup the tests will find
+        run: |
+          for t in cargo rustc rustup; do
+            p=$(command -v "$t" || true)
+            echo "$t -> ${p:-not found}"
+            if [ -n "$p" ]; then ls -l "$p"; echo "  resolves to $(readlink -f "$p")"; fi
+          done
       # Node 22.19.0, not the image's Node (24.x on macos-26): from Node 23 on,
       # `node --test` prints the spec reporter instead of TAP, and the check
       # parser behind l0_acceptance's q05 test (verify's parse_node_test) only
