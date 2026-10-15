@@ -109,6 +109,16 @@ fn run_with_env(
         .env("THRULINE_HOME", base.join(".thruline"))
         // The child `cargo` inherits these three and nothing else of ours.
         .env("CARGO_HOME", &cargo_home)
+        // HOME is the harness's own folder, so rustup's default home would be
+        // empty there. Give the child the caller's toolchains (the caller's
+        // RUSTUP_HOME, else its ~/.rustup) in this test's environment only.
+        .envs(
+            std::env::var_os("RUSTUP_HOME")
+                .or_else(|| {
+                    std::env::var_os("HOME").map(|h| Path::new(&h).join(".rustup").into_os_string())
+                })
+                .map(|home| ("RUSTUP_HOME", home)),
+        )
         .env(
             "CARGO_TARGET_DIR",
             std::env::var_os("CARGO_TARGET_DIR").expect("caller must provide shared target"),

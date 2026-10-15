@@ -258,6 +258,48 @@ fn what_would_allow(program: &str) -> String {
     )
 }
 
+/// Homebrew's own rustup, and only that, wherever it was reached from (for
+/// example through `~/.cargo/bin`, where rustup's installer links its proxies
+/// to Homebrew's `rustup-init`). `cellar` is a canonical `<prefix>/Cellar`
+/// with `<prefix>` one of [`HOMEBREW_PREFIXES`]; the prefix is read from the
+/// resolved path, never by running `brew`. Admitted, exactly:
+///   * `resolved` is `<cellar>/rustup/<version>/bin/rustup-init`; or
+///   * `found` is in `<prefix>/opt/rustup/bin` (which resolves into
+///     `<cellar>/rustup/<version>/bin`) and `resolved` is a file directly in
+///     that same `bin`.
+///
+/// This is the trust the allow-list already gives `$CARGO_HOME/bin`: a
+/// folder the person's own account can write, outside every project (the
+/// project check ran before this and still refuses any path inside one).
+/// A project cannot reach it, and nothing else in the Cellar is admitted.
+fn homebrew_rustup_install(cellar: &Path, found: &Path, resolved: &Path) -> bool {
+    let Ok(below) = resolved.strip_prefix(cellar) else {
+        return false;
+    };
+    let parts: Vec<_> = below.components().collect();
+    let keg_bin_file = |parts: &[std::path::Component<'_>]| {
+        parts.len() == 4
+            && parts[0].as_os_str() == "rustup"
+            && parts[2].as_os_str() == "bin"
+            && !parts[1].as_os_str().is_empty()
+    };
+    if keg_bin_file(&parts) && parts[3].as_os_str() == "rustup-init" {
+        return true;
+    }
+    let Some(prefix) = cellar.parent() else {
+        return false;
+    };
+    let opt_bin = std::fs::canonicalize(prefix.join("opt/rustup/bin")).ok();
+    keg_bin_file(&parts)
+        && opt_bin.is_some()
+        && opt_bin.as_deref() == resolved.parent()
+        && found
+            .parent()
+            .and_then(|d| std::fs::canonicalize(d).ok())
+            .as_deref()
+            == opt_bin.as_deref()
+}
+
 impl ToolRoots {
     pub(crate) fn from_environment(variable: impl Fn(&str) -> Option<std::ffi::OsString>) -> Self {
         let system: Vec<PathBuf> = SYSTEM_TOOL_DIRECTORIES.iter().map(PathBuf::from).collect();
@@ -329,6 +371,13 @@ impl ToolRoots {
         if self.cellars.iter().any(|(bin, cellar)| {
             found_in.as_deref() == Some(bin.as_path()) && resolved.starts_with(cellar)
         }) {
+            return Ok(resolved);
+        }
+        if self
+            .cellars
+            .iter()
+            .any(|(_, cellar)| homebrew_rustup_install(cellar, found, &resolved))
+        {
             return Ok(resolved);
         }
         Err(Refusal::NotAdmitted(format!(
@@ -508,11 +557,18 @@ fn native_tools_for(
     } else {
         roots.admit("rustc", &selected_rustc, resolved_rustc)?
     };
-    let rustc = if rustc.file_stem() == Some(OsStr::new("rustup")) {
+    let rustc = if rustc.file_stem() == Some(OsStr::new("rustup"))
+        || is_rustup_init_proxy(&selected_rustc, &rustc)
+    {
         which(&rustc, "rustc")?
     } else {
         rustc
     };
+    // Whatever is handed back is started under its own name later. A
+    // rustup-init file must never be that: it would run the installer.
+    if rustc.file_stem() == Some(OsStr::new("rustup-init")) {
+        return Err(invalid("selected rustc is not a native rustc executable").into());
+    }
     Ok((cargo, rustc))
 }
 
@@ -1286,6 +1342,7 @@ mod tests {
     let a: Vec<String> = std::env::args().collect();
     let me = std::env::current_exe().expect("exe");
     let name = std::path::Path::new(&a[0]).file_name().expect("name").to_str().expect("utf8").to_string();
+    std::fs::write(me.parent().expect("dir").join("RAN"), &name).expect("ran");
     if name != "rustup" {{
         std::fs::write(me.parent().expect("dir").join("INSTALLER_RAN"), &name).expect("marker");
         std::process::exit(9);
@@ -1319,6 +1376,165 @@ mod tests {
             std::os::unix::fs::symlink("rustup-init", cargo_bin.join(name)).expect("link");
         }
         (roots, cargo_bin, toolchain_bin)
+    }
+
+    /// What the runner has (read from the run-3 log, F1 of the first
+    /// adversary): Homebrew's `rustup-init` in its Cellar, `<prefix>/bin` and
+    /// `<prefix>/opt/rustup` linking to it, and `~/.cargo/bin/{rustup,cargo,
+    /// rustc}` as links to that link -- `rustup-init` itself is in NO
+    /// allow-listed root. Returns the roots (with `<prefix>` as the Homebrew
+    /// prefix when `known_prefix`), `~/.cargo/bin`, the prefix, and the
+    /// toolchain `bin` rustup answers with.
+    fn cellar_layout(base: &Path, known_prefix: bool) -> (ToolRoots, PathBuf, PathBuf, PathBuf) {
+        let prefix = base.join("brew");
+        let cellar_bin = prefix.join("Cellar/rustup/1.29.1/bin");
+        let home = base.join("home");
+        let cargo_bin = home.join(".cargo/bin");
+        let toolchain_bin = home.join(".rustup/toolchains/stable-test/bin");
+        for d in [
+            &cellar_bin,
+            &prefix.join("bin"),
+            &prefix.join("opt"),
+            &cargo_bin,
+            &toolchain_bin,
+        ] {
+            std::fs::create_dir_all(d).expect("dir");
+        }
+        fake_rustup_init(&cellar_bin.join("rustup-init"), &toolchain_bin);
+        std::os::unix::fs::symlink(
+            "../Cellar/rustup/1.29.1/bin/rustup-init",
+            prefix.join("bin/rustup-init"),
+        )
+        .expect("l");
+        std::os::unix::fs::symlink("../Cellar/rustup/1.29.1", prefix.join("opt/rustup"))
+            .expect("l");
+        std::os::unix::fs::symlink(prefix.join("bin/rustup-init"), cargo_bin.join("rustup"))
+            .expect("l");
+        for name in ["cargo", "rustc"] {
+            // As rustup's installer does: a hard link of the symlink itself.
+            std::fs::hard_link(cargo_bin.join("rustup"), cargo_bin.join(name)).expect("hard link");
+        }
+        let homebrew: Vec<PathBuf> = if known_prefix {
+            vec![prefix.clone()]
+        } else {
+            vec![]
+        };
+        let home_var = home.clone();
+        let roots = ToolRoots::under(
+            move |name| (name == "HOME").then(|| home_var.clone().into()),
+            &[],
+            &homebrew,
+        );
+        (roots, cargo_bin, prefix, toolchain_bin)
+    }
+
+    #[test]
+    fn the_runners_homebrew_cellar_layout_is_accepted_and_the_installer_never_runs() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        let (roots, cargo_bin, prefix, toolchain_bin) = cellar_layout(directory.path(), true);
+        put_real_tools(&toolchain_bin);
+        let path = std::env::join_paths([&cargo_bin]).expect("path");
+        let (cargo, rustc) = native_tools("cargo", &path, &root, &root, directory.path(), &roots)
+            .expect("Homebrew's own rustup is admitted at its install location");
+        assert_eq!(
+            cargo,
+            std::fs::canonicalize(toolchain_bin.join("cargo")).expect("c")
+        );
+        assert_eq!(
+            rustc,
+            std::fs::canonicalize(toolchain_bin.join("rustc")).expect("r")
+        );
+        let cellar_bin = prefix.join("Cellar/rustup/1.29.1/bin");
+        assert_eq!(
+            std::fs::read_to_string(cellar_bin.join("RAN")).expect("it answered"),
+            "rustup"
+        );
+        assert!(!cellar_bin.join("INSTALLER_RAN").exists());
+    }
+
+    /// F4: nothing a rustup-init file does may happen before the allow-list
+    /// has said yes to it. The same layout with no known Homebrew prefix is
+    /// skipped, and the file is never started at all.
+    #[test]
+    fn a_rustup_init_outside_the_allow_list_is_skipped_without_being_started() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        let (roots, cargo_bin, prefix, toolchain_bin) = cellar_layout(directory.path(), false);
+        put_real_tools(&toolchain_bin);
+        let path = std::env::join_paths([&cargo_bin]).expect("path");
+        let skipped = native_tools("cargo", &path, &root, &root, directory.path(), &roots);
+        assert!(
+            matches!(&skipped, Err(Refusal::NotAdmitted(_))),
+            "{skipped:?}"
+        );
+        assert!(
+            !prefix.join("Cellar/rustup/1.29.1/bin/RAN").exists(),
+            "it was started"
+        );
+    }
+
+    /// The Cellar rule is exactly `Cellar/rustup/<version>/bin/rustup-init`.
+    #[test]
+    fn only_homebrews_exact_rustup_install_location_is_admitted() {
+        for wrong in [
+            "Cellar/other/1.0/bin",      // another formula
+            "Cellar/rustup/bin",         // no version directory
+            "Cellar/rustup/1.0/libexec", // not bin
+            "Cellar/rustup/1.0/bin/x",   // one level too deep
+        ] {
+            let directory = tempfile::tempdir().expect("temp");
+            let root = directory.path().join("project");
+            std::fs::create_dir_all(&root).expect("project");
+            let (roots, cargo_bin, prefix, toolchain_bin) = cellar_layout(directory.path(), true);
+            put_real_tools(&toolchain_bin);
+            let dir = prefix.join(wrong);
+            std::fs::create_dir_all(&dir).expect("dir");
+            fake_rustup_init(&dir.join("rustup-init"), &toolchain_bin);
+            for name in ["rustup", "cargo", "rustc"] {
+                std::fs::remove_file(cargo_bin.join(name)).expect("rm");
+                std::os::unix::fs::symlink(dir.join("rustup-init"), cargo_bin.join(name))
+                    .expect("l");
+            }
+            let path = std::env::join_paths([&cargo_bin]).expect("path");
+            let skipped = native_tools("cargo", &path, &root, &root, directory.path(), &roots);
+            assert!(
+                matches!(&skipped, Err(Refusal::NotAdmitted(_))),
+                "{wrong}: {skipped:?}"
+            );
+            assert!(!dir.join("RAN").exists(), "{wrong}: it was started");
+        }
+    }
+
+    /// F3: a rustc that is a rustup-init proxy is asked, as `rustup`, for the
+    /// real compiler; the installer file is never handed back as the compiler.
+    #[test]
+    fn a_rustup_init_rustc_is_resolved_through_rustup_and_never_returned_itself() {
+        let directory = tempfile::tempdir().expect("temp");
+        let root = directory.path().join("project");
+        std::fs::create_dir_all(&root).expect("project");
+        let answer = directory
+            .path()
+            .join("rustup-home/toolchains/stable-test/bin");
+        let (roots, cargo_bin, toolchain_bin) = homebrew_layout(directory.path(), &answer);
+        put_real_tools(&toolchain_bin);
+        // A native cargo with no rustc beside it; rustc is found on the path.
+        let cargo_only = cargo_bin.join("alone");
+        std::fs::create_dir_all(&cargo_only).expect("alone");
+        std::fs::write(cargo_only.join("cargo"), "native cargo").expect("cargo");
+        let rustc_dir = cargo_bin.join("alt");
+        std::fs::create_dir_all(&rustc_dir).expect("alt");
+        std::os::unix::fs::symlink("../rustup-init", rustc_dir.join("rustc")).expect("l");
+        let path = std::env::join_paths([&cargo_only, &rustc_dir]).expect("path");
+        let (_, rustc) = native_tools("cargo", &path, &root, &root, directory.path(), &roots)
+            .expect("resolved through rustup");
+        assert_eq!(
+            rustc,
+            std::fs::canonicalize(toolchain_bin.join("rustc")).expect("r")
+        );
+        assert!(!cargo_bin.join("INSTALLER_RAN").exists());
     }
 
     fn put_real_tools(dir: &Path) {

@@ -122,15 +122,20 @@ jobs:
       #     treat a source reached through a symlink as a stable regular file,
       #     so every recorded-prefix / capture-hold fixture reads UNVERIFIABLE.
       #     A canonical, runner-owned TMPDIR removes the symlink.
-      #   * the first `rustup` on PATH is Homebrew's, whose `cargo` beside it is
-      #     a different file, not rustup's proxy (the run-route guard and the
-      #     offline-build tests insist on the proxy layout). Install standard
-      #     rustup into ~/.cargo/bin and put it first, as a developer's Mac has.
+      #   * a machine with no rustup proxies in ~/.cargo/bin gets standard rustup
+      #     installed there and put first. An image that already has them (the
+      #     macOS runner: Homebrew's rustup) keeps its own, which the product
+      #     supports; see the comment inside the step.
       - name: Canonical TMPDIR and standard rustup
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/tmp"
           echo "TMPDIR=$(cd "$RUNNER_TEMP/tmp" && pwd -P)" >> "$GITHUB_ENV"
+          # The image's rustup is Homebrew's: ~/.cargo/bin/{cargo,rustc,rustup}
+          # link to Homebrew's rustup-init. The product now supports that
+          # layout (it asks it questions as `rustup`, never as the installer, and
+          # admits only Homebrew's own rustup install location), so this step is
+          # deliberately skipped for it and CI exercises what Homebrew users have.
           # Pinned rustup-init 1.29.1 (aarch64-apple-darwin), checked against its
           # sha256 before it runs. Skipped when ~/.cargo/bin already holds a
           # rustup that `cargo` there resolves to.
