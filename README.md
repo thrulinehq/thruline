@@ -23,14 +23,25 @@ curl -fsSLO "$BASE/SHA256SUMS"
 grep "thruline-cli-$TARGET.tar.gz" SHA256SUMS | shasum -a 256 -c -   # on Linux: sha256sum -c -
 tar -xzf "thruline-cli-$TARGET.tar.gz"
 mkdir -p ~/.local/bin && install -m 0755 "thruline-cli-$TARGET/thruline" ~/.local/bin/thruline
+```
+
+Put `~/.local/bin` on your `PATH` before you run `thruline`. On macOS the default shell is zsh, so this line adds it to `~/.zprofile` and starts a new login shell:
+
+```sh
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zprofile && exec zsh -l
+```
+
+Downloaded with a browser? Run `xattr -d com.apple.quarantine ~/.local/bin/thruline`.
+
+Check the install:
+
+```sh
 thruline --version
 ```
 
 ```
 thruline 0.2.0
 ```
-
-Put `~/.local/bin` on your `PATH` if it is not there.
 
 **Build from source.** You need Rust 1.97 or newer and git. From a checkout of this repository:
 
@@ -43,6 +54,7 @@ The default build downloads ONNX Runtime while compiling, for the optional `anno
 ## Quick start
 
 ```sh
+thruline demo                    # the two-minute look, on a made-up repository; needs pytest on PATH
 thruline init                    # sets up recording for Claude Code; asks before the optional parts
 claude                           # run your agent as you normally do
 thruline ingest --apply          # read your session logs into the record (plain `thruline ingest` previews)
@@ -66,6 +78,16 @@ claimed, and no proof found in the record
   "I've added retry logic to `client.rs`."
   the claim may be entirely true — the record simply does not show it
 ```
+
+**Test runs.** Run `thruline shim install` once. It writes small wrapper programs into `~/.thruline/shim/` for the test and build tools it finds on your PATH (for example `pytest`, `npm`, `cargo` or `make`), then prints one line that puts that folder first on your PATH:
+
+```sh
+echo 'export PATH="$HOME/.thruline/shim:$PATH"' >> ~/.zprofile && exec zsh -l
+```
+
+It does not edit `~/.zprofile`; the line is yours to add. A command run through a wrapper is recorded with its arguments, exit code and output digests. Each wrapped run also takes a git snapshot of the repository before and after, which adds unreferenced objects to `.git/objects`; `thruline doctor` reports the size. Without the shim, a test run your agent reports is seen only as its own text, so "all tests pass" cannot be proven from the record. `thruline shim status` should print `on PATH true`. To undo it, run `thruline shim uninstall` and delete the shim line from `~/.zprofile`.
+
+**Where to see claims with no proof.** Until the Inbox shows them, open HQ › Record over time to see claims with no proof. The start-of-next-session brief shows up to three of them.
 
 ## What it records, where, and what leaves your machine
 
