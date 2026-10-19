@@ -129,6 +129,8 @@ Only approving a version needs a licence. `thruline licence status` says which y
 
 v0.2.0. Known issues are in the [release notes](docs/release/v0.2.0-NOTES.md#known-limits).
 
+Building v0.3 in public: see the daily [build log](devlog/README.md).
+
 ## License
 
 ThruLine is licensed under the [Functional Source License, Version 1.1, MIT Future License](LICENSE.md) (FSL-1.1-MIT). You may use, modify and share it for any purpose except offering a competing commercial product or service. Each release becomes available under the MIT License two years after it is published.
