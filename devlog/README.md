@@ -12,3 +12,4 @@ How we write it:
 | Day | Date | Headline |
 | --- | --- | --- |
 | 1 | 19 Oct 2026 | [Ground truth first: 357 agent "tests pass" claims, labelled](2026-10-19.md) |
+| 2 | 20 Oct 2026 | [The pass was real. It just wasn't about the code anymore.](2026-10-20.md) |
