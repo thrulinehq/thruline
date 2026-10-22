@@ -14,3 +14,4 @@ How we write it:
 | 1 | 19 Oct 2026 | [Ground truth first: 357 agent "tests pass" claims, labelled](2026-10-19.md) |
 | 2 | 20 Oct 2026 | [The pass was real. It just wasn't about the code anymore.](2026-10-20.md) |
 | 3 | 21 Oct 2026 | [From 0 of 9 to 3 of 9, and why the other 6 still slip](2026-10-21.md) |
+| 4 | 22 Oct 2026 | [Receipts went from 0 of 9 to 8 of 9, and the gate nearly accused 5 honest sessions](2026-10-22.md) |
