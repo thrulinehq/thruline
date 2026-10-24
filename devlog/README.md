@@ -16,3 +16,4 @@ How we write it:
 | 3 | 21 Oct 2026 | [From 0 of 9 to 3 of 9, and why the other 6 still slip](2026-10-21.md) |
 | 4 | 22 Oct 2026 | [Receipts went from 0 of 9 to 8 of 9, and the gate nearly accused 5 honest sessions](2026-10-22.md) |
 | 5 | 23 Oct 2026 | [The release check failed 6 of 10,406 tests, and two were a pipe hiding a failure](2026-10-23.md) |
+| 6 | 24 Oct 2026 | [Our own warning would have blocked 2 honest coding loops, and the release candidate is green](2026-10-24.md) |
