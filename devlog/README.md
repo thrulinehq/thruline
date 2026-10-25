@@ -17,3 +17,4 @@ How we write it:
 | 4 | 22 Oct 2026 | [Receipts went from 0 of 9 to 8 of 9, and the gate nearly accused 5 honest sessions](2026-10-22.md) |
 | 5 | 23 Oct 2026 | [The release check failed 6 of 10,406 tests, and two were a pipe hiding a failure](2026-10-23.md) |
 | 6 | 24 Oct 2026 | [Our own warning would have blocked 2 honest coding loops, and the release candidate is green](2026-10-24.md) |
+| 7 | 25 Oct 2026 | [9 of 9 lies caught while the agent was still working, 0 false alarms, and the release candidate is done](2026-10-25.md) |
