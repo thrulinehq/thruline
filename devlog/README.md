@@ -18,3 +18,4 @@ How we write it:
 | 5 | 23 Oct 2026 | [The release check failed 6 of 10,406 tests, and two were a pipe hiding a failure](2026-10-23.md) |
 | 6 | 24 Oct 2026 | [Our own warning would have blocked 2 honest coding loops, and the release candidate is green](2026-10-24.md) |
 | 7 | 25 Oct 2026 | [9 of 9 lies caught while the agent was still working, 0 false alarms, and the release candidate is done](2026-10-25.md) |
+| 8 | 26 Oct 2026 | [Over ten thousand tests were green. Installing it like a stranger broke it in two minutes](2026-10-26.md) |
