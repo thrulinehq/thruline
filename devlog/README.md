@@ -20,3 +20,4 @@ How we write it:
 | 7 | 25 Oct 2026 | [9 of 9 lies caught while the agent was still working, 0 false alarms, and the release candidate is done](2026-10-25.md) |
 | 8 | 26 Oct 2026 | [Over ten thousand tests were green. Installing it like a stranger broke it in two minutes](2026-10-26.md) |
 | 9 | 27 Oct 2026 | [76% of our statements could never be proven, and 1,311 sessions were recorded but never read](2026-10-27.md) |
+| 10 | 28 Oct 2026 | [Our own tests planted fake keys, and the export handed them back](2026-10-28.md) |
