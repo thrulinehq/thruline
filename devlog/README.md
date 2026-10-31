@@ -23,3 +23,4 @@ How we write it:
 | 10 | 28 Oct 2026 | [Our own tests planted fake keys, and the export handed them back](2026-10-28.md) |
 | 11 | 29 Oct 2026 | [Every branch was green. The merge of all of them failed 21 tests, and one line read a missing exit code as a pass](2026-10-29.md) |
 | 12 | 30 Oct 2026 | [Our checker broke its own rule on the first press, and Apple notarized the build anyway](2026-10-30.md) |
+| 13 | 31 Oct 2026 | [Three full runs, three reds, and a zero-byte file named sqlite backwards](2026-10-31.md) |
