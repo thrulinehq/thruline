@@ -25,3 +25,4 @@ How we write it:
 | 12 | 30 Oct 2026 | [Our checker broke its own rule on the first press, and Apple notarized the build anyway](2026-10-30.md) |
 | 13 | 31 Oct 2026 | [Three full runs, three reds, and a zero-byte file named sqlite backwards](2026-10-31.md) |
 | 14 | 1 Nov 2026 | [Our own code comment promised a time limit the code never had](2026-11-01.md) |
+| 16 | 4 Nov 2026 | [We signed the build at 3 a.m. Then it couldn't find cargo](2026-11-04.md) |
